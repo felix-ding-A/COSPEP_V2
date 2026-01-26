@@ -1,56 +1,53 @@
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { Link } from "@/lib/navigation";
-import { useTranslations } from "next-intl";
-import { getSettings } from "@/lib/sanity/queries";
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import { client } from '@/lib/sanity';
+import { getSiteSettings } from '@/lib/sanity/queries';
+
+// 获取数据的函数
+async function getData() {
+    return await client.fetch(getSiteSettings);
+}
 
 export async function HeroSection() {
-    const t = useTranslations("Index");
-    const settings = await getSettings();
-
+    const data = await getData();
 
     return (
-        <section className="relative bg-muted/30 py-20 lg:py-32 overflow-hidden">
-            <div className="container mx-auto px-4 md:px-6">
-                <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
-                    <div className="flex flex-col justify-center space-y-8">
-                        <div className="space-y-4">
-                            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl xl:text-6xl/none text-foreground">
-                                {settings?.heroText || "Your Premier Sourcing Partner for Premium Botanical Ingredients"}
-                            </h1>
-                            <p className="max-w-[600px] text-muted-foreground md:text-xl leading-relaxed">
-                                Connect with top-tier manufacturers. We ensure quality, compliance, and seamless logistics for the Food, Cosmetic, and Health industries.
-                            </p>
-                        </div>
-                        <div className="flex flex-col gap-4 min-[400px]:flex-row">
-                            <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-                                <Link href="/products">
-                                    Explore Products <ArrowRight className="ml-2 h-4 w-4" />
-                                </Link>
-                            </Button>
-                            <Button asChild variant="outline" size="lg" className="border-primary text-primary hover:bg-primary/10">
-                                <Link href="/contact">
-                                    Contact Us
-                                </Link>
-                            </Button>
-                        </div>
-                    </div>
-                    <div className="relative mx-auto w-full max-w-[500px] lg:max-w-none">
-                        {settings?.heroImageUrl ? (
-                            <div className="aspect-square overflow-hidden rounded-xl border border-border shadow-xl">
-                                <img
-                                    src={settings.heroImageUrl}
-                                    alt="Hero Image"
-                                    className="h-full w-full object-cover"
-                                />
-                            </div>
-                        ) : (
-                            /* Placeholder for "Lab + Plant" image */
-                            <div className="aspect-square overflow-hidden rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center border border-border shadow-xl">
-                                <span className="text-muted-foreground font-medium">Hero Image Placeholder</span>
-                            </div>
-                        )}
-                    </div>
+        <section className="relative h-[600px] flex items-center justify-center overflow-hidden">
+            {/* 背景图层 */}
+            <div className="absolute inset-0 z-0">
+                {data?.heroImageUrl ? (
+                    <Image
+                        src={data.heroImageUrl}
+                        alt="Hero Background"
+                        fill
+                        className="object-cover brightness-50" // brightness-50 让图片变暗一点，文字更清晰
+                        priority
+                    />
+                ) : (
+                    <div className="w-full h-full bg-slate-900" /> // 如果没图，显示深色背景
+                )}
+            </div>
+
+            {/* 文字内容层 */}
+            <div className="relative z-10 container mx-auto px-4 text-center text-white">
+                <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                    {data?.heroTitle || "Premium Biotech Ingredients"}
+                </h1>
+                <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-gray-200">
+                    {data?.heroSubtitle || "Empowering your cosmetic formulations with high-purity peptides and active ingredients."}
+                </p>
+                <div className="flex gap-4 justify-center">
+                    <Link href="/products">
+                        <Button size="lg" className="bg-primary hover:bg-primary/90">
+                            View Products
+                        </Button>
+                    </Link>
+                    <Link href="/contact">
+                        <Button size="lg" variant="outline" className="bg-white/10 text-white hover:bg-white/20 border-white/20">
+                            Contact Us
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </section>

@@ -102,3 +102,9 @@ export async function getSettings(): Promise<Settings> {
     whatsapp
   }`, {}, { next: { revalidate: 0 } }); // Keep revalidate for now to help with updates
 }
+
+export const getSiteSettings = `*[_type == "settings"][0]{
+  heroTitle,
+  heroSubtitle,
+  "heroImageUrl": heroImage.asset->url
+}`;

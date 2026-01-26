@@ -1,31 +1,32 @@
 export default {
     name: 'settings',
-    title: 'Global Settings',
+    title: 'Site Settings',
     type: 'document',
     fields: [
         {
-            name: 'heroText',
-            title: 'Hero Text',
+            name: 'title',
+            title: 'Site Title',
             type: 'string',
-            description: 'Main heading text on the homepage'
         },
         {
             name: 'heroImage',
-            title: 'Hero Image',
+            title: 'Hero Background Image',
             type: 'image',
-            options: { hotspot: true },
-            description: 'Main image displayed on the homepage'
+            options: {
+                hotspot: true, // 允许你在后台裁剪图片重心
+            },
         },
         {
-            name: 'contactEmail',
-            title: 'Contact Email',
-            type: 'string'
-        },
-        {
-            name: 'whatsapp',
-            title: 'WhatsApp Number',
+            name: 'heroTitle',
+            title: 'Hero Title',
             type: 'string',
-            description: 'International format (e.g., +1234567890)'
-        }
-    ]
+            description: 'e.g., Premium Cosmetic Peptides'
+        },
+        {
+            name: 'heroSubtitle',
+            title: 'Hero Subtitle',
+            type: 'text',
+            description: 'e.g., Empowering your formulations...'
+        },
+    ],
 }
