@@ -28,5 +28,28 @@ export default {
             type: 'text',
             description: 'e.g., Empowering your formulations...'
         },
+        // --- Legacy / Contact Info ---
+        {
+            name: 'heroText',
+            title: 'Hero Title (Legacy)',
+            type: 'string',
+            hidden: true, // Hide from Studio but keep for backward compatibility if needed
+        },
+        {
+            name: 'contactEmail',
+            title: 'Contact Email',
+            type: 'string',
+        },
+        {
+            name: 'whatsapp',
+            title: 'WhatsApp / Phone',
+            type: 'string',
+            description: 'e.g. +1 6802556637',
+        },
+        {
+            name: 'address',
+            title: 'Company Address',
+            type: 'text',
+        }
     ],
 }

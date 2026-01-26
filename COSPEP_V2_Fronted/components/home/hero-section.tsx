@@ -32,7 +32,7 @@ export async function HeroSection() {
             {/* 文字内容层 */}
             <div className="relative z-10 container mx-auto px-4 text-center text-white">
                 <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                    {data?.heroTitle || "Premium Biotech Ingredients"}
+                    {data?.heroTitle || data?.heroText || "Premium Biotech Ingredients"}
                 </h1>
                 <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-gray-200">
                     {data?.heroSubtitle || "Empowering your cosmetic formulations with high-purity peptides and active ingredients."}

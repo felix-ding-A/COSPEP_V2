@@ -92,6 +92,7 @@ export interface Settings {
   heroImageUrl?: string;
   contactEmail?: string;
   whatsapp?: string;
+  address?: string;
 }
 
 export async function getSettings(): Promise<Settings> {
@@ -99,12 +100,17 @@ export async function getSettings(): Promise<Settings> {
     heroText,
     "heroImageUrl": heroImage.asset->url,
     contactEmail,
-    whatsapp
+    whatsapp,
+    address
   }`, {}, { next: { revalidate: 0 } }); // Keep revalidate for now to help with updates
 }
 
 export const getSiteSettings = `*[_type == "settings"][0]{
   heroTitle,
+  heroText, // Legacy fallback
   heroSubtitle,
-  "heroImageUrl": heroImage.asset->url
+  "heroImageUrl": heroImage.asset->url,
+  contactEmail,
+  whatsapp,
+  address
 }`;

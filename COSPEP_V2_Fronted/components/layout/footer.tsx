@@ -1,7 +1,15 @@
 import { Link } from "@/lib/navigation";
 import { Facebook, Linkedin, Twitter } from "lucide-react";
+import { client } from "@/lib/sanity";
+import { getSiteSettings } from "@/lib/sanity/queries";
 
-export function Footer() {
+async function getData() {
+    return await client.fetch(getSiteSettings);
+}
+
+export async function Footer() {
+    const settings = await getData();
+
     return (
         <footer className="bg-muted text-muted-foreground border-t">
             <div className="container mx-auto px-4 md:px-6 py-12 lg:py-16">
@@ -11,7 +19,7 @@ export function Footer() {
                     <div className="col-span-2 md:col-span-1 space-y-4">
                         <Link href="/" className="text-2xl font-bold text-primary">COSPEP</Link>
                         <p className="text-sm leading-relaxed max-w-xs">
-                            Your premier sourcing partner for high-quality botanical ingredients. Bridging the gap between certified standards and global demand.
+                            {settings?.heroSubtitle || "Your premier sourcing partner for high-quality botanical ingredients. Bridging the gap between certified standards and global demand."}
                         </p>
                     </div>
 
@@ -41,9 +49,13 @@ export function Footer() {
                     <div className="space-y-4">
                         <h3 className="text-foreground font-semibold">Contact</h3>
                         <ul className="space-y-2 text-sm">
-                            <li>Xi'an, Shaanxi, China</li>
-                            <li>sales@cospep.com</li>
-                            <li>+86 123 4567 8900</li>
+                            <li>{settings?.address || "Xi'an, Shaanxi, China"}</li>
+                            {settings?.contactEmail && (
+                                <li><a href={`mailto:${settings.contactEmail}`} className="hover:text-primary">{settings.contactEmail}</a></li>
+                            )}
+                            {settings?.whatsapp && (
+                                <li><a href={`https://wa.me/${settings.whatsapp.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="hover:text-primary">{settings.whatsapp}</a></li>
+                            )}
                         </ul>
                         <div className="flex gap-4 pt-2">
                             <Link href="#" className="hover:text-primary"><Linkedin className="h-5 w-5" /></Link>
@@ -54,7 +66,7 @@ export function Footer() {
                 </div>
 
                 <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center text-xs">
-                    <p>&copy; 2026 Prius Group / COSPEP. All rights reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} {settings?.heroText || "Prius Group / COSPEP"}. All rights reserved.</p>
                     <div className="flex gap-4 mt-4 md:mt-0">
                         <Link href="/privacy" className="hover:text-foreground">Privacy Policy</Link>
                         <Link href="/terms" className="hover:text-foreground">Terms of Service</Link>
