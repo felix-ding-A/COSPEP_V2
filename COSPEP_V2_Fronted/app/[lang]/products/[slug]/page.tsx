@@ -84,10 +84,11 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 <div className="space-y-8">
                     <div>
                         <h1 className="text-3xl lg:text-4xl font-bold text-primary mb-2">{product.name}</h1>
-                        <div className="flex items-center space-x-4 text-lg text-muted-foreground">
-                            <span className="italic">{product.latinName}</span>
-                            <span>|</span>
+                        <div className="flex flex-wrap gap-x-6 gap-y-2 text-lg text-muted-foreground mt-3">
+                            {product.latinName && <span className="italic">{product.latinName}</span>}
                             <span className="font-semibold text-foreground">CAS: {product.casNumber}</span>
+                            {product.inciName && <span><span className="font-semibold">INCI:</span> {product.inciName}</span>}
+                            {product.purity && <span><span className="font-semibold">Purity:</span> {product.purity}</span>}
                         </div>
                     </div>
 
@@ -120,6 +121,11 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                         <li className="flex items-center">
                             <span className="font-semibold w-24">Documents:</span> COA, MSDS, TDS, ISO
                         </li>
+                        {product.grade && (
+                            <li className="flex items-center">
+                                <span className="font-semibold w-24">Grade:</span> {product.grade}
+                            </li>
+                        )}
                     </div>
                 </div>
             </div>
@@ -132,9 +138,30 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                     <TabsTrigger value="logistics">Logistics</TabsTrigger>
                 </TabsList>
 
-                <TabsContent value="specs" className="space-y-4">
-                    <h3 className="text-xl font-bold flex items-center"><ShieldCheck className="mr-2 h-5 w-5" /> Quality Specifications</h3>
-                    <SpecTable specs={product.specs || []} />
+                <TabsContent value="specs" className="space-y-6">
+                    {/* Functions / Benefits */}
+                    {product.functions && product.functions.length > 0 && (
+                        <div className="space-y-3">
+                            <h3 className="text-xl font-bold flex items-center">Functions / Benefits</h3>
+                            <div className="flex flex-wrap gap-2">
+                                {product.functions.map((func, i) => (
+                                    <Badge key={i} variant="secondary" className="text-md py-1 px-3">
+                                        {func}
+                                    </Badge>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="space-y-3">
+                        <h3 className="text-xl font-bold flex items-center"><ShieldCheck className="mr-2 h-5 w-5" /> Quality Specifications</h3>
+                        <SpecTable
+                            specs={product.specs || []}
+                            grade={product.grade}
+                            usageRate={product.usageRate}
+                            patentNo={product.patentNo}
+                        />
+                    </div>
                 </TabsContent>
 
                 <TabsContent value="documents" className="space-y-4">

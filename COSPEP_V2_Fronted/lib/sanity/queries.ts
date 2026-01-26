@@ -7,11 +7,18 @@ export interface Product {
   name: string;
   slug: { current: string };
   casNumber?: string;
-  latinName?: string;
+  latinName?: string; // Keeping optional for backward compatibility if data exists, but preferred is synonyms
+  synonyms?: string;
   stockStatus?: string;
   imageUrl?: string;
   categories?: { title: string; slug: { current: string } }[];
   specs?: string[];
+  inciName?: string;
+  purity?: string;
+  usageRate?: string;
+  patentNo?: string;
+  functions?: string[];
+  grade?: string;
   seoTitle?: string;
   seoDesc?: string;
   description?: string;
@@ -26,7 +33,7 @@ export interface Category {
 // Queries
 export async function getProducts(search?: string, categorySlug?: string, stockStatus?: string): Promise<Product[]> {
   const query = groq`*[_type == "product" && (
-        !defined($search) || name match $search + "*" || casNumber match $search + "*" || latinName match $search + "*"
+        !defined($search) || name match $search + "*" || casNumber match $search + "*" || synonyms match $search + "*" || latinName match $search + "*"
       ) && (
         !defined($categorySlug) || $categorySlug in categories[]->slug.current
       ) && (
@@ -36,7 +43,8 @@ export async function getProducts(search?: string, categorySlug?: string, stockS
         name,
         slug,
         casNumber,
-        latinName,
+        latinName, // Fetching it if it exists
+        synonyms,
         stockStatus,
         "categories": categories[]->{title, slug},
         "imageUrl": image.asset->url,
@@ -66,6 +74,12 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
         "categories": categories[]->{title, slug},
         "imageUrl": image.asset->url,
         specs,
+        inciName,
+        purity,
+        usageRate,
+        patentNo,
+        functions,
+        grade,
         seoTitle,
         seoDesc,
         description
