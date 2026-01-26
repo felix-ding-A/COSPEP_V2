@@ -96,7 +96,7 @@ export interface Settings {
 }
 
 export async function getSettings(): Promise<Settings> {
-  return client.fetch(groq`*[_type == "settings"][0]{
+  return client.fetch(groq`*[_id == "settings"][0]{
     heroText,
     "heroImageUrl": heroImage.asset->url,
     contactEmail,
@@ -105,7 +105,7 @@ export async function getSettings(): Promise<Settings> {
   }`, {}, { next: { revalidate: 0 } }); // Keep revalidate for now to help with updates
 }
 
-export const getSiteSettings = `*[_type == "settings"][0]{
+export const getSiteSettings = `*[_id == "settings"][0]{
   heroTitle,
   heroText, // Legacy fallback
   heroSubtitle,
