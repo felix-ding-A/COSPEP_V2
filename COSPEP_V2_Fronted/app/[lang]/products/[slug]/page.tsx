@@ -6,6 +6,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FileText, Truck, ShieldCheck, Download } from "lucide-react";
 import { SpecTable } from "@/components/products/spec-table";
 import { Metadata } from "next";
+import Image from "next/image";
+import { SITE_CONFIG } from "@/lib/config";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
@@ -62,7 +64,14 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 <div className="space-y-4">
                     <div className="aspect-square bg-muted rounded-xl overflow-hidden flex items-center justify-center border relative">
                         {product.imageUrl ? (
-                            <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
+                            <Image
+                                src={product.imageUrl}
+                                alt={product.name}
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 1024px) 100vw, 50vw"
+                                priority
+                            />
                         ) : (
                             <span className="text-muted-foreground">Product Image Placeholder</span>
                         )}
@@ -98,7 +107,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                             </span>
-                            <span className="font-medium text-sm">Ready to Ship from <strong>Shanghai Warehouse</strong></span>
+                            <span className="font-medium text-sm">Ready to Ship from <strong>{SITE_CONFIG.warehouse}</strong></span>
                         </div>
                     )}
 
@@ -113,13 +122,13 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
                     <div className="bg-muted/30 p-6 rounded-lg border space-y-3">
                         <li className="flex items-center">
-                            <span className="font-semibold w-24">MOQ:</span> 1kg
+                            <span className="font-semibold w-24">MOQ:</span> {SITE_CONFIG.moq}
                         </li>
                         <li className="flex items-center">
-                            <span className="font-semibold w-24">Lead Time:</span> 3 Days
+                            <span className="font-semibold w-24">Lead Time:</span> {SITE_CONFIG.leadTime}
                         </li>
                         <li className="flex items-center">
-                            <span className="font-semibold w-24">Documents:</span> COA, MSDS, TDS, ISO
+                            <span className="font-semibold w-24">Documents:</span> {SITE_CONFIG.documents.join(", ")}
                         </li>
                         {product.grade && (
                             <li className="flex items-center">
@@ -187,17 +196,17 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                             <div>
                                 <h4 className="font-semibold mb-2">Standard Packaging</h4>
                                 <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                                    <li>25kg / Fiber Drum</li>
-                                    <li>Double plastic bag inside</li>
-                                    <li>1kg / Aluminum Foil Bag (Sample)</li>
+                                    {SITE_CONFIG.packaging.map((item, i) => (
+                                        <li key={i}>{item}</li>
+                                    ))}
                                 </ul>
                             </div>
                             <div>
                                 <h4 className="font-semibold mb-2">Storage Conditions</h4>
                                 <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                                    <li>Store in a cool, dry place</li>
-                                    <li>Keep away from strong light and heat</li>
-                                    <li>Shelf Life: 24 Months</li>
+                                    {SITE_CONFIG.storage.map((item, i) => (
+                                        <li key={i}>{item}</li>
+                                    ))}
                                 </ul>
                             </div>
                         </div>

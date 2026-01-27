@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Product } from "@/lib/sanity/queries";
 
+import Image from "next/image";
+
 interface ProductCardProps {
     product: Product;
 }
@@ -15,7 +17,13 @@ export function ProductCard({ product }: ProductCardProps) {
             {/* Image Placeholder or Actual Image */}
             <div className="aspect-[4/3] w-full overflow-hidden rounded-t-lg bg-muted flex items-center justify-center relative">
                 {product.imageUrl ? (
-                    <img src={product.imageUrl} alt={product.name} className="object-cover w-full h-full" />
+                    <Image
+                        src={product.imageUrl}
+                        alt={product.name}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
                 ) : (
                     <div className="text-muted-foreground text-sm">No Image</div>
                 )}

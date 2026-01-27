@@ -6,7 +6,7 @@ import { getSiteSettings } from '@/lib/sanity/queries';
 
 // 获取数据的函数
 async function getData() {
-    return await client.fetch(getSiteSettings);
+    return await client.fetch(getSiteSettings, {}, { next: { revalidate: 60 } }); // 60 seconds revalidation
 }
 
 export async function HeroSection() {
