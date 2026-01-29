@@ -2,6 +2,7 @@ export default {
     name: 'settings',
     title: 'Site Settings',
     type: 'document',
+    __experimental_actions: ['update', 'publish', 'create'],
     fields: [
         {
             name: 'title',
