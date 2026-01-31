@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google"; // Changed from Inter
+import { Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import "@/app/globals.css";
@@ -8,11 +8,11 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Toaster } from "@/components/ui/sonner";
 
-const fontSans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-sans" });
+const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-    title: "COSPEP - Quality Botanical Ingredients",
-    description: "Sourcing premium botanical ingredients for Food, Cosmetics, and Health industries.",
+    title: "COSPEP - Pure, Potent & Naturally Derived",
+    description: "Ethically sourced and sustainably made to empower consistency in health you can trust, for maximum impact on your goals.",
 };
 
 export default async function RootLayout({
@@ -26,7 +26,7 @@ export default async function RootLayout({
     const messages = await getMessages();
 
     return (
-        <html lang={lang}>
+        <html lang={lang} className="dark">
             <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
                 <NextIntlClientProvider messages={messages}>
                     <Navbar />

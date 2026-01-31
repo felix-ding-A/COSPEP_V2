@@ -1,38 +1,72 @@
-import { ShieldCheck, Truck, PackageCheck } from "lucide-react";
+"use client";
+
+import { motion } from "framer-motion";
+import { Award, Shield, FlaskConical, Globe } from "lucide-react";
 
 const stats = [
     {
-        icon: ShieldCheck,
-        title: "ISO/GMP Certified",
-        description: "Verified Manufacturing Partners"
+        icon: Award,
+        label: "GMP Certified",
+        description: "Quality Assured"
     },
     {
-        icon: PackageCheck,
-        title: "Ready Stock",
-        description: "Immediate Availability for Key Items"
+        icon: Shield,
+        label: "FDA Regulated",
+        description: "Safety First"
     },
     {
-        icon: Truck,
-        title: "Global Shipping",
-        description: "Efficient Logistics Solution"
+        icon: FlaskConical,
+        label: "Third-Party Tested",
+        description: "Verified Purity"
+    },
+    {
+        icon: Globe,
+        label: "Global Shipping",
+        description: "Worldwide Delivery"
     }
 ];
 
 export function TrustStatsBar() {
     return (
-        <section className="bg-primary py-12 text-primary-foreground">
-            <div className="container mx-auto px-4 md:px-6">
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-3 text-center">
-                    {stats.map((stat, index) => (
-                        <div key={index} className="flex flex-col items-center space-y-3 p-4 rounded-lg bg-primary-foreground/5 backdrop-blur-sm border border-primary-foreground/10 hover:bg-primary-foreground/10 transition-colors">
-                            <stat.icon className="h-10 w-10 text-secondary" />
-                            <div className="space-y-1">
-                                <h3 className="text-xl font-bold">{stat.title}</h3>
-                                <p className="text-sm text-primary-foreground/80">{stat.description}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+        <section className="relative -mt-20 z-20">
+            <div className="max-w-7xl mx-auto px-6">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="glass rounded-2xl overflow-hidden"
+                >
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-white/10">
+                        {stats.map((stat, index) => {
+                            const Icon = stat.icon;
+                            return (
+                                <motion.div
+                                    key={stat.label}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                                    className="p-8 text-center group hover:bg-white/5 transition-all duration-300"
+                                >
+                                    <div className="flex flex-col items-center gap-3">
+                                        <div className="w-14 h-14 rounded-full bg-[#B8FF00]/10 flex items-center justify-center group-hover:bg-[#B8FF00]/20 transition-colors">
+                                            <Icon className="w-7 h-7 text-[#B8FF00]" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-lg font-semibold text-white mb-1">
+                                                {stat.label}
+                                            </h3>
+                                            <p className="text-sm text-gray-400">
+                                                {stat.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
+                </motion.div>
             </div>
         </section>
     );
