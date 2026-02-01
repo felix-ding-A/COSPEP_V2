@@ -28,9 +28,9 @@ export default async function RootLayout({
     params
 }: Readonly<{
     children: React.ReactNode;
-    params: { lang: string };
+    params: Promise<{ lang: string }>;
 }>) {
-    const { lang } = params;
+    const { lang } = await params;
     const messages = await getMessages();
 
     // Set text direction based on language (Arabic uses RTL)
