@@ -38,6 +38,22 @@ export default {
             description: 'Standard cosmetic ingredient name (e.g. Copper Tripeptide-1)',
         },
         {
+            name: 'latinName',
+            title: 'Latin Name / Scientific Name',
+            type: 'string',
+            description: 'e.g., Curcuma longa',
+        },
+        {
+            name: 'specs',
+            title: 'Specifications',
+            type: 'array',
+            of: [{ type: 'string' }],
+            options: {
+                layout: 'tags',
+            },
+            description: 'e.g., 95%, 98%, etc.',
+        },
+        {
             name: 'purity',
             title: 'Purity / Assay',
             type: 'string',
@@ -93,58 +109,12 @@ export default {
 
         // --- 分类与标签 ---
         {
-            name: 'category',
-            title: 'Category',
-            type: 'string',
-            options: {
-                list: [
-                    { title: 'Botanical Extracts', value: 'botanical-extracts' },
-                    { title: 'Fruit & Vegetable Powders', value: 'fruit-vegetable-powders' },
-                    { title: 'Peptides', value: 'peptides' },
-                    { title: 'Custom Solutions', value: 'custom-solutions' },
-                ],
-            },
-            validation: (Rule: any) => Rule.required(),
-        },
-        {
-            name: 'subcategory',
-            title: 'Subcategory',
-            type: 'string',
-            options: {
-                list: [
-                    // Group 1: Botanical Extracts
-                    { title: 'Standardized Botanical Extracts', value: 'standardized-botanical-extracts' },
-                    { title: 'Adaptogenic Herbs', value: 'adaptogenic-herbs' },
-                    { title: 'Natural Antioxidants', value: 'natural-antioxidants' },
-                    { title: 'Functional Health Ingredients', value: 'functional-health-ingredients' },
-                    { title: 'Mushroom Extracts', value: 'mushroom-extracts' },
-                    { title: 'Plant Pigments', value: 'plant-pigments' },
-
-                    // Group 2: Fruit & Vegetable Powders
-                    { title: 'FD Powders', value: 'fd-powders' },
-                    { title: 'SD Powders', value: 'sd-powders' },
-                    { title: 'Superfood Powders', value: 'superfood-powders' },
-                    { title: 'Concentrated Juice Powders', value: 'concentrated-juice-powders' },
-                    { title: 'Organic Fruit & Veg Powders', value: 'organic-fruit-veg-powders' },
-
-                    // Group 3: Peptides
-                    { title: 'Metabolic & Weight Management', value: 'metabolic-weight-management' },
-                    { title: 'Cosmetic & Anti-Aging', value: 'cosmetic-anti-aging' },
-                    { title: 'Growth Hormone Series', value: 'growth-hormone-series' },
-                    { title: 'Cognitive Enhancement Peptides', value: 'cognitive-enhancement-peptides' },
-                    { title: 'Hair Care & Growth Peptides', value: 'hair-care-growth-peptides' },
-                    { title: 'Skin Brightening', value: 'skin-brightening' },
-                    { title: 'Tissue Repair & Recovery', value: 'tissue-repair-recovery' },
-                    { title: 'Pharmaceutical Peptides', value: 'pharmaceutical-peptides' },
-
-                    // Group 4: Custom Solutions
-                    { title: 'OEM Manufacturing', value: 'oem-manufacturing' },
-                    { title: 'ODM Private Label', value: 'odm-private-label' },
-                    { title: 'Capsule & Tablet Services', value: 'capsule-tablet-services' },
-                    { title: 'Sachet & Repackaging', value: 'sachet-repackaging' },
-                ],
-            },
-            validation: (Rule: any) => Rule.required(),
+            name: 'categories',
+            title: 'Categories',
+            type: 'array',
+            of: [{ type: 'reference', to: { type: 'category' } }],
+            description: 'Select one or more categories for this product',
+            validation: (Rule: any) => Rule.required().min(1).max(3),
         },
         {
             name: 'functions',

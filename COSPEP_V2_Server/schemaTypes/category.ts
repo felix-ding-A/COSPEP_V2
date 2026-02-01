@@ -4,20 +4,79 @@ export default {
     type: 'document',
     fields: [
         {
-            name: 'sector',
-            title: 'Business Sector',
+            name: 'parentCategory',
+            title: 'Parent Category Group',
             type: 'string',
             options: {
                 list: [
-                    { title: 'Cosmetic Peptides', value: 'cosmetic-peptides' },
-                    { title: 'Pharma & APIs', value: 'pharma-apis' },
-                    { title: 'Bio-Actives & Extracts', value: 'bio-actives' },
-                    { title: 'Custom Services', value: 'custom' }
+                    { title: 'Botanical Extracts', value: 'botanical-extracts' },
+                    { title: 'Fruit & Vegetable Powders', value: 'fruit-vegetable-powders' },
+                    { title: 'Peptides', value: 'peptides' },
+                    { title: 'Custom Solutions', value: 'custom-solutions' }
                 ]
-            }
+            },
+            validation: (Rule: any) => Rule.required(),
+            description: 'Select which main category group this belongs to'
         },
-        { name: 'title', title: 'Title', type: 'string' },
-        { name: 'slug', title: 'Slug', type: 'slug', options: { source: 'title' } },
-        { name: 'description', title: 'Description', type: 'text' }
+        {
+            name: 'title',
+            title: 'Subcategory Name',
+            type: 'string',
+            validation: (Rule: any) => Rule.required(),
+            description: 'e.g., "Standardized Botanical Extracts", "FD Powders", etc.'
+        },
+        {
+            name: 'slug',
+            title: 'URL Slug',
+            type: 'slug',
+            options: {
+                source: 'title',
+                maxLength: 96
+            },
+            validation: (Rule: any) => Rule.required()
+        },
+        {
+            name: 'description',
+            title: 'Description',
+            type: 'text',
+            rows: 3,
+            description: 'Brief description of this subcategory'
+        },
+        {
+            name: 'order',
+            title: 'Display Order',
+            type: 'number',
+            description: 'Lower numbers appear first within the parent category',
+            initialValue: 0
+        }
+    ],
+    preview: {
+        select: {
+            title: 'title',
+            parentCategory: 'parentCategory'
+        },
+        prepare(selection: any) {
+            const { title, parentCategory } = selection;
+            const parentLabels: Record<string, string> = {
+                'botanical-extracts': 'Botanical Extracts',
+                'fruit-vegetable-powders': 'Fruit & Vegetable Powders',
+                'peptides': 'Peptides',
+                'custom-solutions': 'Custom Solutions'
+            };
+            return {
+                title: title,
+                subtitle: parentLabels[parentCategory] || parentCategory
+            };
+        }
+    },
+    orderings: [
+        {
+            title: 'Parent Category, then Order',
+            name: 'parentCategoryOrder',
+            by: [
+                { field: 'parentCategory', direction: 'asc' },
+                { field: 'order', direction: 'asc' }
+            ]
+        }
     ]
 }
