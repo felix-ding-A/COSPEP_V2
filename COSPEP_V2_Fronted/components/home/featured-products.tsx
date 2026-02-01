@@ -4,6 +4,7 @@ import { Link } from "@/lib/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AnimationWrapper } from "@/components/ui/animation-wrapper";
+import { useTranslations } from "next-intl";
 
 // Mock Data until Sanity is populated
 const FEATURED_PRODUCTS = [
@@ -34,13 +35,16 @@ const FEATURED_PRODUCTS = [
 ];
 
 export function FeaturedProducts() {
+    const t = useTranslations('home.featuredProducts');
+    const tCommon = useTranslations('common');
+
     return (
         <section className="py-24 lg:py-32 bg-slate-50/50">
             <div className="container mx-auto px-4 md:px-6">
                 <AnimationWrapper animation="fade-up" className="flex flex-col items-center justify-center space-y-4 text-center mb-16">
-                    <h2 className="text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl text-foreground">Featured Ingredients</h2>
+                    <h2 className="text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl text-foreground">{t('title')}</h2>
                     <p className="max-w-[700px] text-muted-foreground md:text-lg leading-relaxed">
-                        Discover our most sought-after botanical extracts, verified for quality and potency.
+                        {t('description')}
                     </p>
                 </AnimationWrapper>
 
@@ -65,7 +69,7 @@ export function FeaturedProducts() {
                                     </h3>
 
                                     <div className="text-sm text-muted-foreground">
-                                        <span className="font-semibold text-foreground">CAS No.: </span> {product.cas}
+                                        <span className="font-semibold text-foreground">{t('casNumber')} </span> {product.cas}
                                     </div>
 
                                     <div className="flex flex-wrap gap-2 mt-4">
@@ -80,7 +84,7 @@ export function FeaturedProducts() {
                                 <div className="p-6 pt-0 mt-auto">
                                     <Button asChild className="w-full bg-primary hover:bg-primary/90 hover:scale-[1.02] transition-all duration-300">
                                         <Link href={`/products/${product.id}`}>
-                                            View Details
+                                            {t('viewDetails')}
                                         </Link>
                                     </Button>
                                 </div>
@@ -91,7 +95,7 @@ export function FeaturedProducts() {
 
                 <AnimationWrapper animation="fade-up" delay={0.6} className="mt-16 text-center">
                     <Button asChild variant="outline" size="lg" className="border-primary text-primary hover:bg-primary/10 hover:scale-105 transition-all duration-300 px-8">
-                        <Link href="/products">View All Products</Link>
+                        <Link href="/products">{t('viewAll')}</Link>
                     </Button>
                 </AnimationWrapper>
             </div>

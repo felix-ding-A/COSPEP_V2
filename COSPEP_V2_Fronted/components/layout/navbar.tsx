@@ -1,7 +1,7 @@
 "use client";
 
 import { Link, usePathname, useRouter } from "@/lib/navigation";
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Button } from "@/components/ui/button";
 import React from 'react';
 import { client } from "@/lib/sanity";
@@ -14,12 +14,6 @@ import {
 import { Menu, ChevronDown, Search, Globe } from "lucide-react";
 
 // Resources submenu items
-// Resources submenu items
-const resourcesMenu = [
-    { href: "/blog?type=news", label: "News" },
-    { href: "/blog", label: "Blogs" },
-    { href: "/contact", label: "Customer Service" }
-];
 
 // Language options
 const languages = [
@@ -33,11 +27,21 @@ export function Navbar() {
     const router = useRouter();
     const pathname = usePathname();
     const currentLocale = useLocale();
+    const t = useTranslations('nav');
     const [categories, setCategories] = React.useState<any[]>([]);
+    const [isLangDropdownOpen, setIsLangDropdownOpen] = React.useState(false);
+
+    const resourcesMenu = [
+        { href: "/blog?type=news", label: t('resources.news') },
+        { href: "/blog", label: t('resources.blogs') },
+        { href: "/contact", label: t('resources.customerService') }
+    ];
 
     const handleLanguageChange = (newLocale: string) => {
         // Navigate to the same page but with different locale
         router.replace(pathname, { locale: newLocale });
+        // Close dropdown after selection
+        setIsLangDropdownOpen(false);
     };
 
     React.useEffect(() => {
@@ -60,10 +64,12 @@ export function Navbar() {
             <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
 
                 {/* Logo */}
-                <Link href="/" className="flex items-center space-x-2 group">
-                    <div className="w-10 h-10 rounded-lg bg-[#B8FF00] flex items-center justify-center">
-                        <span className="text-[#0A0E0D] font-bold text-xl">C</span>
-                    </div>
+                <Link href="/" className="flex items-center gap-3 group">
+                    <img
+                        src="/logo.png"
+                        alt="COSPEP Logo"
+                        className="w-10 h-10 object-contain group-hover:scale-110 transition-transform"
+                    />
                     <span className="text-2xl font-bold text-white tracking-tight group-hover:text-[#B8FF00] transition-colors">COSPEP</span>
                 </Link>
 
@@ -73,7 +79,7 @@ export function Navbar() {
                     {/* Products Dropdown */}
                     <div className="group relative">
                         <Link href="/products" className="flex items-center gap-1 text-white hover:text-[#B8FF00] transition-colors py-4">
-                            Products
+                            {t('products')}
                             <ChevronDown className="w-4 h-4" />
                         </Link>
                         <div className="absolute left-0 top-full hidden w-56 rounded-lg glass-strong border border-white/10 p-2 shadow-lg group-hover:block transition-all animate-in fade-in-0 slide-in-from-top-2 duration-300">
@@ -88,23 +94,23 @@ export function Navbar() {
                                     </Link>
                                 ))
                             ) : (
-                                <div className="px-3 py-2 text-sm text-gray-400">Loading...</div>
+                                <div className="px-3 py-2 text-sm text-gray-400">{t('loading')}</div>
                             )}
                             <div className="border-t border-white/10 my-1"></div>
                             <Link href="/products" className="block rounded-md px-3 py-2 text-sm text-white hover:bg-[#B8FF00]/10 hover:text-[#B8FF00] font-semibold transition-colors">
-                                View All Products
+                                {t('viewAllProducts')}
                             </Link>
                         </div>
                     </div>
 
                     <Link href="/service" className="text-white hover:text-[#B8FF00] transition-colors">
-                        Pharma Solutions
+                        {t('pharmaSolutions')}
                     </Link>
 
                     {/* Resources Dropdown */}
                     <div className="group relative">
                         <button className="flex items-center gap-1 text-white hover:text-[#B8FF00] transition-colors py-4">
-                            Resources
+                            {t('resources.title')}
                             <ChevronDown className="w-4 h-4" />
                         </button>
                         <div className="absolute left-0 top-full hidden w-56 rounded-lg glass-strong border border-white/10 p-2 shadow-lg group-hover:block transition-all animate-in fade-in-0 slide-in-from-top-2 duration-300">
@@ -121,7 +127,7 @@ export function Navbar() {
                     </div>
 
                     <Link href="/about" className="text-white hover:text-[#B8FF00] transition-colors">
-                        About Us
+                        {t('about')}
                     </Link>
                 </nav>
 
@@ -155,29 +161,40 @@ export function Navbar() {
                     </Button>
 
                     {/* Language Switcher */}
-                    <div className="group relative">
-                        <button className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all">
+                    <div className="relative">
+                        <button
+                            onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
+                            onBlur={(e) => {
+                                // Close dropdown when clicking outside, but not when clicking inside the dropdown
+                                if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                                    setTimeout(() => setIsLangDropdownOpen(false), 200);
+                                }
+                            }}
+                            className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all"
+                        >
                             <Globe className="w-4 h-4" />
-                            <span className="text-sm font-medium">
-                                {languages.find(lang => lang.code === currentLocale)?.flag}
+                            <span className="text-sm font-medium uppercase">
+                                {currentLocale}
                             </span>
-                            <ChevronDown className="w-4 h-4" />
+                            <ChevronDown className={`w-4 h-4 transition-transform ${isLangDropdownOpen ? 'rotate-180' : ''}`} />
                         </button>
-                        <div className="absolute right-0 top-full mt-2 hidden w-48 rounded-lg glass-strong border border-white/10 p-2 shadow-lg group-hover:block transition-all animate-in fade-in-0 slide-in-from-top-2 duration-300">
-                            {languages.map((lang) => (
-                                <button
-                                    key={lang.code}
-                                    onClick={() => handleLanguageChange(lang.code)}
-                                    className={`w-full flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors ${currentLocale === lang.code
+                        {isLangDropdownOpen && (
+                            <div className="absolute right-0 top-full mt-2 w-48 rounded-lg glass-strong border border-white/10 p-2 shadow-lg animate-in fade-in-0 slide-in-from-top-2 duration-300 z-50">
+                                {languages.map((lang) => (
+                                    <button
+                                        key={lang.code}
+                                        onClick={() => handleLanguageChange(lang.code)}
+                                        className={`w-full flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors ${currentLocale === lang.code
                                             ? 'bg-[#B8FF00]/20 text-[#B8FF00]'
                                             : 'text-white hover:bg-[#B8FF00]/10 hover:text-[#B8FF00]'
-                                        }`}
-                                >
-                                    <span className="text-lg">{lang.flag}</span>
-                                    <span>{lang.name}</span>
-                                </button>
-                            ))}
-                        </div>
+                                            }`}
+                                    >
+                                        <span className="text-lg">{lang.flag}</span>
+                                        <span>{lang.name}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
 
@@ -193,10 +210,12 @@ export function Navbar() {
                         <SheetContent side="right" className="glass-strong border-white/10">
                             <div className="flex flex-col h-full">
                                 <div className="flex items-center justify-between py-4">
-                                    <div className="flex items-center space-x-2">
-                                        <div className="w-8 h-8 rounded-lg bg-[#B8FF00] flex items-center justify-center">
-                                            <span className="text-[#0A0E0D] font-bold">C</span>
-                                        </div>
+                                    <div className="flex items-center gap-3">
+                                        <img
+                                            src="/logo.png"
+                                            alt="COSPEP Logo"
+                                            className="w-8 h-8 object-contain"
+                                        />
                                         <span className="text-xl font-bold text-white">COSPEP</span>
                                     </div>
                                 </div>
@@ -249,6 +268,26 @@ export function Navbar() {
                                             About Us
                                         </Link>
                                     </SheetClose>
+
+                                    {/* Mobile Language Switcher */}
+                                    <div className="mt-4 pt-4 border-t border-white/20">
+                                        <div className="text-lg font-medium text-white mb-3">Language</div>
+                                        <div className="flex flex-col gap-2">
+                                            {languages.map((lang) => (
+                                                <button
+                                                    key={lang.code}
+                                                    onClick={() => handleLanguageChange(lang.code)}
+                                                    className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors ${currentLocale === lang.code
+                                                        ? 'bg-[#B8FF00]/20 text-[#B8FF00]'
+                                                        : 'text-gray-400 hover:bg-[#B8FF00]/10 hover:text-[#B8FF00]'
+                                                        }`}
+                                                >
+                                                    <span className="text-lg">{lang.flag}</span>
+                                                    <span>{lang.name}</span>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
 
                                     <SheetClose asChild>
                                         <Button

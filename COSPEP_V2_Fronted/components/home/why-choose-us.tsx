@@ -2,23 +2,26 @@
 
 import { BadgeCheck, Scale, FlaskConical } from "lucide-react";
 import { AnimationWrapper } from "@/components/ui/animation-wrapper";
+import { useTranslations } from "next-intl";
 
 export function WhyChooseUs() {
+    const t = useTranslations('home.features');
+
     const features = [
         {
             icon: BadgeCheck,
-            title: "Strict Auditing",
-            description: "Every supplier is vetted against ISO and cGMP standards. We allow no compromise on safety and authenticity."
+            title: t('items.0.title'),
+            description: t('items.0.description')
         },
         {
             icon: TruckIcon,
-            title: "Consolidated Shipping",
-            description: "Save on logistics by combining multiple small orders into one shipment. We handle the export documentation."
+            title: t('items.1.title'),
+            description: t('items.1.description')
         },
         {
             icon: FlaskConical,
-            title: "Third-Party Testing",
-            description: "Independent lab testing available upon request. Verify potency, heavy metals, and pesticide residues."
+            title: t('items.2.title'),
+            description: t('items.2.description')
         }
     ];
 
@@ -26,9 +29,9 @@ export function WhyChooseUs() {
         <section className="py-24 lg:py-32 bg-background">
             <div className="container mx-auto px-4 md:px-6">
                 <AnimationWrapper animation="fade-up" className="text-center mb-16 space-y-4">
-                    <h2 className="text-3xl font-bold text-foreground md:text-4xl lg:text-5xl tracking-tight">Why Partner With COSPEP?</h2>
+                    <h2 className="text-3xl font-bold text-foreground md:text-4xl lg:text-5xl tracking-tight">{t('title')}</h2>
                     <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
-                        We bridge the gap between quality manufacturing and global demand with rigorous standards.
+                        {t('description')}
                     </p>
                 </AnimationWrapper>
 

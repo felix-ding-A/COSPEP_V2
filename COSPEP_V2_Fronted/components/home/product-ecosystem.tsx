@@ -4,35 +4,38 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-
-const products = [
-    {
-        title: "Bio-Active Peptides",
-        description: "Advanced peptide formulations for targeted health outcomes",
-        image: "/images/product-peptides.png",
-        link: "/en/products?category=Peptide"
-    },
-    {
-        title: "Pharmaceutical Intermediates",
-        description: "High-purity intermediates for pharmaceutical manufacturing",
-        image: "/images/product-intermediates.png",
-        link: "/en/products?category=Pharmaceutical%20Intermediates"
-    },
-    {
-        title: "Natural Plant Extracts",
-        description: "Premium botanical extracts with verified potency",
-        image: "/images/product-plants.png",
-        link: "/en/products?category=Natural%20Plant%20Extracts"
-    },
-    {
-        title: "Custom Health Supplements",
-        description: "Tailored supplement solutions for your needs",
-        image: "/images/product-supplements.png",
-        link: "/en/products?category=Custom%20Health%20Supplements"
-    }
-];
+import { useTranslations } from "next-intl";
 
 export function ProductEcosystem() {
+    const t = useTranslations('home.products');
+
+    const products = [
+        {
+            title: t('items.0.title'),
+            description: t('items.0.description'),
+            image: "/images/product-peptides.png",
+            link: "/en/products?category=Peptide"
+        },
+        {
+            title: t('items.1.title'),
+            description: t('items.1.description'),
+            image: "/images/product-intermediates.png",
+            link: "/en/products?category=Pharmaceutical%20Intermediates"
+        },
+        {
+            title: t('items.2.title'),
+            description: t('items.2.description'),
+            image: "/images/product-plants.png",
+            link: "/en/products?category=Natural%20Plant%20Extracts"
+        },
+        {
+            title: t('items.3.title'),
+            description: t('items.3.description'),
+            image: "/images/product-supplements.png",
+            link: "/en/products?category=Custom%20Health%20Supplements"
+        }
+    ];
+
     return (
         <section className="py-24 bg-gradient-to-b from-background to-[#0F1612]">
             <div className="max-w-7xl mx-auto px-6">
@@ -44,7 +47,7 @@ export function ProductEcosystem() {
                         viewport={{ once: true }}
                         className="inline-block px-4 py-2 rounded-full border border-[#B8FF00]/20 text-[#B8FF00] text-sm font-medium mb-4 uppercase tracking-wider"
                     >
-                        Our Product
+                        {t('badge')}
                     </motion.span>
                     <motion.h2
                         initial={{ opacity: 0, y: 10 }}
@@ -53,7 +56,7 @@ export function ProductEcosystem() {
                         transition={{ delay: 0.1 }}
                         className="text-4xl md:text-5xl font-bold text-white mb-4"
                     >
-                        Our Product Ecosystem
+                        {t('title')}
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 10 }}
@@ -62,8 +65,7 @@ export function ProductEcosystem() {
                         transition={{ delay: 0.2 }}
                         className="text-gray-400 text-lg max-w-2xl mx-auto"
                     >
-                        A comprehensive portfolio designed to empower a truly diverse range of health
-                        and industry provision.
+                        {t('description')}
                     </motion.p>
                 </div>
 

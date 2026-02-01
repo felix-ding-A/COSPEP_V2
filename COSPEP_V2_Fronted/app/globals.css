@@ -211,4 +211,33 @@
   .gradient-dark {
     background: linear-gradient(135deg, #0A0E0D 0%, #1F2A24 100%);
   }
+
+  /* RTL Support Utilities */
+  [dir="rtl"] {
+    direction: rtl;
+  }
+
+  [dir="rtl"] .flex {
+    flex-direction: row-reverse;
+  }
+
+  /* Flip margins and paddings for RTL */
+  [dir="rtl"] .ml-auto {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  [dir="rtl"] .mr-auto {
+    margin-right: 0;
+    margin-left: auto;
+  }
+
+  /* Flip text alignment */
+  [dir="rtl"] .text-left {
+    text-align: right;
+  }
+
+  [dir="rtl"] .text-right {
+    text-align: left;
+  }
 }

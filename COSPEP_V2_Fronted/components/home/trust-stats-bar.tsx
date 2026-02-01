@@ -2,31 +2,34 @@
 
 import { motion } from "framer-motion";
 import { Award, Shield, FlaskConical, Globe } from "lucide-react";
-
-const stats = [
-    {
-        icon: Award,
-        label: "cGMP Certified",
-        description: "Quality Assured"
-    },
-    {
-        icon: Shield,
-        label: "FDA Regulated",
-        description: "Safety First"
-    },
-    {
-        icon: FlaskConical,
-        label: "Third-Party Tested",
-        description: "Verified Purity"
-    },
-    {
-        icon: Globe,
-        label: "Global Shipping",
-        description: "Worldwide Delivery"
-    }
-];
+import { useTranslations } from "next-intl";
 
 export function TrustStatsBar() {
+    const t = useTranslations('home.stats');
+
+    const stats = [
+        {
+            icon: Award,
+            label: t('cgmp.label'),
+            description: t('cgmp.description')
+        },
+        {
+            icon: Shield,
+            label: t('fda.label'),
+            description: t('fda.description')
+        },
+        {
+            icon: FlaskConical,
+            label: t('tested.label'),
+            description: t('tested.description')
+        },
+        {
+            icon: Globe,
+            label: t('shipping.label'),
+            description: t('shipping.description')
+        }
+    ];
+
     return (
         <section className="relative -mt-20 z-20">
             <div className="max-w-7xl mx-auto px-6">

@@ -5,30 +5,53 @@ import { ArrowRight, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-
-const carouselImages = [
-    "/images/hero-carousel-1.png",
-    "/images/hero-carousel-2.png",
-    "/images/hero-carousel-3.png"
-];
+import { useTranslations } from "next-intl";
 
 export function HeroSection() {
+    const t = useTranslations('home.hero');
+    const tCommon = useTranslations('common');
     const [currentSlide, setCurrentSlide] = useState(0);
+
+    // Get carousel data from translations
+    const carouselData = [
+        {
+            image: "/images/hero-carousel-1.png",
+            badge: t('slides.0.badge'),
+            title: t('slides.0.title'),
+            highlight: t('slides.0.highlight'),
+            description: t('slides.0.description')
+        },
+        {
+            image: "/images/hero-carousel-2.png",
+            badge: t('slides.1.badge'),
+            title: t('slides.1.title'),
+            highlight: t('slides.1.highlight'),
+            description: t('slides.1.description')
+        },
+        {
+            image: "/images/hero-carousel-3.png",
+            badge: t('slides.2.badge'),
+            title: t('slides.2.title'),
+            highlight: t('slides.2.highlight'),
+            description: t('slides.2.description')
+        }
+    ];
+
 
     // Auto-advance carousel every 5 seconds
     useEffect(() => {
         const timer = setInterval(() => {
-            setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+            setCurrentSlide((prev) => (prev + 1) % carouselData.length);
         }, 5000);
         return () => clearInterval(timer);
     }, []);
 
     const nextSlide = () => {
-        setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+        setCurrentSlide((prev) => (prev + 1) % carouselData.length);
     };
 
     const prevSlide = () => {
-        setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+        setCurrentSlide((prev) => (prev - 1 + carouselData.length) % carouselData.length);
     };
 
     return (
@@ -46,7 +69,7 @@ export function HeroSection() {
                     >
                         <div
                             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                            style={{ backgroundImage: `url('${carouselImages[currentSlide]}')` }}
+                            style={{ backgroundImage: `url('${carouselData[currentSlide].image}')` }}
                         />
                     </motion.div>
                 </AnimatePresence>
@@ -75,7 +98,7 @@ export function HeroSection() {
 
             {/* Carousel Indicators */}
             <div className="absolute bottom-32 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-                {carouselImages.map((_, index) => (
+                {carouselData.map((_, index) => (
                     <button
                         key={index}
                         onClick={() => setCurrentSlide(index)}
@@ -90,77 +113,80 @@ export function HeroSection() {
 
             {/* Content */}
             <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 text-center">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="space-y-8"
-                >
-                    {/* Badge */}
+                <AnimatePresence mode="wait">
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.2, duration: 0.5 }}
-                        className="inline-block"
-                    >
-                        <div className="glass px-4 py-2 rounded-full text-sm text-white/90 uppercase tracking-wider">
-                            <span className="text-[#B8FF00]">●</span> 100% Pure • Clinically Tested
-                        </div>
-                    </motion.div>
-
-                    {/* Headline */}
-                    <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tight">
-                        Pure, Potent &<br />
-                        <span className="relative inline-block">
-                            <span className="relative z-10 text-[#B8FF00]">Naturally Derived</span>
-                            {/* Highlight Effect */}
-                            <motion.span
-                                initial={{ width: 0 }}
-                                animate={{ width: "100%" }}
-                                transition={{ delay: 0.5, duration: 0.8 }}
-                                className="absolute bottom-2 left-0 h-3 bg-[#B8FF00]/20 -z-0"
-                            />
-                        </span>
-                    </h1>
-
-                    {/* Subtitle */}
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4, duration: 0.8 }}
-                        className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
-                    >
-                        Ethically sourced and sustainably made to empower consistency in
-                        health you can trust, for maximum impact on your goals.
-                    </motion.p>
-
-                    {/* CTA Buttons */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
+                        key={currentSlide}
+                        initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.6, duration: 0.6 }}
-                        className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.6 }}
+                        className="space-y-8"
                     >
-                        <Button
-                            size="lg"
-                            className="bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-semibold px-8 py-6 text-lg group"
-                            asChild
+                        {/* Badge */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.2, duration: 0.5 }}
+                            className="inline-block"
                         >
-                            <Link href="/en/about">
-                                Learn More
-                                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                            </Link>
-                        </Button>
+                            <div className="glass px-4 py-2 rounded-full text-sm text-white/90 uppercase tracking-wider">
+                                <span className="text-[#B8FF00]">●</span> {carouselData[currentSlide].badge}
+                            </div>
+                        </motion.div>
 
-                        <Button
-                            size="lg"
-                            variant="outline"
-                            className="border-2 border-white/20 hover:border-[#B8FF00] hover:bg-[#B8FF00]/10 text-white px-8 py-6 text-lg backdrop-blur-sm group"
-                            asChild
+                        {/* Headline */}
+                        <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tight">
+                            {carouselData[currentSlide].title}<br />
+                            <span className="relative inline-block">
+                                <span className="relative z-10 text-[#B8FF00]">{carouselData[currentSlide].highlight}</span>
+                                {/* Highlight Effect */}
+                                <motion.span
+                                    initial={{ width: 0 }}
+                                    animate={{ width: "100%" }}
+                                    transition={{ delay: 0.3, duration: 0.8 }}
+                                    className="absolute bottom-2 left-0 h-3 bg-[#B8FF00]/20 -z-0"
+                                />
+                            </span>
+                        </h1>
+
+                        {/* Subtitle */}
+                        <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.3, duration: 0.6 }}
+                            className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
                         >
-                        </Button>
+                            {carouselData[currentSlide].description}
+                        </motion.p>
+
+                        {/* CTA Buttons */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.6, duration: 0.6 }}
+                            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
+                        >
+                            <Button
+                                size="lg"
+                                className="bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-semibold px-8 py-6 text-lg group"
+                                asChild
+                            >
+                                <Link href="/en/about">
+                                    {tCommon('learnMore')}
+                                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                                </Link>
+                            </Button>
+
+                            <Button
+                                size="lg"
+                                variant="outline"
+                                className="border-2 border-white/20 hover:border-[#B8FF00] hover:bg-[#B8FF00]/10 text-white px-8 py-6 text-lg backdrop-blur-sm group"
+                                asChild
+                            >
+                            </Button>
+                        </motion.div>
                     </motion.div>
-                </motion.div>
+                </AnimatePresence>
             </div>
         </section>
     );

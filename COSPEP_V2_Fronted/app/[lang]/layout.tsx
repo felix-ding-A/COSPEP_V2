@@ -13,6 +13,14 @@ const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 export const metadata: Metadata = {
     title: "COSPEP - Pure, Potent & Naturally Derived",
     description: "Ethically sourced and sustainably made to empower consistency in health you can trust, for maximum impact on your goals.",
+    icons: {
+        icon: [
+            { url: '/favicon.png', type: 'image/png' },
+        ],
+        apple: [
+            { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+        ],
+    },
 };
 
 export default async function RootLayout({
@@ -20,13 +28,16 @@ export default async function RootLayout({
     params
 }: Readonly<{
     children: React.ReactNode;
-    params: Promise<{ lang: string }>;
+    params: { lang: string };
 }>) {
-    const { lang } = await params;
+    const { lang } = params;
     const messages = await getMessages();
 
+    // Set text direction based on language (Arabic uses RTL)
+    const dir = lang === 'ar' ? 'rtl' : 'ltr';
+
     return (
-        <html lang={lang} className="dark">
+        <html lang={lang} dir={dir} className="dark">
             <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
                 <NextIntlClientProvider messages={messages}>
                     <Navbar />
