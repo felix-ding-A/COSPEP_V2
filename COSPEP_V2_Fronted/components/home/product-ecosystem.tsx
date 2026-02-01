@@ -10,25 +10,25 @@ const products = [
         title: "Bio-Active Peptides",
         description: "Advanced peptide formulations for targeted health outcomes",
         image: "/images/product-peptides.png",
-        link: "/products/peptides"
+        link: "/en/products?category=Peptide"
     },
     {
         title: "Pharmaceutical Intermediates",
         description: "High-purity intermediates for pharmaceutical manufacturing",
         image: "/images/product-intermediates.png",
-        link: "/products/intermediates"
+        link: "/en/products?category=Pharmaceutical%20Intermediates"
     },
     {
         title: "Natural Plant Extracts",
         description: "Premium botanical extracts with verified potency",
         image: "/images/product-plants.png",
-        link: "/products/extracts"
+        link: "/en/products?category=Natural%20Plant%20Extracts"
     },
     {
         title: "Custom Health Supplements",
         description: "Tailored supplement solutions for your needs",
         image: "/images/product-supplements.png",
-        link: "/products/supplements"
+        link: "/en/products?category=Custom%20Health%20Supplements"
     }
 ];
 

@@ -6,7 +6,7 @@ import { Award, Shield, FlaskConical, Globe } from "lucide-react";
 const stats = [
     {
         icon: Award,
-        label: "GMP Certified",
+        label: "cGMP Certified",
         description: "Quality Assured"
     },
     {

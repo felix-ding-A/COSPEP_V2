@@ -146,8 +146,8 @@ export function HeroSection() {
                             className="bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-semibold px-8 py-6 text-lg group"
                             asChild
                         >
-                            <Link href="/contact">
-                                Schedule a Doctor
+                            <Link href="/en/about">
+                                Learn More
                                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                             </Link>
                         </Button>
@@ -158,10 +158,6 @@ export function HeroSection() {
                             className="border-2 border-white/20 hover:border-[#B8FF00] hover:bg-[#B8FF00]/10 text-white px-8 py-6 text-lg backdrop-blur-sm group"
                             asChild
                         >
-                            <Link href="/products">
-                                <Play className="mr-2 h-5 w-5 fill-current" />
-                                Quickly Party
-                            </Link>
                         </Button>
                     </motion.div>
                 </motion.div>

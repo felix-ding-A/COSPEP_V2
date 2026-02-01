@@ -8,7 +8,7 @@ export function WhyChooseUs() {
         {
             icon: BadgeCheck,
             title: "Strict Auditing",
-            description: "Every supplier is vetted against ISO and GMP standards. We allow no compromise on safety and authenticity."
+            description: "Every supplier is vetted against ISO and cGMP standards. We allow no compromise on safety and authenticity."
         },
         {
             icon: TruckIcon,

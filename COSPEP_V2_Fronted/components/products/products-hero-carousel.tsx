@@ -10,7 +10,7 @@ const carouselSlides = [
     {
         image: "/images/product-carousel-1.png",
         title: "Bio-Active Peptides",
-        subtitle: "Pharmaceutical Grade • GMP Certified",
+        subtitle: "Pharmaceutical Grade • cGMP Certified",
         description: "Advanced peptide synthesis for research and therapeutic applications",
         cta: "Explore Peptides",
         href: "/products?category=peptides"

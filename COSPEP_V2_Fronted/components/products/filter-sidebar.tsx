@@ -19,7 +19,7 @@ import { ContactCard } from "./contact-card";
 
 // Certification options
 const certifications = [
-    { id: "gmp", label: "GMP Certified" },
+    { id: "gmp", label: "cGMP Certified" },
     { id: "fda", label: "FDA Approved" },
     { id: "organic", label: "Organic" },
     { id: "iso", label: "ISO Certified" },

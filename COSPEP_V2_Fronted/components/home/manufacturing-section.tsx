@@ -74,7 +74,7 @@ export function ManufacturingSection() {
                             className="bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-semibold px-8"
                             asChild
                         >
-                            <Link href="/service">
+                            <Link href="/en/pharma-solutions">
                                 Start Your Project
                                 <Sparkles className="ml-2 h-5 w-5" />
                             </Link>

@@ -25,7 +25,7 @@ export default function AboutPage() {
                                     Xi'an isn't just an ancient capital; it is the global cluster for herbal extraction. The unique climate of the Qinling Mountains provides an abundance of diverse botanical resources.
                                 </p>
                                 <p>
-                                    Being based here means we are within a <strong>2-hour drive of 500+ GMP factories</strong>. We don't guess the market conditions or rely on emails; we walk the factory floors, inspect the raw materials, and verify production quality in person.
+                                    Being based here means we are within a <strong>2-hour drive of 500+ cGMP factories</strong>. We don't guess the market conditions or rely on emails; we walk the factory floors, inspect the raw materials, and verify production quality in person.
                                 </p>
                             </div>
                             <Button className="bg-primary hover:bg-primary/90">
@@ -94,7 +94,7 @@ export default function AboutPage() {
                             <ul className="space-y-4">
                                 <li className="flex items-start">
                                     <CheckCircle2 className="w-5 h-5 text-primary mr-2 shrink-0 mt-0.5" />
-                                    <span className="font-medium text-foreground">Pre-audited GMP Manufacturers Only.</span>
+                                    <span className="font-medium text-foreground">Pre-audited cGMP Manufacturers Only.</span>
                                 </li>
                                 <li className="flex items-start">
                                     <CheckCircle2 className="w-5 h-5 text-primary mr-2 shrink-0 mt-0.5" />
@@ -122,7 +122,7 @@ export default function AboutPage() {
                         {[
                             { name: "Dr. Chen", role: "Chief Scientific Officer", desc: "15+ Years in Phyto-chemistry" },
                             { name: "Sarah Li", role: "Supply Chain Director", desc: "Expert in Global Logistics" },
-                            { name: "Mike Zhang", role: "Quality Assurance Lead", desc: "Auditor ISO/GMP Standards" },
+                            { name: "Mike Zhang", role: "Quality Assurance Lead", desc: "Auditor ISO/cGMP Standards" },
                             { name: "Emma Wang", role: "Client Success Manager", desc: "Dedicated to smooth ops" },
                         ].map((member, i) => (
                             <Card key={i} className="text-center border-none shadow-none bg-transparent">

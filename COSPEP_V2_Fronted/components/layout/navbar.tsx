@@ -1,6 +1,7 @@
 "use client";
 
 import { Link, usePathname, useRouter } from "@/lib/navigation";
+import { useLocale } from 'next-intl';
 import { Button } from "@/components/ui/button";
 import React from 'react';
 import { client } from "@/lib/sanity";
@@ -10,8 +11,9 @@ import {
     SheetTrigger,
     SheetClose
 } from "@/components/ui/sheet";
-import { Menu, ChevronDown } from "lucide-react";
+import { Menu, ChevronDown, Search, Globe } from "lucide-react";
 
+// Resources submenu items
 // Resources submenu items
 const resourcesMenu = [
     { href: "/blog?type=news", label: "News" },
@@ -19,19 +21,24 @@ const resourcesMenu = [
     { href: "/contact", label: "Customer Service" }
 ];
 
+// Language options
+const languages = [
+    { code: 'en', name: 'English', flag: '🇺🇸' },
+    { code: 'es', name: 'Español', flag: '🇪🇸' },
+    { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+    { code: 'ar', name: 'العربية', flag: '🇸🇦' }
+];
+
 export function Navbar() {
     const router = useRouter();
+    const pathname = usePathname();
+    const currentLocale = useLocale();
     const [categories, setCategories] = React.useState<any[]>([]);
-    const [scrolled, setScrolled] = React.useState(false);
 
-    // Handle scroll for navbar background opacity
-    React.useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    const handleLanguageChange = (newLocale: string) => {
+        // Navigate to the same page but with different locale
+        router.replace(pathname, { locale: newLocale });
+    };
 
     React.useEffect(() => {
         const fetchCategories = async () => {
@@ -48,10 +55,7 @@ export function Navbar() {
 
     return (
         <header
-            className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled
-                    ? 'glass-strong' // More opaque when scrolled
-                    : 'glass-subtle' // More transparent at top
-                }`}
+            className="sticky top-0 z-50 w-full transition-all duration-300 glass-strong"
         >
             <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
 
@@ -121,8 +125,27 @@ export function Navbar() {
                     </Link>
                 </nav>
 
+
                 {/* Desktop Actions */}
                 <div className="hidden md:flex items-center gap-4">
+                    {/* Search Box */}
+                    <div className="relative">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                        <input
+                            type="text"
+                            placeholder="Search products..."
+                            className="w-64 pl-10 pr-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B8FF00] focus:border-transparent transition-all"
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    const query = e.currentTarget.value.trim();
+                                    if (query) {
+                                        router.push(`/search?q=${encodeURIComponent(query)}`);
+                                    }
+                                }
+                            }}
+                        />
+                    </div>
+
                     <Button
                         size="sm"
                         className="bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-semibold"
@@ -130,7 +153,34 @@ export function Navbar() {
                     >
                         <Link href="/contact">Contact</Link>
                     </Button>
+
+                    {/* Language Switcher */}
+                    <div className="group relative">
+                        <button className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all">
+                            <Globe className="w-4 h-4" />
+                            <span className="text-sm font-medium">
+                                {languages.find(lang => lang.code === currentLocale)?.flag}
+                            </span>
+                            <ChevronDown className="w-4 h-4" />
+                        </button>
+                        <div className="absolute right-0 top-full mt-2 hidden w-48 rounded-lg glass-strong border border-white/10 p-2 shadow-lg group-hover:block transition-all animate-in fade-in-0 slide-in-from-top-2 duration-300">
+                            {languages.map((lang) => (
+                                <button
+                                    key={lang.code}
+                                    onClick={() => handleLanguageChange(lang.code)}
+                                    className={`w-full flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors ${currentLocale === lang.code
+                                            ? 'bg-[#B8FF00]/20 text-[#B8FF00]'
+                                            : 'text-white hover:bg-[#B8FF00]/10 hover:text-[#B8FF00]'
+                                        }`}
+                                >
+                                    <span className="text-lg">{lang.flag}</span>
+                                    <span>{lang.name}</span>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
                 </div>
+
 
                 {/* Mobile Menu (Sheet) */}
                 <div className="md:hidden">
