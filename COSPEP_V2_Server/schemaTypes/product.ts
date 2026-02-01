@@ -93,6 +93,60 @@ export default {
 
         // --- 分类与标签 ---
         {
+            name: 'category',
+            title: 'Category',
+            type: 'string',
+            options: {
+                list: [
+                    { title: 'Botanical Extracts', value: 'botanical-extracts' },
+                    { title: 'Fruit & Vegetable Powders', value: 'fruit-vegetable-powders' },
+                    { title: 'Peptides', value: 'peptides' },
+                    { title: 'Custom Solutions', value: 'custom-solutions' },
+                ],
+            },
+            validation: (Rule: any) => Rule.required(),
+        },
+        {
+            name: 'subcategory',
+            title: 'Subcategory',
+            type: 'string',
+            options: {
+                list: [
+                    // Group 1: Botanical Extracts
+                    { title: 'Standardized Botanical Extracts', value: 'standardized-botanical-extracts' },
+                    { title: 'Adaptogenic Herbs', value: 'adaptogenic-herbs' },
+                    { title: 'Natural Antioxidants', value: 'natural-antioxidants' },
+                    { title: 'Functional Health Ingredients', value: 'functional-health-ingredients' },
+                    { title: 'Mushroom Extracts', value: 'mushroom-extracts' },
+                    { title: 'Plant Pigments', value: 'plant-pigments' },
+
+                    // Group 2: Fruit & Vegetable Powders
+                    { title: 'FD Powders', value: 'fd-powders' },
+                    { title: 'SD Powders', value: 'sd-powders' },
+                    { title: 'Superfood Powders', value: 'superfood-powders' },
+                    { title: 'Concentrated Juice Powders', value: 'concentrated-juice-powders' },
+                    { title: 'Organic Fruit & Veg Powders', value: 'organic-fruit-veg-powders' },
+
+                    // Group 3: Peptides
+                    { title: 'Metabolic & Weight Management', value: 'metabolic-weight-management' },
+                    { title: 'Cosmetic & Anti-Aging', value: 'cosmetic-anti-aging' },
+                    { title: 'Growth Hormone Series', value: 'growth-hormone-series' },
+                    { title: 'Cognitive Enhancement Peptides', value: 'cognitive-enhancement-peptides' },
+                    { title: 'Hair Care & Growth Peptides', value: 'hair-care-growth-peptides' },
+                    { title: 'Skin Brightening', value: 'skin-brightening' },
+                    { title: 'Tissue Repair & Recovery', value: 'tissue-repair-recovery' },
+                    { title: 'Pharmaceutical Peptides', value: 'pharmaceutical-peptides' },
+
+                    // Group 4: Custom Solutions
+                    { title: 'OEM Manufacturing', value: 'oem-manufacturing' },
+                    { title: 'ODM Private Label', value: 'odm-private-label' },
+                    { title: 'Capsule & Tablet Services', value: 'capsule-tablet-services' },
+                    { title: 'Sachet & Repackaging', value: 'sachet-repackaging' },
+                ],
+            },
+            validation: (Rule: any) => Rule.required(),
+        },
+        {
             name: 'functions',
             title: 'Functions / Benefits',
             type: 'array',
@@ -101,12 +155,6 @@ export default {
                 layout: 'tags',
             },
             description: 'Press Enter to add tags (e.g. Anti-aging, Whitening)',
-        },
-        {
-            name: 'categories',
-            title: 'Category',
-            type: 'array', // 这里虽然是数组，但通常一个产品选1-2个分类
-            of: [{ type: 'reference', to: { type: 'category' } }],
         },
         {
             name: 'stockStatus',
