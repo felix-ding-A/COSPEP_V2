@@ -39,6 +39,12 @@ export function FilterSidebar({ categories }: { categories: Category[] }) {
         searchParams.get("certifications")?.split(",").filter(Boolean) || []
     );
     const [readyToShip, setReadyToShip] = useState(searchParams.get("stockStatus") === "Ready to Ship");
+    const parentCategory = searchParams.get("parentCategory") || "";
+
+    // Filter categories based on parentCategory
+    const filteredCategories = parentCategory
+        ? categories.filter(cat => cat.parentCategory === parentCategory)
+        : categories;
 
     // Debounced update
     useEffect(() => {
@@ -55,6 +61,7 @@ export function FilterSidebar({ categories }: { categories: Category[] }) {
         if (selectedCategories.length > 0) params.set("categories", selectedCategories.join(","));
         if (selectedCertifications.length > 0) params.set("certifications", selectedCertifications.join(","));
         if (readyToShip) params.set("stockStatus", "Ready to Ship");
+        if (parentCategory) params.set("parentCategory", parentCategory);
 
         router.push(`?${params.toString()}`, { scroll: false });
     };
@@ -108,7 +115,7 @@ export function FilterSidebar({ categories }: { categories: Category[] }) {
                     </AccordionTrigger>
                     <AccordionContent>
                         <div className="space-y-3 pt-2">
-                            {categories.map((cat) => (
+                            {filteredCategories.map((cat) => (
                                 <div key={cat.slug.current} className="flex items-center space-x-2">
                                     <Checkbox
                                         id={cat.slug.current}

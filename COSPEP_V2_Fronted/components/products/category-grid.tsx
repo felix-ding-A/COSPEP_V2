@@ -2,20 +2,35 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Beaker, Leaf, Pill, FlaskRound, Droplet, TestTube, ShoppingBag, Award, Sparkles } from "lucide-react";
+import { Leaf, Apple, Pill, FlaskConical } from "lucide-react";
 
-// Icon mapping for categories
-const categoryIcons: Record<string, any> = {
-    peptides: Beaker,
-    "plant-extracts": Leaf,
-    supplements: Pill,
-    intermediates: FlaskRound,
-    cosmetics: Droplet,
-    "custom-synthesis": TestTube,
-    "raw-materials": ShoppingBag,
-    certified: Award,
-    default: Sparkles
-};
+// Main categories to display
+const mainCategories = [
+    {
+        title: "Botanical Extracts",
+        value: "botanical-extracts",
+        icon: Leaf,
+        description: "Natural plant-based extracts and compounds"
+    },
+    {
+        title: "Fruit & Vegetable Powders",
+        value: "fruit-vegetable-powders",
+        icon: Apple,
+        description: "Premium quality fruit and vegetable powders"
+    },
+    {
+        title: "Peptides",
+        value: "peptides",
+        icon: Pill,
+        description: "High-purity peptide compounds"
+    },
+    {
+        title: "Custom Solutions",
+        value: "custom-solutions",
+        icon: FlaskConical,
+        description: "Tailored formulations for your needs"
+    }
+];
 
 interface CategoryGridProps {
     categories: Array<{
@@ -28,14 +43,6 @@ interface CategoryGridProps {
 }
 
 export function CategoryGrid({ categories }: CategoryGridProps) {
-    // Limit to first 9 categories for 3x3 grid
-    const displayCategories = categories.slice(0, 9);
-
-    const getIcon = (slug: string) => {
-        const Icon = categoryIcons[slug] || categoryIcons.default;
-        return Icon;
-    };
-
     return (
         <section className="py-16 bg-gradient-to-b from-[#0A0E0D] to-[#0F1612]">
             <div className="container mx-auto px-4 md:px-6">
@@ -60,21 +67,21 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
                     </motion.p>
                 </div>
 
-                {/* Category Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                    {displayCategories.map((category, index) => {
-                        const Icon = getIcon(category.slug.current);
+                {/* Category Grid - 2x2 */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
+                    {mainCategories.map((category, index) => {
+                        const Icon = category.icon;
 
                         return (
                             <motion.div
-                                key={category.slug.current}
+                                key={category.value}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: index * 0.05, duration: 0.4 }}
+                                transition={{ delay: index * 0.1, duration: 0.4 }}
                             >
                                 <Link
-                                    href={`/products?category=${category.slug.current}`}
+                                    href={`/products?parentCategory=${category.value}`}
                                     className="group block h-full"
                                 >
                                     <div className="glass h-full rounded-xl p-6 transition-all duration-300 hover:bg-white/10 hover:border-[#B8FF00]/30 border border-white/10">
@@ -89,11 +96,9 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
                                                 <h3 className="text-lg font-semibold text-white group-hover:text-[#B8FF00] transition-colors">
                                                     {category.title}
                                                 </h3>
-                                                {category.productCount !== undefined && (
-                                                    <p className="text-sm text-gray-400 mt-1">
-                                                        {category.productCount} products
-                                                    </p>
-                                                )}
+                                                <p className="text-sm text-gray-400 mt-1">
+                                                    {category.description}
+                                                </p>
                                             </div>
 
                                             {/* Arrow */}
@@ -113,34 +118,12 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
                                                 </svg>
                                             </div>
                                         </div>
-
-                                        {/* Description (if available) */}
-                                        {category.description && (
-                                            <p className="text-sm text-gray-400 mt-3 line-clamp-2">
-                                                {category.description}
-                                            </p>
-                                        )}
                                     </div>
                                 </Link>
                             </motion.div>
                         );
                     })}
                 </div>
-
-                {/* View All Button (if more than 9 categories) */}
-                {categories.length > 9 && (
-                    <div className="text-center mt-8">
-                        <Link
-                            href="/products"
-                            className="inline-flex items-center gap-2 text-[#B8FF00] hover:text-[#A3E600] font-medium transition-colors"
-                        >
-                            View All Categories
-                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                        </Link>
-                    </div>
-                )}
             </div>
         </section>
     );
