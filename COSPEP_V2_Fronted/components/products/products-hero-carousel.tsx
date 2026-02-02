@@ -28,8 +28,8 @@ const carouselSlides = [
         title: "Custom Health Supplements",
         subtitle: "Made to Order • Quality Assured",
         description: "Turnkey supplement manufacturing from formulation to packaging",
-        cta: "Start Your Project",
-        href: "/contact"
+        cta: "Start Your Business",
+        href: "/service"
     }
 ];
 

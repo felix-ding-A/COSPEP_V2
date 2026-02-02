@@ -28,6 +28,8 @@ export interface Category {
   title: string;
   slug: { current: string };
   count: number;
+  parentCategory?: string;
+  order?: number;
 }
 
 // Queries
@@ -55,10 +57,11 @@ export async function getProducts(search?: string, categorySlug?: string, stockS
 }
 
 export async function getCategories(): Promise<Category[]> {
-  // Fetch categories and maybe count products in them (advanced, simplified for now)
-  const query = groq`*[_type == "category"] {
+  const query = groq`*[_type == "category"] | order(parentCategory asc, order asc) {
         title,
-        slug
+        slug,
+        parentCategory,
+        order
     }`;
   return client.fetch(query);
 }

@@ -109,8 +109,8 @@ export function ManufacturingSection() {
                             >
                                 <div className="glass-strong rounded-2xl p-6 text-center">
                                     <Award className="w-8 h-8 text-[#B8FF00] mx-auto mb-2" />
-                                    <div className="text-3xl font-bold text-white mb-1">2004+</div>
-                                    <div className="text-sm text-gray-400">100+ Year</div>
+                                    <div className="text-3xl font-bold text-white mb-1">500+ Clients</div>
+                                    <div className="text-sm text-gray-400">15+ Year</div>
                                 </div>
                             </motion.div>
                         </div>

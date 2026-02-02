@@ -30,11 +30,28 @@ export function Navbar() {
     const t = useTranslations('nav');
     const [categories, setCategories] = React.useState<any[]>([]);
     const [isLangDropdownOpen, setIsLangDropdownOpen] = React.useState(false);
+    const [expandedMobileCategory, setExpandedMobileCategory] = React.useState<string | null>(null);
+
+    // Main categories definition
+    const mainCategories = [
+        { title: 'Botanical Extracts', value: 'botanical-extracts' },
+        { title: 'Fruit & Vegetable Powders', value: 'fruit-vegetable-powders' },
+        { title: 'Peptides', value: 'peptides' },
+        { title: 'Custom Solutions', value: 'custom-solutions' }
+    ];
+
+    // Group subcategories by parent
+    const groupedCategories = React.useMemo(() => {
+        const grouped: Record<string, any[]> = {};
+        mainCategories.forEach(mc => {
+            grouped[mc.value] = categories.filter(cat => cat.parentCategory === mc.value);
+        });
+        return grouped;
+    }, [categories]);
 
     const resourcesMenu = [
         { href: "/blog?type=news", label: t('resources.news') },
-        { href: "/blog", label: t('resources.blogs') },
-        { href: "/contact", label: t('resources.customerService') }
+        { href: "/blog", label: t('resources.blogs') }
     ];
 
     const handleLanguageChange = (newLocale: string) => {
@@ -76,26 +93,35 @@ export function Navbar() {
                 {/* Desktop Nav */}
                 <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
 
-                    {/* Products Dropdown */}
+                    {/* Products Dropdown - Nested */}
                     <div className="group relative">
                         <Link href="/products" className="flex items-center gap-1 text-white hover:text-[#B8FF00] transition-colors py-4">
                             {t('products')}
                             <ChevronDown className="w-4 h-4" />
                         </Link>
                         <div className="absolute left-0 top-full hidden w-56 rounded-lg glass-strong border border-white/10 p-2 shadow-lg group-hover:block transition-all animate-in fade-in-0 slide-in-from-top-2 duration-300">
-                            {categories.length > 0 ? (
-                                categories.map((cat: any) => (
-                                    <Link
-                                        key={cat._id || cat.slug.current}
-                                        href={`/products?category=${cat.slug.current}`}
-                                        className="block rounded-md px-3 py-2 text-sm text-white hover:bg-[#B8FF00]/10 hover:text-[#B8FF00] transition-colors"
-                                    >
-                                        {cat.title}
-                                    </Link>
-                                ))
-                            ) : (
-                                <div className="px-3 py-2 text-sm text-gray-400">{t('loading')}</div>
-                            )}
+                            {mainCategories.map((mainCat) => (
+                                <div key={mainCat.value} className="group/nested relative">
+                                    <div className="flex items-center justify-between rounded-md px-3 py-2 text-sm text-white hover:bg-[#B8FF00]/10 hover:text-[#B8FF00] transition-colors cursor-pointer">
+                                        <span>{mainCat.title}</span>
+                                        <ChevronDown className="w-4 h-4 -rotate-90" />
+                                    </div>
+                                    {/* Nested subcategories */}
+                                    {groupedCategories[mainCat.value]?.length > 0 && (
+                                        <div className="absolute left-full top-0 ml-1 hidden w-64 rounded-lg glass-strong border border-white/10 p-2 shadow-lg group-hover/nested:block">
+                                            {groupedCategories[mainCat.value].map((subCat: any) => (
+                                                <Link
+                                                    key={subCat.slug.current}
+                                                    href={`/products?categories=${subCat.slug.current}`}
+                                                    className="block rounded-md px-3 py-2 text-sm text-white hover:bg-[#B8FF00]/10 hover:text-[#B8FF00] transition-colors"
+                                                >
+                                                    {subCat.title}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
                             <div className="border-t border-white/10 my-1"></div>
                             <Link href="/products" className="block rounded-md px-3 py-2 text-sm text-white hover:bg-[#B8FF00]/10 hover:text-[#B8FF00] font-semibold transition-colors">
                                 {t('viewAllProducts')}
@@ -221,28 +247,45 @@ export function Navbar() {
                                 </div>
 
                                 <nav className="flex flex-col gap-4 mt-6">
-                                    {/* Mobile Products */}
+                                    {/* Mobile Products - Nested */}
                                     <div>
                                         <Link href="/products" className="text-lg font-medium text-white hover:text-[#B8FF00] mb-2 block">
                                             Products
                                         </Link>
-                                        <div className="pl-4 flex flex-col gap-2 border-l-2 border-white/20 ml-1">
-                                            {categories.map((cat: any) => (
-                                                <SheetClose asChild key={cat._id || cat.slug?.current}>
-                                                    <Link
-                                                        href={`/products?category=${cat.slug?.current}`}
-                                                        className="text-base text-gray-400 hover:text-[#B8FF00]"
+                                        <div className="pl-4 flex flex-col gap-3 border-l-2 border-white/20 ml-1">
+                                            {mainCategories.map((mainCat) => (
+                                                <div key={mainCat.value}>
+                                                    <button
+                                                        onClick={() => setExpandedMobileCategory(
+                                                            expandedMobileCategory === mainCat.value ? null : mainCat.value
+                                                        )}
+                                                        className="flex items-center justify-between w-full text-base text-gray-300 hover:text-[#B8FF00] transition-colors"
                                                     >
-                                                        {cat.title}
-                                                    </Link>
-                                                </SheetClose>
+                                                        <span>{mainCat.title}</span>
+                                                        <ChevronDown className={`w-4 h-4 transition-transform ${expandedMobileCategory === mainCat.value ? 'rotate-180' : ''}`} />
+                                                    </button>
+                                                    {expandedMobileCategory === mainCat.value && groupedCategories[mainCat.value]?.length > 0 && (
+                                                        <div className="pl-3 mt-2 flex flex-col gap-2 border-l border-white/10">
+                                                            {groupedCategories[mainCat.value].map((subCat: any) => (
+                                                                <SheetClose asChild key={subCat.slug.current}>
+                                                                    <Link
+                                                                        href={`/products?categories=${subCat.slug.current}`}
+                                                                        className="text-sm text-gray-400 hover:text-[#B8FF00]"
+                                                                    >
+                                                                        {subCat.title}
+                                                                    </Link>
+                                                                </SheetClose>
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                </div>
                                             ))}
                                         </div>
                                     </div>
 
                                     <SheetClose asChild>
                                         <Link href="/service" className="text-lg font-medium text-white hover:text-[#B8FF00]">
-                                            Pharma Solutions
+                                            {t('pharmaSolutions')}
                                         </Link>
                                     </SheetClose>
 

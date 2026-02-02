@@ -12,7 +12,7 @@
     },
     "nav": {
         "products": "Products",
-        "pharmaSolutions": "Pharma Solutions",
+        "pharmaSolutions": "Custom Manufacturing",
         "about": "About Us",
         "contact": "Contact",
         "searchPlaceholder": "Search products...",
@@ -124,8 +124,8 @@
                 "Very strict compliance support",
                 "Packaging & Label Design"
             ],
-            "cta": "Start Your Project",
-            "yearsLabel": "100+ Year"
+            "cta": "Start Your Business",
+            "yearsLabel": "15+ Year"
         },
         "features": {
             "title": "Why Partner With COSPEP?",

@@ -82,7 +82,7 @@ export function NewsBlogs() {
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1, duration: 0.5 }}
                         >
-                            <Link href={post.link} className="group block">
+                            <div className="group block">
                                 <div className="glass rounded-2xl overflow-hidden hover:bg-white/10 transition-all duration-300">
                                     {/* Image */}
                                     <div className="relative h-48 overflow-hidden">
@@ -112,7 +112,7 @@ export function NewsBlogs() {
                                         </div>
                                     </div>
                                 </div>
-                            </Link>
+                            </div>
                         </motion.div>
                     ))}
                 </div>
