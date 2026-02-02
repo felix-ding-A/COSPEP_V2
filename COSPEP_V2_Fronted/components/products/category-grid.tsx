@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { Link } from "@/lib/navigation";
 import { Leaf, Apple, Pill, FlaskConical } from "lucide-react";
 
 // Main categories to display
