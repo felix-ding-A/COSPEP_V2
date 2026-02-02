@@ -33,7 +33,48 @@ export interface Category {
 }
 
 // Queries
-export async function getProducts(search?: string, categorySlug?: string, stockStatus?: string): Promise<Product[]> {
+export async function getProducts(search?: string, categorySlug?: string, stockStatus?: string, parentCategory?: string): Promise<Product[]> {
+  // If parentCategory is specified, we need to first get all subcategory slugs
+  let categoryFilter = categorySlug;
+
+  if (parentCategory && !categorySlug) {
+    // Get all subcategories of the parent category
+    const subcategories = await client.fetch(
+      groq`*[_type == "category" && parentCategory == $parentCategory]{slug}`,
+      { parentCategory }
+    );
+    const subcategorySlugs = subcategories.map((c: any) => c.slug.current);
+
+    if (subcategorySlugs.length > 0) {
+      // Use the first subcategory as a filter (or we can enhance to filter by multiple)
+      // For now, we'll filter products that have ANY of these subcategories
+      const query = groq`*[_type == "product" && (
+        !defined($search) || name match $search + "*" || casNumber match $search + "*" || synonyms match $search + "*" || latinName match $search + "*"
+      ) && (
+        count((categories[]->slug.current)[@ in $subcategorySlugs]) > 0
+      ) && (
+        !defined($stockStatus) || stockStatus == $stockStatus
+      )] {
+        _id,
+        name,
+        slug,
+        casNumber,
+        latinName,
+        synonyms,
+        stockStatus,
+        "categories": categories[]->{title, slug},
+        "imageUrl": image.asset->url,
+        description
+      }`;
+
+      return client.fetch(query, {
+        search: search || null,
+        subcategorySlugs,
+        stockStatus: stockStatus || null
+      });
+    }
+  }
+
   const query = groq`*[_type == "product" && (
         !defined($search) || name match $search + "*" || casNumber match $search + "*" || synonyms match $search + "*" || latinName match $search + "*"
       ) && (
@@ -45,7 +86,7 @@ export async function getProducts(search?: string, categorySlug?: string, stockS
         name,
         slug,
         casNumber,
-        latinName, // Fetching it if it exists
+        latinName,
         synonyms,
         stockStatus,
         "categories": categories[]->{title, slug},

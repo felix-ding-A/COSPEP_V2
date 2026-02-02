@@ -17,12 +17,13 @@ export default async function ProductsPage({
 }) {
     const params = await searchParams;
     const search = typeof params.search === "string" ? params.search : "";
-    const categorySlug = typeof params.categorySlug === "string" ? params.categorySlug : "";
+    const categorySlug = typeof params.categories === "string" ? params.categories : "";
     const stockStatus = typeof params.stockStatus === "string" ? params.stockStatus : "";
+    const parentCategory = typeof params.parentCategory === "string" ? params.parentCategory : "";
 
     // Fetch Data
     const [products, categories] = await Promise.all([
-        getProducts(search, categorySlug, stockStatus),
+        getProducts(search, categorySlug, stockStatus, parentCategory),
         getCategories()
     ]);
 
