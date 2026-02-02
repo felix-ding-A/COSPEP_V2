@@ -31,7 +31,6 @@ export function Navbar() {
     const [categories, setCategories] = React.useState<any[]>([]);
     const [isLangDropdownOpen, setIsLangDropdownOpen] = React.useState(false);
     const [expandedMobileCategory, setExpandedMobileCategory] = React.useState<string | null>(null);
-    const [isProductsDropdownOpen, setIsProductsDropdownOpen] = React.useState(false);
     const [expandedDesktopCategory, setExpandedDesktopCategory] = React.useState<string | null>(null);
 
     // Main categories definition
@@ -95,73 +94,62 @@ export function Navbar() {
                 {/* Desktop Nav */}
                 <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
 
-                    {/* Products Dropdown - Nested */}
-                    <div className="relative">
-                        <button
-                            onClick={() => {
-                                setIsProductsDropdownOpen(!isProductsDropdownOpen);
-                                setExpandedDesktopCategory(null);
-                            }}
-                            onBlur={(e) => {
-                                // Only close if clicking outside the dropdown
-                                if (!e.currentTarget.parentElement?.contains(e.relatedTarget as Node)) {
-                                    setTimeout(() => {
-                                        setIsProductsDropdownOpen(false);
-                                        setExpandedDesktopCategory(null);
-                                    }, 200);
-                                }
-                            }}
-                            className="flex items-center gap-1 text-white hover:text-[#B8FF00] transition-colors py-4"
-                        >
+                    {/* Products Dropdown - Two Column Layout */}
+                    <div className="group relative">
+                        <Link href="/products" className="flex items-center gap-1 text-white hover:text-[#B8FF00] transition-colors py-4">
                             {t('products')}
-                            <ChevronDown className={`w-4 h-4 transition-transform ${isProductsDropdownOpen ? 'rotate-180' : ''}`} />
-                        </button>
-                        {isProductsDropdownOpen && (
-                            <div className="absolute left-0 top-full w-56 rounded-lg glass-strong border border-white/10 p-2 shadow-lg animate-in fade-in-0 slide-in-from-top-2 duration-300 z-50">
-                                {mainCategories.map((mainCat) => (
-                                    <div key={mainCat.value} className="relative">
-                                        <button
-                                            onClick={() => setExpandedDesktopCategory(
-                                                expandedDesktopCategory === mainCat.value ? null : mainCat.value
-                                            )}
-                                            className="w-full flex items-center justify-between rounded-md px-3 py-2 text-sm text-white hover:bg-[#B8FF00]/10 hover:text-[#B8FF00] transition-colors"
+                            <ChevronDown className="w-4 h-4" />
+                        </Link>
+                        <div className="absolute left-0 top-full hidden group-hover:block">
+                            <div className="flex rounded-lg glass-strong border border-white/10 shadow-lg overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-300">
+                                {/* Left Column - Main Categories */}
+                                <div className="w-56 border-r border-white/10 p-2">
+                                    {mainCategories.map((mainCat) => (
+                                        <div
+                                            key={mainCat.value}
+                                            className="group/cat relative"
+                                            onMouseEnter={() => setExpandedDesktopCategory(mainCat.value)}
                                         >
-                                            <span>{mainCat.title}</span>
-                                            <ChevronDown className={`w-4 h-4 transition-transform ${expandedDesktopCategory === mainCat.value ? 'rotate-180' : '-rotate-90'}`} />
-                                        </button>
-                                        {/* Nested subcategories */}
-                                        {expandedDesktopCategory === mainCat.value && groupedCategories[mainCat.value]?.length > 0 && (
-                                            <div className="pl-3 mt-1 mb-1 space-y-1 border-l border-white/20">
-                                                {groupedCategories[mainCat.value].map((subCat: any) => (
-                                                    <Link
-                                                        key={subCat.slug.current}
-                                                        href={`/products?categories=${subCat.slug.current}`}
-                                                        onClick={() => {
-                                                            setIsProductsDropdownOpen(false);
-                                                            setExpandedDesktopCategory(null);
-                                                        }}
-                                                        className="block rounded-md px-3 py-2 text-sm text-gray-300 hover:bg-[#B8FF00]/10 hover:text-[#B8FF00] transition-colors"
-                                                    >
-                                                        {subCat.title}
-                                                    </Link>
-                                                ))}
+                                            <div className="flex items-center justify-between rounded-md px-3 py-2 text-sm text-white hover:bg-[#B8FF00]/10 hover:text-[#B8FF00] transition-colors cursor-pointer">
+                                                <span>{mainCat.title}</span>
+                                                <ChevronDown className="w-4 h-4 -rotate-90" />
                                             </div>
-                                        )}
-                                    </div>
-                                ))}
-                                <div className="border-t border-white/10 my-1"></div>
-                                <Link
-                                    href="/products"
-                                    onClick={() => {
-                                        setIsProductsDropdownOpen(false);
-                                        setExpandedDesktopCategory(null);
-                                    }}
-                                    className="block rounded-md px-3 py-2 text-sm text-white hover:bg-[#B8FF00]/10 hover:text-[#B8FF00] font-semibold transition-colors"
-                                >
-                                    {t('viewAllProducts')}
-                                </Link>
+                                        </div>
+                                    ))}
+                                    <div className="border-t border-white/10 my-1"></div>
+                                    <Link
+                                        href="/products"
+                                        className="block rounded-md px-3 py-2 text-sm text-white hover:bg-[#B8FF00]/10 hover:text-[#B8FF00] font-semibold transition-colors"
+                                    >
+                                        {t('viewAllProducts')}
+                                    </Link>
+                                </div>
+
+                                {/* Right Column - Subcategories */}
+                                <div className="w-64 p-3 bg-white/5">
+                                    {expandedDesktopCategory && groupedCategories[expandedDesktopCategory]?.length > 0 ? (
+                                        <div className="space-y-1">
+                                            <div className="text-xs text-gray-400 uppercase tracking-wider mb-2 px-2">
+                                                {mainCategories.find(cat => cat.value === expandedDesktopCategory)?.title}
+                                            </div>
+                                            {groupedCategories[expandedDesktopCategory].map((subCat: any) => (
+                                                <Link
+                                                    key={subCat.slug.current}
+                                                    href={`/products?categories=${subCat.slug.current}`}
+                                                    className="block rounded-md px-3 py-2 text-sm text-gray-300 hover:bg-[#B8FF00]/10 hover:text-[#B8FF00] transition-colors"
+                                                >
+                                                    {subCat.title}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <div className="flex items-center justify-center h-full text-sm text-gray-500">
+                                            Hover over a category
+                                        </div>
+                                    )}
+                                </div>
                             </div>
-                        )}
+                        </div>
                     </div>
 
                     <Link href="/service" className="text-white hover:text-[#B8FF00] transition-colors">
