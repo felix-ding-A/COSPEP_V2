@@ -64,7 +64,12 @@ export function Navbar() {
 
     React.useEffect(() => {
         const fetchCategories = async () => {
-            const query = `*[_type == "category"]{title, slug}`;
+            const query = `*[_type == "category"] | order(parentCategory asc, order asc) {
+                title, 
+                slug, 
+                parentCategory,
+                order
+            }`;
             try {
                 const data = await client.fetch(query);
                 setCategories(data);
@@ -103,7 +108,7 @@ export function Navbar() {
                         <div className="absolute left-0 top-full hidden group-hover:block">
                             <div className="flex rounded-lg glass-strong border border-white/10 shadow-lg overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-300">
                                 {/* Left Column - Main Categories */}
-                                <div className="w-56 border-r border-white/10 p-2">
+                                <div className="w-72 border-r border-white/10 p-2">
                                     {mainCategories.map((mainCat) => (
                                         <div
                                             key={mainCat.value}
@@ -126,7 +131,7 @@ export function Navbar() {
                                 </div>
 
                                 {/* Right Column - Subcategories */}
-                                <div className="w-64 p-3 bg-white/5">
+                                <div className="w-80 p-3 bg-white/5">
                                     {expandedDesktopCategory && groupedCategories[expandedDesktopCategory]?.length > 0 ? (
                                         <div className="space-y-1">
                                             <div className="text-xs text-gray-400 uppercase tracking-wider mb-2 px-2">
