@@ -41,11 +41,17 @@ export default function AboutPage() {
             {/* Hero Section */}
             <section className="relative py-24 lg:py-32 bg-slate-900 border-b border-primary/10 overflow-hidden">
                 {/* Background Map Graphic (Conceptual) */}
-                <div className="absolute inset-0 opacity-10 pointer-events-none">
-                    <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                        <circle cx="75" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-primary" />
-                        <circle cx="75" cy="50" r="10" fill="currentColor" className="text-primary" />
-                    </svg>
+                {/* Background Image with Overlay */}
+                <div className="absolute inset-0 w-full h-full">
+                    <Image
+                        src="/images/about/hero-bg.jpg"
+                        alt="Traditional Chinese Landscape Painting of Qinling Mountains"
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                    {/* Dark overlay with reduced opacity (60%) to ensure text readability while keeping image detail visible */}
+                    <div className="absolute inset-0 bg-slate-950/60" />
                 </div>
 
                 <div className="container relative z-10 mx-auto px-4 md:px-6 text-center">
