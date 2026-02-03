@@ -57,8 +57,6 @@ export function Navbar() {
 
     const servicesMenu = [
         { href: "/custom-manufacturing", label: t('services.customManufacturing') },
-        { href: "/services/custom-formulations", label: t('services.customFormulations') },
-        { href: "/services/rd-technical-support", label: t('services.rdTechnicalSupport') },
         { href: "/services/packaging-logistics", label: t('services.packagingLogistics') },
         { href: "/services/after-sales-support", label: t('services.afterSalesSupport') }
     ];
