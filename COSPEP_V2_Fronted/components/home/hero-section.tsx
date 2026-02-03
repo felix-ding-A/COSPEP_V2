@@ -75,9 +75,9 @@ export function HeroSection() {
                 </AnimatePresence>
 
                 {/* Dark Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0A0E0D]/95 via-[#0A0E0D]/85 to-[#0A0E0D]/90" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0A0E0D]/70 via-[#0A0E0D]/40 to-[#0A0E0D]/60" />
                 {/* Subtle Green Tint */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-950/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-950/10 to-transparent" />
             </div>
 
             {/* Carousel Navigation Arrows */}
