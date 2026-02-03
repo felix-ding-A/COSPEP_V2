@@ -10,11 +10,31 @@ import {
     CarouselItem,
     CarouselNext,
     CarouselPrevious,
+    type CarouselApi,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
 
 export default function AboutPage() {
+    const [api, setApi] = useState<CarouselApi>();
+    const [current, setCurrent] = useState(0);
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        if (!api) {
+            return;
+        }
+
+        setCount(api.scrollSnapList().length);
+        setCurrent(api.selectedScrollSnap());
+
+        api.on("select", () => {
+            setCurrent(api.selectedScrollSnap());
+        });
+    }, [api]);
+
     return (
         <div className="flex flex-col min-h-screen bg-background text-foreground">
 
@@ -58,8 +78,9 @@ export default function AboutPage() {
                                     We have established a rigorous sourcing network covering a 500km radius around this biodiversity hotspot, ensuring every plant extract we supply benefits from the ideal climate and soil conditions essential for maximum potency.
                                 </p>
                             </div>
-                            <div className="relative aspect-square md:aspect-auto md:h-full min-h-[400px] rounded-2xl overflow-hidden shadow-xl border border-border/50">
+                            <div className="relative aspect-square md:aspect-auto md:h-full min-h-[400px] rounded-2xl overflow-hidden shadow-xl border border-border/50 group/carousel-container">
                                 <Carousel
+                                    setApi={setApi}
                                     plugins={[
                                         Autoplay({
                                             delay: 4000,
@@ -75,12 +96,12 @@ export default function AboutPage() {
                                             { src: "/images/about/qinling-4.jpg", alt: "Layers of misty mountain peaks in the Qinling range at sunrise" }
                                         ].map((item, index) => (
                                             <CarouselItem key={index} className="pl-0 h-full">
-                                                <div className="relative w-full h-full">
+                                                <div className="relative w-full h-full overflow-hidden group">
                                                     <Image
                                                         src={item.src}
                                                         alt={item.alt}
                                                         fill
-                                                        className="object-cover"
+                                                        className="object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
                                                         priority={index === 0}
                                                     />
                                                     {/* Gradient overlay for better text contrast if needed, or just aesthetic */}
@@ -89,9 +110,23 @@ export default function AboutPage() {
                                             </CarouselItem>
                                         ))}
                                     </CarouselContent>
-                                    {/* Optional: Add navigation buttons if desired, but autoplay is usually sufficient for this hero-like section */}
-                                    {/* <CarouselPrevious className="left-4" /> */}
-                                    {/* <CarouselNext className="right-4" /> */}
+
+                                    {/* Navigation Dots */}
+                                    <div className="absolute bottom-6 left-0 right-0 flex justify-center space-x-2 z-10">
+                                        {Array.from({ length: count }).map((_, index) => (
+                                            <button
+                                                key={index}
+                                                className={cn(
+                                                    "w-2.5 h-2.5 rounded-full transition-all duration-300 shadow-sm",
+                                                    index === current
+                                                        ? "bg-primary w-8"
+                                                        : "bg-white/60 hover:bg-white"
+                                                )}
+                                                onClick={() => api?.scrollTo(index)}
+                                                aria-label={`Go to slide ${index + 1}`}
+                                            />
+                                        ))}
+                                    </div>
                                 </Carousel>
                             </div>
                         </div>
