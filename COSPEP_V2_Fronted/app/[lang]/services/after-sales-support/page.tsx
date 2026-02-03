@@ -8,9 +8,6 @@ import {
     Clock,
     Users,
     BookOpen,
-    Video,
-    Mail,
-    Phone,
     Shield,
     CheckCircle2,
     ArrowRight,
@@ -77,30 +74,7 @@ const responseTimes = [
     }
 ];
 
-// Support Channels
-const supportChannels = [
-    {
-        icon: Mail,
-        title: "Email Support",
-        description: "Detailed technical inquiries and documentation requests",
-        contact: "support@cospep.com",
-        availability: "24/7 Response"
-    },
-    {
-        icon: Phone,
-        title: "Phone Support",
-        description: "Direct line to our technical specialists",
-        contact: "+86 XXX XXXX XXXX",
-        availability: "Mon-Fri 9AM-6PM CST"
-    },
-    {
-        icon: Video,
-        title: "Video Consultation",
-        description: "Face-to-face technical discussions via video call",
-        contact: "Schedule Online",
-        availability: "By Appointment"
-    }
-];
+
 
 // Support Process Steps
 const supportProcess = [
@@ -295,47 +269,8 @@ export default function AfterSalesSupportPage() {
                 </div>
             </section>
 
-            {/* Support Channels Section */}
-            <section className="py-16 lg:py-24 bg-[#0A0E0D] border-t border-white/10">
-                <div className="container mx-auto px-4 md:px-6">
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                            Contact Channels
-                        </h2>
-                        <p className="text-gray-400 max-w-2xl mx-auto">
-                            Multiple ways to reach our technical support team
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                        {supportChannels.map((channel, index) => (
-                            <div
-                                key={index}
-                                className="text-center p-8 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300"
-                            >
-                                <div className="w-16 h-16 rounded-full bg-[#b8ff00]/10 flex items-center justify-center mx-auto mb-4">
-                                    <channel.icon className="w-8 h-8 text-[#b8ff00]" strokeWidth={1.5} />
-                                </div>
-                                <h3 className="text-xl font-semibold text-white mb-2">
-                                    {channel.title}
-                                </h3>
-                                <p className="text-gray-400 text-sm mb-4">
-                                    {channel.description}
-                                </p>
-                                <p className="text-[#b8ff00] font-medium mb-1">
-                                    {channel.contact}
-                                </p>
-                                <p className="text-gray-500 text-xs">
-                                    {channel.availability}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
             {/* Our Commitment Section */}
-            <section className="py-16 lg:py-24 bg-[#0A0E0D]">
+            <section className="py-16 lg:py-24 bg-[#0A0E0D] border-t border-white/10">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
