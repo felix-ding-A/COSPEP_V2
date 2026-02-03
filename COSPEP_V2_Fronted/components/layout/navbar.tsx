@@ -55,6 +55,14 @@ export function Navbar() {
         { href: "/blog", label: t('resources.blogs') }
     ];
 
+    const servicesMenu = [
+        { href: "/custom-manufacturing", label: t('services.customManufacturing') },
+        { href: "/services/custom-formulations", label: t('services.customFormulations') },
+        { href: "/services/rd-technical-support", label: t('services.rdTechnicalSupport') },
+        { href: "/services/packaging-logistics", label: t('services.packagingLogistics') },
+        { href: "/services/after-sales-support", label: t('services.afterSalesSupport') }
+    ];
+
     const handleLanguageChange = (newLocale: string) => {
         // Navigate to the same page but with different locale
         router.replace(pathname, { locale: newLocale });
@@ -157,9 +165,24 @@ export function Navbar() {
                         </div>
                     </div>
 
-                    <Link href="/service" className="text-white hover:text-[#B8FF00] transition-colors">
-                        {t('pharmaSolutions')}
-                    </Link>
+                    {/* Services Dropdown */}
+                    <div className="group relative">
+                        <button className="flex items-center gap-1 text-white hover:text-[#B8FF00] transition-colors py-4">
+                            {t('services.title')}
+                            <ChevronDown className="w-4 h-4" />
+                        </button>
+                        <div className="absolute left-0 top-full hidden w-72 rounded-lg glass-strong border border-white/10 p-2 shadow-lg group-hover:block transition-all animate-in fade-in-0 slide-in-from-top-2 duration-300">
+                            {servicesMenu.map((item) => (
+                                <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    className="block rounded-md px-3 py-2 text-sm text-white hover:bg-[#B8FF00]/10 hover:text-[#B8FF00] transition-colors"
+                                >
+                                    {item.label}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
 
                     {/* Resources Dropdown */}
                     <div className="group relative">
@@ -311,11 +334,22 @@ export function Navbar() {
                                         </div>
                                     </div>
 
-                                    <SheetClose asChild>
-                                        <Link href="/service" className="text-lg font-medium text-white hover:text-[#B8FF00]">
-                                            {t('pharmaSolutions')}
-                                        </Link>
-                                    </SheetClose>
+                                    {/* Mobile Services */}
+                                    <div>
+                                        <div className="text-lg font-medium text-white mb-2">{t('services.title')}</div>
+                                        <div className="pl-4 flex flex-col gap-2 border-l-2 border-white/20 ml-1">
+                                            {servicesMenu.map((item) => (
+                                                <SheetClose asChild key={item.href}>
+                                                    <Link
+                                                        href={item.href}
+                                                        className="text-base text-gray-400 hover:text-[#B8FF00]"
+                                                    >
+                                                        {item.label}
+                                                    </Link>
+                                                </SheetClose>
+                                            ))}
+                                        </div>
+                                    </div>
 
                                     {/* Mobile Resources */}
                                     <div>

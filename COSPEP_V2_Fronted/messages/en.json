@@ -12,8 +12,15 @@
     },
     "nav": {
         "products": "Products",
-        "pharmaSolutions": "Custom Manufacturing",
         "about": "About Us",
+        "services": {
+            "title": "Services",
+            "customManufacturing": "Custom Manufacturing",
+            "customFormulations": "Custom Formulations",
+            "rdTechnicalSupport": "R&D and Technical Support",
+            "packagingLogistics": "Packaging & Logistics Support",
+            "afterSalesSupport": "After-Sales Technical Support"
+        },
         "contact": "Contact",
         "searchPlaceholder": "Search products...",
         "viewAllProducts": "View All Products",
