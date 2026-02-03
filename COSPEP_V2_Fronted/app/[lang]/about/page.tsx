@@ -2,6 +2,15 @@ import { Link } from "@/lib/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, SearchCheck, FlaskConical, Sprout } from "lucide-react";
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import Image from "next/image";
 
 export default function AboutPage() {
     return (
@@ -47,12 +56,41 @@ export default function AboutPage() {
                                     We have established a rigorous sourcing network covering a 500km radius around this biodiversity hotspot, ensuring every plant extract we supply benefits from the ideal climate and soil conditions essential for maximum potency.
                                 </p>
                             </div>
-                            <div className="relative aspect-square md:aspect-auto md:h-full min-h-[300px] bg-slate-100 dark:bg-slate-800 rounded-2xl overflow-hidden shadow-xl border border-border/50 flex items-center justify-center">
-                                {/* Placeholder for Map/Mountain Image */}
-                                <div className="text-center p-6 opacity-40">
-                                    <MapPin className="w-16 h-16 mx-auto mb-4 text-primary" />
-                                    <span className="font-mono text-sm">Visual: 500km Radius Map</span>
-                                </div>
+                            <div className="relative aspect-square md:aspect-auto md:h-full min-h-[400px] rounded-2xl overflow-hidden shadow-xl border border-border/50">
+                                <Carousel
+                                    plugins={[
+                                        Autoplay({
+                                            delay: 4000,
+                                        }),
+                                    ]}
+                                    className="w-full h-full"
+                                >
+                                    <CarouselContent className="h-full ml-0">
+                                        {[
+                                            "/images/about/qinling-1.jpg",
+                                            "/images/about/qinling-2.jpg",
+                                            "/images/about/qinling-3.jpg",
+                                            "/images/about/qinling-4.jpg"
+                                        ].map((src, index) => (
+                                            <CarouselItem key={index} className="pl-0 h-full">
+                                                <div className="relative w-full h-full">
+                                                    <Image
+                                                        src={src}
+                                                        alt={`Qinling Mountains Scenery ${index + 1}`}
+                                                        fill
+                                                        className="object-cover"
+                                                        priority={index === 0}
+                                                    />
+                                                    {/* Gradient overlay for better text contrast if needed, or just aesthetic */}
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
+                                                </div>
+                                            </CarouselItem>
+                                        ))}
+                                    </CarouselContent>
+                                    {/* Optional: Add navigation buttons if desired, but autoplay is usually sufficient for this hero-like section */}
+                                    {/* <CarouselPrevious className="left-4" /> */}
+                                    {/* <CarouselNext className="right-4" /> */}
+                                </Carousel>
                             </div>
                         </div>
 
