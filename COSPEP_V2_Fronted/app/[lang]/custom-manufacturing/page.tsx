@@ -52,32 +52,32 @@ const successStories = [
     {
         title: "Pet Food Ingredients",
         description: "Premium nutritional supplements and functional ingredients for companion animal nutrition.",
-        image: "https://placehold.co/600x400/f1f5f9/64748b?text=Pet+Food+Ingredients"
+        image: "/images/pet-food-ingredients.png"
     },
     {
         title: "Livestock Feed Components",
         description: "High-performance feed additives and supplements for agricultural and livestock applications.",
-        image: "https://placehold.co/600x400/f1f5f9/64748b?text=Livestock+Feed"
+        image: "/images/livestock-feed.png"
     },
     {
         title: "Nutraceutical Solutions",
         description: "Advanced dietary supplements and functional foods for human health and wellness markets.",
-        image: "https://placehold.co/600x400/f1f5f9/64748b?text=Nutraceuticals"
+        image: "/images/nutraceuticals.png"
     }
 ];
 
 export default function CustomManufacturingPage() {
     return (
-        <main className="min-h-screen bg-white">
+        <main className="min-h-screen bg-[#0A0E0D]">
             {/* Hero Section */}
-            <section className="relative bg-slate-50 py-20 lg:py-28">
+            <section className="relative bg-[#0A0E0D] py-20 lg:py-28 border-b border-white/10">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="max-w-4xl mx-auto text-center">
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-tight">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
                             Custom Manufacturing &
                             <span className="text-[#b8ff00]"> OEM Services</span>
                         </h1>
-                        <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">
+                        <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
                             From Concept to Commercialization – Your Trusted Biotech Partner.
                         </p>
                     </div>
@@ -87,13 +87,13 @@ export default function CustomManufacturingPage() {
             </section>
 
             {/* OEM Services Section */}
-            <section className="py-16 lg:py-24 bg-white">
+            <section className="py-16 lg:py-24 bg-[#0A0E0D]">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                             Our OEM Services
                         </h2>
-                        <p className="text-slate-600 max-w-2xl mx-auto">
+                        <p className="text-gray-400 max-w-2xl mx-auto">
                             Comprehensive manufacturing solutions tailored to your business needs
                         </p>
                     </div>
@@ -102,18 +102,18 @@ export default function CustomManufacturingPage() {
                         {oemServices.map((service, index) => (
                             <Card
                                 key={index}
-                                className="bg-white border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-300 group"
+                                className="bg-white/5 border border-white/10 shadow-sm hover:shadow-md hover:bg-white/10 transition-all duration-300 group"
                             >
                                 <CardHeader className="pb-4">
                                     <div className="w-14 h-14 rounded-xl border-2 border-[#b8ff00] flex items-center justify-center mb-4 group-hover:bg-[#b8ff00]/10 transition-colors">
                                         <service.icon className="w-7 h-7 text-[#b8ff00]" strokeWidth={1.5} />
                                     </div>
-                                    <CardTitle className="text-xl font-semibold text-slate-900">
+                                    <CardTitle className="text-xl font-semibold text-white">
                                         {service.title}
                                     </CardTitle>
                                 </CardHeader>
                                 <CardContent>
-                                    <p className="text-slate-600 text-sm leading-relaxed">
+                                    <p className="text-gray-400 text-sm leading-relaxed">
                                         {service.description}
                                     </p>
                                 </CardContent>
@@ -124,13 +124,13 @@ export default function CustomManufacturingPage() {
             </section>
 
             {/* OEM Process Section */}
-            <section className="py-16 lg:py-24 bg-slate-50">
+            <section className="py-16 lg:py-24 bg-[#0A0E0D] border-y border-white/10">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                             Our OEM Process
                         </h2>
-                        <p className="text-slate-600 max-w-2xl mx-auto">
+                        <p className="text-gray-400 max-w-2xl mx-auto">
                             Quality Checkpoints integrated at every stage
                         </p>
                     </div>
@@ -139,17 +139,17 @@ export default function CustomManufacturingPage() {
                     <div className="hidden lg:block">
                         <div className="relative flex items-center justify-between max-w-5xl mx-auto">
                             {/* Connecting Line */}
-                            <div className="absolute top-10 left-[10%] right-[10%] h-0.5 bg-slate-200">
+                            <div className="absolute top-10 left-[10%] right-[10%] h-0.5 bg-white/20">
                                 <div className="h-full bg-[#b8ff00] w-full"></div>
                             </div>
 
                             {processSteps.map((step, index) => (
                                 <div key={index} className="relative flex flex-col items-center z-10">
-                                    <div className="w-20 h-20 rounded-full bg-white border-4 border-[#b8ff00] flex items-center justify-center shadow-lg mb-4">
+                                    <div className="w-20 h-20 rounded-full bg-[#0A0E0D] border-4 border-[#b8ff00] flex items-center justify-center shadow-lg mb-4">
                                         <step.icon className="w-8 h-8 text-[#b8ff00]" strokeWidth={1.5} />
                                     </div>
                                     <span className="text-xs font-bold text-[#b8ff00] mb-1">Step {step.step}</span>
-                                    <span className="text-sm font-semibold text-slate-900 text-center whitespace-nowrap">
+                                    <span className="text-sm font-semibold text-white text-center whitespace-nowrap">
                                         {step.title}
                                     </span>
                                 </div>
@@ -166,12 +166,12 @@ export default function CustomManufacturingPage() {
                             <div className="space-y-8">
                                 {processSteps.map((step, index) => (
                                     <div key={index} className="relative flex items-center gap-6 pl-4">
-                                        <div className="w-12 h-12 rounded-full bg-white border-3 border-[#b8ff00] flex items-center justify-center shadow-md z-10 flex-shrink-0">
+                                        <div className="w-12 h-12 rounded-full bg-[#0A0E0D] border-3 border-[#b8ff00] flex items-center justify-center shadow-md z-10 flex-shrink-0">
                                             <step.icon className="w-5 h-5 text-[#b8ff00]" strokeWidth={1.5} />
                                         </div>
                                         <div>
                                             <span className="text-xs font-bold text-[#b8ff00]">Step {step.step}</span>
-                                            <h3 className="text-base font-semibold text-slate-900">{step.title}</h3>
+                                            <h3 className="text-base font-semibold text-white">{step.title}</h3>
                                         </div>
                                     </div>
                                 ))}
@@ -182,13 +182,13 @@ export default function CustomManufacturingPage() {
             </section>
 
             {/* Success Stories Section */}
-            <section className="py-16 lg:py-24 bg-white">
+            <section className="py-16 lg:py-24 bg-[#0A0E0D]">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                             Success Stories
                         </h2>
-                        <p className="text-slate-600 max-w-2xl mx-auto">
+                        <p className="text-gray-400 max-w-2xl mx-auto">
                             Discover how we've helped businesses across industries achieve their goals
                         </p>
                     </div>
@@ -197,7 +197,7 @@ export default function CustomManufacturingPage() {
                         {successStories.map((story, index) => (
                             <Card
                                 key={index}
-                                className="bg-white border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group"
+                                className="bg-white/5 border border-white/10 shadow-sm hover:shadow-lg hover:bg-white/10 transition-all duration-300 overflow-hidden group"
                             >
                                 <div className="relative overflow-hidden">
                                     <img
@@ -208,10 +208,10 @@ export default function CustomManufacturingPage() {
                                     <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#b8ff00]"></div>
                                 </div>
                                 <CardContent className="pt-6">
-                                    <h3 className="text-xl font-semibold text-slate-900 mb-3">
+                                    <h3 className="text-xl font-semibold text-white mb-3">
                                         {story.title}
                                     </h3>
-                                    <p className="text-slate-600 text-sm mb-4 leading-relaxed">
+                                    <p className="text-gray-400 text-sm mb-4 leading-relaxed">
                                         {story.description}
                                     </p>
                                     <Link
@@ -229,18 +229,18 @@ export default function CustomManufacturingPage() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-16 lg:py-20 bg-slate-900">
+            <section className="py-16 lg:py-20 bg-[#0A0E0D] border-t border-white/10">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="max-w-3xl mx-auto text-center">
                         <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
                             Ready to Start Your Project?
                         </h2>
-                        <p className="text-slate-400 mb-8 text-lg">
+                        <p className="text-gray-400 mb-8 text-lg">
                             Partner with us for reliable, high-quality custom manufacturing solutions.
                         </p>
                         <Link
                             href="/contact"
-                            className="inline-flex items-center gap-2 bg-[#b8ff00] hover:bg-[#a3e600] text-slate-900 font-semibold px-8 py-4 rounded-lg transition-colors"
+                            className="inline-flex items-center gap-2 bg-[#b8ff00] hover:bg-[#a3e600] text-[#0A0E0D] font-semibold px-8 py-4 rounded-lg transition-colors"
                         >
                             Get Started Today
                             <ArrowRight className="w-5 h-5" />
