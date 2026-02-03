@@ -69,16 +69,16 @@ export default function AboutPage() {
                                 >
                                     <CarouselContent className="h-full ml-0">
                                         {[
-                                            "/images/about/qinling-1.jpg",
-                                            "/images/about/qinling-2.jpg",
-                                            "/images/about/qinling-3.jpg",
-                                            "/images/about/qinling-4.jpg"
-                                        ].map((src, index) => (
+                                            { src: "/images/about/qinling-1.jpg", alt: "Snow-covered Qinling Mountains at twilight with illuminated buildings" },
+                                            { src: "/images/about/qinling-2.jpg", alt: "Map highlighting the Qinling Mountains region and COSPEP sourcing area" },
+                                            { src: "/images/about/qinling-3.jpg", alt: "Autumn foliage covering the slopes of the Qinling Mountains" },
+                                            { src: "/images/about/qinling-4.jpg", alt: "Layers of misty mountain peaks in the Qinling range at sunrise" }
+                                        ].map((item, index) => (
                                             <CarouselItem key={index} className="pl-0 h-full">
                                                 <div className="relative w-full h-full">
                                                     <Image
-                                                        src={src}
-                                                        alt={`Qinling Mountains Scenery ${index + 1}`}
+                                                        src={item.src}
+                                                        alt={item.alt}
                                                         fill
                                                         className="object-cover"
                                                         priority={index === 0}
