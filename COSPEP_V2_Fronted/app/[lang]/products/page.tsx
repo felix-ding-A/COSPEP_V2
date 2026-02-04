@@ -36,7 +36,7 @@ export default async function ProductsPage({
             <CategoryGrid categories={categories} />
 
             {/* Products Section */}
-            <section className="py-16 bg-gradient-to-b from-[#0F1612] to-[#0A0E0D]">
+            <section id="products-list" className="py-16 bg-gradient-to-b from-[#0F1612] to-[#0A0E0D]">
                 <div className="container mx-auto px-4 md:px-6">
                     <div className="lg:grid lg:grid-cols-4 lg:gap-8">
                         {/* Desktop Sidebar */}

@@ -13,7 +13,7 @@ const carouselSlides = [
         subtitle: "Pharmaceutical Grade • cGMP Certified",
         description: "Advanced peptide synthesis for research and therapeutic applications",
         cta: "Explore Peptides",
-        href: "/products?category=peptides"
+        scrollTarget: "products-list"
     },
     {
         image: "/images/product-carousel-2.png",
@@ -21,7 +21,7 @@ const carouselSlides = [
         subtitle: "100% Natural • Sustainable Sourcing",
         description: "High-purity botanical extracts for nutraceuticals and cosmetics",
         cta: "View Extracts",
-        href: "/products?category=plant-extracts"
+        scrollTarget: "products-list"
     },
     {
         image: "/images/product-carousel-3.png",
@@ -29,7 +29,7 @@ const carouselSlides = [
         subtitle: "Made to Order • Quality Assured",
         description: "Turnkey supplement manufacturing from formulation to packaging",
         cta: "Start Your Business",
-        href: "/service"
+        href: "/custom-manufacturing"
     }
 ];
 
@@ -49,6 +49,13 @@ export function ProductsHeroCarousel() {
 
     const prevSlide = () => {
         setCurrentSlide((prev) => (prev - 1 + carouselSlides.length) % carouselSlides.length);
+    };
+
+    const scrollToProducts = () => {
+        const element = document.getElementById("products-list");
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+        }
     };
 
     const currentData = carouselSlides[currentSlide];
@@ -129,16 +136,27 @@ export function ProductsHeroCarousel() {
                                 </p>
 
                                 {/* CTA Button */}
-                                <Button
-                                    size="lg"
-                                    className="bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-semibold px-8 py-6 text-lg group mt-4"
-                                    asChild
-                                >
-                                    <Link href={currentData.href}>
+                                {currentData.scrollTarget ? (
+                                    <Button
+                                        size="lg"
+                                        className="bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-semibold px-8 py-6 text-lg group mt-4"
+                                        onClick={scrollToProducts}
+                                    >
                                         {currentData.cta}
                                         <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                                    </Link>
-                                </Button>
+                                    </Button>
+                                ) : (
+                                    <Button
+                                        size="lg"
+                                        className="bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-semibold px-8 py-6 text-lg group mt-4"
+                                        asChild
+                                    >
+                                        <Link href={currentData.href || "#"}>
+                                            {currentData.cta}
+                                            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                                        </Link>
+                                    </Button>
+                                )}
                             </motion.div>
                         </AnimatePresence>
                     </div>
