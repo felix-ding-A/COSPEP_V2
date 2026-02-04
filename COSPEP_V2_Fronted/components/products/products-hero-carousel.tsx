@@ -74,7 +74,7 @@ export function ProductsHeroCarousel() {
                 </AnimatePresence>
 
                 {/* Dark Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0A0E0D]/95 via-[#0A0E0D]/80 to-[#0A0E0D]/60" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0A0E0D]/95 via-[#0A0E0D]/70 to-[#0A0E0D]/40" />
             </div>
 
             {/* Navigation Arrows */}

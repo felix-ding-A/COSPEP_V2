@@ -214,13 +214,6 @@ export default function CustomManufacturingPage() {
                                     <p className="text-gray-400 text-sm mb-4 leading-relaxed">
                                         {story.description}
                                     </p>
-                                    <Link
-                                        href="#"
-                                        className="inline-flex items-center gap-2 text-[#b8ff00] font-medium hover:underline text-sm group/link"
-                                    >
-                                        Read More
-                                        <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                                    </Link>
                                 </CardContent>
                             </Card>
                         ))}
