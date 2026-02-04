@@ -33,7 +33,11 @@ const carouselSlides = [
     }
 ];
 
+import { useParams } from "next/navigation";
+
 export function ProductsHeroCarousel() {
+    const params = useParams();
+    const lang = params.lang;
     const [currentSlide, setCurrentSlide] = useState(0);
 
     useEffect(() => {
@@ -62,7 +66,7 @@ export function ProductsHeroCarousel() {
 
     return (
         <section className="relative h-[333px] md:h-[400px] overflow-hidden bg-[#0A0E0D]">
-            {/* Background Images */}
+            {/* ... Background Images ... */}
             <div className="absolute inset-0 z-0">
                 <AnimatePresence initial={false}>
                     <motion.div
@@ -84,7 +88,7 @@ export function ProductsHeroCarousel() {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0A0E0D]/95 via-[#0A0E0D]/70 to-[#0A0E0D]/40" />
             </div>
 
-            {/* Navigation Arrows */}
+            {/* ... Navigation Arrows ... */}
             <button
                 onClick={prevSlide}
                 className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full glass-subtle hover:bg-white/10 flex items-center justify-center transition-all group"
@@ -151,7 +155,7 @@ export function ProductsHeroCarousel() {
                                         className="bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-semibold px-8 py-6 text-lg group mt-4"
                                         asChild
                                     >
-                                        <Link href={currentData.href || "#"}>
+                                        <Link href={`/${lang}${currentData.href || "#"}`}>
                                             {currentData.cta}
                                             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                                         </Link>
