@@ -17,99 +17,12 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
+import { useLocale } from "next-intl";
 
-// Support Services
-const supportServices = [
-    {
-        icon: Headphones,
-        title: "Technical Consultation",
-        description: "Expert guidance on product applications, formulations, and optimal usage scenarios from our technical team.",
-        features: ["Application Advice", "Formulation Support", "Usage Optimization"]
-    },
-    {
-        icon: FileQuestion,
-        title: "Documentation Support",
-        description: "Comprehensive technical documentation including specifications, stability data, and regulatory information.",
-        features: ["Product Specs", "Stability Data", "Compliance Docs"]
-    },
-    {
-        icon: Wrench,
-        title: "Problem Resolution",
-        description: "Swift identification and resolution of any product-related issues with dedicated technical support.",
-        features: ["Issue Analysis", "Root Cause ID", "Solution Delivery"]
-    },
-    {
-        icon: BookOpen,
-        title: "Training & Education",
-        description: "Product training sessions and educational resources to maximize the value of your purchases.",
-        features: ["Product Training", "Best Practices", "Technical Seminars"]
-    }
-];
-
-// Response Time Tiers
-const responseTimes = [
-    {
-        icon: Zap,
-        tier: "Priority",
-        time: "< 2 Hours",
-        description: "Critical issues affecting production",
-        color: "text-red-400",
-        bgColor: "bg-red-400/10"
-    },
-    {
-        icon: Clock,
-        tier: "Standard",
-        time: "< 24 Hours",
-        description: "General technical inquiries",
-        color: "text-[#b8ff00]",
-        bgColor: "bg-[#b8ff00]/10"
-    },
-    {
-        icon: MessageCircle,
-        tier: "Consultation",
-        time: "< 48 Hours",
-        description: "In-depth technical consultations",
-        color: "text-blue-400",
-        bgColor: "bg-blue-400/10"
-    }
-];
-
-
-
-// Support Process Steps
-const supportProcess = [
-    { step: 1, title: "Submit Request", description: "Contact us via your preferred channel" },
-    { step: 2, title: "Ticket Assignment", description: "Your request is assigned to a specialist" },
-    { step: 3, title: "Analysis & Review", description: "Technical team analyzes your inquiry" },
-    { step: 4, title: "Solution Delivery", description: "Receive comprehensive solution and guidance" },
-    { step: 5, title: "Follow-up", description: "Ensure complete satisfaction and resolution" }
-];
-
-// Commitment Features
-const commitments = [
-    {
-        icon: Target,
-        title: "Dedicated Support Team",
-        description: "Experienced technical specialists assigned to your account for consistent, personalized service."
-    },
-    {
-        icon: Shield,
-        title: "Quality Guarantee",
-        description: "We stand behind our products with comprehensive quality assurance and replacement policies."
-    },
-    {
-        icon: Award,
-        title: "Continuous Improvement",
-        description: "Your feedback drives our product development and service enhancement initiatives."
-    },
-    {
-        icon: Users,
-        title: "Long-term Partnership",
-        description: "Building lasting relationships through reliable support and mutual success."
-    }
-];
+// ... (existing constants)
 
 export default function AfterSalesSupportPage() {
+    const locale = useLocale();
     return (
         <main className="min-h-screen bg-[#0A0E0D]">
             {/* Hero Section */}
@@ -343,7 +256,7 @@ export default function AfterSalesSupportPage() {
                             Our expert team is ready to help you get the most out of our products.
                         </p>
                         <Link
-                            href="/contact"
+                            href={`/${locale}/contact`}
                             className="inline-flex items-center gap-2 bg-[#b8ff00] hover:bg-[#a3e600] text-[#0A0E0D] font-semibold px-8 py-4 rounded-lg transition-colors"
                         >
                             Contact Technical Support

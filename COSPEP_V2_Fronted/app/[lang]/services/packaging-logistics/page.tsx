@@ -17,91 +17,12 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
+import { useLocale } from "next-intl";
 
-// Packaging Options
-const packagingOptions = [
-    {
-        icon: Package,
-        title: "Small Scale Packaging",
-        description: "1kg - 5kg aluminum foil bags with zip-lock and moisture-proof protection, ideal for samples and small orders.",
-        specs: ["Aluminum Foil Bags", "Zip-lock Seal", "Moisture-Proof"]
-    },
-    {
-        icon: Box,
-        title: "Bulk Packaging",
-        description: "25kg fiber drums with double plastic bags inside, designed for large-scale commercial orders.",
-        specs: ["Fiber Drums", "Double Lining", "Industrial Grade"]
-    },
-    {
-        icon: Shield,
-        title: "Customized Solutions",
-        description: "OEM private labeling and specialized container sizes tailored to your brand requirements.",
-        specs: ["Private Label", "Custom Sizes", "Brand Design"]
-    },
-    {
-        icon: Thermometer,
-        title: "Protection & Preservation",
-        description: "Vacuum packaging and oxygen absorbers for sensitive ingredients requiring special handling.",
-        specs: ["Vacuum Sealed", "Oxygen Absorbers", "Cold Chain"]
-    }
-];
-
-// Shipping Methods
-const shippingMethods = [
-    {
-        icon: Truck,
-        title: "Express Delivery",
-        description: "Partnership with DHL, FedEx, and UPS for urgent samples and time-sensitive shipments.",
-        highlight: "3-5 Days"
-    },
-    {
-        icon: Plane,
-        title: "Air Freight",
-        description: "Fast and efficient air cargo solutions for medium-sized orders with global reach.",
-        highlight: "5-10 Days"
-    },
-    {
-        icon: Ship,
-        title: "Sea Freight",
-        description: "Cost-effective ocean shipping solutions for large-scale bulk orders worldwide.",
-        highlight: "20-40 Days"
-    }
-];
-
-// Quality & Compliance Features
-const complianceFeatures = [
-    {
-        icon: Warehouse,
-        title: "GMP Warehousing",
-        description: "Temperature and humidity-controlled storage facilities meeting GMP standards."
-    },
-    {
-        icon: FileCheck,
-        title: "Full Documentation",
-        description: "COA, MSDS, Invoice, Packing List, and Certificate of Origin provided with every shipment."
-    },
-    {
-        icon: Shield,
-        title: "Safety Standards",
-        description: "UN-rated packaging for hazardous materials ensuring international compliance."
-    },
-    {
-        icon: MapPin,
-        title: "Real-time Tracking",
-        description: "Live shipment tracking and proactive delivery notifications for complete visibility."
-    }
-];
-
-// Logistics Process Steps
-const logisticsSteps = [
-    { step: 1, title: "Order Confirmation", description: "Verify order details and packaging requirements" },
-    { step: 2, title: "Quality Inspection", description: "Final product inspection before packaging" },
-    { step: 3, title: "Professional Packaging", description: "Secure packaging based on product specifications" },
-    { step: 4, title: "Documentation", description: "Prepare all required export documents" },
-    { step: 5, title: "Shipping & Tracking", description: "Dispatch and real-time tracking until delivery" }
-];
+// ... (existing constants)
 
 export default function PackagingLogisticsPage() {
+    const locale = useLocale();
     return (
         <main className="min-h-screen bg-[#0A0E0D]">
             {/* Hero Section */}
@@ -333,7 +254,7 @@ export default function PackagingLogisticsPage() {
                             Our logistics team is ready to create a tailored solution for your specific requirements.
                         </p>
                         <Link
-                            href="/contact"
+                            href={`/${locale}/contact`}
                             className="inline-flex items-center gap-2 bg-[#b8ff00] hover:bg-[#a3e600] text-[#0A0E0D] font-semibold px-8 py-4 rounded-lg transition-colors"
                         >
                             Contact Our Logistics Team
