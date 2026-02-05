@@ -19,7 +19,105 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { useLocale } from "next-intl";
 
-// ... (existing constants)
+const supportServices = [
+    {
+        icon: Headphones,
+        title: "Technical Consultation",
+        description: "Expert guidance on product application, formulation adjustments, and regulatory compliance.",
+        features: ["24/7 Availability", "Expert Chemists", "Regulatory Guidance"]
+    },
+    {
+        icon: Wrench,
+        title: "Formulation Support",
+        description: "Assistance with integrating our ingredients into your specific product formulations.",
+        features: ["Review & optimizing", "Stability Testing", "Dosage Recommendations"]
+    },
+    {
+        icon: FileQuestion,
+        title: "Documentation",
+        description: "Full access to technical data sheets, safety data sheets, and certificates of analysis.",
+        features: ["COA & MSDS", "Technical Specs", "Quality Certs"]
+    },
+    {
+        icon: MessageCircle,
+        title: "Complaint Resolution",
+        description: "Dedicated process for handling any product quality issues or delivery concerns.",
+        features: ["Fast Resolution", "Root Cause Analysis", "Corrective Actions"]
+    }
+];
+
+const responseTimes = [
+    {
+        icon: Zap,
+        tier: "Priority",
+        time: "< 2 Hours",
+        description: "For critical production-stopping issues",
+        color: "text-[#b8ff00]",
+        bgColor: "bg-[#b8ff00]/10"
+    },
+    {
+        icon: Clock,
+        tier: "Standard",
+        time: "< 24 Hours",
+        description: "For general technical inquiries",
+        color: "text-blue-400",
+        bgColor: "bg-blue-400/10"
+    },
+    {
+        icon: Shield,
+        tier: "Compliance",
+        time: "< 48 Hours",
+        description: "For regulatory documentation requests",
+        color: "text-purple-400",
+        bgColor: "bg-purple-400/10"
+    }
+];
+
+const supportProcess = [
+    {
+        step: 1,
+        title: "Submission",
+        description: "Submit your inquiry via our portal or email"
+    },
+    {
+        step: 2,
+        title: "Triage",
+        description: "Automatic routing to the relevant expert"
+    },
+    {
+        step: 3,
+        title: "Analysis",
+        description: "Technical assessment of your requirement"
+    },
+    {
+        step: 4,
+        title: "Resolution",
+        description: "Detailed response and follow-up support"
+    }
+];
+
+const commitments = [
+    {
+        icon: Users,
+        title: "Dedicated Team",
+        description: "A team of experts assigned to your account for personalized support."
+    },
+    {
+        icon: Target,
+        title: "Solution Focused",
+        description: "We don't just answer questions; we help you find solutions."
+    },
+    {
+        icon: BookOpen,
+        title: "Knowledge Sharing",
+        description: "Regular updates on industry trends and technical advancements."
+    },
+    {
+        icon: Award,
+        title: "Quality Guarantee",
+        description: "We stand behind the quality of our products and support."
+    }
+];
 
 export default function AfterSalesSupportPage() {
     const locale = useLocale();
