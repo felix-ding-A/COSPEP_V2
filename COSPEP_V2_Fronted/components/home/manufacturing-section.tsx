@@ -5,11 +5,12 @@ import { Check, Sparkles, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export function ManufacturingSection() {
     const t = useTranslations('home.manufacturing');
     const tCommon = useTranslations('common');
+    const locale = useLocale();
 
     const features = [
         t('features.0'),
@@ -75,7 +76,7 @@ export function ManufacturingSection() {
                             className="bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-semibold px-8"
                             asChild
                         >
-                            <Link href="/en/pharma-solutions">
+                            <Link href={`/${locale}/custom-manufacturing`}>
                                 {t('cta')}
                                 <Sparkles className="ml-2 h-5 w-5" />
                             </Link>
