@@ -38,7 +38,7 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
                     posts.map((post: any) => (
                         <Link
                             key={post._id}
-                            href={`/blog/${post.slug.current}`}
+                            href={`/industry-insights/${post.slug.current}`}
                             className="group flex flex-col overflow-hidden rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-md transition-shadow"
                         >
                             <div className="relative aspect-video w-full overflow-hidden">

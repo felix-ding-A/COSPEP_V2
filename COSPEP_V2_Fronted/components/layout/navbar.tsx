@@ -51,8 +51,7 @@ export function Navbar() {
     }, [categories]);
 
     const resourcesMenu = [
-        { href: "/blog?type=news", label: t('resources.news') },
-        { href: "/blog", label: t('resources.blogs') },
+        { href: "/industry-insights", label: t('resources.industryInsights') },
         { href: "/resources/sustainability", label: t('resources.sustainability') }
     ];
 
