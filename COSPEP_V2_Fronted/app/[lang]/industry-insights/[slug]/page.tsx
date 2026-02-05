@@ -7,16 +7,21 @@ import { notFound } from "next/navigation";
 export const revalidate = 60;
 
 async function getPost(slug: string) {
-    const query = `*[_type == "post" && slug.current == $slug][0] {
-    _id,
-    title,
-    slug,
-    mainImage,
-    publishedAt,
-    excerpt,
-    body
-  }`;
-    return client.fetch(query, { slug });
+    try {
+        const query = `*[_type == "post" && slug.current == $slug][0] {
+            _id,
+            title,
+            slug,
+            mainImage,
+            publishedAt,
+            excerpt,
+            body
+        }`;
+        return await client.fetch(query, { slug });
+    } catch (error) {
+        console.error("Error fetching post:", error);
+        return null;
+    }
 }
 
 async function getAllPostSlugs() {
@@ -51,7 +56,7 @@ export default async function PostPage({
                     <div className="relative aspect-video w-full overflow-hidden rounded-lg mb-8">
                         <Image
                             src={urlFor(post.mainImage).url()}
-                            alt={post.title}
+                            alt={post.title || "Blog post image"}
                             fill
                             className="object-cover"
                             priority
@@ -60,17 +65,22 @@ export default async function PostPage({
                 )}
 
                 {/* Meta */}
-                <div className="mb-6 text-sm text-muted-foreground">
-                    {new Date(post.publishedAt).toLocaleDateString(lang === 'cn' ? 'zh-CN' : (lang === 'es' ? 'es-ES' : 'en-US'), {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    })}
-                </div>
+                {post.publishedAt && (
+                    <div className="mb-6 text-sm text-muted-foreground">
+                        {new Date(post.publishedAt).toLocaleDateString(
+                            lang === 'cn' ? 'zh-CN' : (lang === 'es' ? 'es-ES' : 'en-US'),
+                            {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            }
+                        )}
+                    </div>
+                )}
 
                 {/* Title */}
                 <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
-                    {post.title}
+                    {post.title || "Untitled Post"}
                 </h1>
 
                 {/* Excerpt */}
@@ -81,7 +91,7 @@ export default async function PostPage({
                 )}
 
                 {/* Body */}
-                {post.body && (
+                {post.body && Array.isArray(post.body) && post.body.length > 0 && (
                     <div className="prose prose-lg dark:prose-invert max-w-none">
                         <PortableText value={post.body} />
                     </div>
