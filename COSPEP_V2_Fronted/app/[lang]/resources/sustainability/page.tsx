@@ -19,21 +19,21 @@ export default function SustainabilityPage() {
     return (
         <div className="flex flex-col min-h-screen bg-background text-foreground">
             {/* Hero Section */}
-            <section className="relative py-24 lg:py-32 bg-slate-900 border-b border-primary/10 overflow-hidden">
+            <section className="relative py-32 lg:py-48 bg-slate-900 border-b border-primary/10 overflow-hidden">
                 <div className="absolute inset-0 w-full h-full">
                     <Image
-                        src="/images/about/hero-bg.jpg" // Using existing image as placeholder, can be changed later
+                        src="/images/sustainability-hero.jpg"
                         alt="Sustainability Hero"
                         fill
                         className="object-cover"
                         priority
                     />
-                    <div className="absolute inset-0 bg-slate-950/60" />
+                    <div className="absolute inset-0 bg-slate-950/40" />
                 </div>
 
                 <div className="container relative z-10 mx-auto px-4 md:px-6 text-center">
                     <motion.h1
-                        className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6"
+                        className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
@@ -41,7 +41,15 @@ export default function SustainabilityPage() {
                         {t('hero.title')}
                     </motion.h1>
                     <motion.p
-                        className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto"
+                        className="text-xs md:text-sm text-gray-300 max-w-2xl mx-auto italic mb-8 opacity-80"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1, duration: 0.8 }}
+                    >
+                        {t('hero.citation')}
+                    </motion.p>
+                    <motion.p
+                        className="text-lg md:text-xl text-slate-200 max-w-2xl mx-auto font-light"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.8 }}

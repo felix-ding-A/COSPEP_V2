@@ -33,24 +33,25 @@
             "customerService": "Customer Service"
         },
         "sustainability": {
-          "hero": {
-            "title": "Commitment to Sustainability",
-            "subtitle": "Preserving Nature for Future Generations"
-          },
-          "sections": {
-            "sourcing": {
-              "title": "Ethical Sourcing",
-              "description": "Our commitment to ethical sourcing ensures that every ingredient is harvested with respect for the environment and the communities that cultivate them."
+            "hero": {
+                "title": "Lucid waters and lush mountains are invaluable assets.",
+                "subtitle": "Preserving Nature for Future Generations",
+                "citation": "Translation Authority: Central Compilation & Translation Bureau Source: Guangming Daily (Nov. 19, 2015)"
             },
-            "manufacturing": {
-              "title": "Green Manufacturing",
-              "description": "We employ eco-friendly manufacturing processes to minimize waste and reduce our carbon footprint."
-            },
-            "community": {
-              "title": "Community Support",
-              "description": "Supporting local farmers and communities is at the heart of our sustainability mission."
+            "sections": {
+                "sourcing": {
+                    "title": "Ethical Sourcing",
+                    "description": "Our commitment to ethical sourcing ensures that every ingredient is harvested with respect for the environment and the communities that cultivate them."
+                },
+                "manufacturing": {
+                    "title": "Green Manufacturing",
+                    "description": "We employ eco-friendly manufacturing processes to minimize waste and reduce our carbon footprint."
+                },
+                "community": {
+                    "title": "Community Support",
+                    "description": "Supporting local farmers and communities is at the heart of our sustainability mission."
+                }
             }
-          }
         }
     },
     "footer": {
