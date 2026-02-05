@@ -19,7 +19,99 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { useLocale } from "next-intl";
 
-// ... (existing constants)
+const packagingOptions = [
+    {
+        icon: Box,
+        title: "Standard Cartons",
+        description: "Durable corrugated boxes ideal for most dry ingredients and smaller shipments.",
+        specs: ["Small (5kg)", "Medium (10kg)", "Large (25kg)"]
+    },
+    {
+        icon: Package,
+        title: "Fiber Drums",
+        description: "Industry-standard fiber drums for bulk powder storage and safe transport.",
+        specs: ["25kg Drum", "Moisture Proof", "Tamper Evident"]
+    },
+    {
+        icon: Shield,
+        title: "Vacuum Sealing",
+        description: "Double-layered polyethylene bags ensuring maximum freshness and protection.",
+        specs: ["Food Grade", "Vacuum Sealed", "UV Protection"]
+    },
+    {
+        icon: Thermometer,
+        title: "Temp Control",
+        description: "Specialized insulated packaging for temperature-sensitive active compounds.",
+        specs: ["Cold Packs", "Thermal Liners", "Data Loggers"]
+    }
+];
+
+const shippingMethods = [
+    {
+        icon: Plane,
+        title: "Air Freight",
+        highlight: "3-7 Days",
+        description: "Fastest delivery option for urgent orders and samples. Direct flights to major global hubs."
+    },
+    {
+        icon: Ship,
+        title: "Sea Freight",
+        highlight: "15-30 Days",
+        description: "Cost-effective solution for large bulk orders. FCL and LCL options available."
+    },
+    {
+        icon: Truck,
+        title: "Land Transport",
+        highlight: "Flexible",
+        description: "Reliable domestic and cross-border delivery network for regional shipments."
+    }
+];
+
+const logisticsSteps = [
+    {
+        step: 1,
+        title: "Processing",
+        description: "Order verification and secure packing"
+    },
+    {
+        step: 2,
+        title: "Documents",
+        description: "Export documentation preparation"
+    },
+    {
+        step: 3,
+        title: "Dispatch",
+        description: "Handover to trusted carrier"
+    },
+    {
+        step: 4,
+        title: "Delivery",
+        description: "Arrival at your specified destination"
+    }
+];
+
+const complianceFeatures = [
+    {
+        icon: FileCheck,
+        title: "Full Documentation",
+        description: "Complete set of export documents including COA, MSDS, and packing lists."
+    },
+    {
+        icon: Shield,
+        title: "Secure Packaging",
+        description: "Tamper-proof sealing and robust materials to prevent damage during transit."
+    },
+    {
+        icon: Clock,
+        title: "Real-time Tracking",
+        description: "Monitor your shipment status 24/7 with provided tracking numbers."
+    },
+    {
+        icon: MapPin,
+        title: "Global Network",
+        description: "Experienced in shipping to over 50 countries with customs expertise."
+    }
+];
 
 export default function PackagingLogisticsPage() {
     const locale = useLocale();
