@@ -52,7 +52,8 @@ export function Navbar() {
 
     const resourcesMenu = [
         { href: "/blog?type=news", label: t('resources.news') },
-        { href: "/blog", label: t('resources.blogs') }
+        { href: "/blog", label: t('resources.blogs') },
+        { href: "/resources/sustainability", label: t('resources.sustainability') }
     ];
 
     const servicesMenu = [

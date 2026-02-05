@@ -4,35 +4,36 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export function ProductEcosystem() {
     const t = useTranslations('home.products');
+    const locale = useLocale();
 
     const products = [
         {
             title: t('items.0.title'),
             description: t('items.0.description'),
             image: "/images/product-peptides.png",
-            link: "/en/products?category=Peptide"
+            link: `/${locale}/products?category=Peptide`
         },
         {
             title: t('items.1.title'),
             description: t('items.1.description'),
             image: "/images/product-intermediates.png",
-            link: "/en/products?category=Pharmaceutical%20Intermediates"
+            link: `/${locale}/products?category=Pharmaceutical%20Intermediates`
         },
         {
             title: t('items.2.title'),
             description: t('items.2.description'),
             image: "/images/product-plants.png",
-            link: "/en/products?category=Natural%20Plant%20Extracts"
+            link: `/${locale}/products?category=Natural%20Plant%20Extracts`
         },
         {
             title: t('items.3.title'),
             description: t('items.3.description'),
             image: "/images/product-supplements.png",
-            link: "/en/products?category=Custom%20Health%20Supplements"
+            link: `/${locale}/custom-manufacturing`
         }
     ];
 
