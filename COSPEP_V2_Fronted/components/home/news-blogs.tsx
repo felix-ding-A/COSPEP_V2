@@ -5,31 +5,34 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
-const blogPosts = [
-    {
-        title: "COSPEP Wins Best Innovation Award at Global Pharma 2026",
-        category: "Company News",
-        image: "/images/blog-1.png",
-        date: "January 15, 2026",
-        link: "/blog/innovation-award-2026"
-    },
-    {
-        title: "Breakthrough in Peptide Stability: New Research Published",
-        category: "R&D Research",
-        image: "/images/blog-2.png",
-        date: "December 28, 2025",
-        link: "/blog/peptide-stability-research"
-    },
-    {
-        title: "Launching Our New Sustainable Extraction Facility in Oregon",
-        category: "Sustainability",
-        image: "/images/blog-3.png",
-        date: "December 15, 2025",
-        link: "/blog/sustainable-facility-launch"
-    }
-];
+import { useLocale } from "next-intl";
 
 export function NewsBlogs() {
+    const locale = useLocale();
+    const blogPosts = [
+        {
+            title: "COSPEP Wins Best Innovation Award at Global Pharma 2026",
+            category: "Company News",
+            image: "/images/blog-1.png",
+            date: "January 15, 2026",
+            link: "/blog/innovation-award-2026"
+        },
+        {
+            title: "Breakthrough in Peptide Stability: New Research Published",
+            category: "R&D Research",
+            image: "/images/blog-2.png",
+            date: "December 28, 2025",
+            link: "/blog/peptide-stability-research"
+        },
+        {
+            title: "Launching Our New Sustainable Extraction Facility in Oregon",
+            category: "Sustainability",
+            image: "/images/blog-3.png",
+            date: "December 15, 2025",
+            link: `/${locale}/resources/sustainability`
+        }
+    ];
+
     return (
         <section className="py-24 bg-gradient-to-b from-[#0F1612] to-[#0A0E0D]">
             <div className="max-w-7xl mx-auto px-6">
@@ -82,10 +85,10 @@ export function NewsBlogs() {
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1, duration: 0.5 }}
                         >
-                            <div className="group block">
-                                <div className="glass rounded-2xl overflow-hidden hover:bg-white/10 transition-all duration-300">
+                            <Link href={post.link} className="group block h-full">
+                                <div className="glass rounded-2xl overflow-hidden hover:bg-white/10 transition-all duration-300 h-full flex flex-col">
                                     {/* Image */}
-                                    <div className="relative h-48 overflow-hidden">
+                                    <div className="relative h-48 overflow-hidden shrink-0">
                                         <Image
                                             src={post.image}
                                             alt={post.title}
@@ -101,18 +104,18 @@ export function NewsBlogs() {
                                     </div>
 
                                     {/* Content */}
-                                    <div className="p-6">
+                                    <div className="p-6 flex flex-col flex-grow">
                                         <p className="text-sm text-gray-500 mb-2">{post.date}</p>
-                                        <h3 className="text-xl font-bold text-white mb-4 leading-tight group-hover:text-[#B8FF00] transition-colors">
+                                        <h3 className="text-xl font-bold text-white mb-4 leading-tight group-hover:text-[#B8FF00] transition-colors line-clamp-2">
                                             {post.title}
                                         </h3>
-                                        <div className="flex items-center text-[#B8FF00] text-sm font-medium">
+                                        <div className="mt-auto flex items-center text-[#B8FF00] text-sm font-medium">
                                             Read More
                                             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         </motion.div>
                     ))}
                 </div>
