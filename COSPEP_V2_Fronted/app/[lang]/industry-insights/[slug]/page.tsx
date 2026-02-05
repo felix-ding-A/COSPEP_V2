@@ -81,9 +81,11 @@ export default async function PostPage({
                 )}
 
                 {/* Body */}
-                <div className="prose prose-lg dark:prose-invert max-w-none">
-                    <PortableText value={post.body} />
-                </div>
+                {post.body && (
+                    <div className="prose prose-lg dark:prose-invert max-w-none">
+                        <PortableText value={post.body} />
+                    </div>
+                )}
             </div>
         </article>
     );
