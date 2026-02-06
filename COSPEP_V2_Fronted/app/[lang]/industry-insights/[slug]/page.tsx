@@ -32,7 +32,7 @@ async function getAllPostSlugs() {
 export async function generateStaticParams() {
     const posts = await getAllPostSlugs();
     const languages = ['en', 'cn', 'es']; // Supported languages
-    
+
     // Generate all combinations of lang and slug
     return languages.flatMap(lang =>
         posts.map((post: { slug: string }) => ({
@@ -41,6 +41,48 @@ export async function generateStaticParams() {
         }))
     );
 }
+
+// Custom components for PortableText
+const portableTextComponents = {
+    types: {
+        image: ({ value }: any) => {
+            if (!value?.asset) return null;
+            return (
+                <div className="my-8">
+                    <Image
+                        src={urlFor(value).url()}
+                        alt={value.alt || 'Blog image'}
+                        width={800}
+                        height={600}
+                        className="rounded-lg w-full h-auto"
+                    />
+                    {value.caption && (
+                        <p className="text-sm text-muted-foreground mt-2 text-center italic">
+                            {value.caption}
+                        </p>
+                    )}
+                </div>
+            );
+        },
+        video: ({ value }: any) => {
+            if (!value?.asset) return null;
+            const videoUrl = value.asset.url || `https://cdn.sanity.io/files/${client.config().projectId}/${client.config().dataset}/${value.asset._ref.replace('file-', '').replace('-mp4', '.mp4')}`;
+            return (
+                <div className="my-8">
+                    <video controls className="w-full rounded-lg">
+                        <source src={videoUrl} type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                    {value.caption && (
+                        <p className="text-sm text-muted-foreground mt-2 text-center italic">
+                            {value.caption}
+                        </p>
+                    )}
+                </div>
+            );
+        },
+    },
+};
 
 export default async function PostPage({
     params
@@ -99,7 +141,7 @@ export default async function PostPage({
                 {/* Body */}
                 {post.body && Array.isArray(post.body) && post.body.length > 0 && (
                     <div className="prose prose-lg dark:prose-invert max-w-none">
-                        <PortableText value={post.body} />
+                        <PortableText value={post.body} components={portableTextComponents} />
                     </div>
                 )}
             </div>
