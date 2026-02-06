@@ -42,7 +42,41 @@ export default defineType({
             name: 'body',
             title: 'Body',
             type: 'array',
-            of: [{ type: 'block' }],
+            of: [
+                { type: 'block' },
+                {
+                    type: 'image',
+                    options: { hotspot: true },
+                    fields: [
+                        {
+                            name: 'caption',
+                            type: 'string',
+                            title: 'Caption',
+                        },
+                        {
+                            name: 'alt',
+                            type: 'string',
+                            title: 'Alt text',
+                            description: 'Important for SEO and accessibility'
+                        }
+                    ]
+                },
+                {
+                    type: 'file',
+                    name: 'video',
+                    title: 'Video',
+                    options: {
+                        accept: 'video/*'
+                    },
+                    fields: [
+                        {
+                            name: 'caption',
+                            type: 'string',
+                            title: 'Caption'
+                        }
+                    ]
+                }
+            ],
         }),
     ],
 })
