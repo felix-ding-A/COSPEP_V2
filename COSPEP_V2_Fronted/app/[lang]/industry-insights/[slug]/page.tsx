@@ -31,9 +31,15 @@ async function getAllPostSlugs() {
 
 export async function generateStaticParams() {
     const posts = await getAllPostSlugs();
-    return posts.map((post: { slug: string }) => ({
-        slug: post.slug,
-    }));
+    const languages = ['en', 'cn', 'es']; // Supported languages
+    
+    // Generate all combinations of lang and slug
+    return languages.flatMap(lang =>
+        posts.map((post: { slug: string }) => ({
+            lang,
+            slug: post.slug,
+        }))
+    );
 }
 
 export default async function PostPage({
