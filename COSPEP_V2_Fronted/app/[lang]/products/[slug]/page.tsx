@@ -71,16 +71,16 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             <div className="container mx-auto px-4 md:px-6 py-10">
                 {/* Main Product Section */}
                 <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
-                    {/* Left: Image Gallery */}
-                    <div className="space-y-4">
-                        <div className="aspect-square glass rounded-2xl overflow-hidden flex items-center justify-center border border-white/10 relative group">
+                    {/* Left: Product Image */}
+                    <div className="flex justify-center lg:justify-start">
+                        <div className="w-full max-w-md aspect-[4/3] glass rounded-2xl overflow-hidden flex items-center justify-center border border-white/10 relative group">
                             {product.imageUrl ? (
                                 <Image
                                     src={product.imageUrl}
                                     alt={product.name}
                                     fill
                                     className="object-cover"
-                                    sizes="(max-width: 1024px) 100vw, 50vw"
+                                    sizes="(max-width: 1024px) 100vw, 450px"
                                     priority
                                 />
                             ) : (
@@ -109,26 +109,6 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                                     <Share2 className="w-5 h-5 text-white" />
                                 </button>
                             </div>
-                        </div>
-
-                        {/* Thumbnail Grid */}
-                        <div className="grid grid-cols-4 gap-3">
-                            <div className="aspect-square glass rounded-lg border border-white/10 flex items-center justify-center overflow-hidden cursor-pointer hover:border-[#B8FF00] transition-colors">
-                                {product.imageUrl && (
-                                    <Image
-                                        src={product.imageUrl}
-                                        alt={product.name}
-                                        fill
-                                        className="object-cover"
-                                        sizes="100px"
-                                    />
-                                )}
-                            </div>
-                            {[1, 2, 3].map(i => (
-                                <div key={i} className="aspect-square glass rounded-lg border border-dashed border-white/10 flex items-center justify-center">
-                                    <Truck className="w-6 h-6 text-gray-600" />
-                                </div>
-                            ))}
                         </div>
                     </div>
 
