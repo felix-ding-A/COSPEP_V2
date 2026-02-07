@@ -5,10 +5,11 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FileText, Truck, ShieldCheck, Download, Share2, Heart } from "lucide-react";
 import { SpecTable } from "@/components/products/spec-table";
+import { ImageZoom } from "@/components/products/image-zoom";
 import { Metadata } from "next";
-import Image from "next/image";
 import { SITE_CONFIG } from "@/lib/config";
 import Link from "next/link";
+
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
@@ -75,17 +76,15 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                     <div className="flex justify-center lg:justify-start">
                         <div className="w-full max-w-md aspect-[4/3] glass rounded-2xl overflow-hidden flex items-center justify-center border border-white/10 relative group">
                             {product.imageUrl ? (
-                                <Image
+                                <ImageZoom
                                     src={product.imageUrl}
                                     alt={product.name}
-                                    fill
-                                    className="object-cover"
-                                    sizes="(max-width: 1024px) 100vw, 450px"
-                                    priority
+                                    className="w-full h-full"
                                 />
                             ) : (
                                 <span className="text-gray-500">Product Image</span>
                             )}
+
 
                             {/* Stock Badge Overlay */}
                             {isReadyStock && (
