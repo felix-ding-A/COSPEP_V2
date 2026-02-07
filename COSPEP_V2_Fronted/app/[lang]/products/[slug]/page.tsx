@@ -73,8 +73,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                 {/* Main Product Section */}
                 <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
                     {/* Left: Product Image */}
-                    <div className="flex justify-center lg:justify-start">
-                        <div className="w-full max-w-md aspect-[4/3] glass rounded-2xl overflow-hidden flex items-center justify-center border border-white/10 relative group">
+                    <div>
+                        <div className="w-full aspect-[4/3] glass rounded-2xl overflow-hidden flex items-center justify-center border border-white/10 relative group">
                             {product.imageUrl ? (
                                 <ImageZoom
                                     src={product.imageUrl}
@@ -84,6 +84,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                             ) : (
                                 <span className="text-gray-500">Product Image</span>
                             )}
+
 
 
                             {/* Stock Badge Overlay */}
