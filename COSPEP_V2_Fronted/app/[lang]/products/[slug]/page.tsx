@@ -9,6 +9,9 @@ import { ImageZoom } from "@/components/products/image-zoom";
 import { Metadata } from "next";
 import { SITE_CONFIG } from "@/lib/config";
 import Link from "next/link";
+import { PortableText } from "@portabletext/react";
+import { urlFor, client } from "@/lib/sanity";
+import Image from "next/image";
 
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -22,6 +25,48 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         description: product.seoDesc || `Buy high-quality ${product.name} (${product.casNumber}). ${product.latinName || ''}. Ready stock available.`,
     };
 }
+
+// Custom components for PortableText in product descriptions
+const productDescriptionComponents = {
+    types: {
+        image: ({ value }: any) => {
+            if (!value?.asset) return null;
+            return (
+                <div className="my-6">
+                    <Image
+                        src={urlFor(value).url()}
+                        alt={value.alt || 'Product image'}
+                        width={800}
+                        height={600}
+                        className="rounded-lg w-full h-auto"
+                    />
+                    {value.caption && (
+                        <p className="text-sm text-gray-400 mt-2 text-center italic">
+                            {value.caption}
+                        </p>
+                    )}
+                </div>
+            );
+        },
+        video: ({ value }: any) => {
+            if (!value?.asset) return null;
+            const videoUrl = value.asset.url || `https://cdn.sanity.io/files/${client.config().projectId}/${client.config().dataset}/${value.asset._ref.replace('file-', '').replace('-mp4', '.mp4')}`;
+            return (
+                <div className="my-6">
+                    <video controls className="w-full rounded-lg">
+                        <source src={videoUrl} type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                    {value.caption && (
+                        <p className="text-sm text-gray-400 mt-2 text-center italic">
+                            {value.caption}
+                        </p>
+                    )}
+                </div>
+            );
+        },
+    },
+};
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
@@ -292,7 +337,16 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                             {product.description && (
                                 <div>
                                     <h3 className="text-2xl font-bold text-white mb-4">Description</h3>
-                                    <p className="text-gray-300 leading-relaxed">{product.description}</p>
+                                    {Array.isArray(product.description) ? (
+                                        <div className="prose prose-invert max-w-none text-gray-300">
+                                            <PortableText
+                                                value={product.description}
+                                                components={productDescriptionComponents}
+                                            />
+                                        </div>
+                                    ) : (
+                                        <p className="text-gray-300 leading-relaxed">{product.description}</p>
+                                    )}
                                 </div>
                             )}
                         </TabsContent>
@@ -302,25 +356,48 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                                 <FileText className="mr-2 h-6 w-6 text-[#B8FF00]" />
                                 Technical Documents
                             </h3>
-                            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {['TDS (Technical Data Sheet)', 'MSDS (Material Safety)', 'Typical COA'].map((doc, i) => (
-                                    <div
-                                        key={i}
-                                        className="glass rounded-lg p-5 border border-white/10 hover:border-[#B8FF00]/50 transition-all cursor-pointer group"
-                                    >
-                                        <div className="flex items-center justify-between mb-3">
-                                            <FileText className="h-10 w-10 text-[#B8FF00] group-hover:scale-110 transition-transform" />
-                                            <Download className="h-5 w-5 text-gray-400 group-hover:text-[#B8FF00] transition-colors" />
-                                        </div>
-                                        <div className="font-medium text-white group-hover:text-[#B8FF00] transition-colors">
-                                            {doc}
-                                        </div>
+                            {product.documents && product.documents.length > 0 ? (
+                                <>
+                                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                        {product.documents.map((doc, i) => (
+                                            <a
+                                                key={i}
+                                                href={doc.file.asset.url}
+                                                download
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="glass rounded-lg p-5 border border-white/10 hover:border-[#B8FF00]/50 transition-all cursor-pointer group"
+                                            >
+                                                <div className="flex items-center justify-between mb-3">
+                                                    <FileText className="h-10 w-10 text-[#B8FF00] group-hover:scale-110 transition-transform" />
+                                                    <Download className="h-5 w-5 text-gray-400 group-hover:text-[#B8FF00] transition-colors" />
+                                                </div>
+                                                <div className="font-medium text-white group-hover:text-[#B8FF00] transition-colors">
+                                                    {doc.title}
+                                                </div>
+                                                {doc.file.asset.originalFilename && (
+                                                    <div className="text-xs text-gray-500 mt-2 truncate">
+                                                        {doc.file.asset.originalFilename}
+                                                    </div>
+                                                )}
+                                            </a>
+                                        ))}
                                     </div>
-                                ))}
-                            </div>
-                            <p className="text-sm text-gray-400">
-                                * Login required for full verified document downloads.
-                            </p>
+                                    <p className="text-sm text-gray-400">
+                                        Click any document to download or view
+                                    </p>
+                                </>
+                            ) : (
+                                <div className="glass rounded-lg p-8 border border-white/10 text-center">
+                                    <FileText className="h-16 w-16 text-gray-600 mx-auto mb-4" />
+                                    <p className="text-gray-400">
+                                        No technical documents available for this product yet.
+                                    </p>
+                                    <p className="text-sm text-gray-500 mt-2">
+                                        Contact us to request product documentation.
+                                    </p>
+                                </div>
+                            )}
                         </TabsContent>
 
                         <TabsContent value="logistics" className="space-y-6">
@@ -356,6 +433,6 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                     </Tabs>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

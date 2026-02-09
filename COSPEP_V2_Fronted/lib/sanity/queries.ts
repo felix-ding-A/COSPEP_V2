@@ -22,6 +22,15 @@ export interface Product {
   seoTitle?: string;
   seoDesc?: string;
   description?: string;
+  documents?: {
+    title: string;
+    file: {
+      asset: {
+        url: string;
+        originalFilename?: string;
+      };
+    };
+  }[];
 }
 
 export interface Category {
@@ -126,7 +135,16 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
         grade,
         seoTitle,
         seoDesc,
-        description
+        description,
+        documents[] {
+          title,
+          "file": {
+            "asset": {
+              "url": file.asset->url,
+              "originalFilename": file.asset->originalFilename
+            }
+          }
+        }
     }`;
   return client.fetch(query, { slug });
 }

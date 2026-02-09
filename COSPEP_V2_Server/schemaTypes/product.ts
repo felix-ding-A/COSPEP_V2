@@ -1,4 +1,6 @@
-export default {
+import { defineType } from 'sanity'
+
+export default defineType({
     name: 'product',
     title: 'Product',
     type: 'document',
@@ -103,8 +105,44 @@ export default {
         {
             name: 'description',
             title: 'Product Description (Main)',
-            type: 'text',
-            rows: 5,
+            type: 'array',
+            description: 'Rich text editor with support for images, videos, and tables',
+            of: [
+                { type: 'block' },
+                {
+                    type: 'image',
+                    options: { hotspot: true },
+                    fields: [
+                        {
+                            name: 'caption',
+                            type: 'string',
+                            title: 'Caption',
+                        },
+                        {
+                            name: 'alt',
+                            type: 'string',
+                            title: 'Alt text',
+                            description: 'Important for SEO and accessibility'
+                        }
+                    ]
+                },
+                {
+                    type: 'file',
+                    name: 'video',
+                    title: 'Video',
+                    options: {
+                        accept: 'video/*'
+                    },
+                    fields: [
+                        {
+                            name: 'caption',
+                            type: 'string',
+                            title: 'Caption'
+                        }
+                    ]
+                },
+                { type: 'table' }
+            ],
         },
 
         // --- 分类与标签 ---
@@ -140,6 +178,53 @@ export default {
             initialValue: 'Ready to Ship',
         },
 
+        // --- Documents 文档 ---
+        {
+            name: 'documents',
+            title: 'Technical Documents',
+            type: 'array',
+            description: 'Upload product documents such as TDS, MSDS, COA, etc.',
+            of: [
+                {
+                    type: 'object',
+                    name: 'technicalDocument',
+                    title: 'Document',
+                    fields: [
+                        {
+                            name: 'title',
+                            title: 'Document Title',
+                            type: 'string',
+                            description: 'E.g., "TDS (Technical Data Sheet)", "MSDS", "COA"',
+                            validation: (Rule: any) => Rule.required(),
+                        },
+                        {
+                            name: 'file',
+                            title: 'File',
+                            type: 'file',
+                            description: 'Upload PDF or other document files',
+                            options: {
+                                accept: '.pdf,.doc,.docx,.xls,.xlsx'
+                            },
+                            validation: (Rule: any) => Rule.required(),
+                        },
+                    ],
+                    preview: {
+                        select: {
+                            title: 'title',
+                            file: 'file.asset.originalFilename',
+                        },
+                        prepare(selection: any) {
+                            const { title, file } = selection;
+                            return {
+                                title: title || 'Untitled Document',
+                                subtitle: file || 'No file uploaded',
+                            };
+                        },
+                    },
+                },
+            ],
+        },
+
         // --- SEO 设置 ---
         {
             name: 'seoTitle',
@@ -154,4 +239,4 @@ export default {
             description: 'If empty, will use Product Description',
         },
     ],
-}
+})
