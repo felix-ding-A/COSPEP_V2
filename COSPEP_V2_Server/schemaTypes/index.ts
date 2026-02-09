@@ -4,5 +4,6 @@ import settings from './settings'
 import benefit from './benefit'
 import inquiry from './inquiry'
 import post from './post'
+import table from './table'
 
-export const schemaTypes = [product, category, inquiry, settings, post] // 👈 加上它
+export const schemaTypes = [product, category, inquiry, settings, post, table]

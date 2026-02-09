@@ -75,7 +75,8 @@ export default defineType({
                             title: 'Caption'
                         }
                     ]
-                }
+                },
+                { type: 'table' }
             ],
         }),
     ],
