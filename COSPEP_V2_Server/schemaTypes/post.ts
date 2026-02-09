@@ -39,6 +39,14 @@ export default defineType({
             rows: 3,
         }),
         defineField({
+            name: 'seoDescription',
+            title: 'SEO Description',
+            type: 'text',
+            rows: 3,
+            description: 'Meta description for search engines (recommended 150-160 characters)',
+            validation: (Rule) => Rule.max(160).warning('SEO descriptions should be under 160 characters for optimal display in search results'),
+        }),
+        defineField({
             name: 'body',
             title: 'Body',
             type: 'array',
@@ -77,6 +85,40 @@ export default defineType({
                     ]
                 },
                 { type: 'table' }
+            ],
+        }),
+        defineField({
+            name: 'faqs',
+            title: 'FAQs',
+            type: 'array',
+            description: 'Frequently Asked Questions for this post',
+            of: [
+                {
+                    type: 'object',
+                    name: 'faq',
+                    title: 'FAQ',
+                    fields: [
+                        {
+                            name: 'question',
+                            title: 'Question',
+                            type: 'string',
+                            validation: (Rule) => Rule.required(),
+                        },
+                        {
+                            name: 'answer',
+                            title: 'Answer',
+                            type: 'text',
+                            rows: 4,
+                            validation: (Rule) => Rule.required(),
+                        },
+                    ],
+                    preview: {
+                        select: {
+                            title: 'question',
+                            subtitle: 'answer',
+                        },
+                    },
+                },
             ],
         }),
     ],

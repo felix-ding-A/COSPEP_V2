@@ -3,6 +3,13 @@ import { client, urlFor } from "@/lib/sanity";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import Script from "next/script";
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export const revalidate = 60;
 
@@ -15,7 +22,12 @@ async function getPost(slug: string) {
             mainImage,
             publishedAt,
             excerpt,
-            body
+            seoDescription,
+            body,
+            faqs[] {
+                question,
+                answer
+            }
         }`;
         return await client.fetch(query, { slug });
     } catch (error) {
@@ -40,6 +52,32 @@ export async function generateStaticParams() {
             slug: post.slug,
         }))
     );
+}
+
+// Generate metadata for SEO
+export async function generateMetadata({
+    params
+}: {
+    params: Promise<{ lang: string; slug: string }>
+}) {
+    const { slug } = await params;
+    const post = await getPost(slug);
+
+    if (!post) {
+        return {
+            title: 'Post Not Found',
+        };
+    }
+
+    return {
+        title: post.title || 'Blog Post',
+        description: post.seoDescription || post.excerpt || 'Read our latest insights and articles',
+        openGraph: {
+            title: post.title || 'Blog Post',
+            description: post.seoDescription || post.excerpt || '',
+            images: post.mainImage ? [urlFor(post.mainImage).url()] : [],
+        },
+    };
 }
 
 // Custom components for PortableText
@@ -96,55 +134,109 @@ export default async function PostPage({
         notFound();
     }
 
+    // 生成FAQ Schema (JSON-LD) for SEO
+    const faqSchema = post.faqs && post.faqs.length > 0 ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": post.faqs.map((faq: any) => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer
+            }
+        }))
+    } : null;
+
+    // 获取标题文本（用于FAQ区域）
+    const faqTitles: Record<string, string> = {
+        en: 'Frequently Asked Questions',
+        cn: '常见问题',
+        es: 'Preguntas Frecuentes'
+    };
+    const faqTitle = faqTitles[lang] || faqTitles.en;
+
     return (
-        <article className="container mx-auto px-4 py-12 md:px-6 lg:py-16">
-            <div className="mx-auto max-w-3xl">
-                {/* Hero Image */}
-                {post.mainImage && (
-                    <div className="relative aspect-video w-full overflow-hidden rounded-lg mb-8">
-                        <Image
-                            src={urlFor(post.mainImage).url()}
-                            alt={post.title || "Blog post image"}
-                            fill
-                            className="object-cover"
-                            priority
-                        />
-                    </div>
-                )}
+        <>
+            {/* FAQ Schema for SEO */}
+            {faqSchema && (
+                <Script
+                    id="faq-schema"
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify(faqSchema)
+                    }}
+                />
+            )}
 
-                {/* Meta */}
-                {post.publishedAt && (
-                    <div className="mb-6 text-sm text-muted-foreground">
-                        {new Date(post.publishedAt).toLocaleDateString(
-                            lang === 'cn' ? 'zh-CN' : (lang === 'es' ? 'es-ES' : 'en-US'),
-                            {
-                                year: 'numeric',
-                                month: 'long',
-                                day: 'numeric'
-                            }
-                        )}
-                    </div>
-                )}
+            <article className="container mx-auto px-4 py-12 md:px-6 lg:py-16">
+                <div className="mx-auto max-w-3xl">
+                    {/* Hero Image */}
+                    {post.mainImage && (
+                        <div className="relative aspect-video w-full overflow-hidden rounded-lg mb-8">
+                            <Image
+                                src={urlFor(post.mainImage).url()}
+                                alt={post.title || "Blog post image"}
+                                fill
+                                className="object-cover"
+                                priority
+                            />
+                        </div>
+                    )}
 
-                {/* Title */}
-                <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
-                    {post.title || "Untitled Post"}
-                </h1>
+                    {/* Meta */}
+                    {post.publishedAt && (
+                        <div className="mb-6 text-sm text-muted-foreground">
+                            {new Date(post.publishedAt).toLocaleDateString(
+                                lang === 'cn' ? 'zh-CN' : (lang === 'es' ? 'es-ES' : 'en-US'),
+                                {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric'
+                                }
+                            )}
+                        </div>
+                    )}
 
-                {/* Excerpt */}
-                {post.excerpt && (
-                    <p className="text-xl text-muted-foreground mb-8 italic">
-                        {post.excerpt}
-                    </p>
-                )}
+                    {/* Title */}
+                    <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
+                        {post.title || "Untitled Post"}
+                    </h1>
 
-                {/* Body */}
-                {post.body && Array.isArray(post.body) && post.body.length > 0 && (
-                    <div className="prose prose-lg dark:prose-invert max-w-none">
-                        <PortableText value={post.body} components={portableTextComponents} />
-                    </div>
-                )}
-            </div>
-        </article>
+                    {/* Excerpt */}
+                    {post.excerpt && (
+                        <p className="text-xl text-muted-foreground mb-8 italic">
+                            {post.excerpt}
+                        </p>
+                    )}
+
+                    {/* Body */}
+                    {post.body && Array.isArray(post.body) && post.body.length > 0 && (
+                        <div className="prose prose-lg dark:prose-invert max-w-none">
+                            <PortableText value={post.body} components={portableTextComponents} />
+                        </div>
+                    )}
+
+                    {/* FAQs Section - Collapsible */}
+                    {post.faqs && post.faqs.length > 0 && (
+                        <div className="mt-12 border-t pt-12">
+                            <h2 className="text-3xl font-bold mb-6">{faqTitle}</h2>
+                            <Accordion type="single" collapsible className="w-full">
+                                {post.faqs.map((faq: any, index: number) => (
+                                    <AccordionItem key={index} value={`faq-${index}`}>
+                                        <AccordionTrigger className="text-left font-semibold">
+                                            {faq.question}
+                                        </AccordionTrigger>
+                                        <AccordionContent className="text-muted-foreground whitespace-pre-line">
+                                            {faq.answer}
+                                        </AccordionContent>
+                                    </AccordionItem>
+                                ))}
+                            </Accordion>
+                        </div>
+                    )}
+                </div>
+            </article>
+        </>
     );
 }
