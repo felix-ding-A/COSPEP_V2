@@ -150,6 +150,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                             <ProductActions
                                 productSlug={product.slug.current}
                                 productName={product.name}
+                                productDescription={typeof product.description === 'string' ? product.description : undefined}
                             />
                         </div>
                     </div>

@@ -2,18 +2,18 @@
 
 import { Heart, Share2 } from "lucide-react";
 import { useFavorites } from "@/lib/hooks/use-favorites";
-import { useShare } from "@/lib/hooks/use-share";
+import { ShareMenu } from "./share-menu";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
 
 interface ProductActionsProps {
     productSlug: string;
     productName: string;
+    productDescription?: string;
 }
 
-export function ProductActions({ productSlug, productName }: ProductActionsProps) {
+export function ProductActions({ productSlug, productName, productDescription }: ProductActionsProps) {
     const { isFavorite, toggleFavorite, isClient } = useFavorites();
-    const { getShareUrl, copyToClipboard } = useShare();
     const [isFav, setIsFav] = useState(false);
 
     // Update favorite status when client is ready
@@ -38,11 +38,6 @@ export function ProductActions({ productSlug, productName }: ProductActionsProps
         }
     };
 
-    const handleShareClick = async () => {
-        const url = getShareUrl(productSlug);
-        await copyToClipboard(url, `${productName} - COSPEP`);
-    };
-
     // Don't render until client-side to prevent hydration mismatch
     if (!isClient) {
         return (
@@ -53,12 +48,9 @@ export function ProductActions({ productSlug, productName }: ProductActionsProps
                 >
                     <Heart className="w-5 h-5 text-white" />
                 </button>
-                <button
-                    className="w-10 h-10 rounded-full glass-strong flex items-center justify-center hover:bg-white/20 transition-colors"
-                    disabled
-                >
+                <div className="w-10 h-10 rounded-full glass-strong flex items-center justify-center opacity-50">
                     <Share2 className="w-5 h-5 text-white" />
-                </button>
+                </div>
             </div>
         );
     }
@@ -73,19 +65,16 @@ export function ProductActions({ productSlug, productName }: ProductActionsProps
             >
                 <Heart
                     className={`w-5 h-5 transition-all ${isFav
-                            ? "fill-red-500 text-red-500"
-                            : "text-white"
+                        ? "fill-red-500 text-red-500"
+                        : "text-white"
                         }`}
                 />
             </button>
-            <button
-                onClick={handleShareClick}
-                className="w-10 h-10 rounded-full glass-strong flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110 active:scale-95"
-                aria-label="Share product"
-                title="Share product"
-            >
-                <Share2 className="w-5 h-5 text-white" />
-            </button>
+            <ShareMenu
+                productSlug={productSlug}
+                productName={productName}
+                productDescription={productDescription}
+            />
         </div>
     );
 }
