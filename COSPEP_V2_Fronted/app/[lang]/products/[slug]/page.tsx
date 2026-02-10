@@ -7,6 +7,8 @@ import { FileText, Truck, ShieldCheck, Download, Share2, Heart } from "lucide-re
 import { SpecTable } from "@/components/products/spec-table";
 import { ImageZoom } from "@/components/products/image-zoom";
 import { ProductActions } from "@/components/products/product-actions";
+import { ProductCTAButtons } from "@/components/products/product-cta-buttons";
+import { ProductDetailClient } from "@/components/products/product-detail-client";
 import { Metadata } from "next";
 import { SITE_CONFIG } from "@/lib/config";
 import Link from "next/link";
@@ -153,6 +155,26 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                                 productDescription={typeof product.description === 'string' ? product.description : undefined}
                             />
                         </div>
+
+                        {/* CTA Buttons Below Image */}
+                        <ProductCTAButtons
+                            onRequestDataSheet={() => {
+                                const tabsSection = document.getElementById('product-tabs');
+                                if (tabsSection) {
+                                    tabsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    setTimeout(() => {
+                                        const documentsTab = document.querySelector('[data-state="inactive"][value="documents"]') as HTMLButtonElement;
+                                        if (documentsTab) documentsTab.click();
+                                    }, 300);
+                                }
+                            }}
+                            onContactSales={() => {
+                                const contactForm = document.getElementById('contact-form');
+                                if (contactForm) {
+                                    contactForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
+                            }}
+                        />
                     </div>
 
                     {/* Right: Product Info */}
@@ -231,23 +253,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                             </div>
                         )}
 
-                        {/* CTA Buttons */}
-                        <div className="flex flex-col sm:flex-row gap-3 pt-4">
-                            <Button
-                                size="lg"
-                                className="flex-1 bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-semibold text-lg h-14 group"
-                            >
-                                Request Data Sheet
-                                <Download className="ml-2 h-5 w-5 group-hover:translate-y-0.5 transition-transform" />
-                            </Button>
-                            <Button
-                                variant="outline"
-                                size="lg"
-                                className="flex-1 border-white/20 text-white hover:bg-white/10 hover:border-[#B8FF00] h-14"
-                            >
-                                Contact Sales
-                            </Button>
-                        </div>
+
 
                         {/* Product Info Grid */}
                         <div className="glass-strong rounded-xl p-6 border border-white/10 space-y-3">
@@ -273,164 +279,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                     </div>
                 </div>
 
-                {/* Tabs Section */}
-                <div className="glass-strong rounded-2xl p-6 md:p-8 border border-white/10">
-                    <Tabs defaultValue="specs" className="space-y-8">
-                        <TabsList className="grid w-full grid-cols-3 max-w-[600px] bg-white/5 border border-white/10">
-                            <TabsTrigger
-                                value="specs"
-                                className="data-[state=active]:bg-[#B8FF00] data-[state=active]:text-[#0A0E0D] text-gray-300"
-                            >
-                                Specifications
-                            </TabsTrigger>
-                            <TabsTrigger
-                                value="documents"
-                                className="data-[state=active]:bg-[#B8FF00] data-[state=active]:text-[#0A0E0D] text-gray-300"
-                            >
-                                Documents
-                            </TabsTrigger>
-                            <TabsTrigger
-                                value="logistics"
-                                className="data-[state=active]:bg-[#B8FF00] data-[state=active]:text-[#0A0E0D] text-gray-300"
-                            >
-                                Logistics
-                            </TabsTrigger>
-                        </TabsList>
-
-                        <TabsContent value="specs" className="space-y-8">
-                            {/* Functions / Benefits */}
-                            {product.functions && product.functions.length > 0 && (
-                                <div>
-                                    <h3 className="text-2xl font-bold text-white mb-4 flex items-center">
-                                        <ShieldCheck className="mr-2 h-6 w-6 text-[#B8FF00]" />
-                                        Functions / Benefits
-                                    </h3>
-                                    <div className="flex flex-wrap gap-3">
-                                        {product.functions.map((func, i) => (
-                                            <Badge
-                                                key={i}
-                                                className="bg-[#B8FF00]/10 text-[#B8FF00] border border-[#B8FF00]/20 text-base py-2 px-4 hover:bg-[#B8FF00]/20 transition-colors"
-                                            >
-                                                {func}
-                                            </Badge>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
-                            {/* Quality Specifications */}
-                            <div>
-                                <h3 className="text-2xl font-bold text-white mb-4">Quality Specifications</h3>
-                                <div className="glass rounded-lg overflow-hidden border border-white/10">
-                                    <SpecTable
-                                        specs={product.specs || []}
-                                        grade={product.grade}
-                                        usageRate={product.usageRate}
-                                        patentNo={product.patentNo}
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Description */}
-                            {product.description && (
-                                <div>
-                                    <h3 className="text-2xl font-bold text-white mb-4">Description</h3>
-                                    {Array.isArray(product.description) ? (
-                                        <div className="prose prose-invert max-w-none text-gray-300">
-                                            <PortableText
-                                                value={product.description}
-                                                components={productDescriptionComponents}
-                                            />
-                                        </div>
-                                    ) : (
-                                        <p className="text-gray-300 leading-relaxed">{product.description}</p>
-                                    )}
-                                </div>
-                            )}
-                        </TabsContent>
-
-                        <TabsContent value="documents" className="space-y-6">
-                            <h3 className="text-2xl font-bold text-white flex items-center">
-                                <FileText className="mr-2 h-6 w-6 text-[#B8FF00]" />
-                                Technical Documents
-                            </h3>
-                            {product.documents && product.documents.length > 0 ? (
-                                <>
-                                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                                        {product.documents.map((doc, i) => (
-                                            <a
-                                                key={i}
-                                                href={doc.file.asset.url}
-                                                download
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="glass rounded-lg p-5 border border-white/10 hover:border-[#B8FF00]/50 transition-all cursor-pointer group"
-                                            >
-                                                <div className="flex items-center justify-between mb-3">
-                                                    <FileText className="h-10 w-10 text-[#B8FF00] group-hover:scale-110 transition-transform" />
-                                                    <Download className="h-5 w-5 text-gray-400 group-hover:text-[#B8FF00] transition-colors" />
-                                                </div>
-                                                <div className="font-medium text-white group-hover:text-[#B8FF00] transition-colors">
-                                                    {doc.title}
-                                                </div>
-                                                {doc.file.asset.originalFilename && (
-                                                    <div className="text-xs text-gray-500 mt-2 truncate">
-                                                        {doc.file.asset.originalFilename}
-                                                    </div>
-                                                )}
-                                            </a>
-                                        ))}
-                                    </div>
-                                    <p className="text-sm text-gray-400">
-                                        Click any document to download or view
-                                    </p>
-                                </>
-                            ) : (
-                                <div className="glass rounded-lg p-8 border border-white/10 text-center">
-                                    <FileText className="h-16 w-16 text-gray-600 mx-auto mb-4" />
-                                    <p className="text-gray-400">
-                                        No technical documents available for this product yet.
-                                    </p>
-                                    <p className="text-sm text-gray-500 mt-2">
-                                        Contact us to request product documentation.
-                                    </p>
-                                </div>
-                            )}
-                        </TabsContent>
-
-                        <TabsContent value="logistics" className="space-y-6">
-                            <h3 className="text-2xl font-bold text-white flex items-center">
-                                <Truck className="mr-2 h-6 w-6 text-[#B8FF00]" />
-                                Packaging & Storage
-                            </h3>
-                            <div className="grid md:grid-cols-2 gap-8">
-                                <div className="glass rounded-lg p-6 border border-white/10">
-                                    <h4 className="text-lg font-semibold text-white mb-4">Standard Packaging</h4>
-                                    <ul className="space-y-2">
-                                        {SITE_CONFIG.packaging.map((item, i) => (
-                                            <li key={i} className="flex items-start gap-3 text-gray-300">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-[#B8FF00] mt-2 flex-shrink-0"></span>
-                                                {item}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                                <div className="glass rounded-lg p-6 border border-white/10">
-                                    <h4 className="text-lg font-semibold text-white mb-4">Storage Conditions</h4>
-                                    <ul className="space-y-2">
-                                        {SITE_CONFIG.storage.map((item, i) => (
-                                            <li key={i} className="flex items-start gap-3 text-gray-300">
-                                                <span className="w-1.5 h-1.5 rounded-full bg-[#B8FF00] mt-2 flex-shrink-0"></span>
-                                                {item}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        </TabsContent>
-                    </Tabs>
-                </div>
+                {/* Client Components (Tabs + Contact Form) */}
+                <ProductDetailClient product={product} siteConfig={SITE_CONFIG} />
             </div>
-        </div >
+        </div>
     );
 }

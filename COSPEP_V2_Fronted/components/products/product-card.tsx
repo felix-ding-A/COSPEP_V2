@@ -14,40 +14,42 @@ export function ProductCard({ product }: ProductCardProps) {
 
     return (
         <div className="group relative flex flex-col rounded-xl glass border border-white/10 shadow-lg hover:shadow-2xl hover:border-[#B8FF00]/30 transition-all duration-500 overflow-hidden">
-            {/* Image */}
-            <div className="aspect-[4/3] w-full overflow-hidden bg-white/5 flex items-center justify-center relative">
-                {product.imageUrl ? (
-                    <Image
-                        src={product.imageUrl}
-                        alt={product.name}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
-                ) : (
-                    <div className="text-gray-500 text-sm">No Image</div>
-                )}
+            {/* Image - Clickable */}
+            <Link href={`/products/${product.slug.current}`} className="block">
+                <div className="aspect-[4/3] w-full overflow-hidden bg-white/5 flex items-center justify-center relative cursor-pointer">
+                    {product.imageUrl ? (
+                        <Image
+                            src={product.imageUrl}
+                            alt={product.name}
+                            fill
+                            className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                    ) : (
+                        <div className="text-gray-500 text-sm">No Image</div>
+                    )}
 
-                {/* Stock Indicator */}
-                {isReadyStock && (
-                    <div className="absolute top-3 right-3 flex items-center gap-1 bg-green-500/90 backdrop-blur-sm px-2 py-1 rounded-full">
-                        <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-300 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-200"></span>
-                        </span>
-                        <span className="text-xs font-medium text-white">In Stock</span>
-                    </div>
-                )}
+                    {/* Stock Indicator */}
+                    {isReadyStock && (
+                        <div className="absolute top-3 right-3 flex items-center gap-1 bg-green-500/90 backdrop-blur-sm px-2 py-1 rounded-full">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-300 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-200"></span>
+                            </span>
+                            <span className="text-xs font-medium text-white">In Stock</span>
+                        </div>
+                    )}
 
-                {/* Category Badge */}
-                {product.categories && product.categories.length > 0 && (
-                    <div className="absolute top-3 left-3">
-                        <Badge className="bg-[#B8FF00]/90 text-[#0A0E0D] hover:bg-[#B8FF00] border-none font-medium">
-                            {product.categories[0].title}
-                        </Badge>
-                    </div>
-                )}
-            </div>
+                    {/* Category Badge */}
+                    {product.categories && product.categories.length > 0 && (
+                        <div className="absolute top-3 left-3">
+                            <Badge className="bg-[#B8FF00]/90 text-[#0A0E0D] hover:bg-[#B8FF00] border-none font-medium">
+                                {product.categories[0].title}
+                            </Badge>
+                        </div>
+                    )}
+                </div>
+            </Link>
 
             {/* Content */}
             <div className="flex flex-col flex-1 p-5 space-y-3">
