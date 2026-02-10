@@ -86,6 +86,20 @@ export default defineType({
             type: 'string',
             description: 'e.g. 0.1-0.5%',
         },
+        {
+            name: 'moq',
+            title: 'MOQ (Minimum Order Quantity)',
+            type: 'string',
+            description: 'Leave empty to use site default (1kg). E.g., "1kg", "500g", "25kg"',
+            placeholder: '1kg',
+        },
+        {
+            name: 'leadTime',
+            title: 'Lead Time',
+            type: 'string',
+            description: 'Leave empty to use site default (3 Days). E.g., "Same Day", "3 Days", "7-14 Days"',
+            placeholder: '3 Days',
+        },
 
         // --- 图片与描述 ---
         {
@@ -223,6 +237,38 @@ export default defineType({
                     },
                 },
             ],
+        },
+
+        // --- Logistics & Packaging ---
+        {
+            name: 'packaging',
+            title: 'Packaging Information',
+            type: 'array',
+            of: [{ type: 'string' }],
+            description: 'Custom packaging details. Leave empty to use site defaults. Press Enter to add each item.',
+            options: {
+                layout: 'list',
+            },
+        },
+        {
+            name: 'storage',
+            title: 'Storage Conditions',
+            type: 'array',
+            of: [{ type: 'string' }],
+            description: 'Custom storage requirements. Leave empty to use site defaults. Press Enter to add each item.',
+            options: {
+                layout: 'list',
+            },
+        },
+
+        // --- Product Recommendations ---
+        {
+            name: 'recommendedProducts',
+            title: 'Recommended Products',
+            type: 'array',
+            of: [{ type: 'reference', to: { type: 'product' } }],
+            description: 'Select up to 3 recommended products to display on this product detail page',
+            validation: (Rule: any) => Rule.max(3),
         },
 
         // --- SEO 设置 ---

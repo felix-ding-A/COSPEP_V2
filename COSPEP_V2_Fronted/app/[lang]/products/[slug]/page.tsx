@@ -7,6 +7,7 @@ import { FileText, Truck, ShieldCheck, Download, Share2, Heart } from "lucide-re
 import { SpecTable } from "@/components/products/spec-table";
 import { ImageZoom } from "@/components/products/image-zoom";
 import { ProductActions } from "@/components/products/product-actions";
+import { ProductImageCTAButtons } from "@/components/products/product-image-cta-buttons";
 import { ProductDetailClient } from "@/components/products/product-detail-client";
 import { Metadata } from "next";
 import { SITE_CONFIG } from "@/lib/config";
@@ -154,6 +155,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                                 productDescription={typeof product.description === 'string' ? product.description : undefined}
                             />
                         </div>
+
+                        {/* CTA Buttons Below Image */}
+                        <ProductImageCTAButtons />
                     </div>
 
                     {/* Right: Product Info */}
@@ -238,11 +242,11 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                         <div className="glass-strong rounded-xl p-6 border border-white/10 space-y-3">
                             <div className="flex justify-between py-2 border-b border-white/10">
                                 <span className="text-gray-400">MOQ</span>
-                                <span className="text-white font-medium">{SITE_CONFIG.moq}</span>
+                                <span className="text-white font-medium">{product.moq || SITE_CONFIG.moq}</span>
                             </div>
                             <div className="flex justify-between py-2 border-b border-white/10">
                                 <span className="text-gray-400">Lead Time</span>
-                                <span className="text-white font-medium">{SITE_CONFIG.leadTime}</span>
+                                <span className="text-white font-medium">{product.leadTime || SITE_CONFIG.leadTime}</span>
                             </div>
                             {product.grade && (
                                 <div className="flex justify-between py-2 border-b border-white/10">

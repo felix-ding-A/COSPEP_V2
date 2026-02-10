@@ -19,6 +19,11 @@ export interface Product {
   patentNo?: string;
   functions?: string[];
   grade?: string;
+  moq?: string;
+  leadTime?: string;
+  packaging?: string[];
+  storage?: string[];
+  recommendedProducts?: Product[];
   seoTitle?: string;
   seoDesc?: string;
   description?: string;
@@ -133,6 +138,20 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
         patentNo,
         functions,
         grade,
+        moq,
+        leadTime,
+        packaging,
+        storage,
+        recommendedProducts[]->{  
+          _id,
+          name,
+          slug,
+          casNumber,
+          latinName,
+          stockStatus,
+          "categories": categories[]->{title, slug},
+          "imageUrl": image.asset->url
+        },
         seoTitle,
         seoDesc,
         description,

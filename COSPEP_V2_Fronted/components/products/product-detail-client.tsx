@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { FileText, Truck, ShieldCheck, Download } from "lucide-react";
 import { ProductCTAButtons } from "./product-cta-buttons";
 import { ProductContactForm } from "./product-contact-form";
+import { RecommendedProducts } from "./recommended-products";
 import { SpecTable } from "./spec-table";
 import { PortableText } from "@portabletext/react";
 import { urlFor, client } from "@/lib/sanity";
@@ -82,14 +83,6 @@ export function ProductDetailClient({ product, siteConfig }: ProductDetailClient
 
     return (
         <>
-            {/* CTA Buttons Section - Displayed below image in page layout */}
-            <div className="mb-8">
-                <ProductCTAButtons
-                    onRequestDataSheet={handleRequestDataSheet}
-                    onContactSales={handleContactSales}
-                />
-            </div>
-
             {/* Tabs Section */}
             <div id="product-tabs" className="glass-strong rounded-2xl p-6 md:p-8 border border-white/10 scroll-mt-20">
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
@@ -224,7 +217,10 @@ export function ProductDetailClient({ product, siteConfig }: ProductDetailClient
                             <div className="glass rounded-lg p-6 border border-white/10">
                                 <h4 className="text-lg font-semibold text-white mb-4">Standard Packaging</h4>
                                 <ul className="space-y-2">
-                                    {siteConfig.packaging.map((item: string, i: number) => (
+                                    {(product.packaging && product.packaging.length > 0
+                                        ? product.packaging
+                                        : siteConfig.packaging
+                                    ).map((item: string, i: number) => (
                                         <li key={i} className="flex items-start gap-3 text-gray-300">
                                             <span className="w-1.5 h-1.5 rounded-full bg-[#B8FF00] mt-2 flex-shrink-0"></span>
                                             {item}
@@ -235,7 +231,10 @@ export function ProductDetailClient({ product, siteConfig }: ProductDetailClient
                             <div className="glass rounded-lg p-6 border border-white/10">
                                 <h4 className="text-lg font-semibold text-white mb-4">Storage Conditions</h4>
                                 <ul className="space-y-2">
-                                    {siteConfig.storage.map((item: string, i: number) => (
+                                    {(product.storage && product.storage.length > 0
+                                        ? product.storage
+                                        : siteConfig.storage
+                                    ).map((item: string, i: number) => (
                                         <li key={i} className="flex items-start gap-3 text-gray-300">
                                             <span className="w-1.5 h-1.5 rounded-full bg-[#B8FF00] mt-2 flex-shrink-0"></span>
                                             {item}
@@ -247,6 +246,11 @@ export function ProductDetailClient({ product, siteConfig }: ProductDetailClient
                     </TabsContent>
                 </Tabs>
             </div>
+
+            {/* Recommended Products Section */}
+            {product.recommendedProducts && product.recommendedProducts.length > 0 && (
+                <RecommendedProducts products={product.recommendedProducts} />
+            )}
 
             {/* Contact Form Section */}
             <div id="contact-form" className="scroll-mt-20">
