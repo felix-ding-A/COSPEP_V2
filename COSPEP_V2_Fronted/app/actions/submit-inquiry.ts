@@ -18,8 +18,10 @@ export async function submitInquiry(prevState: any, formData: FormData) {
         name: formData.get("name") as string,
         email: formData.get("email") as string,
         company: formData.get("company") as string,
+        phone: formData.get("phone") as string,
         type: formData.get("type") as string,
         productName: formData.get("productName") as string,
+        quantity: formData.get("quantity") as string,
         targetPrice: formData.get("targetPrice") as string,
         message: formData.get("message") as string,
     };

@@ -1,62 +1,68 @@
 "use client";
 
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Send, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import { submitInquiry } from "@/app/actions/submit-inquiry";
+
+// Form Schema
+const formSchema = z.object({
+    name: z.string().min(2, "Name is required"),
+    email: z.string().email("Invalid email address"),
+    company: z.string().optional(),
+    phone: z.string().optional(),
+    type: z.string().default("Sourcing Request"),
+    productName: z.string().optional(),
+    quantity: z.string().optional(),
+    targetPrice: z.string().optional(),
+    message: z.string().optional(),
+});
 
 export function RequestForm() {
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        company: "",
-        phone: "",
-        productInterest: "",
-        quantity: "",
-        message: ""
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            name: "",
+            email: "",
+            company: "",
+            phone: "",
+            type: "Sourcing Request",
+            productName: "",
+            quantity: "",
+            targetPrice: "",
+            message: ""
+        },
     });
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        const formData = new FormData();
+        Object.entries(values).forEach(([key, value]) => {
+            if (value) formData.append(key, value);
+        });
 
-        try {
-            // TODO: Send to Sanity API endpoint
-            const response = await fetch("/api/submit-request", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData)
-            });
+        const result = await submitInquiry(null, formData);
 
-            if (response.ok) {
-                alert("Request submitted successfully!");
-                setFormData({
-                    name: "",
-                    email: "",
-                    company: "",
-                    phone: "",
-                    productInterest: "",
-                    quantity: "",
-                    message: ""
-                });
-            } else {
-                alert("Failed to submit request. Please try again.");
-            }
-        } catch (error) {
-            console.error("Error submitting form:", error);
-            alert("An error occurred. Please try again.");
-        } finally {
-            setIsSubmitting(false);
+        if (result.success) {
+            toast.success(result.message);
+            form.reset();
+        } else {
+            toast.error(result.message);
         }
-    };
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData(prev => ({
-            ...prev,
-            [e.target.name]: e.target.value
-        }));
-    };
+    }
 
     return (
         <section className="py-24 bg-gradient-to-b from-[#0F1612] to-[#0A0E0D]">
@@ -79,142 +85,170 @@ export function RequestForm() {
 
                     {/* Form */}
                     <div className="glass-strong rounded-2xl p-8 md:p-10">
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            {/* Row 1: Name & Email */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
-                                        Full Name <span className="text-[#B8FF00]">*</span>
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="name"
+                        <Form {...form}>
+                            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                                {/* Row 1: Name & Email */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <FormField
+                                        control={form.control}
                                         name="name"
-                                        required
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                        className="w-full h-12 px-4 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#B8FF00] focus:ring-1 focus:ring-[#B8FF00] transition-colors"
-                                        placeholder="John Doe"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-white">
+                                                    Full Name <span className="text-[#B8FF00]">*</span>
+                                                </FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        placeholder="John Doe"
+                                                        {...field}
+                                                        className="h-12 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#B8FF00] focus:ring-[#B8FF00]"
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
                                     />
-                                </div>
-                                <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-white mb-2">
-                                        Email Address <span className="text-[#B8FF00]">*</span>
-                                    </label>
-                                    <input
-                                        type="email"
-                                        id="email"
+                                    <FormField
+                                        control={form.control}
                                         name="email"
-                                        required
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        className="w-full h-12 px-4 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#B8FF00] focus:ring-1 focus:ring-[#B8FF00] transition-colors"
-                                        placeholder="john@company.com"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-white">
+                                                    Email Address <span className="text-[#B8FF00]">*</span>
+                                                </FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        type="email"
+                                                        placeholder="john@company.com"
+                                                        {...field}
+                                                        className="h-12 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#B8FF00] focus:ring-[#B8FF00]"
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
                                     />
                                 </div>
-                            </div>
 
-                            {/* Row 2: Company & Phone */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label htmlFor="company" className="block text-sm font-medium text-white mb-2">
-                                        Company Name
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="company"
+                                {/* Row 2: Company & Phone */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <FormField
+                                        control={form.control}
                                         name="company"
-                                        value={formData.company}
-                                        onChange={handleChange}
-                                        className="w-full h-12 px-4 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#B8FF00] focus:ring-1 focus:ring-[#B8FF00] transition-colors"
-                                        placeholder="Company Inc."
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-white">Company Name</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        placeholder="Company Inc."
+                                                        {...field}
+                                                        className="h-12 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#B8FF00] focus:ring-[#B8FF00]"
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
                                     />
-                                </div>
-                                <div>
-                                    <label htmlFor="phone" className="block text-sm font-medium text-white mb-2">
-                                        Phone Number
-                                    </label>
-                                    <input
-                                        type="tel"
-                                        id="phone"
+                                    <FormField
+                                        control={form.control}
                                         name="phone"
-                                        value={formData.phone}
-                                        onChange={handleChange}
-                                        className="w-full h-12 px-4 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#B8FF00] focus:ring-1 focus:ring-[#B8FF00] transition-colors"
-                                        placeholder="+1 (555) 123-4567"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-white">Phone Number</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        type="tel"
+                                                        placeholder="+1 (555) 123-4567"
+                                                        {...field}
+                                                        className="h-12 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#B8FF00] focus:ring-[#B8FF00]"
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
                                     />
                                 </div>
-                            </div>
 
-                            {/* Row 3: Product Interest & Quantity */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label htmlFor="productInterest" className="block text-sm font-medium text-white mb-2">
-                                        Product of Interest
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="productInterest"
-                                        name="productInterest"
-                                        value={formData.productInterest}
-                                        onChange={handleChange}
-                                        className="w-full h-12 px-4 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#B8FF00] focus:ring-1 focus:ring-[#B8FF00] transition-colors"
-                                        placeholder="e.g., Bio-Active Peptides"
+                                {/* Row 3: Product Interest & Quantity */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <FormField
+                                        control={form.control}
+                                        name="productName"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-white">Product of Interest</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        placeholder="e.g., Bio-Active Peptides"
+                                                        {...field}
+                                                        className="h-12 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#B8FF00] focus:ring-[#B8FF00]"
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
                                     />
-                                </div>
-                                <div>
-                                    <label htmlFor="quantity" className="block text-sm font-medium text-white mb-2">
-                                        Quantity / MOQ
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="quantity"
+                                    <FormField
+                                        control={form.control}
                                         name="quantity"
-                                        value={formData.quantity}
-                                        onChange={handleChange}
-                                        className="w-full h-12 px-4 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#B8FF00] focus:ring-1 focus:ring-[#B8FF00] transition-colors"
-                                        placeholder="e.g., 100kg"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-white">Quantity / MOQ</FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        placeholder="e.g., 100kg"
+                                                        {...field}
+                                                        className="h-12 bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#B8FF00] focus:ring-[#B8FF00]"
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
                                     />
                                 </div>
-                            </div>
 
-                            {/* Message */}
-                            <div>
-                                <label htmlFor="message" className="block text-sm font-medium text-white mb-2">
-                                    Message / Requirements
-                                </label>
-                                <textarea
-                                    id="message"
+                                {/* Message */}
+                                <FormField
+                                    control={form.control}
                                     name="message"
-                                    rows={5}
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#B8FF00] focus:ring-1 focus:ring-[#B8FF00] transition-colors resize-none"
-                                    placeholder="Please provide any additional details about your requirements..."
-                                />
-                            </div>
-
-                            {/* Submit Button */}
-                            <div className="flex justify-center pt-4">
-                                <Button
-                                    type="submit"
-                                    disabled={isSubmitting}
-                                    className="bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-semibold px-12 py-6 text-lg group"
-                                >
-                                    {isSubmitting ? (
-                                        <>
-                                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                                            Submitting...
-                                        </>
-                                    ) : (
-                                        <>
-                                            Submit Request
-                                            <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                                        </>
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel className="text-white">Message / Requirements</FormLabel>
+                                            <FormControl>
+                                                <Textarea
+                                                    rows={5}
+                                                    placeholder="Please provide any additional details about your requirements..."
+                                                    {...field}
+                                                    className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 focus:border-[#B8FF00] focus:ring-[#B8FF00] resize-none"
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
                                     )}
-                                </Button>
-                            </div>
-                        </form>
+                                />
+
+                                {/* Submit Button */}
+                                <div className="flex justify-center pt-4">
+                                    <Button
+                                        type="submit"
+                                        disabled={form.formState.isSubmitting}
+                                        className="bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-semibold px-12 py-6 text-lg group"
+                                    >
+                                        {form.formState.isSubmitting ? (
+                                            <>
+                                                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                                                Submitting...
+                                            </>
+                                        ) : (
+                                            <>
+                                                Submit Request
+                                                <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                                            </>
+                                        )}
+                                    </Button>
+                                </div>
+                            </form>
+                        </Form>
                     </div>
                 </motion.div>
             </div>

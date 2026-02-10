@@ -6,6 +6,7 @@ export default {
         { name: 'name', title: 'Name', type: 'string' },
         { name: 'email', title: 'Email', type: 'string' },
         { name: 'company', title: 'Company Name', type: 'string' },
+        { name: 'phone', title: 'Phone Number', type: 'string' },
         {
             name: 'type',
             title: 'Inquiry Type',
@@ -19,8 +20,10 @@ export default {
             }
         },
         { name: 'productName', title: 'Target Product', type: 'string' },
+        { name: 'quantity', title: 'Quantity / MOQ', type: 'string' },
         { name: 'targetPrice', title: 'Target Price', type: 'string' },
         { name: 'message', title: 'Message', type: 'text' },
+        { name: 'submittedAt', title: 'Submitted At', type: 'datetime' },
         {
             name: 'status',
             title: 'Status',
