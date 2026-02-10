@@ -82,6 +82,14 @@ export function ProductDetailClient({ product, siteConfig }: ProductDetailClient
 
     return (
         <>
+            {/* CTA Buttons Section - Displayed below image in page layout */}
+            <div className="mb-8">
+                <ProductCTAButtons
+                    onRequestDataSheet={handleRequestDataSheet}
+                    onContactSales={handleContactSales}
+                />
+            </div>
+
             {/* Tabs Section */}
             <div id="product-tabs" className="glass-strong rounded-2xl p-6 md:p-8 border border-white/10 scroll-mt-20">
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
@@ -244,28 +252,6 @@ export function ProductDetailClient({ product, siteConfig }: ProductDetailClient
             <div id="contact-form" className="scroll-mt-20">
                 <ProductContactForm productName={product.name} />
             </div>
-
-            {/* Hidden CTA buttons for export */}
-            <div className="hidden">
-                <ProductCTAButtons
-                    onRequestDataSheet={handleRequestDataSheet}
-                    onContactSales={handleContactSales}
-                />
-            </div>
         </>
     );
-}
-
-// Export the button handlers for use in the main page
-export function useProductActions() {
-    return {
-        handleRequestDataSheet: () => {
-            const event = new CustomEvent('requestDataSheet');
-            window.dispatchEvent(event);
-        },
-        handleContactSales: () => {
-            const event = new CustomEvent('contactSales');
-            window.dispatchEvent(event);
-        },
-    };
 }

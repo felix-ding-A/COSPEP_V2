@@ -7,7 +7,6 @@ import { FileText, Truck, ShieldCheck, Download, Share2, Heart } from "lucide-re
 import { SpecTable } from "@/components/products/spec-table";
 import { ImageZoom } from "@/components/products/image-zoom";
 import { ProductActions } from "@/components/products/product-actions";
-import { ProductCTAButtons } from "@/components/products/product-cta-buttons";
 import { ProductDetailClient } from "@/components/products/product-detail-client";
 import { Metadata } from "next";
 import { SITE_CONFIG } from "@/lib/config";
@@ -155,26 +154,6 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                                 productDescription={typeof product.description === 'string' ? product.description : undefined}
                             />
                         </div>
-
-                        {/* CTA Buttons Below Image */}
-                        <ProductCTAButtons
-                            onRequestDataSheet={() => {
-                                const tabsSection = document.getElementById('product-tabs');
-                                if (tabsSection) {
-                                    tabsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                    setTimeout(() => {
-                                        const documentsTab = document.querySelector('[data-state="inactive"][value="documents"]') as HTMLButtonElement;
-                                        if (documentsTab) documentsTab.click();
-                                    }, 300);
-                                }
-                            }}
-                            onContactSales={() => {
-                                const contactForm = document.getElementById('contact-form');
-                                if (contactForm) {
-                                    contactForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                }
-                            }}
-                        />
                     </div>
 
                     {/* Right: Product Info */}
