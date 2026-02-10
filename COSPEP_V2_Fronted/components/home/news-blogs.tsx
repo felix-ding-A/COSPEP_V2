@@ -15,14 +15,14 @@ export function NewsBlogs() {
             category: "Company News",
             image: "/images/blog-1.png",
             date: "January 15, 2026",
-            link: "/industry-insights/innovation-award-2026"
+            link: `/${locale}/industry-insights/innovation-award-2026`
         },
         {
             title: "Breakthrough in Peptide Stability: New Research Published",
             category: "R&D Research",
             image: "/images/blog-2.png",
             date: "December 28, 2025",
-            link: "/industry-insights/peptide-stability-research"
+            link: `/${locale}/industry-insights/peptide-stability-research`
         },
         {
             title: "Launching Our New Sustainable Extraction Facility in Oregon",

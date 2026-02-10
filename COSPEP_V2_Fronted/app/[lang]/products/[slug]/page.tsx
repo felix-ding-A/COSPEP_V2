@@ -11,13 +11,13 @@ import { ProductImageCTAButtons } from "@/components/products/product-image-cta-
 import { ProductDetailClient } from "@/components/products/product-detail-client";
 import { Metadata } from "next";
 import { SITE_CONFIG } from "@/lib/config";
-import Link from "next/link";
+import { Link } from "@/lib/navigation";
 import { PortableText } from "@portabletext/react";
 import { urlFor, client } from "@/lib/sanity";
 import Image from "next/image";
 
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string; lang: string }> }): Promise<Metadata> {
     const { slug } = await params;
     const product = await getProductBySlug(slug);
 
@@ -71,8 +71,8 @@ const productDescriptionComponents = {
     },
 };
 
-export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-    const { slug } = await params;
+export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string; lang: string }> }) {
+    const { slug, lang } = await params;
     const product = await getProductBySlug(slug);
 
     if (!product) notFound();
