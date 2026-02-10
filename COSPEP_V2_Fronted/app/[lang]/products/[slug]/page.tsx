@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FileText, Truck, ShieldCheck, Download, Share2, Heart } from "lucide-react";
 import { SpecTable } from "@/components/products/spec-table";
 import { ImageZoom } from "@/components/products/image-zoom";
+import { ProductActions } from "@/components/products/product-actions";
 import { Metadata } from "next";
 import { SITE_CONFIG } from "@/lib/config";
 import Link from "next/link";
@@ -146,14 +147,10 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                             )}
 
                             {/* Action Icons */}
-                            <div className="absolute top-4 left-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button className="w-10 h-10 rounded-full glass-strong flex items-center justify-center hover:bg-white/20 transition-colors">
-                                    <Heart className="w-5 h-5 text-white" />
-                                </button>
-                                <button className="w-10 h-10 rounded-full glass-strong flex items-center justify-center hover:bg-white/20 transition-colors">
-                                    <Share2 className="w-5 h-5 text-white" />
-                                </button>
-                            </div>
+                            <ProductActions
+                                productSlug={product.slug.current}
+                                productName={product.name}
+                            />
                         </div>
                     </div>
 
