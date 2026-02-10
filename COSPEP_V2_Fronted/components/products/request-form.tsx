@@ -25,7 +25,7 @@ const formSchema = z.object({
     email: z.string().email("Invalid email address"),
     company: z.string().optional(),
     phone: z.string().optional(),
-    type: z.string().default("Sourcing Request"),
+    type: z.string(),
     productName: z.string().optional(),
     quantity: z.string().optional(),
     targetPrice: z.string().optional(),
