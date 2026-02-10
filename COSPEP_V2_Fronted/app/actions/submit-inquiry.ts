@@ -2,6 +2,7 @@
 
 import { createClient } from "@sanity/client";
 import { revalidatePath } from "next/cache";
+import { sendInquiryEmail } from "@/lib/email";
 
 // We need a separate write client because the public client is read-only
 // NOTE: You must add SANITY_API_TOKEN to your .env.local
@@ -30,12 +31,20 @@ export async function submitInquiry(prevState: any, formData: FormData) {
     // We are just saving what we get for now.
 
     try {
+        // 1. Save to Sanity
         await writeClient.create({
             _type: "inquiry",
             ...rawData,
             status: "New",
             submittedAt: new Date().toISOString()
         });
+
+        // 2. Send email notification
+        const emailResult = await sendInquiryEmail(rawData);
+
+        if (!emailResult.success) {
+            console.error('邮件发送失败，但数据已保存到 Sanity');
+        }
 
         // Revalidate if we had a dashboard page (we don't yet, but good practice)
         revalidatePath("/contact");
