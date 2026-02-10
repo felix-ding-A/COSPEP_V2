@@ -12,7 +12,7 @@ export function RecommendedProducts({ products }: RecommendedProductsProps) {
         <div className="mb-16">
             <h2 className="text-3xl font-bold text-white mb-8 flex items-center justify-center gap-3">
                 <span className="w-12 h-0.5 bg-gradient-to-r from-transparent to-[#B8FF00]"></span>
-                产品推荐
+                Featured Products
                 <span className="w-12 h-0.5 bg-gradient-to-l from-transparent to-[#B8FF00]"></span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
