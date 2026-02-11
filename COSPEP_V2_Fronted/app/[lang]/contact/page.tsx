@@ -75,7 +75,7 @@ export default function ContactPage() {
     return (
         <div className="container mx-auto px-4 md:px-6 py-10">
             <div className="mb-10 text-center space-y-4">
-                <h1 className="text-3xl font-bold text-primary lg:text-4xl">Contact Our Team</h1>
+                <h1 className="text-3xl font-bold text-primary lg:text-4xl">Contact Us Now</h1>
                 <p className="text-muted-foreground max-w-2xl mx-auto">
                     Whether you need a quick quote, a specific ingredient sourcing, or have a logistical question, we are here to help.
                 </p>
