@@ -99,7 +99,11 @@ export default function ContactPage() {
                             <Mail className="h-6 w-6 text-primary mt-1" />
                             <div>
                                 <h3 className="font-bold text-lg">Email Us</h3>
-                                <p className="text-muted-foreground">info@cospep.com</p>
+                                <p className="text-muted-foreground">
+                                    <a href="mailto:info@cospep.com" className="hover:text-primary transition-colors">
+                                        info@cospep.com
+                                    </a>
+                                </p>
                             </div>
                         </div>
 
@@ -107,10 +111,21 @@ export default function ContactPage() {
                             <Phone className="h-6 w-6 text-primary mt-1" />
                             <div>
                                 <h3 className="font-bold text-lg">Call / WhatsApp</h3>
-                                <p className="text-muted-foreground">+86 13201818603</p>
-                                <Button className="mt-2 bg-[#25D366] hover:bg-[#128C7E] text-white border-none" size="sm">
-                                    Chat on WhatsApp
-                                </Button>
+                                <p className="text-muted-foreground">
+                                    <a href="tel:+8613201818603" className="hover:text-primary transition-colors">
+                                        +86 13201818603
+                                    </a>
+                                </p>
+                                <a
+                                    href="https://wa.me/8613201818603"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-block mt-2"
+                                >
+                                    <Button className="bg-[#25D366] hover:bg-[#128C7E] text-white border-none" size="sm">
+                                        Chat on WhatsApp
+                                    </Button>
+                                </a>
                             </div>
                         </div>
                     </div>
