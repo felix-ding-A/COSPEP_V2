@@ -25,6 +25,7 @@ export async function submitInquiry(prevState: any, formData: FormData) {
         quantity: formData.get("quantity") as string,
         targetPrice: formData.get("targetPrice") as string,
         message: formData.get("message") as string,
+        locale: formData.get("locale") as string || 'en',
     };
 
     // Basic server-side validation can be added here, though Zod handles it on client usually

@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -33,6 +34,8 @@ const formSchema = z.object({
 });
 
 export function RequestForm() {
+    const locale = useLocale();
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -47,9 +50,9 @@ export function RequestForm() {
             message: ""
         },
     });
-
     async function onSubmit(values: z.infer<typeof formSchema>) {
         const formData = new FormData();
+        formData.append("locale", locale); // Add locale to formData
         Object.entries(values).forEach(([key, value]) => {
             if (value) formData.append(key, value);
         });
