@@ -195,3 +195,14 @@ export const getSiteSettings = `*[_id == "settings"][0]{
   whatsapp,
   address
 }`;
+
+export async function getLatestPosts(limit: number = 3): Promise<any[]> {
+  const query = groq`*[_type == "post" && defined(publishedAt)] | order(publishedAt desc)[0...$limit] {
+        title,
+        "slug": slug.current,
+        "image": mainImage.asset->url,
+        publishedAt,
+        excerpt
+    }`;
+  return client.fetch(query, { limit });
+}

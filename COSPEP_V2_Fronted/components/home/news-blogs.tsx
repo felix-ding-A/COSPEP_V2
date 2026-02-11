@@ -15,14 +15,14 @@ export function NewsBlogs() {
             category: "Company News",
             image: "/images/blog-1.png",
             date: "January 15, 2026",
-            link: `/${locale}/industry-insights/innovation-award-2026`
+            link: "" // Disabled link
         },
         {
             title: "Breakthrough in Peptide Stability: New Research Published",
             category: "R&D Research",
             image: "/images/blog-2.png",
             date: "December 28, 2025",
-            link: `/${locale}/industry-insights/peptide-stability-research`
+            link: "" // Disabled link
         },
         {
             title: "Launching Our New Sustainable Extraction Facility in Oregon",
@@ -76,6 +76,7 @@ export function NewsBlogs() {
                 </div>
 
                 {/* Blog Grid */}
+                {/* Blog Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {blogPosts.map((post, index) => (
                         <motion.div
@@ -85,37 +86,77 @@ export function NewsBlogs() {
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1, duration: 0.5 }}
                         >
-                            <Link href={post.link} className="group block h-full">
-                                <div className="glass rounded-2xl overflow-hidden hover:bg-white/10 transition-all duration-300 h-full flex flex-col">
-                                    {/* Image */}
-                                    <div className="relative h-48 overflow-hidden shrink-0">
-                                        <Image
-                                            src={post.image}
-                                            alt={post.title}
-                                            fill
-                                            className="object-cover transition-transform duration-500 group-hover:scale-110"
-                                        />
-                                        {/* Category Badge */}
-                                        <div className="absolute top-4 left-4">
-                                            <span className="px-3 py-1 rounded-full bg-[#B8FF00] text-[#0A0E0D] text-xs font-semibold uppercase tracking-wider">
-                                                {post.category}
-                                            </span>
+                            {post.link ? (
+                                <Link href={post.link} className="group block h-full">
+                                    <div className="glass rounded-2xl overflow-hidden hover:bg-white/10 transition-all duration-300 h-full flex flex-col">
+                                        {/* Image */}
+                                        <div className="relative h-48 overflow-hidden shrink-0">
+                                            <Image
+                                                src={post.image}
+                                                alt={post.title}
+                                                fill
+                                                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                            />
+                                            {/* Category Badge */}
+                                            <div className="absolute top-4 left-4">
+                                                <span className="px-3 py-1 rounded-full bg-[#B8FF00] text-[#0A0E0D] text-xs font-semibold uppercase tracking-wider">
+                                                    {post.category}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        {/* Content */}
+                                        <div className="p-6 flex flex-col flex-grow">
+                                            <p className="text-sm text-gray-500 mb-2">{post.date}</p>
+                                            <h3 className="text-xl font-bold text-white mb-4 leading-tight group-hover:text-[#B8FF00] transition-colors line-clamp-2">
+                                                {post.title}
+                                            </h3>
+                                            <div className="mt-auto flex items-center text-[#B8FF00] text-sm font-medium">
+                                                Read More
+                                                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                            </div>
                                         </div>
                                     </div>
+                                </Link>
+                            ) : (
+                                <div className="group block h-full cursor-default">
+                                    <div className="glass rounded-2xl overflow-hidden hover:bg-white/10 transition-all duration-300 h-full flex flex-col">
+                                        {/* Image */}
+                                        <div className="relative h-48 overflow-hidden shrink-0">
+                                            <Image
+                                                src={post.image}
+                                                alt={post.title}
+                                                fill
+                                                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                            />
+                                            {/* Category Badge */}
+                                            <div className="absolute top-4 left-4">
+                                                <span className="px-3 py-1 rounded-full bg-[#B8FF00] text-[#0A0E0D] text-xs font-semibold uppercase tracking-wider">
+                                                    {post.category}
+                                                </span>
+                                            </div>
+                                        </div>
 
-                                    {/* Content */}
-                                    <div className="p-6 flex flex-col flex-grow">
-                                        <p className="text-sm text-gray-500 mb-2">{post.date}</p>
-                                        <h3 className="text-xl font-bold text-white mb-4 leading-tight group-hover:text-[#B8FF00] transition-colors line-clamp-2">
-                                            {post.title}
-                                        </h3>
-                                        <div className="mt-auto flex items-center text-[#B8FF00] text-sm font-medium">
-                                            Read More
-                                            <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                        {/* Content */}
+                                        <div className="p-6 flex flex-col flex-grow">
+                                            <p className="text-sm text-gray-500 mb-2">{post.date}</p>
+                                            <h3 className="text-xl font-bold text-white mb-4 leading-tight group-hover:text-[#B8FF00] transition-colors line-clamp-2">
+                                                {post.title}
+                                            </h3>
+                                            {/* We hide the 'Read More' button or keep it static? User said 'no jump', implying visual consistency. 
+                                                However, a button that does nothing is confusing. 
+                                                I'll remove the Read More part for non-links to be safe/logical, 
+                                                OR I'll keep it but it just doesn't link. 
+                                                Given "No jump" is the only request, I'll keep the visuals identical for now 
+                                                so the grid looks uniform. */}
+                                            <div className="mt-auto flex items-center text-[#B8FF00] text-sm font-medium opacity-50 cursor-not-allowed">
+                                                Read More
+                                                <ArrowRight className="ml-2 w-4 h-4" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </Link>
+                            )}
                         </motion.div>
                     ))}
                 </div>
