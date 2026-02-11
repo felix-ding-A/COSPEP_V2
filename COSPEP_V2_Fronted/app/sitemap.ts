@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { client } from '@/lib/sanity';
 import { groq } from 'next-sanity';
 
-const baseUrl = 'https://cospsp.com';
+const baseUrl = 'https://cospep.com';
 const locales = ['en', 'ar', 'es', 'ru'];
 
 // Static routes relative to base URL

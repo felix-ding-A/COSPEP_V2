@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     // You might want to use getTranslations here if you have metadata in your messages
     // const t = await getTranslations({ locale: lang, namespace: 'Metadata' });
 
-    const baseUrl = 'https://cospsp.com';
+    const baseUrl = 'https://cospep.com';
 
     return {
         title: {

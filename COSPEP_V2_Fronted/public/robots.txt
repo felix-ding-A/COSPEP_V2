@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cospsp.com/sitemap.xml
+Sitemap: https://cospep.com/sitemap.xml

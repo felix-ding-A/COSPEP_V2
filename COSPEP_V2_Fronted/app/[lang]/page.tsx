@@ -13,8 +13,8 @@ export default async function Home() {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "COSPEP",
-        "url": "https://cospsp.com",
-        "logo": "https://cospsp.com/logo.png",
+        "url": "https://cospep.com",
+        "logo": "https://cospep.com/logo.png",
         "description": settings?.heroSubtitle || "Pure, Potent & Naturally Derived Ingredients",
         "address": {
             "@type": "PostalAddress",
