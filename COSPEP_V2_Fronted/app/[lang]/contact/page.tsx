@@ -90,8 +90,7 @@ export default function ContactPage() {
                             <div>
                                 <h3 className="font-bold text-lg">Headquarters</h3>
                                 <p className="text-muted-foreground">
-                                    High-Tech Industry Development Zone<br />
-                                    Xi'an, Shaanxi, China
+                                    No. 10108, 1st Floor, Unit 1, Building DK8-8, CR Future City, International Trade and Logistics Park, Xi'an City, Shaanxi Province
                                 </p>
                             </div>
                         </div>
@@ -100,7 +99,6 @@ export default function ContactPage() {
                             <Mail className="h-6 w-6 text-primary mt-1" />
                             <div>
                                 <h3 className="font-bold text-lg">Email Us</h3>
-                                <p className="text-muted-foreground">sales@cospep.com</p>
                                 <p className="text-muted-foreground">info@cospep.com</p>
                             </div>
                         </div>
@@ -109,7 +107,7 @@ export default function ContactPage() {
                             <Phone className="h-6 w-6 text-primary mt-1" />
                             <div>
                                 <h3 className="font-bold text-lg">Call / WhatsApp</h3>
-                                <p className="text-muted-foreground">+86 123 4567 8900</p>
+                                <p className="text-muted-foreground">+86 13201818603</p>
                                 <Button className="mt-2 bg-[#25D366] hover:bg-[#128C7E] text-white border-none" size="sm">
                                     Chat on WhatsApp
                                 </Button>

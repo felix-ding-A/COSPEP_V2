@@ -62,9 +62,8 @@ export async function Footer() {
                             {settings?.contactEmail && (
                                 <li><a href={`mailto:${settings.contactEmail}`} className="hover:text-primary">{settings.contactEmail}</a></li>
                             )}
-                            {settings?.whatsapp && (
-                                <li><a href={`https://wa.me/${settings.whatsapp.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" className="hover:text-primary">{settings.whatsapp}</a></li>
-                            )}
+                            {/* Hardcoded phone number as per request */}
+                            <li><a href="https://wa.me/8613201818603" target="_blank" rel="noopener noreferrer" className="hover:text-primary">+86 13201818603</a></li>
                         </ul>
                         <div className="flex gap-4 pt-2">
                             <Link href="#" className="hover:text-primary"><Linkedin className="h-5 w-5" /></Link>
