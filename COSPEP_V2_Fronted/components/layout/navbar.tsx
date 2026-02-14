@@ -295,7 +295,7 @@ export function Navbar() {
                                     </div>
                                 </div>
 
-                                <nav className="flex flex-col gap-4 mt-6">
+                                <nav className="flex flex-col gap-4 mt-6 flex-1 min-h-0 overflow-y-auto overscroll-contain pb-4">
                                     {/* Mobile Products - Nested */}
                                     <div>
                                         <Link href="/products" className="text-lg font-medium text-white hover:text-[#B8FF00] mb-2 block">
@@ -392,16 +392,20 @@ export function Navbar() {
                                         </div>
                                     </div>
 
+                                </nav>
+
+                                {/* Contact button - pinned at bottom */}
+                                <div className="pt-4 border-t border-white/20 shrink-0">
                                     <SheetClose asChild>
                                         <Button
                                             size="lg"
-                                            className="bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-semibold mt-4"
+                                            className="bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-semibold w-full"
                                             asChild
                                         >
                                             <Link href="/contact">Contact</Link>
                                         </Button>
                                     </SheetClose>
-                                </nav>
+                                </div>
                             </div>
                         </SheetContent>
                     </Sheet>
