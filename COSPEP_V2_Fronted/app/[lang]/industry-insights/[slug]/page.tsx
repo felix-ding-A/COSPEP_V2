@@ -10,6 +10,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const revalidate = 60;
 
@@ -168,6 +169,8 @@ export default async function PostPage({
                     }}
                 />
             )}
+
+            <Breadcrumbs title={post.title} />
 
             <article className="container mx-auto px-4 py-12 md:px-6 lg:py-16">
                 <div className="mx-auto max-w-3xl">

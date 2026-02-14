@@ -14,10 +14,12 @@ import {
     Ship,
     Clock
 } from "lucide-react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export default function ServicePage() {
     return (
         <div className="flex flex-col min-h-screen">
+            <Breadcrumbs />
 
             {/* Section 1: The Consolidation Advantage */}
             <section className="py-20 bg-muted/30">

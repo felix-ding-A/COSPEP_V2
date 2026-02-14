@@ -16,6 +16,7 @@ import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export default function AboutPage() {
     const [api, setApi] = useState<CarouselApi>();
@@ -37,6 +38,7 @@ export default function AboutPage() {
 
     return (
         <div className="flex flex-col min-h-screen bg-background text-foreground">
+            <Breadcrumbs />
 
             {/* Hero Section */}
             <section className="relative py-24 lg:py-32 bg-slate-900 border-b border-primary/10 overflow-hidden">

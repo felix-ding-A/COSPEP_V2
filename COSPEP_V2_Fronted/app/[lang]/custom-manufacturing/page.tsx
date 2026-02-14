@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 // OEM Services data
 const oemServices = [
@@ -69,6 +70,7 @@ const successStories = [
 export default function CustomManufacturingPage() {
     return (
         <main className="min-h-screen bg-[#0A0E0D]">
+            <Breadcrumbs />
             {/* Hero Section */}
             <section className="relative bg-[#0A0E0D] py-20 lg:py-28 border-b border-white/10">
                 <div className="container mx-auto px-4 md:px-6">

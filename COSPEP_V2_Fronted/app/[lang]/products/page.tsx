@@ -7,6 +7,7 @@ import { CategoryGrid } from "@/components/products/category-grid";
 import { RequestForm } from "@/components/products/request-form";
 import { NewsBlogs } from "@/components/home/news-blogs";
 import { Loader2 } from "lucide-react";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const dynamic = 'force-dynamic';
 
@@ -29,6 +30,7 @@ export default async function ProductsPage({
 
     return (
         <div className="min-h-screen bg-[#0A0E0D]">
+            <Breadcrumbs />
             {/* Hero Carousel */}
             <ProductsHeroCarousel />
 

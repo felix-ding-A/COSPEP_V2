@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Leaf, Recycle, HeartHandshake } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export default function SustainabilityPage() {
     const t = useTranslations('nav.sustainability');
@@ -18,6 +19,7 @@ export default function SustainabilityPage() {
 
     return (
         <div className="flex flex-col min-h-screen bg-background text-foreground">
+            <Breadcrumbs />
             {/* Hero Section */}
             <section className="relative py-32 lg:py-48 bg-slate-900 border-b border-primary/10 overflow-hidden">
                 <div className="absolute inset-0 w-full h-full">

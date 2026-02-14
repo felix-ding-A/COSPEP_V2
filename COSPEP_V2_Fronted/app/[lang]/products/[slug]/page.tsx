@@ -12,6 +12,7 @@ import { ProductDetailClient } from "@/components/products/product-detail-client
 import { Metadata } from "next";
 import { SITE_CONFIG } from "@/lib/config";
 import { Link } from "@/lib/navigation";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { PortableText } from "@portabletext/react";
 import { urlFor, client } from "@/lib/sanity";
 import Image from "next/image";
@@ -105,16 +106,8 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             />
 
             {/* Breadcrumb */}
-            <div className="bg-gradient-to-b from-[#0F1612] to-[#0A0E0D] py-6">
-                <div className="container mx-auto px-4 md:px-6">
-                    <div className="text-sm text-gray-400 flex items-center gap-2">
-                        <Link href="/" className="hover:text-[#B8FF00] transition-colors">Home</Link>
-                        <span>/</span>
-                        <Link href="/products" className="hover:text-[#B8FF00] transition-colors">Products</Link>
-                        <span>/</span>
-                        <span className="text-white">{product.name}</span>
-                    </div>
-                </div>
+            <div className="bg-gradient-to-b from-[#0F1612] to-[#0A0E0D]">
+                <Breadcrumbs title={product.name} />
             </div>
 
             <div className="container mx-auto px-4 md:px-6 py-10">

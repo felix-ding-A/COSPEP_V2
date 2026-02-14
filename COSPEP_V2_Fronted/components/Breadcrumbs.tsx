@@ -21,7 +21,12 @@ interface BreadcrumbItem {
     href: string;
 }
 
-export function Breadcrumbs() {
+interface BreadcrumbsProps {
+    /** Override the last breadcrumb segment label (e.g. product name from CMS) */
+    title?: string;
+}
+
+export function Breadcrumbs({ title }: BreadcrumbsProps = {}) {
     const pathname = usePathname(); // already locale-stripped, e.g. "/products/peptides"
     const locale = useLocale();
 
@@ -38,6 +43,11 @@ export function Breadcrumbs() {
             href: "/" + segments.slice(0, index + 1).join("/"),
         })),
     ];
+
+    // If a custom title is provided, override the last item's label
+    if (title && items.length > 1) {
+        items[items.length - 1].label = title;
+    }
 
     // JSON-LD structured data for SEO (BreadcrumbList schema)
     const jsonLd = {
@@ -63,7 +73,7 @@ export function Breadcrumbs() {
             />
 
             {/* Visual breadcrumbs */}
-            <nav aria-label="Breadcrumb" className="py-3">
+            <nav aria-label="Breadcrumb" className="container mx-auto px-4 md:px-6 py-3">
                 <ol className="flex flex-wrap items-center gap-1 text-sm">
                     {items.map((item, index) => {
                         const isLast = index === items.length - 1;

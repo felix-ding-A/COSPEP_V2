@@ -2,6 +2,7 @@
 import { client, urlFor } from "@/lib/sanity";
 import { Link } from "@/lib/navigation";
 import Image from "next/image";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 // Revalidate every 60 seconds or custom duration
 export const revalidate = 60;
@@ -24,6 +25,7 @@ export default async function BlogPage({ params }: { params: Promise<{ lang: str
 
     return (
         <div className="container mx-auto px-4 py-12 md:px-6 lg:py-16">
+            <Breadcrumbs />
             <div className="mx-auto max-w-4xl text-center mb-12">
                 <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
                     Latest Insights & News

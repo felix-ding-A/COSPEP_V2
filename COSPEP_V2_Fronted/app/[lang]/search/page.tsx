@@ -2,6 +2,7 @@
 import { client, urlFor } from "@/lib/sanity";
 import { Link } from "@/lib/navigation";
 import Image from "next/image";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 
 export const dynamic = 'force-dynamic';
 
@@ -46,6 +47,7 @@ export default async function SearchPage({
 
     return (
         <div className="container mx-auto px-4 py-12 md:px-6 lg:py-16">
+            <Breadcrumbs />
             <div className="mb-12">
                 <h1 className="text-3xl font-bold tracking-tight mb-2">
                     Search Results for "{q}"
