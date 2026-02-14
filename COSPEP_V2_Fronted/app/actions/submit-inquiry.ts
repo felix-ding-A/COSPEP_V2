@@ -28,6 +28,39 @@ export async function submitInquiry(prevState: any, formData: FormData) {
         locale: formData.get("locale") as string || 'en',
     };
 
+    // Honeypot validation - silently reject bot submissions
+    const honeypot = formData.get("website") as string;
+    if (honeypot) {
+        // Return success to confuse bots, but don't process the submission
+        console.log('🍯 Honeypot triggered - bot submission blocked');
+        return { success: true, message: "Inquiry submitted successfully!" };
+    }
+
+    // reCAPTCHA v3 verification
+    const recaptchaToken = formData.get("recaptchaToken") as string;
+    if (!recaptchaToken) {
+        return { success: false, message: "reCAPTCHA verification failed. Please try again." };
+    }
+
+    try {
+        const recaptchaResponse = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
+        });
+        const recaptchaResult = await recaptchaResponse.json();
+
+        console.log(`🔒 reCAPTCHA score: ${recaptchaResult.score}, success: ${recaptchaResult.success}`);
+
+        if (!recaptchaResult.success || recaptchaResult.score < 0.5) {
+            console.log('🚫 reCAPTCHA verification failed - possible bot');
+            return { success: false, message: "Security verification failed. Please try again." };
+        }
+    } catch (error) {
+        console.error('reCAPTCHA verification error:', error);
+        // Allow submission to continue if reCAPTCHA service is down
+    }
+
     // Basic server-side validation can be added here, though Zod handles it on client usually
     // We are just saving what we get for now.
 

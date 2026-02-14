@@ -4,6 +4,8 @@ import { useLocale } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useCallback } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,10 +33,12 @@ const formSchema = z.object({
     quantity: z.string().optional(),
     targetPrice: z.string().optional(),
     message: z.string().optional(),
+    website: z.string().optional(), // Honeypot field
 });
 
 export function RequestForm() {
     const locale = useLocale();
+    const { executeRecaptcha } = useGoogleReCaptcha();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -47,12 +51,22 @@ export function RequestForm() {
             productName: "",
             quantity: "",
             targetPrice: "",
-            message: ""
+            message: "",
+            website: "", // Honeypot field
         },
     });
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+
+    const onSubmit = useCallback(async (values: z.infer<typeof formSchema>) => {
+        if (!executeRecaptcha) {
+            toast.error("reCAPTCHA not ready. Please try again.");
+            return;
+        }
+
+        const recaptchaToken = await executeRecaptcha('submit_inquiry');
+
         const formData = new FormData();
-        formData.append("locale", locale); // Add locale to formData
+        formData.append("locale", locale);
+        formData.append("recaptchaToken", recaptchaToken);
         Object.entries(values).forEach(([key, value]) => {
             if (value) formData.append(key, value);
         });
@@ -65,7 +79,7 @@ export function RequestForm() {
         } else {
             toast.error(result.message);
         }
-    }
+    }, [executeRecaptcha, locale, form]);
 
     return (
         <section className="py-24 bg-gradient-to-b from-[#0F1612] to-[#0A0E0D]">
@@ -230,8 +244,26 @@ export function RequestForm() {
                                     )}
                                 />
 
+                                {/* Honeypot field - hidden from users */}
+                                <FormField
+                                    control={form.control}
+                                    name="website"
+                                    render={({ field }) => (
+                                        <FormItem className="honeypot-field">
+                                            <FormLabel>Website</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    {...field}
+                                                    autoComplete="off"
+                                                    tabIndex={-1}
+                                                />
+                                            </FormControl>
+                                        </FormItem>
+                                    )}
+                                />
+
                                 {/* Submit Button */}
-                                <div className="flex justify-center pt-4">
+                                <div className="flex flex-col items-center pt-4 gap-3">
                                     <Button
                                         type="submit"
                                         disabled={form.formState.isSubmitting}
@@ -249,6 +281,15 @@ export function RequestForm() {
                                             </>
                                         )}
                                     </Button>
+
+                                    {/* reCAPTCHA Legal Notice */}
+                                    <p className="text-xs text-gray-500 text-center">
+                                        This site is protected by reCAPTCHA and the Google{" "}
+                                        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">Privacy Policy</a>{" "}
+                                        and{" "}
+                                        <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">Terms of Service</a>{" "}
+                                        apply.
+                                    </p>
                                 </div>
                             </form>
                         </Form>

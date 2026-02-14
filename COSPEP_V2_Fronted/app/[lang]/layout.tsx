@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Toaster } from "@/components/ui/sonner";
+import { ReCaptchaProvider } from "@/components/providers/recaptcha-provider";
 
 const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -78,10 +79,12 @@ export default async function RootLayout({
         <html lang={lang} dir={dir} className="dark">
             <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
                 <NextIntlClientProvider messages={messages}>
-                    <Navbar />
-                    {children}
-                    <Footer />
-                    <Toaster />
+                    <ReCaptchaProvider>
+                        <Navbar />
+                        {children}
+                        <Footer />
+                        <Toaster />
+                    </ReCaptchaProvider>
                 </NextIntlClientProvider>
                 <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID!} />
             </body>

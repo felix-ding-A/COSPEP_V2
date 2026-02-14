@@ -4,6 +4,8 @@ import { useLocale } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import {
     Form,
@@ -34,6 +36,7 @@ const formSchema = z.object({
     productName: z.string().optional(),
     targetPrice: z.string().optional(),
     message: z.string().min(10, "Message must be at least 10 characters"),
+    website: z.string().optional(), // Honeypot field
 });
 
 interface ProductContactFormProps {
@@ -42,6 +45,7 @@ interface ProductContactFormProps {
 
 export function ProductContactForm({ productName }: ProductContactFormProps) {
     const locale = useLocale();
+    const { executeRecaptcha } = useGoogleReCaptcha();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -53,12 +57,21 @@ export function ProductContactForm({ productName }: ProductContactFormProps) {
             productName: productName || "",
             targetPrice: "",
             message: "",
+            website: "", // Honeypot field
         },
     });
-    // ... existing code ...
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+
+    const onSubmit = useCallback(async (values: z.infer<typeof formSchema>) => {
+        if (!executeRecaptcha) {
+            toast.error("reCAPTCHA not ready. Please try again.");
+            return;
+        }
+
+        const recaptchaToken = await executeRecaptcha('submit_inquiry');
+
         const formData = new FormData();
-        formData.append("locale", locale); // Add locale to formData
+        formData.append("locale", locale);
+        formData.append("recaptchaToken", recaptchaToken);
         Object.entries(values).forEach(([key, value]) => {
             if (value) formData.append(key, value);
         });
@@ -71,7 +84,7 @@ export function ProductContactForm({ productName }: ProductContactFormProps) {
         } else {
             toast.error(result.message);
         }
-    }
+    }, [executeRecaptcha, locale, form]);
 
     return (
         <div className="glass-strong rounded-2xl p-6 md:p-8 border border-white/10">
@@ -211,12 +224,39 @@ export function ProductContactForm({ productName }: ProductContactFormProps) {
                         )}
                     />
 
+                    {/* Honeypot field - hidden from users */}
+                    <FormField
+                        control={form.control}
+                        name="website"
+                        render={({ field }) => (
+                            <FormItem className="honeypot-field">
+                                <FormLabel>Website</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        {...field}
+                                        autoComplete="off"
+                                        tabIndex={-1}
+                                    />
+                                </FormControl>
+                            </FormItem>
+                        )}
+                    />
+
                     <Button
                         type="submit"
                         className="w-full bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-semibold text-lg h-12"
                     >
                         Send Request
                     </Button>
+
+                    {/* reCAPTCHA Legal Notice */}
+                    <p className="text-xs text-gray-500 text-center mt-3">
+                        This site is protected by reCAPTCHA and the Google{" "}
+                        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">Privacy Policy</a>{" "}
+                        and{" "}
+                        <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-400">Terms of Service</a>{" "}
+                        apply.
+                    </p>
                 </form>
             </Form>
         </div>

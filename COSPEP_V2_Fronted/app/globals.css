@@ -240,4 +240,19 @@
   [dir="rtl"] .text-right {
     text-align: left;
   }
+
+  /* Honeypot field - hide from users but not from bots */
+  .honeypot-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Hide reCAPTCHA badge - legal notice is shown in forms instead */
+  .grecaptcha-badge {
+    visibility: hidden !important;
+  }
 }
