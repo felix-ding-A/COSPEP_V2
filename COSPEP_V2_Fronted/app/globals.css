@@ -255,4 +255,10 @@
   .grecaptcha-badge {
     visibility: hidden !important;
   }
+
+  /* Footer CLS fix - prevent layout shift from async content */
+  .footer-stable {
+    contain-intrinsic-size: auto 450px;
+    content-visibility: auto;
+  }
 }

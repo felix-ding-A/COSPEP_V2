@@ -14,7 +14,7 @@ export async function Footer() {
     const t = await getTranslations('footer');
 
     return (
-        <footer className="bg-muted text-muted-foreground border-t min-h-[400px]">
+        <footer className="bg-muted text-muted-foreground border-t min-h-[400px] footer-stable">
             <div className="container mx-auto px-4 md:px-6 py-12 lg:py-16">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
 
