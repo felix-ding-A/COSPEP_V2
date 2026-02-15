@@ -73,9 +73,11 @@ export function HeroSection() {
                             alt={carouselData[currentSlide].title}
                             fill
                             priority={currentSlide === 0}
+                            fetchPriority={currentSlide === 0 ? "high" : "auto"}
+                            decoding="sync"
                             sizes="100vw"
                             className="object-cover"
-                            quality={85}
+                            quality={75}
                         />
                     </motion.div>
                 </AnimatePresence>
