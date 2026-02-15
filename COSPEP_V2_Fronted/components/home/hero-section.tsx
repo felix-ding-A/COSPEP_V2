@@ -1,9 +1,10 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Play, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 
@@ -55,7 +56,7 @@ export function HeroSection() {
     };
 
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <section className="relative h-screen bg-[#0A0E0D] flex items-center justify-center overflow-hidden">
             {/* Carousel Background Images */}
             <div className="absolute inset-0 z-0">
                 <AnimatePresence initial={false}>
@@ -67,9 +68,14 @@ export function HeroSection() {
                         transition={{ duration: 1 }}
                         className="absolute inset-0"
                     >
-                        <div
-                            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                            style={{ backgroundImage: `url('${carouselData[currentSlide].image}')` }}
+                        <Image
+                            src={carouselData[currentSlide].image}
+                            alt={carouselData[currentSlide].title}
+                            fill
+                            priority={currentSlide === 0}
+                            sizes="100vw"
+                            className="object-cover"
+                            quality={85}
                         />
                     </motion.div>
                 </AnimatePresence>
@@ -111,8 +117,8 @@ export function HeroSection() {
                 ))}
             </div>
 
-            {/* Content */}
-            <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 text-center">
+            {/* Content - Centered with Flexbox */}
+            <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentSlide}
