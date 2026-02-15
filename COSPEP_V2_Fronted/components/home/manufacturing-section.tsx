@@ -93,7 +93,7 @@ export function ManufacturingSection() {
                     >
                         <div className="relative rounded-2xl overflow-hidden glass group">
                             <Image
-                                src="/images/manufacturing.png"
+                                src="/images/manufacturing.webp"
                                 alt="Manufacturing Facility"
                                 width={600}
                                 height={400}

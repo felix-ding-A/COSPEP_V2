@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 
 const carouselSlides = [
     {
-        image: "/images/product-carousel-1.png",
+        image: "/images/product-carousel-1.webp",
         title: "Bio-Active Peptides",
         subtitle: "Pharmaceutical Grade • cGMP Certified",
         description: "Advanced peptide synthesis for research and therapeutic applications",
@@ -16,7 +16,7 @@ const carouselSlides = [
         scrollTarget: "products-list"
     },
     {
-        image: "/images/product-carousel-2.png",
+        image: "/images/product-carousel-2.webp",
         title: "Premium Plant Extracts",
         subtitle: "100% Natural • Sustainable Sourcing",
         description: "High-purity botanical extracts for nutraceuticals and cosmetics",
@@ -24,7 +24,7 @@ const carouselSlides = [
         scrollTarget: "products-list"
     },
     {
-        image: "/images/product-carousel-3.png",
+        image: "/images/product-carousel-3.webp",
         title: "Custom Health Supplements",
         subtitle: "Made to Order • Quality Assured",
         description: "Turnkey supplement manufacturing from formulation to packaging",

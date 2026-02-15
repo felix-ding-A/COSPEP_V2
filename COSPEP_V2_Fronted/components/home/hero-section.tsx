@@ -15,21 +15,21 @@ export function HeroSection() {
     // Get carousel data from translations
     const carouselData = [
         {
-            image: "/images/hero-carousel-1.png",
+            image: "/images/hero-carousel-1.webp",
             badge: t('slides.0.badge'),
             title: t('slides.0.title'),
             highlight: t('slides.0.highlight'),
             description: t('slides.0.description')
         },
         {
-            image: "/images/hero-carousel-2.png",
+            image: "/images/hero-carousel-2.webp",
             badge: t('slides.1.badge'),
             title: t('slides.1.title'),
             highlight: t('slides.1.highlight'),
             description: t('slides.1.description')
         },
         {
-            image: "/images/hero-carousel-3.png",
+            image: "/images/hero-carousel-3.webp",
             badge: t('slides.2.badge'),
             title: t('slides.2.title'),
             highlight: t('slides.2.highlight'),

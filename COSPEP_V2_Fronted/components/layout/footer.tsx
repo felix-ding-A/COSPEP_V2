@@ -3,6 +3,7 @@ import { Facebook, Linkedin, Twitter } from "lucide-react";
 import { client } from "@/lib/sanity";
 import { getSiteSettings } from "@/lib/sanity/queries";
 import { getTranslations } from "next-intl/server";
+import Image from "next/image";
 
 async function getData() {
     return await client.fetch(getSiteSettings);
@@ -20,10 +21,12 @@ export async function Footer() {
                     {/* Column 1: Company */}
                     <div className="col-span-2 md:col-span-1 space-y-4">
                         <Link href="/" className="flex items-center gap-3 group">
-                            <img
-                                src="/logo.png"
+                            <Image
+                                src="/logo.webp"
                                 alt="COSPEP Logo"
-                                className="w-8 h-8 object-contain group-hover:scale-110 transition-transform"
+                                width={32}
+                                height={32}
+                                className="object-contain group-hover:scale-110 transition-transform"
                             />
                             <span className="text-2xl font-bold text-primary">COSPEP</span>
                         </Link>

@@ -13,21 +13,21 @@ export function NewsBlogs() {
         {
             title: "COSPEP Wins Best Innovation Award at Global Pharma 2026",
             category: "Company News",
-            image: "/images/blog-1.png",
+            image: "/images/blog-1.webp",
             date: "January 15, 2026",
             link: "" // Disabled link
         },
         {
             title: "Breakthrough in Peptide Stability: New Research Published",
             category: "R&D Research",
-            image: "/images/blog-2.png",
+            image: "/images/blog-2.webp",
             date: "December 28, 2025",
             link: "" // Disabled link
         },
         {
             title: "Launching Our New Sustainable Extraction Facility in Oregon",
             category: "Sustainability",
-            image: "/images/blog-3.png",
+            image: "/images/blog-3.webp",
             date: "December 15, 2025",
             link: `/${locale}/resources/sustainability`
         }
@@ -96,6 +96,7 @@ export function NewsBlogs() {
                                                 alt={post.title}
                                                 fill
                                                 className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 393px"
                                             />
                                             {/* Category Badge */}
                                             <div className="absolute top-4 left-4">
@@ -128,6 +129,7 @@ export function NewsBlogs() {
                                                 alt={post.title}
                                                 fill
                                                 className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 393px"
                                             />
                                             {/* Category Badge */}
                                             <div className="absolute top-4 left-4">

@@ -11,6 +11,7 @@ import { SpecTable } from "./spec-table";
 import { PortableText } from "@portabletext/react";
 import { urlFor, client } from "@/lib/sanity";
 import Image from "next/image";
+import { ReCaptchaProvider } from "@/components/providers/recaptcha-provider";
 
 // Custom components for PortableText in product descriptions
 const productDescriptionComponents = {
@@ -82,7 +83,7 @@ export function ProductDetailClient({ product, siteConfig }: ProductDetailClient
     };
 
     return (
-        <>
+        <ReCaptchaProvider>
             {/* Tabs Section */}
             <div id="product-tabs" className="glass-strong rounded-2xl p-6 md:p-8 border border-white/10 scroll-mt-20">
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
@@ -256,6 +257,6 @@ export function ProductDetailClient({ product, siteConfig }: ProductDetailClient
             <div id="contact-form" className="scroll-mt-20">
                 <ProductContactForm productName={product.name} />
             </div>
-        </>
+        </ReCaptchaProvider>
     );
 }

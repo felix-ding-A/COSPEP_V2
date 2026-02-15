@@ -14,7 +14,7 @@ export default async function Home() {
         "@type": "Organization",
         "name": "COSPEP",
         "url": "https://cospep.com",
-        "logo": "https://cospep.com/logo.png",
+        "logo": "https://cospep.com/logo.webp",
         "description": settings?.heroSubtitle || "Pure, Potent & Naturally Derived Ingredients",
         "address": {
             "@type": "PostalAddress",

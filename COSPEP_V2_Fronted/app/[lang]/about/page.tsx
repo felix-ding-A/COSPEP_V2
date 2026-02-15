@@ -46,7 +46,7 @@ export default function AboutPage() {
                 {/* Background Image with Overlay */}
                 <div className="absolute inset-0 w-full h-full">
                     <Image
-                        src="/images/about/hero-bg.jpg"
+                        src="/images/about/hero-bg.webp"
                         alt="Traditional Chinese Landscape Painting of Qinling Mountains"
                         fill
                         className="object-cover"
@@ -98,10 +98,10 @@ export default function AboutPage() {
                                 >
                                     <CarouselContent className="h-full ml-0">
                                         {[
-                                            { src: "/images/about/qinling-1.jpg", alt: "Snow-covered Qinling Mountains at twilight with illuminated buildings" },
-                                            { src: "/images/about/qinling-2.jpg", alt: "Map highlighting the Qinling Mountains region and COSPEP sourcing area" },
-                                            { src: "/images/about/qinling-3.jpg", alt: "Autumn foliage covering the slopes of the Qinling Mountains" },
-                                            { src: "/images/about/qinling-4.jpg", alt: "Layers of misty mountain peaks in the Qinling range at sunrise" }
+                                            { src: "/images/about/qinling-1.webp", alt: "Snow-covered Qinling Mountains at twilight with illuminated buildings" },
+                                            { src: "/images/about/qinling-2.webp", alt: "Map highlighting the Qinling Mountains region and COSPEP sourcing area" },
+                                            { src: "/images/about/qinling-3.webp", alt: "Autumn foliage covering the slopes of the Qinling Mountains" },
+                                            { src: "/images/about/qinling-4.webp", alt: "Layers of misty mountain peaks in the Qinling range at sunrise" }
                                         ].map((item, index) => (
                                             <CarouselItem key={index} className="pl-0 h-full">
                                                 <div className="relative w-full h-full overflow-hidden group">

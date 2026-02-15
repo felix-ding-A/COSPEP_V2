@@ -53,17 +53,17 @@ const successStories = [
     {
         title: "Pet Food Ingredients",
         description: "Premium nutritional supplements and functional ingredients for companion animal nutrition.",
-        image: "/images/pet-food-ingredients.png"
+        image: "/images/pet-food-ingredients.webp"
     },
     {
         title: "Livestock Feed Components",
         description: "High-performance feed additives and supplements for agricultural and livestock applications.",
-        image: "/images/livestock-feed.png"
+        image: "/images/livestock-feed.webp"
     },
     {
         title: "Nutraceutical Solutions",
         description: "Advanced dietary supplements and functional foods for human health and wellness markets.",
-        image: "/images/nutraceuticals.png"
+        image: "/images/nutraceuticals.webp"
     }
 ];
 

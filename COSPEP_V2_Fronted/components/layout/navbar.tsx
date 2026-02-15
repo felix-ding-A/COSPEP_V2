@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Button } from "@/components/ui/button";
 import React from 'react';
 import { client } from "@/lib/sanity";
+import Image from "next/image";
 import {
     Sheet,
     SheetContent,
@@ -94,10 +95,13 @@ export function Navbar() {
 
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-3 group">
-                    <img
-                        src="/logo.png"
+                    <Image
+                        src="/logo.webp"
                         alt="COSPEP Logo"
-                        className="w-10 h-10 object-contain group-hover:scale-110 transition-transform"
+                        width={40}
+                        height={40}
+                        className="object-contain group-hover:scale-110 transition-transform"
+                        priority
                     />
                     <span className="text-2xl font-bold text-white tracking-tight group-hover:text-[#B8FF00] transition-colors">COSPEP</span>
                 </Link>
@@ -286,10 +290,12 @@ export function Navbar() {
                             <div className="flex flex-col h-full">
                                 <div className="flex items-center justify-between py-4">
                                     <div className="flex items-center gap-3">
-                                        <img
-                                            src="/logo.png"
+                                        <Image
+                                            src="/logo.webp"
                                             alt="COSPEP Logo"
-                                            className="w-8 h-8 object-contain"
+                                            width={32}
+                                            height={32}
+                                            className="object-contain"
                                         />
                                         <span className="text-xl font-bold text-white">COSPEP</span>
                                     </div>

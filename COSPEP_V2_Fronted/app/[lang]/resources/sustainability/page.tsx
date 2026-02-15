@@ -24,7 +24,7 @@ export default function SustainabilityPage() {
             <section className="relative py-32 lg:py-48 bg-slate-900 border-b border-primary/10 overflow-hidden">
                 <div className="absolute inset-0 w-full h-full">
                     <Image
-                        src="/images/sustainability-hero.jpg"
+                        src="/images/sustainability-hero.webp"
                         alt="Sustainability Hero"
                         fill
                         className="object-cover"

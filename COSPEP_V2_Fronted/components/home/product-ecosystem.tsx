@@ -14,25 +14,25 @@ export function ProductEcosystem() {
         {
             title: t('items.0.title'),
             description: t('items.0.description'),
-            image: "/images/product-peptides.png",
+            image: "/images/product-peptides.webp",
             link: `/${locale}/products?category=Peptide`
         },
         {
             title: t('items.1.title'),
             description: t('items.1.description'),
-            image: "/images/product-intermediates.png",
+            image: "/images/product-intermediates.webp",
             link: `/${locale}/products?category=Pharmaceutical%20Intermediates`
         },
         {
             title: t('items.2.title'),
             description: t('items.2.description'),
-            image: "/images/product-plants.png",
+            image: "/images/product-plants.webp",
             link: `/${locale}/products?category=Natural%20Plant%20Extracts`
         },
         {
             title: t('items.3.title'),
             description: t('items.3.description'),
-            image: "/images/product-supplements.png",
+            image: "/images/product-supplements.webp",
             link: `/${locale}/custom-manufacturing`
         }
     ];
@@ -89,6 +89,7 @@ export function ProductEcosystem() {
                                             alt={product.title}
                                             fill
                                             className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 604px"
                                         />
                                         {/* Gradient Overlay */}
                                         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E0D] via-[#0A0E0D]/60 to-transparent" />

@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Toaster } from "@/components/ui/sonner";
-import { ReCaptchaProvider } from "@/components/providers/recaptcha-provider";
 
 const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -42,7 +41,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
             siteName: "COSPEP",
             images: [
                 {
-                    url: '/logo.png', // Or a specific OG image if available
+                    url: '/logo.webp', // Or a specific OG image if available
                     width: 1200,
                     height: 630,
                     alt: 'COSPEP Logo',
@@ -53,10 +52,10 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         },
         icons: {
             icon: [
-                { url: '/favicon.png', type: 'image/png' },
+                { url: '/favicon.webp', type: 'image/webp' },
             ],
             apple: [
-                { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+                { url: '/apple-touch-icon.webp', sizes: '180x180', type: 'image/webp' },
             ],
         },
     };
@@ -79,15 +78,16 @@ export default async function RootLayout({
         <html lang={lang} dir={dir} className="dark">
             <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
                 <NextIntlClientProvider messages={messages}>
-                    <ReCaptchaProvider>
-                        <Navbar />
-                        {children}
-                        <Footer />
-                        <Toaster />
-                    </ReCaptchaProvider>
+                    <Navbar />
+                    {children}
+                    <Footer />
+                    <Toaster />
                 </NextIntlClientProvider>
-                <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID!} />
+                {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && (
+                    <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} />
+                )}
             </body>
         </html>
     );
 }
+
