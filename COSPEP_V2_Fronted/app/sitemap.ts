@@ -35,21 +35,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
 
     // 2. Fetch all products and posts
-    // We fetch only slugs to minimize data transfer
-    const productsQuery = groq`*[_type == "product" && defined(slug.current)][].slug.current`;
-    const postsQuery = groq`*[_type == "post" && defined(slug.current)][].slug.current`;
+    // We fetch slug and _updatedAt
+    const productsQuery = groq`*[_type == "product" && defined(slug.current)]{ "slug": slug.current, _updatedAt }`;
+    const postsQuery = groq`*[_type == "post" && defined(slug.current)]{ "slug": slug.current, _updatedAt }`;
 
-    const [productSlugs, postSlugs] = await Promise.all([
+    const [products, posts] = await Promise.all([
         client.fetch(productsQuery),
         client.fetch(postsQuery)
     ]);
 
     // 3. Add product pages
-    productSlugs.forEach((slug: string) => {
+    products.forEach((product: any) => {
         locales.forEach(locale => {
             sitemapEntries.push({
-                url: `${baseUrl}/${locale}/products/${slug}`,
-                lastModified: new Date(),
+                url: `${baseUrl}/${locale}/products/${product.slug}`,
+                lastModified: new Date(product._updatedAt),
                 changeFrequency: 'weekly',
                 priority: 0.7,
             });
@@ -57,11 +57,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
 
     // 4. Add blog post pages
-    postSlugs.forEach((slug: string) => {
+    posts.forEach((post: any) => {
         locales.forEach(locale => {
             sitemapEntries.push({
-                url: `${baseUrl}/${locale}/industry-insights/${slug}`,
-                lastModified: new Date(), // Ideally we'd capture publishedAt
+                url: `${baseUrl}/${locale}/industry-insights/${post.slug}`,
+                lastModified: new Date(post._updatedAt),
                 changeFrequency: 'monthly',
                 priority: 0.6,
             });

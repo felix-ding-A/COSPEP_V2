@@ -83,19 +83,33 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
     // JSON-LD Structured Data
     const jsonLd = {
         "@context": "https://schema.org",
-        "@type": "Product",
-        "name": product.name,
-        "image": product.imageUrl,
-        "description": product.description || product.seoDesc || `Wholesale ${product.name}`,
-        "sku": product.casNumber,
-        "mpn": product.casNumber,
-        "offers": {
-            "@type": "Offer",
-            "url": `https://cospep.com/products/${product.slug.current}`,
-            "availability": isReadyStock ? "https://schema.org/InStock" : "https://schema.org/PreOrder",
-            "priceCurrency": "USD",
-            "price": "0.00"
-        }
+        "@graph": [
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://cospep.com" },
+                    { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://cospep.com/products" },
+                    { "@type": "ListItem", "position": 3, "name": product.name }
+                ]
+            },
+            {
+                "@type": "Product",
+                "name": product.name,
+                "image": product.imageUrl,
+                "description": product.description || product.seoDesc || `Wholesale ${product.name}`,
+                "sku": product.casNumber,
+                "mpn": product.casNumber,
+                "brand": { "@type": "Brand", "name": "COSPEP" },
+                "offers": {
+                    "@type": "Offer",
+                    "url": `https://cospep.com/products/${product.slug.current}`,
+                    "availability": isReadyStock ? "https://schema.org/InStock" : "https://schema.org/PreOrder",
+                    "priceCurrency": "USD",
+                    "price": "0.00",
+                    "priceValidUntil": "2025-12-31"
+                }
+            }
+        ]
     };
 
     return (

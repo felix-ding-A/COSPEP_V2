@@ -22,6 +22,7 @@ async function getPost(slug: string) {
             slug,
             mainImage,
             publishedAt,
+            _updatedAt,
             excerpt,
             seoDescription,
             body,
@@ -159,6 +160,35 @@ export default async function PostPage({
 
     return (
         <>
+            {/* Article Schema for SEO */}
+            <Script
+                id="article-schema"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "BlogPosting",
+                        "headline": post.title,
+                        "image": post.mainImage ? urlFor(post.mainImage).url() : undefined,
+                        "datePublished": post.publishedAt,
+                        "dateModified": post._updatedAt || post.publishedAt,
+                        "author": {
+                            "@type": "Organization",
+                            "name": "COSPEP Team"
+                        },
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "COSPEP",
+                            "logo": {
+                                "@type": "ImageObject",
+                                "url": "https://cospep.com/logo.png"
+                            }
+                        },
+                        "description": post.seoDescription || post.excerpt
+                    })
+                }}
+            />
+
             {/* FAQ Schema for SEO */}
             {faqSchema && (
                 <Script

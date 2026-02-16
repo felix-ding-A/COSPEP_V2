@@ -148,7 +148,7 @@ export default function AboutPage() {
                                     More Than a Trader: We Are Curators
                                 </h3>
                                 <p className="text-muted-foreground leading-relaxed flex-grow">
-                                    We define ourselves as an innovation-driven partner, not just a trader. We understand that quality starts at the source. That’s why we don’t just buy and sell; we screen, audit, and integrate. We have filtered through hundreds of manufacturers to partner exclusively with those who meet the highest GMP and ISO standards, acting as your eyes and ears on the ground to ensure consistency and purity.
+                                    We define ourselves as an innovation-driven partner, not just a trader. We understand that quality starts at the source. That’s why we don’t just buy and sell; we screen, audit, and integrate. We have filtered through hundreds of manufacturers to partner exclusively with those who meet the highest cGMP and ISO standards, acting as your eyes and ears on the ground to ensure consistency and purity.
                                 </p>
                             </div>
 
@@ -197,7 +197,7 @@ export default function AboutPage() {
                                 </div>
                                 <h3 className="text-xl font-bold mb-3">Rigorous Supplier Screening</h3>
                                 <p className="text-muted-foreground text-sm leading-relaxed">
-                                    We enforce a strict 4-step audit process for our manufacturing partners, ensuring compliance with global standards (GMP/ISO).
+                                    We enforce a strict 4-step audit process for our manufacturing partners, ensuring compliance with global standards (cGMP/ISO).
                                 </p>
                             </CardContent>
                         </Card>
