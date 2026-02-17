@@ -62,7 +62,7 @@ export function HeroSection() {
                 <AnimatePresence initial={false}>
                     <motion.div
                         key={currentSlide}
-                        initial={{ opacity: 0 }}
+                        initial={currentSlide === 0 ? { opacity: 1 } : { opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 1 }}
@@ -124,7 +124,7 @@ export function HeroSection() {
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentSlide}
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={currentSlide === 0 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.6 }}
