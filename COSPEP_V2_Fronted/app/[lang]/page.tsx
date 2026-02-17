@@ -1,13 +1,29 @@
+
 import { HeroSection } from "@/components/home/hero-section";
 import { TrustStatsBar } from "@/components/home/trust-stats-bar";
-import { ProductEcosystem } from "@/components/home/product-ecosystem";
-import { ManufacturingSection } from "@/components/home/manufacturing-section";
-import { NewsBlogs } from "@/components/home/news-blogs";
+// 👇 1. Lazy load below-the-fold components
+import dynamic from "next/dynamic";
 import { client } from "@/lib/sanity";
 import { getSiteSettings } from "@/lib/sanity/queries";
+const ProductEcosystem = dynamic(() => import("@/components/home/product-ecosystem").then(mod => mod.ProductEcosystem));
+const ManufacturingSection = dynamic(() => import("@/components/home/manufacturing-section").then(mod => mod.ManufacturingSection));
+const NewsBlogs = dynamic(() => import("@/components/home/news-blogs").then(mod => mod.NewsBlogs));
+
+// 👇 2. Explicitly define static params to FORCE Build-Time Generation (SSG)
+export async function generateStaticParams() {
+    return [
+        { lang: 'en' },
+        { lang: 'ar' },
+        { lang: 'es' },
+        { lang: 'ru' }
+    ];
+}
 
 export default async function Home() {
-    const settings = await client.fetch(getSiteSettings);
+    // 👇 3. Use explicit data caching strategies
+    const settings = await client.fetch(getSiteSettings, {}, {
+        next: { revalidate: 60 }
+    });
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -28,10 +44,8 @@ export default async function Home() {
         },
         "sameAs": [
             "https://www.linkedin.com/company/cospep",
-            // Add other social links if available in settings or config
         ]
     };
-
     return (
         <main className="flex min-h-screen flex-col">
             <script
