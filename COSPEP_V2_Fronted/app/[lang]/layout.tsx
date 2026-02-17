@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { GoogleAnalytics } from '@next/third-parties/google';
+import Script from "next/script";
 import { Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
@@ -88,7 +88,22 @@ export default async function RootLayout({
                     <Toaster />
                 </NextIntlClientProvider>
                 {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && (
-                    <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} />
+                    <>
+                        <Script
+                            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
+                            strategy="lazyOnload"
+                        />
+                        <Script id="google-analytics" strategy="lazyOnload">
+                            {`
+                                window.dataLayer = window.dataLayer || [];
+                                function gtag(){dataLayer.push(arguments);}
+                                gtag('js', new Date());
+                                gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}', {
+                                    page_path: window.location.pathname,
+                                });
+                            `}
+                        </Script>
+                    </>
                 )}
             </body>
         </html>
