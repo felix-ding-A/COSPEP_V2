@@ -293,9 +293,11 @@ function ContactInfo() {
     );
 }
 
+import { ReCaptchaProvider } from "@/components/providers/recaptcha-provider";
+
 export default function ContactPage() {
     return (
-        <>
+        <ReCaptchaProvider>
             <Breadcrumbs />
             <div className="container mx-auto px-4 md:px-6 py-10">
                 <div className="mb-10 text-center space-y-4">
@@ -312,6 +314,6 @@ export default function ContactPage() {
                     </Suspense>
                 </div>
             </div>
-        </>
+        </ReCaptchaProvider>
     );
 }
