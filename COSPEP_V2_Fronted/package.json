@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "lhci:mobile": "lhci autorun --collect.url=https://cospep.com --collect.settings.preset=mobile",
-    "lhci:desktop": "lhci autorun --collect.url=https://cospep.com --collect.settings.preset=desktop"
+    "lhci:desktop": "lhci autorun"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

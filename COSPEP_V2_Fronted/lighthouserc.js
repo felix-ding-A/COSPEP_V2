@@ -2,9 +2,9 @@ module.exports = {
     ci: {
         collect: {
             url: ['https://cospep.com'],
-            startServerCommand: undefined,
             settings: {
-                chromeFlags: '--no-sandbox --headless=new --disable-gpu',
+                preset: 'desktop',
+                chromeFlags: '--no-sandbox --headless --disable-gpu --disable-dev-shm-usage',
             },
         },
         upload: {
