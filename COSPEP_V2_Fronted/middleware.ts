@@ -3,7 +3,9 @@ import createMiddleware from 'next-intl/middleware';
 import { routing } from './lib/navigation';
 
 export default createMiddleware({
-    ...routing,
+    locales: ['en', 'es', 'ru', 'ar'],
+    defaultLocale: 'en',
+    localePrefix: 'as-needed',
     localeDetection: false
 });
 
