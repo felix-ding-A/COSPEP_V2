@@ -31,7 +31,6 @@ export function TrustStatsBar() {
     ];
 
     return (
-    return (
         <section className="relative -mt-20 z-20">
             <LazyMotion features={domAnimation}>
                 <div className="max-w-7xl mx-auto px-6">
