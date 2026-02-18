@@ -2,7 +2,10 @@
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './lib/navigation';
 
-export default createMiddleware(routing);
+export default createMiddleware({
+    ...routing,
+    localeDetection: false
+});
 
 export const config = {
     // Match all pathnames except for
