@@ -13,14 +13,14 @@ async function getSearchResults(query: string) {
     // Assuming 'product' has title, slug, and maybe an image or description
     // Assuming 'post' has title, slug, mainImage, excerpt
     const groqQuery = `{
-    "products": *[_type == "product" && title match $q + "*"] {
+    "products": *[_type == "product" && (isVisible == true || !defined(isVisible)) && title match $q + "*"] {
       _id,
       title,
       slug,
       "imageUrl": images[0].asset->url,
       description
     },
-    "posts": *[_type == "post" && title match $q + "*"] {
+    "posts": *[_type == "post" && (isVisible == true || !defined(isVisible)) && title match $q + "*"] {
       _id,
       title,
       slug,

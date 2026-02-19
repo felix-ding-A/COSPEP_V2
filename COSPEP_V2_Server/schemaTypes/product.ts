@@ -25,6 +25,13 @@ export default defineType({
             options: { source: 'name' },
             validation: (Rule: any) => Rule.required(),
         },
+        {
+            name: 'isVisible',
+            title: 'Visible on Website',
+            type: 'boolean',
+            initialValue: true,
+            description: 'Toggle to show/hide this product on the website without deleting it.',
+        },
 
         // --- 核心参数 (升级部分) ---
         {

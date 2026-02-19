@@ -64,7 +64,7 @@ export async function getProducts(search?: string, categorySlug?: string, stockS
       // For now, we'll filter products that have ANY of these subcategories
       const query = groq`*[_type == "product" && (
         !defined($search) || name match $search + "*" || casNumber match $search + "*" || synonyms match $search + "*" || latinName match $search + "*"
-      ) && (
+      ) && (isVisible == true || !defined(isVisible)) && (
         count((categories[]->slug.current)[@ in $subcategorySlugs]) > 0
       ) && (
         !defined($stockStatus) || stockStatus == $stockStatus
@@ -91,7 +91,7 @@ export async function getProducts(search?: string, categorySlug?: string, stockS
 
   const query = groq`*[_type == "product" && (
         !defined($search) || name match $search + "*" || casNumber match $search + "*" || synonyms match $search + "*" || latinName match $search + "*"
-      ) && (
+      ) && (isVisible == true || !defined(isVisible)) && (
         !defined($categorySlug) || $categorySlug in categories[]->slug.current
       ) && (
         !defined($stockStatus) || stockStatus == $stockStatus
@@ -122,7 +122,7 @@ export async function getCategories(): Promise<Category[]> {
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
-  const query = groq`*[_type == "product" && slug.current == $slug][0] {
+  const query = groq`*[_type == "product" && slug.current == $slug && (isVisible == true || !defined(isVisible))][0] {
         _id,
         name,
         slug,
@@ -197,7 +197,7 @@ export const getSiteSettings = `*[_id == "settings"][0]{
 }`;
 
 export async function getLatestPosts(limit: number = 3): Promise<any[]> {
-  const query = groq`*[_type == "post" && defined(publishedAt)] | order(publishedAt desc)[0...$limit] {
+  const query = groq`*[_type == "post" && defined(publishedAt) && (isVisible == true || !defined(isVisible))] | order(publishedAt desc)[0...$limit] {
         title,
         "slug": slug.current,
         "image": mainImage.asset->url,

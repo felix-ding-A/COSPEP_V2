@@ -16,7 +16,7 @@ export const revalidate = 60;
 
 async function getPost(slug: string) {
     try {
-        const query = `*[_type == "post" && slug.current == $slug][0] {
+        const query = `*[_type == "post" && slug.current == $slug && (isVisible == true || !defined(isVisible))][0] {
             _id,
             title,
             slug,
@@ -39,7 +39,7 @@ async function getPost(slug: string) {
 }
 
 async function getAllPostSlugs() {
-    const query = `*[_type == "post"] { "slug": slug.current }`;
+    const query = `*[_type == "post" && (isVisible == true || !defined(isVisible))] { "slug": slug.current }`;
     return client.fetch(query);
 }
 

@@ -36,8 +36,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // 2. Fetch all products and posts
     // We fetch slug and _updatedAt
-    const productsQuery = groq`*[_type == "product" && defined(slug.current)]{ "slug": slug.current, _updatedAt }`;
-    const postsQuery = groq`*[_type == "post" && defined(slug.current)]{ "slug": slug.current, _updatedAt }`;
+    const productsQuery = groq`*[_type == "product" && defined(slug.current) && (isVisible == true || !defined(isVisible))]{ "slug": slug.current, _updatedAt }`;
+    const postsQuery = groq`*[_type == "post" && defined(slug.current) && (isVisible == true || !defined(isVisible))]{ "slug": slug.current, _updatedAt }`;
 
     const [products, posts] = await Promise.all([
         client.fetch(productsQuery),

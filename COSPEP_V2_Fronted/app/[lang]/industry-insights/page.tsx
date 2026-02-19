@@ -8,7 +8,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 export const revalidate = 60;
 
 async function getPosts() {
-    const query = `*[_type == "post"] | order(publishedAt desc) {
+    const query = `*[_type == "post" && (isVisible == true || !defined(isVisible))] | order(publishedAt desc) {
     _id,
     title,
     slug,

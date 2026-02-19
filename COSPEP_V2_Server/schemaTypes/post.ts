@@ -20,6 +20,13 @@ export default defineType({
             },
         }),
         defineField({
+            name: 'isVisible',
+            title: 'Visible on Website',
+            type: 'boolean',
+            initialValue: true,
+            description: 'Toggle to show/hide this post on the website without deleting it.',
+        }),
+        defineField({
             name: 'mainImage',
             title: 'Main image',
             type: 'image',
