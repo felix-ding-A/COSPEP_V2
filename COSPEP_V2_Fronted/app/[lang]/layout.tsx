@@ -30,15 +30,6 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
         },
         description: "Ethically sourced and sustainably made to empower consistency in health you can trust, for maximum impact on your goals.",
         metadataBase: new URL(baseUrl),
-        alternates: {
-            canonical: `${baseUrl}/${lang}`,
-            languages: {
-                'en': `${baseUrl}/en`,
-                'ar': `${baseUrl}/ar`,
-                'es': `${baseUrl}/es`,
-                'ru': `${baseUrl}/ru`,
-            },
-        },
         openGraph: {
             title: "COSPEP - Pure, Potent & Naturally Derived",
             description: "Ethically sourced and sustainably made to empower consistency in health you can trust.",

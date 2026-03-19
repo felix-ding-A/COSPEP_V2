@@ -9,6 +9,24 @@ const ProductEcosystem = nextDynamic(() => import("@/components/home/product-eco
 const ManufacturingSection = nextDynamic(() => import("@/components/home/manufacturing-section").then(mod => mod.ManufacturingSection));
 const NewsBlogs = nextDynamic(() => import("@/components/home/news-blogs").then(mod => mod.NewsBlogs));
 
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }) {
+    const { lang } = await params;
+    const baseUrl = 'https://cospep.com';
+    const currentUrl = lang === 'en' ? baseUrl : `${baseUrl}/${lang}`;
+    
+    return {
+        alternates: {
+            canonical: currentUrl,
+            languages: {
+                'en': baseUrl,
+                'ar': `${baseUrl}/ar`,
+                'es': `${baseUrl}/es`,
+                'ru': `${baseUrl}/ru`,
+            },
+        },
+    };
+}
+
 // 👇 2. Explicitly define static params to FORCE Build-Time Generation (SSG)
 export async function generateStaticParams() {
     return [
