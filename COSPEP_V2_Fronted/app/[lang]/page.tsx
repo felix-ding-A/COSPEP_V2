@@ -15,6 +15,9 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     const currentUrl = lang === 'en' ? baseUrl : `${baseUrl}/${lang}`;
     
     return {
+        title: "Top Chinese Peptide Suppliers & Plant Extracts | COSPEP",
+        description: "Looking for high-quality peptides from China? COSPEP is a leading manufacturer offering direct peptide wholesale China and premium plant extracts for global B2B buyers.",
+        keywords: "chinese peptide suppliers, peptide wholesale china, peptides from china, COSPEP, plant extracts supplier, raw cosmetic ingredients",
         alternates: {
             canonical: currentUrl,
             languages: {

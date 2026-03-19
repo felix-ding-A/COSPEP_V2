@@ -9,6 +9,26 @@ import { NewsBlogs } from "@/components/home/news-blogs";
 import { Loader2 } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
+export async function generateMetadata({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
+    const params = await searchParams;
+    const categorySlug = typeof params.categories === "string" ? params.categories : "";
+
+    if (categorySlug) {
+        const categoryName = categorySlug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        return {
+            title: `${categoryName} Wholesale China | Buy Bulk Active Ingredients | COSPEP`,
+            description: `Wondering peptides china where to buy for ${categoryName.toLowerCase()} formulations? Browse our comprehensive catalog of high-purity active peptides and plant extracts for bulk orders.`,
+            keywords: `${categoryName.toLowerCase()}, peptide wholesale china, buy bulk peptides, peptides china where to buy, anti-aging peptide powder`,
+        };
+    }
+
+    return {
+        title: "Cosmetic Peptide Wholesale China | Buy Bulk Active Ingredients | COSPEP",
+        description: "Wondering peptides china where to buy for cosmetic formulations? Browse our comprehensive catalog of high-purity active peptides and plant extracts for bulk orders.",
+        keywords: "cosmetic peptides, peptide wholesale china, buy bulk peptides, peptides china where to buy, anti-aging peptide powder",
+    };
+}
+
 export const dynamic = 'force-dynamic';
 
 export default async function ProductsPage({

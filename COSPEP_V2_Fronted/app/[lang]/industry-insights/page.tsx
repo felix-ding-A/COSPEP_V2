@@ -7,6 +7,12 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 // Revalidate every 60 seconds or custom duration
 export const revalidate = 60;
 
+export const metadata = {
+    title: "Peptides China Where to Buy: A Complete Sourcing Guide | COSPEP Blog",
+    description: "Read our industry insights to navigate the market. We answer your questions on peptides china where to buy, how to evaluate supplier quality, and the latest trends in plant extracts.",
+    keywords: "peptides china where to buy, sourcing peptides from china, cosmetic ingredient trends, B2B sourcing guide, evaluate peptide suppliers",
+};
+
 async function getPosts() {
     const query = `*[_type == "post" && (isVisible == true || !defined(isVisible))] | order(publishedAt desc) {
     _id,

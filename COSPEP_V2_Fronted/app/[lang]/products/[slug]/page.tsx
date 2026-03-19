@@ -25,8 +25,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     if (!product) return { title: "Product Not Found" };
 
     return {
-        title: product.seoTitle || `${product.name} Manufacturer & Supplier | CAS ${product.casNumber}`,
-        description: product.seoDesc || `Buy high-quality ${product.name} (${product.casNumber}). ${product.latinName || ''}. Ready stock available.`,
+        title: product.seoTitle || `Buy ${product.name} | Peptides from China | COSPEP`,
+        description: product.seoDesc || `Looking for peptides china where to buy? Order high-purity ${product.name} directly from COSPEP. We are trusted Chinese peptide suppliers offering reliable factory prices.`,
+        keywords: `${product.name}, ${product.name} wholesale, peptides from china, buy ${product.name}, COSPEP`,
     };
 }
 
