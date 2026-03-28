@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../lib/i18n';
+import { ProductsHeroCarousel } from '@/components/products/products-hero-carousel';
+import { CategoryGrid } from '@/components/products/category-grid';
+import { FilterSidebar } from '@/components/products/filter-sidebar';
+import { ProductCard } from '@/components/products/product-card';
+import { RequestForm } from '@/components/products/request-form';
+import { getProducts, getCategories, getSettings } from "@/lib/sanity/queries";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+// SSR handling
+const { lang: langParam } = Astro.params;
+const lang = langParam || 'en';
+const t = useTranslations(lang as any);
+
+// Parse search params
+const searchParams = Astro.url.searchParams;
+const search = searchParams.get('search') || '';
+const categoriesParam = searchParams.get('categories') || '';
+const stockStatus = searchParams.get('stockStatus') || '';
+const parentCategory = searchParams.get('parentCategory') || '';
+
+// Fetch data
+const [products, categories, settings] = await Promise.all([
+    getProducts(
+        search || undefined,
+        categoriesParam || undefined,
+        stockStatus || undefined,
+        parentCategory || undefined
+    ),
+    getCategories(),
+    getSettings(),
+]);
+
+const title = t('nav.products') + " | COSPEP";
+const description = "Explore our wide range of high-quality peptides and plant extracts. Direct from manufacturer with guaranteed purity.";
+
+// SEO JSON-LD
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": title,
+    "description": description,
+    "url": Astro.url.href,
+    "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": products.slice(0, 10).map((p, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "url": `${Astro.url.origin}${getRelativeLocaleUrl(lang, `products/${p.slug.current}`)}`,
+            "name": p.name
+        }))
+    }
+};
+---
+
+<BaseLayout title={title} description={description}>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <main class="flex min-h-screen flex-col bg-[#0A0E0D]">
+        {/* Hero Carousel */}
+        <ProductsHeroCarousel client:load />
+
+        <section class="py-12 md:py-20">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="flex flex-col lg:flex-row gap-12">
+                    {/* Sidebar */}
+                    <aside class="w-full lg:w-80 flex-shrink-0">
+                        <div class="sticky top-24">
+                            <FilterSidebar 
+                                client:load 
+                                categories={categories} 
+                            />
+                        </div>
+                    </aside>
+
+                    {/* Main Content */}
+                    <div class="flex-1 space-y-12">
+                        {/* Category Grid (Show only when no filters) */}
+                        {!search && !categoriesParam && !stockStatus && !parentCategory && (
+                            <CategoryGrid client:load categories={categories} />
+                        )}
+
+                        {/* Products Grid */}
+                        <div class="space-y-8">
+                            <div class="flex items-center justify-between border-b border-white/10 pb-6">
+                                <h2 class="text-2xl font-bold text-white">
+                                    {products.length} Products Found
+                                </h2>
+                            </div>
+
+                            {products.length > 0 ? (
+                                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                                    {products.map((product) => (
+                                        <ProductCard client:visible product={product} />
+                                    ))}
+                                </div>
+                            ) : (
+                                <div class="py-20 text-center glass rounded-2xl border border-dashed border-white/10">
+                                    <h3 class="text-xl text-gray-400 mb-4">No products found matching your criteria</h3>
+                                    <p class="text-gray-500">Try adjusting your filters or search terms</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {/* Request Form */}
+        <RequestForm client:visible />
+    </main>
+</BaseLayout>

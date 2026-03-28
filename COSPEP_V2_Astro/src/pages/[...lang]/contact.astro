@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { ContactForm } from "@/components/contact/contact-form";
+import { ReCaptchaProvider } from "@/components/providers/recaptcha-provider";
+import { MapPin, Mail, Phone } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const { lang: langParam } = Astro.params;
+const lang = langParam || 'en';
+
+const title = "Contact Us | COSPEP";
+const description = "Get in touch with COSPEP for high-quality botanical ingredients and bioactive peptides. We offer expert sourcing, technical support, and global logistics solutions.";
+---
+
+<BaseLayout title={title} description={description}>
+    <main class="min-h-screen bg-[#0A0E0D] text-white">
+        <div class="bg-gradient-to-b from-[#0F1612] to-[#0A0E0D]">
+            <Breadcrumbs />
+        </div>
+
+        <div class="container mx-auto px-4 md:px-6 py-16">
+            <div class="mb-16 text-center space-y-4">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight">
+                    Contact Us <span class="text-[#B8FF00]">Now</span>
+                </h1>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
+                    Whether you need a quick quote, a specific ingredient sourcing, or have a logistical question, we are here to help.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+                {/* Contact Info */}
+                <div class="space-y-10">
+                    <div class="glass-strong rounded-3xl p-10 border border-white/10 space-y-8 bg-gradient-to-br from-[#0F1612] to-[#0A0E0D]">
+                        <div class="flex items-start space-x-6">
+                            <div class="w-12 h-12 rounded-2xl bg-[#B8FF00]/10 flex items-center justify-center flex-shrink-0 text-[#B8FF00]">
+                                <MapPin class="h-7 w-7" />
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-xl mb-2 text-white">Headquarters</h3>
+                                <p class="text-gray-400 text-lg leading-relaxed">
+                                    No. 10108, 1st Floor, Unit 1, Building DK8-8, CR Future City, International Trade and Logistics Park, Xi'an City, Shaanxi Province
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-6">
+                            <div class="w-12 h-12 rounded-2xl bg-[#B8FF00]/10 flex items-center justify-center flex-shrink-0 text-[#B8FF00]">
+                                <Mail class="h-7 w-7" />
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-xl mb-2 text-white">Email Us</h3>
+                                <p class="text-gray-400 text-lg">
+                                    <a href="mailto:info@cospep.com" class="hover:text-[#B8FF00] transition-colors decoration-[#B8FF00]/30 underline underline-offset-4 font-medium">
+                                        info@cospep.com
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-6">
+                            <div class="w-12 h-12 rounded-2xl bg-[#B8FF00]/10 flex items-center justify-center flex-shrink-0 text-[#B8FF00]">
+                                <Phone class="h-7 w-7" />
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-xl mb-2 text-white">Call / WhatsApp</h3>
+                                <p class="text-gray-400 text-lg font-mono">
+                                    <a href="tel:+8613201818603" class="hover:text-[#B8FF00] transition-colors">
+                                        +86 13201818603
+                                    </a>
+                                </p>
+                                <div class="mt-6">
+                                    <a
+                                        href="https://wa.me/8613201818603"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="inline-flex items-center px-6 py-3 rounded-2xl bg-[#25D366] hover:bg-[#128C7E] text-white font-bold transition-all hover:scale-105 shadow-lg shadow-[#25D366]/20"
+                                    >
+                                        <svg class="w-6 h-6 mr-3" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.171.823-.299.043-.687.072-1.109-.064-.242-.078-.545-.184-.897-.337-1.493-.65-2.457-2.164-2.532-2.264-.074-.1-.611-.813-.611-1.549 0-.736.386-1.1.528-1.248.143-.148.312-.185.416-.185.105 0 .208.001.301.004.098.004.228-.037.357.275.13.312.443 1.079.481 1.157.039.079.066.17.013.275-.053.106-.079.171-.16.265-.079.094-.171.21-.243.284-.084.085-.172.178-.073.348.099.17.442.729.948 1.18.652.58 1.202.76 1.371.844.17.085.269.071.369-.043.1-.114.428-.497.545-.668.114-.171.228-.143.385-.084.157.058 1.001.472 1.171.557.17.085.284.128.327.2.043.071.043.411-.101.816z" />
+                                            <path d="M12.094 2c-5.468 0-9.911 4.442-9.911 9.911 0 1.758.459 3.474 1.33 4.99L2 22l5.221-1.371c1.5.816 3.189 1.247 4.918 1.247a9.911 9.911 0 009.911-9.911c0-5.468-4.442-9.911-9.911-9.911zm1.034 1.4c3.085 0 5.604 2.519 5.604 5.604 0 3.085-2.519 5.604-5.604 5.604-3.085 0-5.604-2.519-5.604-5.604 0-3.085 2.519-5.604 5.604-5.604z" />
+                                        </svg>
+                                        Chat on WhatsApp
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Placeholder Map */}
+                    <div class="aspect-video w-full rounded-3xl bg-[#0F1612] overflow-hidden border border-white/10 shadow-2xl relative">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d102877.29415896357!2d108.878!3d34.229!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x366379e922ac17b9%3A0x85d466fda5a67!2sXi%27an%2C%20Shaanxi%2C%20China!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
+                            width="100%"
+                            height="100%"
+                            style="border: 0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            class="grayscale opacity-70 contrast-125"
+                        ></iframe>
+                        <div class="absolute inset-0 pointer-events-none border border-white/5 rounded-3xl"></div>
+                    </div>
+                </div>
+
+                {/* Contact Form */}
+                <ReCaptchaProvider client:load>
+                    <ContactForm client:load />
+                </ReCaptchaProvider>
+            </div>
+        </div>
+    </main>
+</BaseLayout>

@@ -1,0 +1,247 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { Link } from '@/lib/navigation';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+    Factory,
+    Warehouse,
+    Receipt,
+    UserCheck,
+    ArrowRight,
+    Package,
+    FlaskConical,
+    ShoppingBag,
+    Plane,
+    Ship,
+    Clock
+} from "lucide-react";
+
+const { lang: langParam } = Astro.params;
+const lang = langParam || 'en';
+
+const title = "Services & Logistics | COSPEP";
+const description = "Streamlined global logistics for your botanical ingredients. One shipment, multiple factories, and professional packaging standards.";
+---
+
+<BaseLayout title={title} description={description}>
+    <main class="min-h-screen bg-[#0A0E0D] text-white">
+        <div class="bg-gradient-to-b from-[#0F1612] to-[#0A0E0D]">
+            <Breadcrumbs />
+        </div>
+
+        {/* Section 1: The Consolidation Advantage */}
+        <section class="py-24 bg-[#0F1612]/30">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center max-w-3xl mx-auto mb-20 space-y-6">
+                    <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight">
+                        One Shipment, <span class="text-[#B8FF00]">Multiple Factories.</span>
+                    </h1>
+                    <p class="text-xl text-gray-400 leading-relaxed">
+                        Reduce shipping costs by <span class="font-bold text-[#B8FF00]">30%</span> and simplify customs clearance with a single consolidated invoice.
+                    </p>
+                </div>
+
+                {/* Visual Schematic */}
+                <div class="relative flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-8 py-12 max-w-6xl mx-auto">
+                    {/* Factories */}
+                    <div class="flex flex-col gap-6 w-full lg:w-auto">
+                        <div class="flex items-center gap-4 glass p-6 rounded-2xl border border-white/10 hover:border-[#B8FF00]/30 transition-all group">
+                            <Factory class="text-gray-400 h-6 w-6 group-hover:text-[#B8FF00]" /> 
+                            <span class="font-bold text-lg">Factory A</span>
+                        </div>
+                        <div class="flex items-center gap-4 glass p-6 rounded-2xl border border-white/10 hover:border-[#B8FF00]/30 transition-all group">
+                            <Factory class="text-gray-400 h-6 w-6 group-hover:text-[#B8FF00]" /> 
+                            <span class="font-bold text-lg">Factory B</span>
+                        </div>
+                        <div class="flex items-center gap-4 glass p-6 rounded-2xl border border-white/10 hover:border-[#B8FF00]/30 transition-all group">
+                            <Factory class="text-gray-400 h-6 w-6 group-hover:text-[#B8FF00]" /> 
+                            <span class="font-bold text-lg">Factory C</span>
+                        </div>
+                    </div>
+
+                    {/* Arrows */}
+                    <div class="hidden lg:flex flex-col gap-6">
+                        <ArrowRight class="text-[#B8FF00] h-6 w-6 opacity-50 animate-pulse" />
+                        <ArrowRight class="text-[#B8FF00] h-6 w-6 opacity-80 animate-pulse" />
+                        <ArrowRight class="text-[#B8FF00] h-6 w-6 opacity-50 animate-pulse" />
+                    </div>
+                    <div class="lg:hidden">
+                        <ArrowRight class="text-[#B8FF00] h-10 w-10 rotate-90 opacity-80" />
+                    </div>
+
+                    {/* COSPEP Hub */}
+                    <div class="bg-[#B8FF00] text-[#0A0E0D] p-12 rounded-[2.5rem] shadow-2xl shadow-[#B8FF00]/20 flex flex-col items-center gap-4 z-10 hover:scale-105 transition-transform duration-500 group">
+                        <div class="w-16 h-16 rounded-2xl bg-[#0A0E0D]/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <Warehouse class="h-10 w-10" />
+                        </div>
+                        <div class="text-center font-black text-2xl tracking-tighter">COSPEP HUB</div>
+                        <div class="text-sm font-bold opacity-80 uppercase tracking-widest leading-none text-center">Consolidation & QC</div>
+                    </div>
+
+                    {/* Arrow */}
+                    <div class="hidden lg:block">
+                        <ArrowRight class="text-[#B8FF00] h-10 w-10 opacity-80 animate-pulse" />
+                    </div>
+                    <div class="lg:hidden">
+                        <ArrowRight class="text-[#B8FF00] h-10 w-10 rotate-90 opacity-80" />
+                    </div>
+
+                    {/* Output */}
+                    <div class="flex flex-col gap-6 w-full lg:w-auto">
+                        <div class="flex items-center gap-5 glass-strong p-8 rounded-2xl border border-white/10 shadow-xl group hover:border-[#B8FF00]/30 transition-all">
+                            <div class="w-14 h-14 rounded-2xl bg-[#B8FF00]/10 flex items-center justify-center text-[#B8FF00]">
+                                <Receipt class="h-8 w-8" />
+                            </div>
+                            <div>
+                                <div class="font-black text-white text-xl">One Invoice</div>
+                                <div class="text-sm text-gray-400 font-medium">Simplified Customs</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-5 glass-strong p-8 rounded-2xl border border-white/10 shadow-xl group hover:border-[#B8FF00]/30 transition-all">
+                            <div class="w-14 h-14 rounded-2xl bg-[#B8FF00]/10 flex items-center justify-center text-[#B8FF00]">
+                                <UserCheck class="h-8 w-8" />
+                            </div>
+                            <div>
+                                <div class="font-black text-white text-xl">Direct to You</div>
+                                <div class="text-sm text-gray-400 font-medium">Door-to-Door Service</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {/* Section 2: Professional Packaging */}
+        <section class="py-24 bg-[#0A0E0D]">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-16 space-y-4">
+                    <h2 class="text-4xl font-bold text-white">Professional Packaging Standards</h2>
+                    <p class="text-gray-400 text-lg">Safe, secure, and compliant with international shipping regulations.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    {/* Powder */}
+                    <Card className="bg-[#0F1612]/50 border-white/10 hover:border-[#B8FF00]/40 transition-all duration-500 rounded-3xl group overflow-hidden">
+                        <CardHeader className="text-center pt-10">
+                            <div class="mx-auto bg-[#B8FF00]/10 w-20 h-20 rounded-2xl flex items-center justify-center mb-6 text-[#B8FF00] group-hover:scale-110 transition-transform">
+                                <Package class="h-10 w-10" />
+                            </div>
+                            <CardTitle className="text-2xl font-bold text-white">Powder Ingredients</CardTitle>
+                        </CardHeader>
+                        <CardContent className="text-center text-gray-400 pb-10 space-y-3">
+                            <p class="text-lg">25kg Fiber Drum</p>
+                            <p class="text-lg">Double Plastic Bag Inside</p>
+                            <div class="pt-4">
+                                <span class="text-xs bg-white/5 border border-white/10 text-[#B8FF00] px-3 py-1 rounded-full font-bold uppercase tracking-widest">UN Approved</span>
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    {/* Liquid */}
+                    <Card className="bg-[#0F1612]/50 border-white/10 hover:border-[#B8FF00]/40 transition-all duration-500 rounded-3xl group overflow-hidden">
+                        <CardHeader className="text-center pt-10">
+                            <div class="mx-auto bg-[#B8FF00]/10 w-20 h-20 rounded-2xl flex items-center justify-center mb-6 text-[#B8FF00] group-hover:scale-110 transition-transform">
+                                <FlaskConical class="h-10 w-10" />
+                            </div>
+                            <CardTitle className="text-2xl font-bold text-white">Liquid Extracts</CardTitle>
+                        </CardHeader>
+                        <CardContent className="text-center text-gray-400 pb-10 space-y-3">
+                            <p class="text-lg">Fluorinated Bottles</p>
+                            <p class="text-lg">25kg / 200kg Iron Drum</p>
+                            <p class="text-lg">IBC Tanks Available</p>
+                        </CardContent>
+                    </Card>
+
+                    {/* Sample */}
+                    <Card className="bg-[#0F1612]/50 border-white/10 hover:border-[#B8FF00]/40 transition-all duration-500 rounded-3xl group overflow-hidden">
+                        <CardHeader className="text-center pt-10">
+                            <div class="mx-auto bg-[#B8FF00]/10 w-20 h-20 rounded-2xl flex items-center justify-center mb-6 text-[#B8FF00] group-hover:scale-110 transition-transform">
+                                <ShoppingBag class="h-10 w-10" />
+                            </div>
+                            <CardTitle className="text-2xl font-bold text-white">Small Pack / Sample</CardTitle>
+                        </CardHeader>
+                        <CardContent className="text-center text-gray-400 pb-10 space-y-3">
+                            <p class="text-lg">1kg Aluminum Foil Bag</p>
+                            <p class="text-lg">Vacuum Sealed</p>
+                            <div class="pt-4">
+                                <span class="text-xs bg-white/5 border border-white/10 text-[#B8FF00] px-3 py-1 rounded-full font-bold uppercase tracking-widest">Low MOQ Friendly</span>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </div>
+            </div>
+        </section>
+
+        {/* Section 3: Global Logistics Network */}
+        <section class="py-24 bg-[#0F1612]/30 border-y border-white/5">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="grid lg:grid-cols-2 gap-20 items-center">
+                    <div class="space-y-8">
+                        <div>
+                            <h2 class="text-4xl font-bold mb-6 text-white">Global Logistics Network</h2>
+                            <p class="text-xl text-gray-400 leading-relaxed">
+                                We have established long-term cooperation with major courier services and freight forwarders to ensure your goods arrive safely and on time.
+                            </p>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="group flex items-center gap-6 p-8 bg-[#0A0E0D] rounded-3xl border border-white/10 hover:border-[#B8FF00]/30 transition-all shadow-xl">
+                                <div class="w-16 h-16 rounded-2xl bg-[#B8FF00]/10 flex items-center justify-center text-[#B8FF00] group-hover:scale-110 transition-transform">
+                                    <Plane class="h-10 w-10" />
+                                </div>
+                                <div class="flex-1 space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <h3 class="font-bold text-xl text-white">Express / Air Cargo</h3>
+                                        <span class="text-base font-black text-[#B8FF00]">3 - 10 Days</span>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <span class="text-xs border border-white/10 px-3 py-1 rounded-full bg-white/5 text-gray-300 font-bold uppercase tracking-widest">FedEx</span>
+                                        <span class="text-xs border border-white/10 px-3 py-1 rounded-full bg-white/5 text-gray-300 font-bold uppercase tracking-widest">DHL</span>
+                                        <span class="text-xs border border-white/10 px-3 py-1 rounded-full bg-white/5 text-gray-300 font-bold uppercase tracking-widest">UPS</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="group flex items-center gap-6 p-8 bg-[#0A0E0D] rounded-3xl border border-white/10 hover:border-[#B8FF00]/30 transition-all shadow-xl">
+                                <div class="w-16 h-16 rounded-2xl bg-[#B8FF00]/10 flex items-center justify-center text-[#B8FF00] group-hover:scale-110 transition-transform">
+                                    <Ship class="h-10 w-10" />
+                                </div>
+                                <div class="flex-1 space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <h3 class="font-bold text-xl text-white">Sea Freight</h3>
+                                        <span class="text-base font-black text-[#B8FF00]">20 - 30 Days</span>
+                                    </div>
+                                    <div class="flex flex-wrap gap-3">
+                                        <span class="text-xs border border-white/10 px-3 py-1 rounded-full bg-white/5 text-gray-300 font-bold uppercase tracking-widest">LCL Consolidation</span>
+                                        <span class="text-xs border border-white/10 px-3 py-1 rounded-full bg-white/5 text-gray-300 font-bold uppercase tracking-widest">FCL Container</span>
+                                        <span class="text-xs border border-white/10 px-3 py-1 rounded-full bg-white/5 text-gray-300 font-bold uppercase tracking-widest">Maersk</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right CTA Area */}
+                    <div class="bg-[#B8FF00] text-[#0A0E0D] p-12 md:p-16 rounded-[3rem] text-center space-y-8 shadow-2xl shadow-[#B8FF00]/20 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent pointer-events-none opacity-50 group-hover:scale-110 transition-transform duration-1000"></div>
+                        <div class="relative z-10 space-y-8">
+                            <div class="w-20 h-20 rounded-[1.5rem] bg-[#0A0E0D]/10 flex items-center justify-center mx-auto">
+                                <Clock class="h-12 w-12" />
+                            </div>
+                            <h3 class="text-3xl md:text-4xl font-black tracking-tighter leading-tight">Ready to streamline your supply chain?</h3>
+                            <p class="text-lg font-bold opacity-80 max-w-md mx-auto leading-relaxed">
+                                Get a competitive shipping quote today. We handle all export documentation, including Certificate of Origin and Health Certificates.
+                            </p>
+                            <Button asChild size="lg" className="h-16 px-10 rounded-2xl bg-[#0A0E0D] text-[#B8FF00] hover:bg-[#0A0E0D]/80 text-xl font-black uppercase tracking-widest transition-all hover:scale-105 shadow-2xl shadow-[#0A0E0D]/20">
+                                <Link href="/contact?type=General&message=I%20need%20a%20shipping%20quote">
+                                    Get a Shipping Quote
+                                </Link>
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</BaseLayout>

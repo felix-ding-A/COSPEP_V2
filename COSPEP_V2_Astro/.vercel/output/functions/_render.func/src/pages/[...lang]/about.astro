@@ -1,0 +1,155 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { Link } from '@/lib/navigation';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { MapPin, SearchCheck, FlaskConical, Sprout } from "lucide-react";
+import { AboutCarousel } from "@/components/about/about-carousel";
+
+const { lang: langParam } = Astro.params;
+const lang = langParam || 'en';
+
+const title = "About COSPEP | Bridging Nature's Purity with Scientific Innovation";
+const description = "Learn about COSPEP's journey from the heart of the Qinling Mountains to becoming a leading supplier of premium botanical ingredients and bioactive peptides.";
+---
+
+<BaseLayout title={title} description={description}>
+    <main class="flex flex-col min-h-screen bg-[#0A0E0D] text-white">
+        <div class="bg-gradient-to-b from-[#0F1612] to-[#0A0E0D]">
+            <Breadcrumbs />
+        </div>
+
+        {/* Hero Section */}
+        <section class="relative py-24 lg:py-32 bg-[#0F1612] border-b border-white/5 overflow-hidden">
+            <div class="absolute inset-0 w-full h-full">
+                <img
+                    src="/images/about/hero-bg.webp"
+                    alt="Traditional Chinese Landscape"
+                    class="object-cover w-full h-full opacity-40"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0A0E0D] via-[#0A0E0D]/60 to-transparent" />
+            </div>
+
+            <div class="container relative z-10 mx-auto px-4 md:px-6 text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight">
+                    Bridging Nature's Purity with <br />
+                    <span class="text-[#B8FF00] drop-shadow-[0_0_15px_rgba(184,255,0,0.3)]">Scientific Innovation</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                    Where the ancient wisdom of the Qinling Mountains meets modern scientific precision.
+                </p>
+            </div>
+        </section>
+
+        {/* Our Story Section */}
+        <section class="py-24 bg-[#0A0E0D]">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="max-w-5xl mx-auto space-y-24">
+
+                    {/* Phase 1: The Origin */}
+                    <div class="grid lg:grid-cols-2 gap-16 items-center">
+                        <div class="space-y-8">
+                            <div class="inline-flex items-center px-4 py-2 rounded-full bg-[#B8FF00]/10 text-[#B8FF00] text-sm font-semibold border border-[#B8FF00]/20 backdrop-blur-sm">
+                                <MapPin class="w-4 h-4 mr-2" />
+                                33°N, 107°E — The Origin
+                            </div>
+                            <h2 class="text-4xl font-bold text-white">From the Heart of Qinling</h2>
+                            <div class="space-y-4 text-gray-400 text-lg leading-relaxed">
+                                <p>
+                                    Since 2015, COSPEP has been dedicated to bridging the gap between China's premium botanical resources and the global market. Our journey begins at <strong class="text-[#B8FF00]">33°N, 107°E</strong>—the heart of the <strong class="text-[#B8FF00]">Qinling Mountains</strong>, known as the 'Gene Bank' of wild flora.
+                                </p>
+                                <p>
+                                    We have established a rigorous sourcing network covering a 500km radius around this biodiversity hotspot, ensuring every plant extract we supply benefits from the ideal climate and soil conditions essential for maximum potency.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="relative aspect-[4/3] lg:aspect-square rounded-3xl overflow-hidden glass shadow-2xl border border-white/10">
+                            <AboutCarousel client:load />
+                        </div>
+                    </div>
+
+                    {/* Phase 2 & 3 */}
+                    <div class="grid md:grid-cols-2 gap-8">
+                        {/* Phase 2: More Than a Trader */}
+                        <div class="glass-strong rounded-3xl p-10 border border-white/10 hover:border-[#B8FF00]/40 transition-all duration-500 group">
+                            <div class="w-14 h-14 rounded-2xl bg-[#B8FF00]/10 flex items-center justify-center mb-8 text-[#B8FF00] group-hover:scale-110 transition-transform">
+                                <SearchCheck class="w-8 h-8" />
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 text-white">
+                                More Than a Trader: We Are Curators
+                            </h3>
+                            <p class="text-gray-400 leading-relaxed text-lg">
+                                We define ourselves as an innovation-driven partner, not just a trader. We understand that quality starts at the source. That’s why we don’t just buy and sell; we screen, audit, and integrate. We have filtered through hundreds of manufacturers to partner exclusively with those who meet the highest cGMP and ISO standards.
+                            </p>
+                        </div>
+
+                        {/* Phase 3: The Fusion of Bio & Nature */}
+                        <div class="glass-strong rounded-3xl p-10 border border-white/10 hover:border-[#B8FF00]/40 transition-all duration-500 group">
+                            <div class="w-14 h-14 rounded-2xl bg-[#B8FF00]/10 flex items-center justify-center mb-8 text-[#B8FF00] group-hover:scale-110 transition-transform">
+                                <FlaskConical class="w-8 h-8" />
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 text-white">
+                                The Fusion of Bio & Nature
+                            </h3>
+                            <p class="text-gray-400 leading-relaxed text-lg">
+                                The name COSPEP reflects our dual expertise: Cosmetics/Nature and Peptides/Science. Beyond our botanical roots, we are pioneers in supplying high-purity bioactive peptides. By combining the ancient wisdom of herbal medicine with modern synthetic biology, we provide comprehensive ingredient solutions.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        {/* Key Features Section */}
+        <section class="py-24 bg-[#0F1612]/50 border-y border-white/5">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="text-center mb-16 max-w-2xl mx-auto space-y-4">
+                    <h2 class="text-4xl font-bold text-white">Core Values</h2>
+                    <p class="text-gray-400 text-lg">The pillars of our commitment to quality and innovation.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    {/* Feature 1 */}
+                    <Card className="bg-[#0A0E0D] border-white/10 hover:border-[#B8FF00]/30 hover:shadow-2xl hover:shadow-[#B8FF00]/5 transition-all duration-500 rounded-3xl">
+                        <CardContent className="pt-10 text-center flex flex-col items-center p-8">
+                            <div class="w-16 h-16 rounded-2xl bg-[#B8FF00]/10 flex items-center justify-center mb-8 text-[#B8FF00]">
+                                <Sprout class="w-8 h-8" />
+                            </div>
+                            <h3 class="text-xl font-bold mb-4 text-white">Geo-Authentic Sourcing</h3>
+                            <p class="text-gray-400 text-base leading-relaxed">
+                                Leveraging our strategic location in the Qinling region to secure raw materials with the highest active content.
+                            </p>
+                        </CardContent>
+                    </Card>
+
+                    {/* Feature 2 */}
+                    <Card className="bg-[#0A0E0D] border-white/10 hover:border-[#B8FF00]/30 hover:shadow-2xl hover:shadow-[#B8FF00]/5 transition-all duration-500 rounded-3xl">
+                        <CardContent className="pt-10 text-center flex flex-col items-center p-8">
+                            <div class="w-16 h-16 rounded-2xl bg-[#B8FF00]/10 flex items-center justify-center mb-8 text-[#B8FF00]">
+                                <SearchCheck class="w-8 h-8" />
+                            </div>
+                            <h3 class="text-xl font-bold mb-4 text-white">Rigorous Audit Process</h3>
+                            <p class="text-gray-400 text-base leading-relaxed">
+                                We enforce a strict 4-step audit process for our manufacturing partners, ensuring compliance with global standards (cGMP/ISO).
+                            </p>
+                        </CardContent>
+                    </Card>
+
+                    {/* Feature 3 */}
+                    <Card className="bg-[#0A0E0D] border-white/10 hover:border-[#B8FF00]/30 hover:shadow-2xl hover:shadow-[#B8FF00]/5 transition-all duration-500 rounded-3xl">
+                        <CardContent className="pt-10 text-center flex flex-col items-center p-8">
+                            <div class="w-16 h-16 rounded-2xl bg-[#B8FF00]/10 flex items-center justify-center mb-8 text-[#B8FF00]">
+                                <FlaskConical class="w-8 h-8" />
+                            </div>
+                            <h3 class="text-xl font-bold mb-4 text-white">Custom Innovation</h3>
+                            <p class="text-gray-400 text-base leading-relaxed">
+                                From standard extracts to custom peptide synthesis and OEM formulation, we adapt our supply chain to your R&D needs.
+                            </p>
+                        </CardContent>
+                    </Card>
+                </div>
+            </div>
+        </section>
+    </main>
+</BaseLayout>

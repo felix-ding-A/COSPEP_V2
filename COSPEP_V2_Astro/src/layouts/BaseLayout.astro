@@ -1,0 +1,57 @@
+---
+import "@/styles/global.css";
+import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "COSPEP - Pure, Potent & Naturally Derived" } = Astro.props;
+const { lang = "en" } = Astro.params;
+const dir = lang === 'ar' ? 'rtl' : 'ltr';
+---
+
+<!doctype html>
+<html lang={lang} dir={dir} class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/webp" href="/favicon.webp" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- Primary Meta Tags -->
+		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+		<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={new URL('/og-image.webp', Astro.site)} />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={Astro.url} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={new URL('/og-image.webp', Astro.site)} />
+	</head>
+	<body class="min-h-screen bg-[#0A0E0D] font-sans antialiased text-white flex flex-col">
+		<Navbar client:load />
+		<main class="flex-grow">
+			<slot />
+		</main>
+		<Footer client:load />
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--font-sans: "Inter", system-ui, sans-serif;
+	}
+</style>

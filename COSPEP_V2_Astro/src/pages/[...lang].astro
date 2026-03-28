@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { useTranslations } from '../lib/i18n';
+import { HeroSection } from '@/components/home/hero-section';
+import { TrustStatsBar } from '@/components/home/trust-stats-bar';
+import { ProductEcosystem } from '@/components/home/product-ecosystem';
+import { ManufacturingSection } from '@/components/home/manufacturing-section';
+import { NewsBlogs } from '@/components/home/news-blogs';
+import { client } from "@/lib/sanity";
+import { getSiteSettings } from "@/lib/sanity/queries";
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: undefined } },
+    { params: { lang: 'es' } },
+    { params: { lang: 'ru' } },
+    { params: { lang: 'ar' } },
+  ];
+}
+
+const { lang: langParam } = Astro.params;
+const lang = langParam || 'en';
+const t = useTranslations(lang as any);
+
+const settings = await client.fetch(getSiteSettings);
+
+// SEO Metadata
+const baseUrl = 'https://cospep.com';
+const currentUrl = lang === 'en' ? baseUrl : `${baseUrl}/${lang}`;
+const title = "Top Chinese Peptide Suppliers & Plant Extracts | COSPEP";
+const description = "Looking for high-quality peptides from China? COSPEP is a leading manufacturer offering direct peptide wholesale China and premium plant extracts for global B2B buyers.";
+
+const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "COSPEP",
+    "url": "https://cospep.com",
+    "logo": "https://cospep.com/logo.webp",
+    "description": settings?.heroSubtitle || "Pure, Potent & Naturally Derived Ingredients",
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": settings?.address || "Xi'an, Shaanxi, China"
+    },
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": settings?.whatsapp || "",
+        "contactType": "customer service",
+        "email": settings?.contactEmail
+    },
+    "sameAs": [
+        "https://www.linkedin.com/company/cospep",
+    ]
+};
+---
+
+<BaseLayout title={title} description={description}>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    
+    <main class="flex min-h-screen flex-col">
+        <HeroSection client:load />
+        <TrustStatsBar client:visible />
+        <ProductEcosystem client:visible />
+        <ManufacturingSection client:visible />
+        <NewsBlogs client:visible />
+    </main>
+</BaseLayout>

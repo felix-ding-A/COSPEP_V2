@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../../lib/i18n';
+import { getBlogPostBySlug } from "@/lib/sanity/queries";
+import { PortableText } from "@portabletext/react";
+import { urlFor } from "@/lib/sanity";
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { blogPortableTextComponents } from "@/components/blog/blog-portable-text-components";
+
+const { slug, lang: langParam } = Astro.params;
+const lang = langParam || 'en';
+const t = useTranslations(lang as any);
+
+if (!slug) {
+    return Astro.redirect(`/${lang}/industry-insights`);
+}
+
+const post = await getBlogPostBySlug(slug);
+
+if (!post) {
+    return Astro.redirect('/404');
+}
+
+const faqTitle = lang === 'es' ? 'Preguntas Frecuentes' : (lang === 'ru' ? 'Часто задаваемые вопросы' : 'Frequently Asked Questions');
+
+const title = post.title || 'Industry Insights';
+const description = post.seoDescription || post.excerpt || 'Read our latest insights and articles';
+
+// JSON-LD
+const faqSchema = post.faqs && post.faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": post.faqs.map((faq: any) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer
+        }
+    }))
+} : null;
+
+const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "image": post.mainImage ? post.mainImage : undefined,
+    "datePublished": post.publishedAt,
+    "dateModified": post._updatedAt || post.publishedAt,
+    "author": {
+        "@type": "Organization",
+        "name": "COSPEP Team"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "COSPEP",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://cospep.com/logo.webp"
+        }
+    },
+    "description": post.seoDescription || post.excerpt
+};
+---
+
+<BaseLayout title={title} description={description}>
+    {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+    <main class="min-h-screen bg-[#0A0E0D]">
+        <div class="bg-gradient-to-b from-[#0F1612] to-[#0A0E0D]">
+            <Breadcrumbs title={post.title} />
+        </div>
+
+        <article class="container mx-auto px-4 py-12 md:px-6 lg:py-16">
+            <div class="mx-auto max-w-3xl">
+                {/* Hero Image */}
+                {post.mainImage && (
+                    <div class="relative aspect-video w-full overflow-hidden rounded-2xl mb-10 border border-white/10">
+                        <img
+                            src={post.mainImage}
+                            alt={post.title || "Blog post image"}
+                            class="object-cover w-full h-full"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0A0E0D] to-transparent opacity-40"></div>
+                    </div>
+                )}
+
+                {/* Meta */}
+                {post.publishedAt && (
+                    <div class="mb-6 text-sm text-[#B8FF00] font-medium tracking-wide uppercase">
+                        {new Date(post.publishedAt).toLocaleDateString(
+                            lang === 'cn' ? 'zh-CN' : (lang === 'es' ? 'es-ES' : 'en-US'),
+                            {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            }
+                        )}
+                    </div>
+                )}
+
+                {/* Title */}
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-8 text-white leading-tight">
+                    {post.title || "Untitled Post"}
+                </h1>
+
+                {/* Excerpt */}
+                {post.excerpt && (
+                    <p class="text-xl text-gray-400 mb-10 italic border-l-4 border-[#B8FF00] pl-6 py-2 leading-relaxed">
+                        {post.excerpt}
+                    </p>
+                )}
+
+                {/* Body */}
+                {post.body && Array.isArray(post.body) && post.body.length > 0 && (
+                    <div class="prose prose-lg prose-invert max-w-none text-gray-300 leading-relaxed
+                        prose-headings:text-white prose-headings:font-bold
+                        prose-a:text-[#B8FF00] prose-a:no-underline hover:prose-a:underline
+                        prose-strong:text-white prose-blockquote:border-[#B8FF00]
+                        prose-img:rounded-2xl prose-img:border prose-img:border-white/10">
+                        <PortableText value={post.body} components={blogPortableTextComponents} />
+                    </div>
+                )}
+
+                {/* FAQs Section - Collapsible */}
+                {post.faqs && post.faqs.length > 0 && (
+                    <div class="mt-16 border-t border-white/10 pt-16">
+                        <h2 class="text-3xl font-bold mb-8 text-white flex items-center gap-4">
+                            <span class="w-8 h-1 bg-[#B8FF00] rounded-full"></span>
+                            {faqTitle}
+                        </h2>
+                        <Accordion client:load type="single" collapsible class="w-full space-y-4">
+                            {post.faqs.map((faq: any, index: number) => (
+                                <AccordionItem key={index} value={`faq-${index}`} class="border border-white/10 rounded-xl overflow-hidden glass px-6 py-2">
+                                    <AccordionTrigger class="text-left font-semibold text-white hover:text-[#B8FF00] transition-colors py-4">
+                                        {faq.question}
+                                    </AccordionTrigger>
+                                    <AccordionContent class="text-gray-400 whitespace-pre-line pb-6 leading-relaxed">
+                                        {faq.answer}
+                                    </AccordionContent>
+                                </AccordionItem>
+                            ))}
+                        </Accordion>
+                    </div>
+                )}
+            </div>
+        </article>
+    </main>
+</BaseLayout>
