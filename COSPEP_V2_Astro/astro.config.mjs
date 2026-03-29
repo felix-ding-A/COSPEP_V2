@@ -15,13 +15,6 @@ export default defineConfig({
     host: '127.0.0.1',
     port: 4321,
   },
-  i18n: {
-    defaultLocale: "en",
-    locales: ["en", "es", "ru", "ar"],
-    routing: {
-      prefixDefaultLocale: false,
-    },
-  },
   vite: {
     plugins: [tailwindcss()],
   },

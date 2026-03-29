@@ -7,7 +7,7 @@ import { FilterSidebar } from '@/components/products/filter-sidebar';
 import { ProductCard } from '@/components/products/product-card';
 import { RequestForm } from '@/components/products/request-form';
 import { getProducts, getCategories, getSettings } from "@/lib/sanity/queries";
-import { getRelativeLocaleUrl } from 'astro:i18n';
+
 
 // SSR handling
 const { lang: langParam } = Astro.params;
@@ -48,7 +48,7 @@ const jsonLd = {
         "itemListElement": products.slice(0, 10).map((p, index) => ({
             "@type": "ListItem",
             "position": index + 1,
-            "url": `${Astro.url.origin}${getRelativeLocaleUrl(lang, `products/${p.slug.current}`)}`,
+            "url": `${Astro.url.origin}/${lang === 'en' ? '' : lang + '/'}products/${p.slug.current}`,
             "name": p.name
         }))
     }
