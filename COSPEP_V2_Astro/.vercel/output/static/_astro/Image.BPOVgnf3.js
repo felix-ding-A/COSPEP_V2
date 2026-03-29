@@ -1,1 +1,0 @@
-import{j as n}from"./jsx-runtime.u17CrQMm.js";import"./index.Bi6L2ga8.js";function p({src:r,alt:o,width:t,height:a,priority:e,className:i,...m}){return n.jsx("img",{src:r,alt:o,width:t,height:a,className:i,loading:e?"eager":"lazy",...m})}export{p as I};

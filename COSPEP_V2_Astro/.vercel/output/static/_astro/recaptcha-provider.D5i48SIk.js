@@ -1,1 +1,0 @@
-import{j as t}from"./jsx-runtime.u17CrQMm.js";import{h as o}from"./react-google-recaptcha-v3.esm.CWABdGC_.js";import"./index.Bi6L2ga8.js";const e="6LetCWssAAAAAPv7VLxiiJvTVPFVTOs6rLfTwOIS";function A({children:r}){return t.jsx(o,{reCaptchaKey:e,children:r})}export{A as ReCaptchaProvider};
