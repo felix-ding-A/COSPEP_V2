@@ -23,10 +23,14 @@ interface BreadcrumbItem {
 interface BreadcrumbsProps {
     /** Override the last breadcrumb segment label (e.g. product name from CMS) */
     title?: string;
+    /** Server-side pathname since window.location is unavailable */
+    pathname?: string;
 }
 
-export function Breadcrumbs({ title }: BreadcrumbsProps = {}) {
-    const pathname = usePathname(); // already locale-stripped, e.g. "/products/peptides"
+export function Breadcrumbs({ title, pathname: serverPath }: BreadcrumbsProps = {}) {
+    // Fall back to hook if no server path provided (though we should always provide it from Astro)
+    const clientPath = usePathname();
+    const pathname = serverPath || clientPath;
     const locale = useLocale();
 
     // Don't render breadcrumbs on the homepage

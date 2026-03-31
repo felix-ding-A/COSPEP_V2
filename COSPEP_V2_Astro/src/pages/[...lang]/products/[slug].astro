@@ -69,7 +69,7 @@ const jsonLd = {
     <div class="min-h-screen bg-[#0A0E0D]">
         {/* Breadcrumb */}
         <div class="bg-gradient-to-b from-[#0F1612] to-[#0A0E0D]">
-            <Breadcrumbs title={product.name} />
+            <Breadcrumbs title={product.name} pathname={Astro.url.pathname} />
         </div>
 
         <div class="container mx-auto px-4 md:px-6 py-10">
