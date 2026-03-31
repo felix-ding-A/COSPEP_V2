@@ -71,10 +71,9 @@ export function HeroSection() {
                             <Image
                                 src={carouselData[currentSlide].image}
                                 alt={carouselData[currentSlide].title}
-                                fill
                                 priority={currentSlide === 0}
                                 sizes="100vw"
-                                className="object-cover"
+                                className="object-cover w-full h-full"
                             />
                         </m.div>
                     </AnimatePresence>
