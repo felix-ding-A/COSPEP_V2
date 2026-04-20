@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
     Form,
@@ -25,6 +25,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 import React from 'react';
 
 // Form Schema
@@ -46,6 +47,7 @@ interface ProductContactFormProps {
 export function ProductContactForm({ productName }: ProductContactFormProps) {
     const locale = useLocale();
     const { executeRecaptcha } = useGoogleReCaptcha();
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -63,9 +65,13 @@ export function ProductContactForm({ productName }: ProductContactFormProps) {
 
     const onSubmit = useCallback(async (values: z.infer<typeof formSchema>) => {
         if (!executeRecaptcha) {
+            console.warn("reCAPTCHA not ready during submission");
             toast.error("reCAPTCHA not ready. Please try again.");
             return;
         }
+
+        setIsSubmitting(true);
+        console.log("Submitting product inquiry:", values);
 
         try {
             const recaptchaToken = await executeRecaptcha('submit_inquiry');
@@ -93,6 +99,8 @@ export function ProductContactForm({ productName }: ProductContactFormProps) {
         } catch (error) {
             console.error("Submission error:", error);
             toast.error("An error occurred. Please try again.");
+        } finally {
+            setIsSubmitting(false);
         }
     }, [executeRecaptcha, locale, form]);
 
@@ -255,8 +263,16 @@ export function ProductContactForm({ productName }: ProductContactFormProps) {
                     <Button
                         type="submit"
                         className="w-full bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-semibold text-lg h-12 hover:scale-[1.02] transition-all"
+                        disabled={isSubmitting}
                     >
-                        Send Request
+                        {isSubmitting ? (
+                            <>
+                                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                                Sending...
+                            </>
+                        ) : (
+                            "Send Request"
+                        )}
                     </Button>
 
                     {/* reCAPTCHA Legal Notice */}

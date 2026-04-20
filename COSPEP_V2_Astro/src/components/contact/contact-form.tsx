@@ -65,11 +65,13 @@ export function ContactForm() {
 
     const onSubmit = useCallback(async (values: z.infer<typeof formSchema>) => {
         if (!executeRecaptcha) {
+            console.warn("reCAPTCHA not ready during submission");
             toast.error("reCAPTCHA not ready. Please try again.");
             return;
         }
 
         setIsSubmitting(true);
+        console.log("Submitting inquiry:", values);
         try {
             const recaptchaToken = await executeRecaptcha('submit_inquiry');
 
