@@ -7,6 +7,7 @@ import * as z from "zod";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { ReCaptchaProvider } from "../providers/recaptcha-provider";
 import {
     Form,
     FormControl,
@@ -41,7 +42,7 @@ const formSchema = z.object({
     website: z.string().optional(), // Honeypot field
 });
 
-export function ContactForm() {
+function ContactFormInner() {
     const locale = useLocale();
     const searchParams = useSearchParams();
     const defaultProduct = searchParams.get("product") || "";
@@ -303,5 +304,13 @@ export function ContactForm() {
                 </form>
             </Form>
         </div>
+    );
+}
+
+export function ContactForm() {
+    return (
+        <ReCaptchaProvider>
+            <ContactFormInner />
+        </ReCaptchaProvider>
     );
 }

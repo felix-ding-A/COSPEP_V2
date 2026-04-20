@@ -7,6 +7,7 @@ import * as z from "zod";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { ReCaptchaProvider } from "../providers/recaptcha-provider";
 import {
     Form,
     FormControl,
@@ -44,7 +45,7 @@ interface ProductContactFormProps {
     productName?: string;
 }
 
-export function ProductContactForm({ productName }: ProductContactFormProps) {
+function ProductContactFormInner({ productName }: ProductContactFormProps) {
     const locale = useLocale();
     const { executeRecaptcha } = useGoogleReCaptcha();
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -286,5 +287,13 @@ export function ProductContactForm({ productName }: ProductContactFormProps) {
                 </form>
             </Form>
         </div>
+    );
+}
+
+export function ProductContactForm(props: ProductContactFormProps) {
+    return (
+        <ReCaptchaProvider>
+            <ProductContactFormInner {...props} />
+        </ReCaptchaProvider>
     );
 }
