@@ -54,7 +54,7 @@ export function PeptidePromo() {
 
                             <div className="pt-4">
                                 <Link 
-                                    href="/products?category=Peptide"
+                                    href="/peptides"
                                     className="inline-flex items-center px-8 py-4 bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-bold text-lg rounded-xl transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(184,255,0,0.3)] group"
                                 >
                                     {t('cta')}

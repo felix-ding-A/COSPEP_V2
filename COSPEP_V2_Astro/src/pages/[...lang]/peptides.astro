@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { PeptideCatalog } from "@/components/peptides/peptide-catalog";
+import { PeptideFAQ } from "@/components/peptides/peptide-faq";
+import { RequestForm } from "@/components/products/request-form";
+
+const { lang: langParam } = Astro.params;
+const lang = langParam || 'en';
+
+const title = "Multi-Peptide Catalog | COSPEP";
+const description = "Browse our comprehensive catalog of high-purity bioactive peptides. Search and explore our research-grade peptide collection with guaranteed quality.";
+---
+
+<BaseLayout title={title} description={description}>
+    <main class="min-h-screen bg-[#0A0E0D] text-white">
+        {/* Hero Section with Breadcrumbs */}
+        <div class="bg-gradient-to-b from-[#0F1612] to-[#0A0E0D]">
+            <Breadcrumbs />
+            
+            <div class="container mx-auto px-4 md:px-6 py-12 md:py-20 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-4">
+                    Peptide <span class="text-[#B8FF00]">Catalog</span>
+                </h1>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
+                    Explore our extensive list of bioactive peptides sourced for research and industrial innovation.
+                </p>
+            </div>
+        </div>
+
+        {/* Catalog Section */}
+        <div class="container mx-auto px-4 md:px-6 pb-24">
+            <PeptideCatalog client:load />
+            
+            <div class="mt-32">
+                <PeptideFAQ client:visible />
+            </div>
+        </div>
+
+        {/* Request Form */}
+        <RequestForm client:visible />
+    </main>
+</BaseLayout>
