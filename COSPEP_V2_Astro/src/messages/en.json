@@ -140,6 +140,12 @@
                 }
             ]
         },
+        "peptidePromo": {
+            "badge": "Research & Discovery",
+            "title": "Premium Multi-Peptides",
+            "subtitle": "Unlock the Power of Advanced Bioactive Peptides. Pure, Potent, and Expertly Sourced for Global Innovation.",
+            "cta": "Explore Peptide Collection"
+        },
         "manufacturing": {
             "badge": "Full-Service Operation",
             "title": "End-to-End\nSupplement Manufacturing",

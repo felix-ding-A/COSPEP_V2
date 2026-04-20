@@ -4,6 +4,7 @@ import { useTranslations } from '../lib/i18n';
 import { HeroSection } from '@/components/home/hero-section';
 import { TrustStatsBar } from '@/components/home/trust-stats-bar';
 import { ProductEcosystem } from '@/components/home/product-ecosystem';
+import { PeptidePromo } from '@/components/home/peptide-promo';
 import { ManufacturingSection } from '@/components/home/manufacturing-section';
 import { NewsBlogs } from '@/components/home/news-blogs';
 import { client } from "@/lib/sanity";
@@ -59,6 +60,7 @@ const jsonLd = {
     <main class="flex min-h-screen flex-col">
         <HeroSection client:load />
         <TrustStatsBar client:visible />
+        <PeptidePromo client:visible />
         <ProductEcosystem client:visible />
         <ManufacturingSection client:visible />
         <NewsBlogs client:visible />

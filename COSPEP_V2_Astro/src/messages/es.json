@@ -112,6 +112,12 @@
                 }
             ]
         },
+        "peptidePromo": {
+            "badge": "Investigación y Descubrimiento",
+            "title": "Péptidos Premium",
+            "subtitle": "Libere el poder de los péptidos bioactivos avanzados. Puros, potentes y abastecidos por expertos para la innovación global.",
+            "cta": "Explorar colección de péptidos"
+        },
         "manufacturing": {
             "badge": "Operación de servicio completo",
             "title": "Fabricación integral de suplementos",
