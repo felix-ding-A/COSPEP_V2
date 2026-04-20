@@ -9,18 +9,25 @@ import { Link } from "@/lib/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import React from 'react';
 
-const PEPTIDE_DATA = [
-    { name: "5-AMINO-1MQ", variants: 3, suppliers: 7 },
-    { name: "ACETIC ACID", variants: 2, suppliers: 2 },
-    { name: "ADAMAX", variants: 1, suppliers: 3 },
-    { name: "AHK-CU", variants: 2, suppliers: 5 },
-    { name: "AOD-9604", variants: 3, suppliers: 5 },
-    { name: "ARA-290", variants: 2, suppliers: 5 },
-    { name: "B12", variants: 1, suppliers: 2 },
-    { name: "BAC WATER", variants: 3, suppliers: 5 },
-    { name: "BPC157", variants: 4, suppliers: 8 },
-    { name: "+TB500 BPC", variants: 2, suppliers: 6 },
+const PEPTIDE_NAMES = [
+    "ACETIC ACID", "ADAMAX", "AHK-CU", "AOD-9604", "ARA-290", "B12", "BAC WATER", "BPC157", 
+    "CAGRILINTIDE", "CEREBROLYSIN", "CJC-1295 (NO DAC)", "CJC-1295 (WITH DAC)", "DERMORPHIN", 
+    "DSIP", "EPITALON", "FOX04", "GDF-8", "GHK-CU", "GHRP-2 ACETATE", "GHRP-6 ACETATE", 
+    "GLUTATHIONE", "HCG", "HEXARELIN ACETATE", "HGH FRAGMENT 176-191", "HMG", "HYALURONIC ACID", 
+    "IGF-1LR3", "IPAMORELIN", "KISSPEPTIN-10", "KPV", "L-CARNITINE", "LIPO C", "LL-37", 
+    "MAZDUTIDE", "MELANOTAN-1", "MELANOTAN-2", "MELATONIN", "MOTS-C", "NAD+", 
+    "OXYTOCIN ACETATE", "P21", "PE 22-28", "PEG MGF", "PINEALON", "PNC-27", "PT-141", 
+    "RETATRUTIDE", "SELANK", "SEMAGLUTIDE", "SEMAX", "SERMORELIN", "SLU-PP-332", "SNAP-8", 
+    "SOMATROPIN (HGH)", "SS-31", "SURVODUTIDE", "TB500", "TESAMORELIN", "TESTAGEN", "THYMALIN", 
+    "THYMOSIN ALPHA-1", "TIRZEPATIDE", "VILON", "VIP"
 ];
+
+const TAGS = ["Best Choice", "Top Pick", "Premium Selection"];
+
+const PEPTIDE_DATA = PEPTIDE_NAMES.map((name, index) => ({
+    name,
+    tag: TAGS[index % TAGS.length] // Deterministic "random" tag for consistency
+}));
 
 export function PeptideCatalog() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -72,8 +79,7 @@ export function PeptideCatalog() {
                                 <PeptideCard 
                                     key={peptide.name}
                                     name={peptide.name}
-                                    variants={peptide.variants}
-                                    suppliers={peptide.suppliers}
+                                    tag={peptide.tag}
                                 />
                             ))}
                         </motion.div>

@@ -7,12 +7,11 @@ import React from 'react';
 
 interface PeptideCardProps {
     name: string;
-    variants?: number;
-    suppliers?: number;
+    tag?: string;
     slug?: string;
 }
 
-export function PeptideCard({ name, variants = 1, suppliers = 1, slug }: PeptideCardProps) {
+export function PeptideCard({ name, tag, slug }: PeptideCardProps) {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -26,18 +25,31 @@ export function PeptideCard({ name, variants = 1, suppliers = 1, slug }: Peptide
 
             <div className="flex flex-col h-full space-y-4">
                 <div className="flex items-start justify-between">
-                    <div className="p-3 rounded-xl bg-white/5 border border-white/10 group-hover:border-[#B8FF00]/20 group-hover:bg-[#B8FF00]/5 transition-all">
-                        <Syringe className="w-6 h-6 text-[#B8FF00]" />
+                    <div className="px-3 py-1 rounded-full bg-[#B8FF00]/10 border border-[#B8FF00]/20">
+                        <span className="text-[10px] font-bold text-[#B8FF00] tracking-widest uppercase">
+                            POWDER
+                        </span>
                     </div>
                 </div>
 
                 <div className="flex-1">
-                    <h3 className="text-xl font-bold text-white group-hover:text-[#B8FF00] transition-colors leading-tight mb-2">
+                    <h3 className="text-xl font-bold text-white group-hover:text-[#B8FF00] transition-colors leading-tight mb-3">
                         {name}
                     </h3>
-                    <div className="space-y-1 text-sm text-gray-400">
-                        <p>{variants} {variants === 1 ? 'Variant' : 'Variants'}</p>
-                        <p>{suppliers} {suppliers === 1 ? 'Supplier' : 'Suppliers'}</p>
+                    
+                    <div className="space-y-3">
+                        <div className="flex items-center gap-2">
+                            <span className="text-xs font-medium text-gray-500 uppercase tracking-wider">MOQ</span>
+                            <span className="text-sm font-semibold text-gray-300">1g</span>
+                        </div>
+
+                        {tag && (
+                            <div className="inline-block px-2 py-1 rounded-md bg-white/5 border border-white/10">
+                                <span className="text-[10px] font-medium text-gray-400 uppercase tracking-tight">
+                                    {tag}
+                                </span>
+                            </div>
+                        )}
                     </div>
                 </div>
 
