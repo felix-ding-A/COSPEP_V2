@@ -15,6 +15,7 @@
     "@astrojs/check": "^0.9.8",
     "@astrojs/node": "^10.0.3",
     "@astrojs/react": "^5.0.1",
+    "@astrojs/sitemap": "^3.7.2",
     "@astrojs/vercel": "^10.0.3",
     "@hookform/resolvers": "^5.2.2",
     "@next/third-parties": "^16.2.1",

@@ -33,8 +33,20 @@ const [products, categories, settings] = await Promise.all([
     getSettings(),
 ]);
 
-const title = t('nav.products') + " | COSPEP";
-const description = "Explore our wide range of high-quality peptides and plant extracts. Direct from manufacturer with guaranteed purity.";
+let title = t('nav.products') + " | COSPEP";
+let description = "Explore our wide range of high-quality peptides and plant extracts. Direct from manufacturer with guaranteed purity.";
+
+if (search) {
+    title = `Search results for "${search}" | ${t('nav.products')} | COSPEP`;
+} else if (categoriesParam) {
+    const cat = categories.find(c => c.slug.current === categoriesParam);
+    if (cat) {
+        title = `${cat.title} | Premium Botanical Ingredients | COSPEP`;
+        description = `Browse our high-quality ${cat.title} collection. Sourced from certified manufacturers with guaranteed potency and purity.`;
+    }
+}
+
+const keywords = "Bioactive Peptides, Botanical Extracts, Plant Extracts China, Pharmaceutical Intermediates, Custom Manufacturing";
 
 // SEO JSON-LD
 const jsonLd = {

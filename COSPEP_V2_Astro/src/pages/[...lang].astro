@@ -28,8 +28,9 @@ const settings = await client.fetch(getSiteSettings);
 // SEO Metadata
 const baseUrl = 'https://cospep.com';
 const currentUrl = lang === 'en' ? baseUrl : `${baseUrl}/${lang}`;
-const title = "Top Chinese Peptide Suppliers & Plant Extracts | COSPEP";
-const description = "Looking for high-quality peptides from China? COSPEP is a leading manufacturer offering direct peptide wholesale China and premium plant extracts for global B2B buyers.";
+const title = "Leading Chinese Peptide Manufacturer & Plant Extracts Supplier | COSPEP";
+const description = "Best Chinese peptide suppliers for global B2B sourcing. COSPEP offers high-purity bioactive peptides, bulk plant extracts, and custom synthesis manufacturing with worldwide shipping.";
+const keywords = "China Peptide Suppliers, Chinese Peptide Manufacturer, Bioactive Peptides, Botanical Extracts Supplier, Bulk Peptides China, Custom Synthesis, Pharmaceutical Intermediates";
 
 const jsonLd = {
     "@context": "https://schema.org",
@@ -54,7 +55,7 @@ const jsonLd = {
 };
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} keywords={keywords}>
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     
     <main class="flex min-h-screen flex-col">

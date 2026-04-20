@@ -8,11 +8,12 @@ import { RequestForm } from "@/components/products/request-form";
 const { lang: langParam } = Astro.params;
 const lang = langParam || 'en';
 
-const title = "Multi-Peptide Catalog | COSPEP";
-const description = "Browse our comprehensive catalog of high-purity bioactive peptides. Search and explore our research-grade peptide collection with guaranteed quality.";
+const title = "Premium Peptide Catalog | Research Grade Bioactive Peptides China | COSPEP";
+const description = "Explore COSPEP's comprehensive bioactive peptide catalog. Leading Chinese supplier of high-purity peptides for research and industry. Worldwide shipping, cGMP quality.";
+const keywords = "Peptide Catalog, Bioactive Peptides, Research Peptides China, Peptide Wholesale, BPC157, Semaglutide, Tirzepatide, Peptide Synthesis";
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} keywords={keywords}>
     <main class="min-h-screen bg-[#0A0E0D] text-white">
         {/* Hero Section with Breadcrumbs */}
         <div class="bg-gradient-to-b from-[#0F1612] to-[#0A0E0D]">

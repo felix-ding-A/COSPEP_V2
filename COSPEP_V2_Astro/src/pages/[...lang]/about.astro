@@ -10,11 +10,12 @@ import { AboutCarousel } from "@/components/about/about-carousel";
 const { lang: langParam } = Astro.params;
 const lang = langParam || 'en';
 
-const title = "About COSPEP | Bridging Nature's Purity with Scientific Innovation";
-const description = "Learn about COSPEP's journey from the heart of the Qinling Mountains to becoming a leading supplier of premium botanical ingredients and bioactive peptides.";
+const title = "About COSPEP | China Peptide Manufacturer & Botanical Extract Supplier";
+const description = "Learn how COSPEP bridges nature's purity with scientific innovation. Leading Chinese supplier of high-purity peptides and premium botanical extracts since 2015. cGMP & ISO certified.";
+const keywords = "About COSPEP, China Peptide Manufacturer, Botanical Extract Supplier, Qinling Mountains Sourcing, Bioactive Peptides, Peptide Synthesis China";
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} keywords={keywords}>
     <main class="flex flex-col min-h-screen bg-[#0A0E0D] text-white">
         <div class="bg-gradient-to-b from-[#0F1612] to-[#0A0E0D]">
             <Breadcrumbs />

@@ -7,11 +7,23 @@ import { Toaster } from "@/components/ui/sonner";
 interface Props {
 	title: string;
 	description?: string;
+	keywords?: string;
+	ogType?: string;
+	ogImage?: string;
 }
 
-const { title, description = "COSPEP - Pure, Potent & Naturally Derived" } = Astro.props;
+const { 
+	title, 
+	description = "COSPEP - Pure, Potent & Naturally Derived Bioactive Peptides and Plant Extracts",
+	keywords = "COSPEP, Bioactive Peptides, Botanical Extracts, Plant Extracts China, Custom Synthesis, cGMP Manufacturing",
+	ogType = "website",
+	ogImage = "/og-image.webp"
+} = Astro.props;
+
 const { lang = "en" } = Astro.params;
 const dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+const absoluteOgImage = new URL(ogImage, Astro.site).href;
 ---
 
 <!doctype html>
@@ -21,26 +33,28 @@ const dir = lang === 'ar' ? 'rtl' : 'ltr';
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/webp" href="/favicon.webp" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="theme-color" content="#0A0E0D" />
 		
 		<!-- Primary Meta Tags -->
 		<title>{title}</title>
 		<meta name="title" content={title} />
 		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
 		<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
 
 		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
+		<meta property="og:type" content={ogType} />
 		<meta property="og:url" content={Astro.url} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:image" content={new URL('/og-image.webp', Astro.site)} />
+		<meta property="og:image" content={absoluteOgImage} />
 
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:url" content={Astro.url} />
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description} />
-		<meta property="twitter:image" content={new URL('/og-image.webp', Astro.site)} />
+		<meta property="twitter:image" content={absoluteOgImage} />
 	</head>
 	<body class="min-h-screen bg-[#0A0E0D] font-sans antialiased text-white flex flex-col">
 		<Toaster client:load />

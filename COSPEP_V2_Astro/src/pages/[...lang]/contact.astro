@@ -9,11 +9,12 @@ import { Button } from "@/components/ui/button";
 const { lang: langParam } = Astro.params;
 const lang = langParam || 'en';
 
-const title = "Contact Us | COSPEP";
-const description = "Get in touch with COSPEP for high-quality botanical ingredients and bioactive peptides. We offer expert sourcing, technical support, and global logistics solutions.";
+const title = "Contact COSPEP | China Peptide Wholesale & Botanical Sourcing";
+const description = "Get in touch with COSPEP for high-quality botanical ingredients and bioactive peptides. Expert sourcing, technical support, and global logistics solutions for B2B buyers.";
+const keywords = "Contact COSPEP, Peptide Wholesale China, Botanical Sourcing Partner, Buy Peptides Bulk, Plant Extract Supplier Contact";
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} keywords={keywords}>
     <main class="min-h-screen bg-[#0A0E0D] text-white">
         <div class="bg-gradient-to-b from-[#0F1612] to-[#0A0E0D]">
             <Breadcrumbs />
