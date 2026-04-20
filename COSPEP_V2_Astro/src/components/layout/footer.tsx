@@ -86,7 +86,7 @@ export function Footer() {
                         <div className="space-y-4">
                             <h3 className="text-foreground font-semibold">{t('contact.title')}</h3>
                             <ul className="space-y-2 text-sm">
-                                <li>{settings?.address || "Xi'an, Shaanxi, China"}</li>
+                                <li>{settings?.address || "Xi'an International Trade & Logistics Park"}</li>
                                 {settings?.contactEmail && (
                                     <li><a href={`mailto:${settings.contactEmail}`} className="hover:text-primary">{settings.contactEmail}</a></li>
                                 )}
