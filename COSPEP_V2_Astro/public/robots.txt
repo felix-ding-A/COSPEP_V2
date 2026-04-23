@@ -3,3 +3,4 @@ Allow: /
 Disallow: /api/
 
 Sitemap: https://cospep.com/sitemap.xml
+Sitemap: https://cospep.com/llms.txt
