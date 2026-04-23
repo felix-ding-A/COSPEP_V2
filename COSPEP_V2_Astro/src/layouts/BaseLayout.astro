@@ -23,6 +23,25 @@ const {
 const { lang = "en" } = Astro.params;
 const dir = lang === 'ar' ? 'rtl' : 'ltr';
 
+// Multi-language SEO alternates
+const languages = ['en', 'es', 'ru', 'ar'];
+const pathname = Astro.url.pathname;
+const pathWithoutLang = pathname.replace(/^\/(es|ru|ar)(\/|$)/, '/');
+
+const alternates = languages.map(l => {
+    const prefix = l === 'en' ? '' : `/${l}`;
+    let path = pathWithoutLang;
+    if (prefix) {
+        path = pathWithoutLang === '/' ? prefix : `${prefix}${pathWithoutLang}`;
+    }
+    return {
+        lang: l,
+        href: new URL(path, Astro.site)
+    };
+});
+
+const xDefault = alternates.find(a => a.lang === 'en')?.href;
+
 const absoluteOgImage = new URL(ogImage, Astro.site).href;
 ---
 
@@ -57,6 +76,13 @@ const absoluteOgImage = new URL(ogImage, Astro.site).href;
 		<meta name="title" content={title} />
 		<meta name="description" content={description} />
 		<meta name="keywords" content={keywords} />
+		
+		<!-- Language Alternates -->
+		{alternates.map(alt => (
+			<link rel="alternate" hreflang={alt.lang} href={alt.href} />
+		))}
+		<link rel="alternate" hreflang="x-default" href={xDefault} />
+		
 		<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
 
 		<!-- Open Graph / Facebook -->
