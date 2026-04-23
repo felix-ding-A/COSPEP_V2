@@ -29,6 +29,15 @@ const absoluteOgImage = new URL(ogImage, Astro.site).href;
 <!doctype html>
 <html lang={lang} dir={dir} class="dark">
 	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-QEVM1NZGDL"></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'G-QEVM1NZGDL');
+		</script>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/webp" href="/favicon.webp" />
