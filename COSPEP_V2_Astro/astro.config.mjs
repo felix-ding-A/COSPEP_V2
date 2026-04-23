@@ -5,10 +5,16 @@ import tailwindcss from '@tailwindcss/vite';
 
 import vercel from '@astrojs/vercel';
 
+import partytown from '@astrojs/partytown';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://cospep.com',
-  integrations: [react()],
+  integrations: [react(), partytown({
+    config: {
+      forward: ['dataLayer.push'],
+    },
+  })],
   output: 'server',
   adapter: vercel(),
   server: {

@@ -49,8 +49,8 @@ const absoluteOgImage = new URL(ogImage, Astro.site).href;
 <html lang={lang} dir={dir} class="dark">
 	<head>
 		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-QEVM1NZGDL"></script>
-		<script is:inline>
+		<script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-QEVM1NZGDL"></script>
+		<script type="text/partytown">
 			window.dataLayer = window.dataLayer || [];
 			function gtag(){dataLayer.push(arguments);}
 			gtag('js', new Date());
@@ -58,7 +58,7 @@ const absoluteOgImage = new URL(ogImage, Astro.site).href;
 			gtag('config', 'G-QEVM1NZGDL');
 		</script>
 		<!-- Microsoft Clarity -->
-		<script is:inline>
+		<script type="text/partytown">
 			(function(c,l,a,r,i,t,y){
 				c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
 				t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;

@@ -1,0 +1,100 @@
+---
+import { ArrowRight, Microscope } from "lucide-astro";
+import { useTranslations } from "@/lib/i18n";
+import { Link } from "@/lib/navigation";
+
+const { lang = "en" } = Astro.params;
+const t = useTranslations(lang as any);
+---
+
+<section class="relative py-20 overflow-hidden" id="peptide-promo-section">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl">
+            {/* Background with Image */}
+            <div class="absolute inset-0 z-0">
+                <img
+                    src="/images/peptide-promo-bg.png"
+                    alt="Peptide Research"
+                    class="object-cover w-full h-full"
+                    loading="lazy"
+                />
+                {/* Premium Gradient Overlays */}
+                <div class="absolute inset-0 bg-gradient-to-r from-[#0A0E0D] via-[#0A0E0D]/80 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0A0E0D] via-transparent to-transparent"></div>
+                <div class="absolute inset-0 bg-[#B8FF00]/5 mix-blend-overlay"></div>
+            </div>
+
+            {/* Content Section */}
+            <div class="relative z-10 px-8 py-16 md:px-16 md:py-24 max-w-2xl promo-content opacity-0 -translate-x-8 transition-all duration-700 ease-out">
+                <div class="space-y-6">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 rounded-lg bg-[#B8FF00]/10 border border-[#B8FF00]/20">
+                            <Microscope class="w-5 h-5 text-[#B8FF00]" />
+                        </div>
+                        <span class="text-[#B8FF00] font-medium tracking-widest uppercase text-sm">
+                            {t('home.peptidePromo.badge')}
+                        </span>
+                    </div>
+
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+                        {t('home.peptidePromo.title')}
+                    </h2>
+
+                    <p class="text-gray-300 text-lg md:text-xl leading-relaxed">
+                        {t('home.peptidePromo.subtitle')}
+                    </p>
+
+                    <div class="pt-4">
+                        <Link 
+                            href="/peptides"
+                            class="inline-flex items-center px-8 py-4 bg-[#B8FF00] hover:bg-[#A3E600] text-[#0A0E0D] font-bold text-lg rounded-xl transition-all hover:scale-105 hover:shadow-[0_0_20px_rgba(184,255,0,0.3)] group"
+                        >
+                            {t('home.peptidePromo.cta')}
+                            <ArrowRight class="ml-2 w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                    </div>
+                </div>
+            </div>
+
+            {/* Decorative Elements */}
+            <div class="absolute top-0 right-0 p-12 hidden lg:block">
+                <div class="w-64 h-64 border border-[#B8FF00]/10 rounded-full flex items-center justify-center animate-spin-slow">
+                    <div class="w-48 h-48 border border-[#B8FF00]/5 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const content = entry.target.querySelector('.promo-content');
+                if (content) {
+                    content.classList.remove('opacity-0', '-translate-x-8');
+                    content.classList.add('opacity-100', 'translate-x-0');
+                }
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    const section = document.getElementById('peptide-promo-section');
+    if (section) {
+        observer.observe(section);
+    }
+</script>
+
+<style>
+    @keyframes spin-slow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    .animate-spin-slow {
+        animation: spin-slow 20s linear infinite;
+    }
+    .promo-content {
+        transition-property: transform, opacity;
+    }
+</style>

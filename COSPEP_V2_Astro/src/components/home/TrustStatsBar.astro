@@ -1,0 +1,93 @@
+---
+import { Award, Shield, FlaskConical, Globe } from "lucide-astro";
+import { useTranslations } from "@/lib/i18n";
+
+const { lang = "en" } = Astro.params;
+const t = useTranslations(lang as any);
+
+const stats = [
+    {
+        icon: Award,
+        label: t('home.stats.cgmp.label'),
+        description: t('home.stats.cgmp.description')
+    },
+    {
+        icon: Shield,
+        label: t('home.stats.fda.label'),
+        description: t('home.stats.fda.description')
+    },
+    {
+        icon: FlaskConical,
+        label: t('home.stats.tested.label'),
+        description: t('home.stats.tested.description')
+    },
+    {
+        icon: Globe,
+        label: t('home.stats.shipping.label'),
+        description: t('home.stats.shipping.description')
+    }
+];
+---
+
+<section class="relative -mt-20 z-20" id="trust-stats-section">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="glass rounded-2xl overflow-hidden shadow-2xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-white/10">
+                {stats.map((stat, index) => {
+                    const Icon = stat.icon;
+                    return (
+                        <div 
+                            class="p-8 text-center group hover:bg-white/5 transition-all duration-300 stats-item opacity-0 translate-y-4"
+                            style={`transition-delay: ${index * 100}ms`}
+                        >
+                            <div class="flex flex-col items-center gap-3">
+                                <div class="w-14 h-14 rounded-full bg-[#B8FF00]/10 flex items-center justify-center group-hover:bg-[#B8FF00]/20 transition-colors">
+                                    <Icon class="w-7 h-7 text-[#B8FF00]" />
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white mb-1">
+                                        {stat.label}
+                                    </h3>
+                                    <p class="text-sm text-gray-400">
+                                        {stat.description}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const items = entry.target.querySelectorAll('.stats-item');
+                items.forEach(item => {
+                    item.classList.remove('opacity-0', 'translate-y-4');
+                    item.classList.add('opacity-100', 'translate-y-0');
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    const section = document.getElementById('trust-stats-section');
+    if (section) {
+        observer.observe(section);
+    }
+</script>
+
+<style>
+    .stats-item {
+        transition-property: transform, opacity;
+    }
+</style>

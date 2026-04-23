@@ -2,11 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { useTranslations } from '../lib/i18n';
 import { HeroSection } from '@/components/home/hero-section';
-import { TrustStatsBar } from '@/components/home/trust-stats-bar';
-import { ProductEcosystem } from '@/components/home/product-ecosystem';
-import { PeptidePromo } from '@/components/home/peptide-promo';
-import { ManufacturingSection } from '@/components/home/manufacturing-section';
-import { NewsBlogs } from '@/components/home/news-blogs';
+import TrustStatsBar from '../components/home/TrustStatsBar.astro';
+import PeptidePromo from '../components/home/PeptidePromo.astro';
+import ProductEcosystem from '../components/home/ProductEcosystem.astro';
+import ManufacturingSection from '../components/home/ManufacturingSection.astro';
+import NewsBlogs from '../components/home/NewsBlogs.astro';
 import { client } from "@/lib/sanity";
 import { getSiteSettings } from "@/lib/sanity/queries";
 
@@ -59,11 +59,11 @@ const jsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     
     <main class="flex min-h-screen flex-col">
-        <HeroSection client:load />
-        <TrustStatsBar client:visible />
-        <PeptidePromo client:visible />
-        <ProductEcosystem client:visible />
-        <ManufacturingSection client:visible />
-        <NewsBlogs client:visible />
+        <HeroSection client:idle />
+        <TrustStatsBar />
+        <PeptidePromo />
+        <ProductEcosystem />
+        <ManufacturingSection />
+        <NewsBlogs />
     </main>
 </BaseLayout>
