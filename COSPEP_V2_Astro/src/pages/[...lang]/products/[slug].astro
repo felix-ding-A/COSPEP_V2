@@ -27,7 +27,7 @@ if (!product) {
 
 const isReadyStock = product.stockStatus === 'Ready to Ship';
 
-const title = product.seoTitle || `${product.name} | COSPEP`;
+const title = product.seoTitle || t('meta.productDetail.titleFallback').replace('{name}', product.name);
 const description = product.seoDesc || t('meta.productDetail.fallback').replace('{name}', product.name);
 
 // JSON-LD Structured Data

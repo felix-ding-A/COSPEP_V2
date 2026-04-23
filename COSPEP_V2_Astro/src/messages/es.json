@@ -166,33 +166,43 @@
     },
     "meta": {
         "home": {
+            "title": "Fabricante líder de péptidos en China y proveedor de extractos | COSPEP",
             "description": "Fabricante líder de péptidos en China y proveedor de extractos de plantas. Especialista en péptidos bioactivos de alta pureza y síntesis personalizada para B2B global."
         },
         "products": {
+            "title": "Catálogo de Péptidos Bioactivos y Extractos de Plantas | COSPEP",
             "description": "Explore nuestra amplia gama de péptidos y extractos de plantas de alta calidad. Directo del fabricante con pureza garantizada y envío mundial."
         },
         "industryInsights": {
+            "title": "Blog e Información de la Industria | Tecnología de Péptidos | COSPEP",
             "description": "Lea nuestros últimos artículos sobre péptidos bioactivos, extractos de plantas e intermedios farmacéuticos."
         },
         "about": {
+            "title": "Sobre COSPEP | Fabricante de Péptidos y Proveedor de Extractos en China",
             "description": "Conozca COSPEP, proveedor principal de ingredientes botánicos y péptidos bioactivos. Descubra nuestra misión, valores y excelencia en fabricación."
         },
         "contact": {
+            "title": "Contactar COSPEP | Venta al por mayor de Péptidos y Suministro Botánico",
             "description": "Contacte con COSPEP para el suministro de péptidos y fabricación personalizada. Solicite cotizaciones, soporte técnico y logística global."
         },
         "customManufacturing": {
+            "title": "Fabricación Personalizada y Servicios OEM | COSPEP",
             "description": "Servicios profesionales de síntesis personalizada y fabricación de suplementos. Desde el diseño de fórmulas hasta soluciones llave en mano cGMP."
         },
         "peptides": {
+            "title": "Catálogo de Péptidos Premium | Péptidos Bioactivos en China | COSPEP",
             "description": "Catálogo especializado de péptidos bioactivos premium. Puros, potentes y abastecidos por expertos para la innovación cosmética y farmacéutica."
         },
         "service": {
+            "title": "Servicios y Logística | Suministro Global y Cadena de Suministro | COSPEP",
             "description": "Logística global simplificada para sus ingredientes botánicos. Un solo envío, múltiples fábricas y estándares de embalaje profesional."
         },
         "productDetail": {
+            "titleFallback": "{name} | Péptidos de Alta Pureza | COSPEP",
             "fallback": "Compre {name} de alta calidad en COSPEP. Proveedor confiable de péptidos con entrega global y pureza certificada."
         },
         "blogDetail": {
+            "titleFallback": "{title} | Información de la Industria | COSPEP",
             "fallback": "Lea sobre {title} y descubra las últimas tendencias en ingredientes bioactivos y fabricación farmacéutica."
         }
     }

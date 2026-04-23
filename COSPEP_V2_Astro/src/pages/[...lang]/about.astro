@@ -13,7 +13,7 @@ const { lang: langParam } = Astro.params;
 const lang = langParam || 'en';
 const t = useTranslations(lang as any);
 
-const title = "About COSPEP | China Peptide Manufacturer & Botanical Extract Supplier";
+const title = t('meta.about.title');
 const description = t('meta.about.description');
 const keywords = "About COSPEP, China Peptide Manufacturer, Botanical Extract Supplier, Qinling Mountains Sourcing, Bioactive Peptides, Peptide Synthesis China";
 ---

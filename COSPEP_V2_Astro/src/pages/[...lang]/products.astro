@@ -33,7 +33,7 @@ const [products, categories, settings] = await Promise.all([
     getSettings(),
 ]);
 
-let title = t('nav.products') + " | COSPEP";
+let title = t('meta.products.title');
 let description = t('meta.products.description');
 
 if (search) {

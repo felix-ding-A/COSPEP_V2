@@ -11,7 +11,7 @@ const { lang: langParam } = Astro.params;
 const lang = langParam || 'en';
 const t = useTranslations(lang as any);
 
-const title = "Premium Peptide Catalog | Research Grade Bioactive Peptides China | COSPEP";
+const title = t('meta.peptides.title');
 const description = t('meta.peptides.description');
 const keywords = "Peptide Catalog, Bioactive Peptides, Research Peptides China, Peptide Wholesale, BPC157, Semaglutide, Tirzepatide, Peptide Synthesis";
 ---

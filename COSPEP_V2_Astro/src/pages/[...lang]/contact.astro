@@ -12,7 +12,7 @@ const { lang: langParam } = Astro.params;
 const lang = langParam || 'en';
 const t = useTranslations(lang as any);
 
-const title = "Contact COSPEP | China Peptide Wholesale & Botanical Sourcing";
+const title = t('meta.contact.title');
 const description = t('meta.contact.description');
 const keywords = "Contact COSPEP, Peptide Wholesale China, Botanical Sourcing Partner, Buy Peptides Bulk, Plant Extract Supplier Contact";
 ---

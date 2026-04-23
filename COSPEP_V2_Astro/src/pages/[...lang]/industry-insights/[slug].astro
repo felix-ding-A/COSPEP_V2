@@ -24,7 +24,7 @@ if (!post) {
 
 const faqTitle = lang === 'es' ? 'Preguntas Frecuentes' : (lang === 'ru' ? 'Часто задаваемые вопросы' : 'Frequently Asked Questions');
 
-const title = post.title || 'Industry Insights';
+const title = post.seoTitle || t('meta.blogDetail.titleFallback').replace('{title}', post.title);
 const description = post.seoDescription || post.excerpt || t('meta.blogDetail.fallback').replace('{title}', post.title);
 
 // JSON-LD

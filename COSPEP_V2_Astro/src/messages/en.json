@@ -194,33 +194,43 @@
     },
     "meta": {
         "home": {
+            "title": "Leading Chinese Peptide Manufacturer & Plant Extracts Supplier | COSPEP",
             "description": "Leading Chinese Peptide Manufacturer & Plant Extracts Supplier. Specialist in high-purity bioactive peptides, bulk botanical extracts, and custom synthesis for global B2B sourcing."
         },
         "products": {
+            "title": "High-Purity Bioactive Peptides & Plant Extracts Catalog | COSPEP",
             "description": "Explore our wide range of high-quality peptides and plant extracts. Direct from manufacturer with guaranteed purity and worldwide shipping."
         },
         "industryInsights": {
+            "title": "Industry Insights & Blog | Bioactive Peptide Technology | COSPEP",
             "description": "Read our latest insights and articles on bioactive peptides, plant extracts, and pharmaceutical intermediates."
         },
         "about": {
+            "title": "About COSPEP | China Peptide Manufacturer & Botanical Extract Supplier",
             "description": "Learn about COSPEP, a premier supplier of botanical ingredients and bioactive peptides. Discover our mission, values, and manufacturing excellence."
         },
         "contact": {
+            "title": "Contact COSPEP | China Peptide Wholesale & Botanical Sourcing",
             "description": "Contact COSPEP for high-quality peptide sourcing and custom manufacturing. Reach our team for quotes, technical support, and global logistics."
         },
         "customManufacturing": {
+            "title": "Custom Manufacturing & OEM Services | COSPEP",
             "description": "Professional custom synthesis and supplement manufacturing services. From formula design to turnkey solutions with cGMP standards."
         },
         "peptides": {
+            "title": "Premium Peptide Catalog | Research Grade Bioactive Peptides China | COSPEP",
             "description": "Specialized catalog of premium bioactive multi-peptides. Pure, potent, and expertly sourced for cosmetic and pharmaceutical innovation."
         },
         "service": {
+            "title": "Services & Logistics | Global Sourcing & Supply Chain | COSPEP",
             "description": "Streamlined global logistics for your botanical ingredients. One shipment, multiple factories, and professional packaging standards."
         },
         "productDetail": {
+            "titleFallback": "{name} | High-Purity Peptides | COSPEP",
             "fallback": "Buy high-quality {name} at COSPEP. Trusted Chinese peptide supplier with global delivery and certified purity."
         },
         "blogDetail": {
+            "titleFallback": "{title} | Industry Insights | COSPEP",
             "fallback": "Read about {title} and discover the latest trends in bioactive ingredients and pharmaceutical manufacturing."
         }
     }
