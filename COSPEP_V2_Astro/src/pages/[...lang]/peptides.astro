@@ -5,11 +5,14 @@ import { PeptideCatalog } from "@/components/peptides/peptide-catalog";
 import { PeptideFAQ } from "@/components/peptides/peptide-faq";
 import { RequestForm } from "@/components/products/request-form";
 
+import { useTranslations } from '../../lib/i18n';
+
 const { lang: langParam } = Astro.params;
 const lang = langParam || 'en';
+const t = useTranslations(lang as any);
 
 const title = "Premium Peptide Catalog | Research Grade Bioactive Peptides China | COSPEP";
-const description = "Explore COSPEP's comprehensive bioactive peptide catalog. Leading Chinese supplier of high-purity peptides for research and industry. Worldwide shipping, cGMP quality.";
+const description = t('meta.peptides.description');
 const keywords = "Peptide Catalog, Bioactive Peptides, Research Peptides China, Peptide Wholesale, BPC157, Semaglutide, Tirzepatide, Peptide Synthesis";
 ---
 

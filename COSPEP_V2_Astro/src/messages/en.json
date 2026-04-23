@@ -191,5 +191,37 @@
                 "madeToOrder": "Made to Order"
             }
         }
+    },
+    "meta": {
+        "home": {
+            "description": "Leading Chinese Peptide Manufacturer & Plant Extracts Supplier. Specialist in high-purity bioactive peptides, bulk botanical extracts, and custom synthesis for global B2B sourcing."
+        },
+        "products": {
+            "description": "Explore our wide range of high-quality peptides and plant extracts. Direct from manufacturer with guaranteed purity and worldwide shipping."
+        },
+        "industryInsights": {
+            "description": "Read our latest insights and articles on bioactive peptides, plant extracts, and pharmaceutical intermediates."
+        },
+        "about": {
+            "description": "Learn about COSPEP, a premier supplier of botanical ingredients and bioactive peptides. Discover our mission, values, and manufacturing excellence."
+        },
+        "contact": {
+            "description": "Contact COSPEP for high-quality peptide sourcing and custom manufacturing. Reach our team for quotes, technical support, and global logistics."
+        },
+        "customManufacturing": {
+            "description": "Professional custom synthesis and supplement manufacturing services. From formula design to turnkey solutions with cGMP standards."
+        },
+        "peptides": {
+            "description": "Specialized catalog of premium bioactive multi-peptides. Pure, potent, and expertly sourced for cosmetic and pharmaceutical innovation."
+        },
+        "service": {
+            "description": "Streamlined global logistics for your botanical ingredients. One shipment, multiple factories, and professional packaging standards."
+        },
+        "productDetail": {
+            "fallback": "Buy high-quality {name} at COSPEP. Trusted Chinese peptide supplier with global delivery and certified purity."
+        },
+        "blogDetail": {
+            "fallback": "Read about {title} and discover the latest trends in bioactive ingredients and pharmaceutical manufacturing."
+        }
     }
 }

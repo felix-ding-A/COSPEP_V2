@@ -163,5 +163,37 @@
                 "madeToOrder": "Bajo pedido"
             }
         }
+    },
+    "meta": {
+        "home": {
+            "description": "Fabricante líder de péptidos en China y proveedor de extractos de plantas. Especialista en péptidos bioactivos de alta pureza y síntesis personalizada para B2B global."
+        },
+        "products": {
+            "description": "Explore nuestra amplia gama de péptidos y extractos de plantas de alta calidad. Directo del fabricante con pureza garantizada y envío mundial."
+        },
+        "industryInsights": {
+            "description": "Lea nuestros últimos artículos sobre péptidos bioactivos, extractos de plantas e intermedios farmacéuticos."
+        },
+        "about": {
+            "description": "Conozca COSPEP, proveedor principal de ingredientes botánicos y péptidos bioactivos. Descubra nuestra misión, valores y excelencia en fabricación."
+        },
+        "contact": {
+            "description": "Contacte con COSPEP para el suministro de péptidos y fabricación personalizada. Solicite cotizaciones, soporte técnico y logística global."
+        },
+        "customManufacturing": {
+            "description": "Servicios profesionales de síntesis personalizada y fabricación de suplementos. Desde el diseño de fórmulas hasta soluciones llave en mano cGMP."
+        },
+        "peptides": {
+            "description": "Catálogo especializado de péptidos bioactivos premium. Puros, potentes y abastecidos por expertos para la innovación cosmética y farmacéutica."
+        },
+        "service": {
+            "description": "Logística global simplificada para sus ingredientes botánicos. Un solo envío, múltiples fábricas y estándares de embalaje profesional."
+        },
+        "productDetail": {
+            "fallback": "Compre {name} de alta calidad en COSPEP. Proveedor confiable de péptidos con entrega global y pureza certificada."
+        },
+        "blogDetail": {
+            "fallback": "Lea sobre {title} y descubra las últimas tendencias en ingredientes bioactivos y fabricación farmacéutica."
+        }
     }
 }

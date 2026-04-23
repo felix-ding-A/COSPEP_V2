@@ -6,11 +6,14 @@ import { ReCaptchaProvider } from "@/components/providers/recaptcha-provider";
 import { MapPin, Mail, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+import { useTranslations } from '../../lib/i18n';
+
 const { lang: langParam } = Astro.params;
 const lang = langParam || 'en';
+const t = useTranslations(lang as any);
 
 const title = "Contact COSPEP | China Peptide Wholesale & Botanical Sourcing";
-const description = "Get in touch with COSPEP for high-quality botanical ingredients and bioactive peptides. Expert sourcing, technical support, and global logistics solutions for B2B buyers.";
+const description = t('meta.contact.description');
 const keywords = "Contact COSPEP, Peptide Wholesale China, Botanical Sourcing Partner, Buy Peptides Bulk, Plant Extract Supplier Contact";
 ---
 

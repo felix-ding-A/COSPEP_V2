@@ -28,7 +28,7 @@ if (!product) {
 const isReadyStock = product.stockStatus === 'Ready to Ship';
 
 const title = product.seoTitle || `${product.name} | COSPEP`;
-const description = product.seoDesc || `Buy high-quality ${product.name} at COSPEP. Trusted Chinese peptide supplier.`;
+const description = product.seoDesc || t('meta.productDetail.fallback').replace('{name}', product.name);
 
 // JSON-LD Structured Data
 const jsonLd = {

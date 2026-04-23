@@ -34,7 +34,7 @@ const [products, categories, settings] = await Promise.all([
 ]);
 
 let title = t('nav.products') + " | COSPEP";
-let description = "Explore our wide range of high-quality peptides and plant extracts. Direct from manufacturer with guaranteed purity.";
+let description = t('meta.products.description');
 
 if (search) {
     title = `Search results for "${search}" | ${t('nav.products')} | COSPEP`;
