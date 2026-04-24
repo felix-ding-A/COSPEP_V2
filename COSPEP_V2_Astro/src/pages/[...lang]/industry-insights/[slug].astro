@@ -30,11 +30,30 @@ if (post.body && Array.isArray(post.body)) {
                 const res = await fetch(block.url);
                 if (res.ok) {
                     const text = await res.text();
-                    const rows = text.split('\n').map(row => 
-                        row.split(',').map(cell => cell.replace(/^"(.*)"$/, '$1'))
-                    );
-                    // Filter empty rows
-                    block.sheetData = rows.filter(row => row.some(cell => cell.trim() !== ''));
+                    // More robust CSV parsing
+                    const rows = text.split(/\r?\n/)
+                        .map(row => {
+                            // Split by comma but respect quoted strings (if any)
+                            const regex = /,(?=(?:(?:[^"]*"){2})*[^"]*$)/;
+                            return row.split(regex).map(cell => 
+                                cell.trim().replace(/^"(.*)"$/, '$1').trim()
+                            );
+                        })
+                        .filter(row => row.some(cell => cell !== ''));
+
+                    // Auto-crop extra empty columns that Google Sheets might export
+                    if (rows.length > 0) {
+                        let maxCols = 0;
+                        rows.forEach(row => {
+                            for (let i = row.length - 1; i >= 0; i--) {
+                                if (row[i] !== '') {
+                                    maxCols = Math.max(maxCols, i + 1);
+                                    break;
+                                }
+                            }
+                        });
+                        block.sheetData = rows.map(row => row.slice(0, maxCols));
+                    }
                 }
             } catch (err) {
                 console.error('Failed to pre-fetch Google Sheet data on SSR:', err);
