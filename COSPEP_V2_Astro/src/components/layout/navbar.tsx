@@ -11,17 +11,11 @@ import {
     SheetTrigger,
     SheetClose
 } from "@/components/ui/sheet";
-import { Menu, ChevronDown, Search, Globe } from "lucide-react";
+import { Menu, ChevronDown, Search } from "lucide-react";
 
 // Resources submenu items
 
 // Language options
-const languages = [
-    { code: 'en', name: 'English', flag: '🇺🇸' },
-    { code: 'es', name: 'Español', flag: '🇪🇸' },
-    { code: 'ru', name: 'Русский', flag: '🇷🇺' },
-    { code: 'ar', name: 'العربية', flag: '🇸🇦' }
-];
 
 interface NavbarProps {
     lang?: string;
@@ -34,7 +28,6 @@ export function Navbar({ lang: propLang }: NavbarProps) {
     const currentLocale = propLang || serverLocale;
     const t = useTranslations('nav');
     const [categories, setCategories] = React.useState<any[]>([]);
-    const [isLangDropdownOpen, setIsLangDropdownOpen] = React.useState(false);
     const [expandedMobileCategory, setExpandedMobileCategory] = React.useState<string | null>(null);
     const [expandedDesktopCategory, setExpandedDesktopCategory] = React.useState<string | null>(null);
 
@@ -66,12 +59,6 @@ export function Navbar({ lang: propLang }: NavbarProps) {
         { href: "/services/after-sales-support", label: t('services.afterSalesSupport') }
     ];
 
-    const handleLanguageChange = (newLocale: string) => {
-        // Navigate to the same page but with different locale
-        router.replace(pathname, { locale: newLocale });
-        // Close dropdown after selection
-        setIsLangDropdownOpen(false);
-    };
 
     React.useEffect(() => {
         const fetchCategories = async () => {
@@ -243,42 +230,6 @@ export function Navbar({ lang: propLang }: NavbarProps) {
                         <Link href="/contact">Contact</Link>
                     </Button>
 
-                    {/* Language Switcher */}
-                    <div className="relative">
-                        <button
-                            onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
-                            onBlur={(e) => {
-                                // Close dropdown when clicking outside, but not when clicking inside the dropdown
-                                if (!e.currentTarget.parentElement?.contains(e.relatedTarget as Node)) {
-                                    setTimeout(() => setIsLangDropdownOpen(false), 200);
-                                }
-                            }}
-                            className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all"
-                        >
-                            <Globe className="w-4 h-4" />
-                            <span className="text-sm font-medium uppercase">
-                                {currentLocale}
-                            </span>
-                            <ChevronDown className={`w-4 h-4 transition-transform ${isLangDropdownOpen ? 'rotate-180' : ''}`} />
-                        </button>
-                        {isLangDropdownOpen && (
-                            <div className="absolute right-0 top-full mt-2 w-48 rounded-lg glass-strong border border-white/10 p-2 shadow-lg animate-in fade-in-0 slide-in-from-top-2 duration-300 z-50">
-                                {languages.map((lang) => (
-                                    <button
-                                        key={lang.code}
-                                        onClick={() => handleLanguageChange(lang.code)}
-                                        className={`w-full flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors ${currentLocale === lang.code
-                                            ? 'bg-[#B8FF00]/20 text-[#B8FF00]'
-                                            : 'text-white hover:bg-[#B8FF00]/10 hover:text-[#B8FF00]'
-                                            }`}
-                                    >
-                                        <span className="text-lg">{lang.flag}</span>
-                                        <span>{lang.name}</span>
-                                    </button>
-                                ))}
-                            </div>
-                        )}
-                    </div>
                 </div>
 
 
@@ -382,25 +333,6 @@ export function Navbar({ lang: propLang }: NavbarProps) {
                                         </Link>
                                     </SheetClose>
 
-                                    {/* Mobile Language Switcher */}
-                                    <div className="mt-4 pt-4 border-t border-white/20">
-                                        <div className="text-lg font-medium text-white mb-3">Language</div>
-                                        <div className="flex flex-col gap-2">
-                                            {languages.map((lang) => (
-                                                <button
-                                                    key={lang.code}
-                                                    onClick={() => handleLanguageChange(lang.code)}
-                                                    className={`flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors ${currentLocale === lang.code
-                                                        ? 'bg-[#B8FF00]/20 text-[#B8FF00]'
-                                                        : 'text-gray-400 hover:bg-[#B8FF00]/10 hover:text-[#B8FF00]'
-                                                        }`}
-                                                >
-                                                    <span className="text-lg">{lang.flag}</span>
-                                                    <span>{lang.name}</span>
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
 
                                 </nav>
 
