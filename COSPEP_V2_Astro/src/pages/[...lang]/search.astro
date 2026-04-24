@@ -14,11 +14,11 @@ async function getSearchResults(q: string) {
     if (!q) return { products: [], posts: [] };
 
     const groqQuery = `{
-        "products": *[_type == "product" && (isVisible == true || !defined(isVisible)) && title match $q + "*"] {
+        "products": *[_type == "product" && (isVisible == true || !defined(isVisible)) && (name match $q + "*" || casNumber match $q + "*" || synonyms match $q + "*" || latinName match $q + "*")] {
             _id,
-            title,
+            name,
             slug,
-            "imageUrl": images[0].asset->url,
+            "imageUrl": image.asset->url,
             description
         },
         "posts": *[_type == "post" && (isVisible == true || !defined(isVisible)) && title match $q + "*"] {
@@ -90,7 +90,7 @@ const description = `Search results for ${query} on COSPEP. Find botanical ingre
                                     <div class="absolute inset-0 bg-gradient-to-t from-[#0A0E0D]/60 to-transparent"></div>
                                 </div>
                                 <div class="p-6">
-                                    <h3 class="font-bold text-xl text-white group-hover:text-[#B8FF00] transition-colors line-clamp-2 leading-tight">{product.title}</h3>
+                                    <h3 class="font-bold text-xl text-white group-hover:text-[#B8FF00] transition-colors line-clamp-2 leading-tight">{product.name}</h3>
                                     <div class="mt-4 flex items-center text-[#B8FF00] text-sm font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all transform translate-x-[-10px] group-hover:translate-x-0">
                                         View Details <ChevronRight class="ml-1 w-4 h-4" />
                                     </div>
