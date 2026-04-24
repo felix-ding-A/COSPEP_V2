@@ -31,8 +31,6 @@ interface FooterProps {
 
 export function Footer({ lang: propLang }: FooterProps) {
     const [settings, setSettings] = React.useState<any>(null);
-    const serverLocale = useLocale();
-    const currentLocale = propLang || serverLocale;
     const t = useTranslations('footer');
 
     React.useEffect(() => {

@@ -32,10 +32,20 @@
         "searchPlaceholder": "Buscar productos...",
         "viewAllProducts": "Ver Todos los Productos",
         "loading": "Cargando...",
+        "services": {
+            "title": "Servicios",
+            "customManufacturing": "Fabricación Personalizada",
+            "customFormulations": "Formulaciones Personalizadas",
+            "rdTechnicalSupport": "I+D y Soporte Técnico",
+            "packagingLogistics": "Empaque y Logística",
+            "afterSalesSupport": "Soporte Técnico Post-Venta"
+        },
         "resources": {
             "title": "Recursos",
             "news": "Noticias",
             "blogs": "Blogs",
+            "industryInsights": "Perspectivas del Sector",
+            "sustainability": "Sostenibilidad",
             "customerService": "Servicio al Cliente"
         }
     },

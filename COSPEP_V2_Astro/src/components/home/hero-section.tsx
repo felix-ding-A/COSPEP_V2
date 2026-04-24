@@ -12,8 +12,6 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ lang: propLang }: HeroSectionProps) {
-    const serverLocale = useLocale();
-    const currentLocale = propLang || serverLocale;
     const t = useTranslations('home.hero');
     const tCommon = useTranslations('common');
     const [currentSlide, setCurrentSlide] = useState(0);

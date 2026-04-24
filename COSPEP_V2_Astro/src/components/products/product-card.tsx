@@ -1,12 +1,11 @@
 "use client";
 
-import { Link } from "@/lib/navigation";
+import { Link, useTranslations } from "@/lib/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import type { Product } from "@/lib/sanity/queries";
 import Image from "@/components/Image";
 import { ShoppingCart, Eye } from "lucide-react";
-import { useTranslations } from "@/lib/navigation";
 import React from 'react';
 
 interface ProductCardProps {
