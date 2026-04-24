@@ -38,14 +38,23 @@ export function useRouter() {
     push: (url: string) => { window.location.href = url; },
     replace: (url: string, options?: { locale?: string }) => { 
         if (options?.locale) {
-            // Simple logic to replace locale in URL
             const parts = window.location.pathname.split('/');
-            if (['en', 'es', 'ru', 'ar'].includes(parts[1])) {
-                parts[1] = options.locale;
+            const currentLocale = ['en', 'es', 'ru', 'ar'].find(l => l === parts[1]);
+            
+            if (currentLocale) {
+                if (options.locale === 'en') {
+                    parts.splice(1, 1);
+                } else {
+                    parts[1] = options.locale;
+                }
             } else {
-                parts.splice(1, 0, options.locale);
+                if (options.locale !== 'en') {
+                    parts.splice(1, 0, options.locale);
+                }
             }
-            window.location.replace(parts.join('/'));
+            
+            const newPath = parts.join('/') || '/';
+            window.location.replace(newPath + window.location.search);
         } else {
             window.location.replace(url); 
         }

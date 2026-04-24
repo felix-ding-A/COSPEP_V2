@@ -107,11 +107,11 @@ export function Navbar({ lang: propLang }: NavbarProps) {
                         className="object-contain group-hover:scale-110 transition-transform"
                         priority
                     />
-                    <span className="text-2xl font-bold text-white tracking-tight group-hover:text-[#B8FF00] transition-colors">COSPEP</span>
+                    <span className="hidden xl:inline text-2xl font-bold text-white tracking-tight group-hover:text-[#B8FF00] transition-colors">COSPEP</span>
                 </Link>
 
                 {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+                <nav className="hidden md:flex items-center gap-4 lg:gap-8 text-sm font-medium">
 
                     {/* Products Dropdown - Two Column Layout */}
                     <div className="group relative">
@@ -223,7 +223,7 @@ export function Navbar({ lang: propLang }: NavbarProps) {
                         <input
                             type="text"
                             placeholder="Search products..."
-                            className="w-64 pl-10 pr-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B8FF00] focus:border-transparent transition-all"
+                            className="w-32 lg:w-48 xl:w-64 pl-10 pr-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B8FF00] focus:border-transparent transition-all"
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter') {
                                     const query = e.currentTarget.value.trim();
@@ -249,7 +249,7 @@ export function Navbar({ lang: propLang }: NavbarProps) {
                             onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
                             onBlur={(e) => {
                                 // Close dropdown when clicking outside, but not when clicking inside the dropdown
-                                if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                                if (!e.currentTarget.parentElement?.contains(e.relatedTarget as Node)) {
                                     setTimeout(() => setIsLangDropdownOpen(false), 200);
                                 }
                             }}

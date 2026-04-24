@@ -8,7 +8,21 @@
         "aboutUs": "О нас",
         "products": "Продукты",
         "services": "Услуги",
-        "allRightsReserved": "Все права защищены"
+        "allRightsReserved": "Все права защищены",
+        "details": "Детали",
+        "quote": "Запросить цену",
+        "inStock": "В наличии",
+        "readyToShip": "Готов к отправке",
+        "lowStock": "Мало на складе",
+        "madeToOrder": "Под заказ",
+        "noImage": "Нет изображения",
+        "purity": "Чистота",
+        "grade": "Сорт/Грейд",
+        "moq": "Мин. заказ (MOQ)",
+        "leadTime": "Срок поставки",
+        "documents": "Документы",
+        "categories": "Категории",
+        "inciName": "Наименование INCI"
     },
     "nav": {
         "products": "Продукты",
@@ -18,10 +32,20 @@
         "searchPlaceholder": "Поиск продуктов...",
         "viewAllProducts": "Посмотреть все продукты",
         "loading": "Загрузка...",
+        "services": {
+            "title": "Услуги",
+            "customManufacturing": "Контрактное производство",
+            "customFormulations": "Индивидуальные формулы",
+            "rdTechnicalSupport": "НИОКР и техподдержка",
+            "packagingLogistics": "Упаковка и логистика",
+            "afterSalesSupport": "Послепродажная поддержка"
+        },
         "resources": {
             "title": "Ресурсы",
             "news": "Новости",
             "blogs": "Блоги",
+            "industryInsights": "Отраслевая аналитика",
+            "sustainability": "Устойчивое развитие",
             "customerService": "Служба поддержки"
         }
     },
