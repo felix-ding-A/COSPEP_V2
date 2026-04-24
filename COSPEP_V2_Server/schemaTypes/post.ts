@@ -91,7 +91,8 @@ export default defineType({
                         }
                     ]
                 },
-                { type: 'table' }
+                { type: 'table' },
+                { type: 'googleSheet' }
             ],
         }),
         defineField({

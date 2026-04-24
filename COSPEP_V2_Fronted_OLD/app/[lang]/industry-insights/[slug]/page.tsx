@@ -121,6 +121,37 @@ const portableTextComponents = {
                 </div>
             );
         },
+        table: ({ value }: any) => {
+            if (!value?.rows) return null;
+            return (
+                <div className="my-10 overflow-x-auto rounded-xl border border-border bg-card shadow-sm">
+                    <table className="w-full border-collapse text-left text-sm">
+                        <thead className="bg-muted/50 text-xs uppercase tracking-wider text-muted-foreground">
+                            <tr>
+                                {value.rows[0]?.cells?.map((cell: string, i: number) => (
+                                    <th key={i} className="px-6 py-4 font-semibold border-b border-border">{cell}</th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-border">
+                            {value.rows.slice(1).map((row: any, i: number) => (
+                                <tr key={i} className="hover:bg-muted/30 transition-colors">
+                                    {row.cells?.map((cell: string, j: number) => (
+                                        <td key={j} className="px-6 py-4">{cell}</td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    {value.caption && (
+                        <p className="text-xs text-muted-foreground mt-4 text-center italic pb-4">
+                            {value.caption}
+                        </p>
+                    )}
+                </div>
+            );
+        },
+        googleSheet: ({ value }: any) => <GoogleSheet value={value} />,
     },
 };
 
