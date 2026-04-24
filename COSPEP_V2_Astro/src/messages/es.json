@@ -8,7 +8,21 @@
         "aboutUs": "Sobre nosotros",
         "products": "Productos",
         "services": "Servicios",
-        "allRightsReserved": "Todos los derechos reservados"
+        "allRightsReserved": "Todos los derechos reservados",
+        "details": "Detalles",
+        "quote": "Cotizar",
+        "inStock": "En stock",
+        "readyToShip": "Listo para enviar",
+        "lowStock": "Poco stock",
+        "madeToOrder": "Bajo pedido",
+        "noImage": "Sin imagen",
+        "purity": "Pureza",
+        "grade": "Grado",
+        "moq": "Pedido mínimo (MOQ)",
+        "leadTime": "Plazo de entrega",
+        "documents": "Documentos",
+        "categories": "Categorías",
+        "inciName": "Nombre INCI"
     },
     "nav": {
         "products": "Productos",

@@ -59,11 +59,11 @@ const jsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     
     <main class="flex min-h-screen flex-col">
-        <HeroSection client:idle />
-        <TrustStatsBar />
-        <PeptidePromo />
-        <ProductEcosystem />
-        <ManufacturingSection />
-        <NewsBlogs />
+        <HeroSection client:idle lang={lang} />
+        <TrustStatsBar lang={lang} />
+        <PeptidePromo lang={lang} />
+        <ProductEcosystem lang={lang} />
+        <ManufacturingSection lang={lang} />
+        <NewsBlogs lang={lang} />
     </main>
 </BaseLayout>

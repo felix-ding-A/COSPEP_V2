@@ -85,7 +85,7 @@ const jsonLd = {
                                 client:load
                             />
                         ) : (
-                            <span className="text-gray-500 text-lg">No Image Available</span>
+                            <span className="text-gray-500 text-lg">{t('common.noImage') || 'No Image Available'}</span>
                         )}
 
                         {/* Stock Badge Overlay */}
@@ -96,7 +96,7 @@ const jsonLd = {
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-300 opacity-75"></span>
                                         <span className="relative inline-flex rounded-full h-2 w-2 bg-green-200"></span>
                                     </span>
-                                    In Stock
+                                    {t('common.inStock') || 'In Stock'}
                                 </Badge>
                             </div>
                         )}
@@ -140,7 +140,7 @@ const jsonLd = {
                             </div>
                             {product.purity && (
                                 <div class="glass rounded-lg p-4 border border-white/10">
-                                    <div class="text-sm text-gray-400 mb-1">Purity</div>
+                                    <div class="text-sm text-gray-400 mb-1">{t('common.purity') || 'Purity'}</div>
                                     <div class="text-lg font-semibold text-[#B8FF00]">
                                         {product.purity}
                                     </div>
@@ -148,7 +148,7 @@ const jsonLd = {
                             )}
                             {product.inciName && (
                                 <div class="glass rounded-lg p-4 border border-white/10 sm:col-span-2">
-                                    <div class="text-sm text-gray-400 mb-1">INCI Name</div>
+                                    <div class="text-sm text-gray-400 mb-1">{t('common.inciName') || 'INCI Name'}</div>
                                     <div class="text-lg font-semibold text-white">
                                         {product.inciName}
                                     </div>
@@ -165,7 +165,7 @@ const jsonLd = {
                                     <Truck className="w-6 h-6 text-green-400" />
                                 </div>
                                 <div>
-                                    <div class="font-semibold text-white">Ready to Ship</div>
+                                    <div class="font-semibold text-white">{t('common.readyToShip') || 'Ready to Ship'}</div>
                                     <div class="text-sm text-gray-400">
                                         Available from <span class="text-[#B8FF00]">{SITE_CONFIG.warehouse}</span>
                                     </div>
@@ -177,7 +177,7 @@ const jsonLd = {
                     {/* Categories */}
                     {product.categories && product.categories.length > 0 && (
                         <div>
-                            <div class="text-sm text-gray-400 mb-2">Categories</div>
+                            <div class="text-sm text-gray-400 mb-2">{t('common.categories') || 'Categories'}</div>
                             <div class="flex flex-wrap gap-2">
                                 {product.categories.map((cat: any) => (
                                     <Badge
@@ -194,21 +194,21 @@ const jsonLd = {
                     {/* Product Info Grid */}
                     <div class="glass-strong rounded-xl p-6 border border-white/10 space-y-3">
                         <div class="flex justify-between py-2 border-b border-white/10">
-                            <span class="text-gray-400">MOQ</span>
+                            <span class="text-gray-400">{t('common.moq') || 'MOQ'}</span>
                             <span class="text-white font-medium">{product.moq || SITE_CONFIG.moq}</span>
                         </div>
                         <div class="flex justify-between py-2 border-b border-white/10">
-                            <span class="text-gray-400">Lead Time</span>
+                            <span class="text-gray-400">{t('common.leadTime') || 'Lead Time'}</span>
                             <span class="text-white font-medium">{product.leadTime || SITE_CONFIG.leadTime}</span>
                         </div>
                         {product.grade && (
                             <div class="flex justify-between py-2 border-b border-white/10">
-                                <span class="text-gray-400">Grade</span>
+                                <span class="text-gray-400">{t('common.grade') || 'Grade'}</span>
                                 <span class="text-white font-medium">{product.grade}</span>
                             </div>
                         )}
                         <div class="flex justify-between py-2">
-                            <span class="text-gray-400">Documents</span>
+                            <span class="text-gray-400">{t('common.documents') || 'Documents'}</span>
                             <span class="text-white font-medium">{SITE_CONFIG.documents.join(", ")}</span>
                         </div>
                     </div>

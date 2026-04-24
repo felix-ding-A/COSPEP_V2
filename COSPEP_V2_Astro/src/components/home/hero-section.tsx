@@ -7,7 +7,13 @@ import { Link, useTranslations } from "@/lib/navigation";
 import Image from "@/components/Image";
 import { useState, useEffect } from "react";
 
-export function HeroSection() {
+interface HeroSectionProps {
+    lang?: string;
+}
+
+export function HeroSection({ lang: propLang }: HeroSectionProps) {
+    const serverLocale = useLocale();
+    const currentLocale = propLang || serverLocale;
     const t = useTranslations('home.hero');
     const tCommon = useTranslations('common');
     const [currentSlide, setCurrentSlide] = useState(0);

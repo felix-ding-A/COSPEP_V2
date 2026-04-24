@@ -51,7 +51,7 @@ export interface Category {
 }
 
 // Queries
-export async function getProducts(search?: string, categorySlug?: string, stockStatus?: string, parentCategory?: string): Promise<Product[]> {
+export async function getProducts(search?: string, categorySlug?: string, stockStatus?: string, parentCategory?: string, lang: string = 'en'): Promise<Product[]> {
   // If parentCategory is specified, we need to first get all subcategory slugs
   let categoryFilter = categorySlug;
 
@@ -178,7 +178,8 @@ export interface Settings {
   address?: string;
 }
 
-export async function getSettings(): Promise<Settings> {
+
+export async function getSettings(lang: string = 'en'): Promise<Settings> {
   return client.fetch(groq`*[_id == "settings"][0]{
     heroText,
     "heroImageUrl": heroImage.asset->url,
@@ -198,7 +199,7 @@ export const getSiteSettings = groq`*[_id == "settings"][0]{
   address
 }`;
 
-export async function getLatestPosts(limit: number = 3): Promise<any[]> {
+export async function getLatestPosts(limit: number = 3, lang: string = 'en'): Promise<any[]> {
   const query = groq`*[_type == "post" && defined(publishedAt) && (isVisible == true || !defined(isVisible))] | order(publishedAt desc)[0...$limit] {
         _id,
         title,
@@ -210,7 +211,7 @@ export async function getLatestPosts(limit: number = 3): Promise<any[]> {
   return client.fetch(query, { limit });
 }
 
-export async function getPosts(): Promise<any[]> {
+export async function getPosts(lang: string = 'en'): Promise<any[]> {
   const query = groq`*[_type == "post" && (isVisible == true || !defined(isVisible))] | order(publishedAt desc) {
         _id,
         title,
@@ -222,7 +223,7 @@ export async function getPosts(): Promise<any[]> {
   return client.fetch(query);
 }
 
-export async function getBlogPostBySlug(slug: string): Promise<any> {
+export async function getBlogPostBySlug(slug: string, lang: string = 'en'): Promise<any> {
     const query = groq`*[_type == "post" && slug.current == $slug && (isVisible == true || !defined(isVisible))][0] {
         _id,
         title,

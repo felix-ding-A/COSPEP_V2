@@ -6,13 +6,16 @@ import { Badge } from "@/components/ui/badge";
 import type { Product } from "@/lib/sanity/queries";
 import Image from "@/components/Image";
 import { ShoppingCart, Eye } from "lucide-react";
+import { useTranslations } from "@/lib/navigation";
 import React from 'react';
 
 interface ProductCardProps {
     product: Product;
+    lang?: string;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, lang: propLang }: ProductCardProps) {
+    const t = useTranslations('common');
     const isReadyStock = product.stockStatus === 'Ready to Ship';
 
     return (
@@ -27,7 +30,7 @@ export function ProductCard({ product }: ProductCardProps) {
                             className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out h-full w-full"
                         />
                     ) : (
-                        <div className="text-gray-500 text-sm">No Image</div>
+                        <div className="text-gray-500 text-sm">{t('noImage') || 'No Image'}</div>
                     )}
 
                     {/* Stock Indicator */}
@@ -37,7 +40,7 @@ export function ProductCard({ product }: ProductCardProps) {
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-300 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-200"></span>
                             </span>
-                            <span className="text-xs font-medium text-white">In Stock</span>
+                            <span className="text-xs font-medium text-white">{t('inStock') || 'In Stock'}</span>
                         </div>
                     )}
 
@@ -79,7 +82,7 @@ export function ProductCard({ product }: ProductCardProps) {
                             ? 'bg-green-500/10 text-green-400 border border-green-500/20'
                             : 'bg-white/5 text-gray-400 border border-white/10'
                             }`}>
-                            {product.stockStatus || 'Made to Order'}
+                            {product.stockStatus ? (t(product.stockStatus.toLowerCase().replace(/ /g, '')) || product.stockStatus) : (t('madeToOrder') || 'Made to Order')}
                         </span>
                     </div>
                 </div>
@@ -92,7 +95,7 @@ export function ProductCard({ product }: ProductCardProps) {
                     >
                         <Link href={`/products/${product.slug.current}`}>
                             <Eye className="w-4 h-4 mr-1 group-hover/btn:scale-110 transition-transform" />
-                            Details
+                            {t('details') || 'Details'}
                         </Link>
                     </Button>
                     <Button
@@ -100,7 +103,7 @@ export function ProductCard({ product }: ProductCardProps) {
                         className="flex-1 border-white/20 text-white hover:bg-white/10 hover:border-[#B8FF00] hover:text-[#B8FF00] hover:scale-[1.02] transition-all duration-300 group/btn"
                     >
                         <ShoppingCart className="w-4 h-4 mr-1 group-hover/btn:scale-110 transition-transform" />
-                        Quote
+                        {t('quote') || 'Quote'}
                     </Button>
                 </div>
             </div>

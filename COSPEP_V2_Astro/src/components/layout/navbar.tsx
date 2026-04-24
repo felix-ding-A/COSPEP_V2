@@ -23,10 +23,15 @@ const languages = [
     { code: 'ar', name: 'العربية', flag: '🇸🇦' }
 ];
 
-export function Navbar() {
+interface NavbarProps {
+    lang?: string;
+}
+
+export function Navbar({ lang: propLang }: NavbarProps) {
     const router = useRouter();
     const pathname = usePathname();
-    const currentLocale = useLocale();
+    const serverLocale = useLocale();
+    const currentLocale = propLang || serverLocale;
     const t = useTranslations('nav');
     const [categories, setCategories] = React.useState<any[]>([]);
     const [isLangDropdownOpen, setIsLangDropdownOpen] = React.useState(false);

@@ -25,8 +25,14 @@ const TwitterIcon = ({ className }: { className?: string }) => (
     </svg>
 );
 
-export function Footer() {
+interface FooterProps {
+    lang?: string;
+}
+
+export function Footer({ lang: propLang }: FooterProps) {
     const [settings, setSettings] = React.useState<any>(null);
+    const serverLocale = useLocale();
+    const currentLocale = propLang || serverLocale;
     const t = useTranslations('footer');
 
     React.useEffect(() => {

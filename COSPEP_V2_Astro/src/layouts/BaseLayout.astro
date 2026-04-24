@@ -101,11 +101,11 @@ const absoluteOgImage = new URL(ogImage, Astro.site).href;
 	</head>
 	<body class="min-h-screen bg-[#0A0E0D] font-sans antialiased text-white flex flex-col">
 		<Toaster client:load />
-		<Navbar client:load />
+		<Navbar client:load lang={lang} />
 		<main class="flex-grow">
 			<slot />
 		</main>
-		<Footer client:load />
+		<Footer client:load lang={lang} />
 	</body>
 </html>
 
