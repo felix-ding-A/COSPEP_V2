@@ -229,7 +229,7 @@
             "titleFallback": "{title} | Información de la Industria | COSPEP",
             "fallback": "Lea sobre {title} y descubra las últimas tendencias en ingredientes bioactivos y fabricación farmacéutica."
         }
-    ,
+    },
     "products": {
         "found": "Productos encontrados",
         "notFound": "No se encontraron productos que coincidan con sus criterios",
