@@ -29,13 +29,13 @@ export function ContactCard() {
                 <div className="flex items-center gap-3 text-sm">
                     <Mail className="w-4 h-4 text-[#B8FF00]" />
                     <a href="mailto:info@cospep.com" className="text-gray-300 hover:text-[#B8FF00] transition-colors">
-                        info@cospep.com
+                        [EMAIL_ADDRESS]
                     </a>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                     <Phone className="w-4 h-4 text-[#B8FF00]" />
-                    <a href="tel:+8618220916763" className="text-gray-300 hover:text-[#B8FF00] transition-colors">
-                        +86 182 2091 6763
+                    <a href="tel:+1 6802556637" className="text-gray-300 hover:text-[#B8FF00] transition-colors">
+                        +1 680 255 6637
                     </a>
                 </div>
             </div>
