@@ -2,13 +2,17 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useTranslations } from "@/lib/i18n";
+import { 
+    List, Dna, FlaskConical, Thermometer, Activity, 
+    ShieldAlert, Crosshair, Stethoscope, Lightbulb, Info 
+} from "lucide-astro";
 
 const { lang: langParam } = Astro.params;
 const lang = (langParam as any) || 'en';
 const t = useTranslations(lang);
 
-const title = "Stapled Peptides: The Future of Therapeutics | COSPEP";
-const description = "Unlocking the potential of stapled peptides. Learn how this technology revolutionizes drug discovery for previously undruggable targets.";
+const title = "The Advent of Stapled Peptide Technology | COSPEP";
+const description = "Chemical Mechanisms, Stability Breakthroughs, and Clinical Translation of Stapled Peptide Technology.";
 ---
 
 <BaseLayout title={title} description={description}>
@@ -18,172 +22,389 @@ const description = "Unlocking the potential of stapled peptides. Learn how this
             <Breadcrumbs title="Stapled Peptides" pathname={Astro.url.pathname} />
         </div>
 
-        <header id="overview" class="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center">
-            <div class="inline-block px-4 py-1.5 rounded-full border border-[#B8FF00]/20 text-[#B8FF00] text-sm font-semibold mb-6 uppercase tracking-wider">
-                R&D Research
+        {/* Hero Section */}
+        <header id="overview" class="relative pt-24 pb-32 overflow-hidden text-center px-4 sm:px-6 lg:px-8">
+            <div class="absolute inset-0 opacity-10 pointer-events-none">
+                <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="hexagons" width="50" height="43.4" patternUnits="userSpaceOnUse" patternTransform="scale(2)">
+                            <path d="M25 0L50 14.4V43.3L25 57.7L0 43.3V14.4Z" fill="none" stroke="#B8FF00" stroke-width="1"></path>
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#hexagons)"></rect>
+                </svg>
             </div>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
-                Unlocking the Potential of <span class="text-[#B8FF00]">Stapled Peptides</span>
-            </h1>
-            <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed">
-                Natural peptides hold immense therapeutic promise but are limited by rapid degradation in the body and an inability to enter cells. <strong class="text-white">Stapled peptide technology</strong> solves this by synthetically "locking" peptides into their active shapes, revolutionizing drug discovery for previously "undruggable" targets.
-            </p>
-            <a href="#mechanism" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-full text-[#0A0E0D] bg-[#B8FF00] hover:bg-[#B8FF00]/90 transition-all hover:scale-105 shadow-[0_0_20px_rgba(184,255,0,0.3)]">
-                Explore the Technology &darr;
-            </a>
+            <div class="relative max-w-4xl mx-auto z-10">
+                <span class="inline-block py-1 px-4 rounded-full border border-[#B8FF00]/20 text-[#B8FF00] text-sm font-semibold tracking-wide uppercase mb-6 shadow-sm">
+                    Review Article
+                </span>
+                <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
+                    The Advent of <span class="text-[#B8FF00]">Stapled Peptide</span> Technology
+                </h1>
+                <p class="mt-4 text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto font-light leading-relaxed">
+                    Chemical Mechanisms, Stability Breakthroughs, and Clinical Translation
+                </p>
+                <div class="mt-10 flex justify-center gap-4">
+                    <a href="#introduction" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-full text-[#0A0E0D] bg-[#B8FF00] hover:bg-[#B8FF00]/90 transition-all hover:scale-105 shadow-[0_0_20px_rgba(184,255,0,0.3)]">
+                        Start Reading
+                    </a>
+                </div>
+            </div>
         </header>
 
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-            {/* The Structural Mechanism */}
-            <section id="mechanism" class="mb-24 scroll-mt-24">
-                <div class="mb-12 text-center max-w-3xl mx-auto">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">The Structural Mechanism</h2>
-                    <p class="text-gray-400 text-lg">
-                        This section illustrates the fundamental concept of peptide stapling. By comparing a native, flexible peptide with a stapled counterpart, we can visually understand how the synthetic brace forces the molecule into a stable alpha-helical shape.
-                    </p>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col lg:flex-row gap-12 relative">
+            
+            {/* Sidebar / Table of Contents */}
+            <aside class="hidden lg:block w-1/4 shrink-0 relative">
+                <div class="sticky top-24 bg-[#0F1612]/50 p-6 rounded-2xl border border-white/10 overflow-y-auto max-h-[80vh] custom-scrollbar">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-gray-500 mb-4 flex items-center gap-2">
+                        <List class="w-4 h-4" /> Contents
+                    </h3>
+                    <nav id="toc" class="flex flex-col space-y-1">
+                        <a href="#introduction" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Introduction</a>
+                        <a href="#chemical-foundations" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Chemical Foundations</a>
+                        <a href="#mechanism" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Structural Mechanism</a>
+                        <a href="#thermodynamics" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Thermodynamic Stabilization</a>
+                        <a href="#pharmacokinetics" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Breakthrough Stability</a>
+                        <a href="#toxicity" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Toxicity & Manufacturing</a>
+                        <a href="#target-landscape" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Target Landscape</a>
+                        <a href="#clinical-pipeline" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Clinical Pipeline</a>
+                        <a href="#conclusions" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Conclusions</a>
+                    </nav>
                 </div>
+            </aside>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-                    <div class="bg-[#0F1612]/50 p-8 rounded-3xl border border-white/10 flex flex-col items-center group hover:border-white/20 transition-all">
-                        <h3 class="text-xl font-bold text-white mb-8">Native Peptide (Unstapled)</h3>
-                        <div class="peptide-chain w-full h-48 flex justify-center">
-                            <div class="amino-acid bg-gray-700 text-gray-300 transform translate-y-4">AA</div>
-                            <div class="amino-acid bg-gray-700 text-gray-300 transform -translate-y-2">AA</div>
-                            <div class="amino-acid bg-gray-700 text-gray-300 transform translate-y-6">AA</div>
-                            <div class="amino-acid bg-gray-700 text-gray-300 transform -translate-y-4">AA</div>
-                            <div class="amino-acid bg-gray-700 text-gray-300 transform translate-y-2">AA</div>
-                            <div class="amino-acid bg-gray-700 text-gray-300 transform -translate-y-6">AA</div>
-                            <div class="amino-acid bg-gray-700 text-gray-300 transform translate-y-1">AA</div>
+            {/* Article Content */}
+            <article class="w-full lg:w-3/4 max-w-4xl prose prose-invert prose-lg md:prose-xl prose-headings:text-white prose-headings:font-bold prose-p:text-gray-300 prose-strong:text-white prose-a:text-[#B8FF00] prose-a:no-underline hover:prose-a:underline">
+                
+                <section id="introduction" class="fade-in-section pb-10 border-b border-white/10">
+                    <h2 class="text-3xl font-bold text-white mt-0 mb-6 flex items-center gap-3">
+                        <Dna class="text-[#B8FF00] w-8 h-8" /> Introduction
+                    </h2>
+                    <p>The pharmaceutical and biotechnological landscapes have historically been bifurcated into two primary therapeutic modalities: small molecules and large biologicals. Small molecules have long formed the bedrock of the pharmaceutical industry, celebrated for their oral bioavailability and capacity to penetrate cell membranes. However, their diminutive surface area fundamentally restricts their ability to disrupt extensive, flat protein-protein interactions (PPIs).</p>
+                    <p>Conversely, large biologicals like monoclonal antibodies offer exquisite target specificity but are inherently incapable of traversing the hydrophobic lipid bilayer to reach intracellular domains.</p>
+                    <p>Peptides occupy the critical middle ground. As the minimal functional domains of larger proteins, peptides natively mediate a vast array of physiological processes. Within the structural lexicon of biology, the α-helix represents the most ubiquitous secondary structural motif.</p>
+                    <p>Despite theoretical advantages, unmodified linear peptides have suffered from severe pharmacological liabilities: rapid conformational collapse, proteolytic cleavage, and poor pharmacokinetic profiles. To overcome these barriers, the scientific community developed <strong>"stapled peptide"</strong> technology. Pioneered in the late 1990s and early 2000s, stapled peptides are engineered to forcefully lock a peptide sequence into its bioactive α-helical conformation via a synthetic macrocyclic brace—the "staple".</p>
+                </section>
+
+                <section id="chemical-foundations" class="fade-in-section py-10 border-b border-white/10">
+                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                        <FlaskConical class="text-[#B8FF00] w-8 h-8" /> Chemical Foundations
+                    </h2>
+                    <p>A stapled peptide is formally classified as a Class A peptidomimetic. The architecture of the prototypical all-hydrocarbon staple is achieved by incorporating highly specialized α,α-disubstituted non-natural amino acids bearing terminal alkene side chains during solid-phase peptide synthesis (SPPS).</p>
+                    <p>Once the linear precursor sequence is successfully synthesized, the macrocycle is formed via a ruthenium-catalyzed ring-closing metathesis (RCM) reaction. Beyond the classic single all-hydrocarbon staple, advanced modalities include multimeric constraints (stitched peptides), click-chemistry staples, and heteroatom linkages.</p>
+
+                    {/* Table 1 */}
+                    <div class="my-10 not-prose">
+                        <div class="overflow-x-auto bg-[#0F1612] rounded-2xl border border-white/10 shadow-2xl">
+                            <table class="w-full text-left border-collapse min-w-[600px]">
+                                <thead>
+                                    <tr class="bg-white/5 text-white border-b border-white/10">
+                                        <th class="p-4 font-semibold text-sm uppercase tracking-wider">Modality</th>
+                                        <th class="p-4 font-semibold text-sm uppercase tracking-wider">Mechanism</th>
+                                        <th class="p-4 font-semibold text-sm uppercase tracking-wider">Advantages</th>
+                                        <th class="p-4 font-semibold text-sm uppercase tracking-wider">Limitations</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-sm divide-y divide-white/5">
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 font-medium text-[#B8FF00]">All-Hydrocarbon Staple</td>
+                                        <td class="p-4 text-gray-300">Ruthenium-catalyzed RCM</td>
+                                        <td class="p-4 text-emerald-400">Superior cell penetration, very high proteolytic stability.</td>
+                                        <td class="p-4 text-rose-400">Expensive synthesis, hydrophobic liabilities.</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 font-medium text-[#B8FF00]">Lactam Bridge</td>
+                                        <td class="p-4 text-gray-300">Condensation of Lys and Asp/Glu</td>
+                                        <td class="p-4 text-emerald-400">Excellent for extracellular targets, high bioactivity.</td>
+                                        <td class="p-4 text-rose-400">Fails to improve cell penetration due to high polarity.</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 font-medium text-[#B8FF00]">Bis-triazole "Double Click"</td>
+                                        <td class="p-4 text-gray-300">CuAAC click chemistry</td>
+                                        <td class="p-4 text-emerald-400">Modular synthesis, allows varied linkers.</td>
+                                        <td class="p-4 text-rose-400">Triazole rings can introduce unintended steric hindrance.</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 font-medium text-[#B8FF00]">Stitched Peptides</td>
+                                        <td class="p-4 text-gray-300">Tandem RCM</td>
+                                        <td class="p-4 text-emerald-400">Extreme rigidity over large sequences.</td>
+                                        <td class="p-4 text-rose-400">Complex synthesis, poor atom economy.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <p class="mt-8 text-sm text-gray-400 text-center leading-relaxed">
-                            Highly flexible, loses shape in solution, making it vulnerable to enzymes (proteases) that act like molecular scissors.
-                        </p>
-                    </div>
-
-                    <div class="bg-[#0F1612]/80 p-8 rounded-3xl border border-[#B8FF00]/30 flex flex-col items-center relative overflow-hidden group hover:shadow-[0_0_30px_rgba(184,255,0,0.1)] transition-all">
-                        <div class="absolute inset-0 bg-[#B8FF00]/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <h3 class="text-xl font-bold text-[#B8FF00] mb-8 relative z-10">Stapled Peptide</h3>
-                        <div class="peptide-chain w-full h-48 relative flex justify-center z-10">
-                            <div class="staple-bridge" style="width: 130px; left: calc(50% - 65px);"></div>
-                            <div class="amino-acid bg-[#B8FF00] text-[#0A0E0D]">AA</div>
-                            <div class="amino-acid bg-[#B8FF00] text-[#0A0E0D] transform translate-y-2">AA</div>
-                            <div class="amino-acid bg-white text-[#0A0E0D] ring-2 ring-[#B8FF00] ring-offset-2 ring-offset-[#0F1612]" id="anchor1">X</div>
-                            <div class="amino-acid bg-[#B8FF00] text-[#0A0E0D] transform -translate-y-2">AA</div>
-                            <div class="amino-acid bg-[#B8FF00] text-[#0A0E0D] transform -translate-y-1">AA</div>
-                            <div class="amino-acid bg-white text-[#0A0E0D] ring-2 ring-[#B8FF00] ring-offset-2 ring-offset-[#0F1612]" id="anchor2">X</div>
-                            <div class="amino-acid bg-[#B8FF00] text-[#0A0E0D]">AA</div>
+                        <div class="mt-3 flex justify-end items-center text-xs text-gray-500 italic">
+                            <Info class="w-3 h-3 mr-1" />
+                            <span>Citation: Compiled from "The Advent of Stapled Peptide Technology" (2026).</span>
                         </div>
-                        <p class="mt-8 text-sm text-gray-300 text-center font-medium leading-relaxed relative z-10">
-                            A synthetic hydrocarbon bridge ("staple") connects two synthetic amino acids (X), locking the peptide into a rigid alpha-helix.
-                        </p>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            {/* Quantitative Breakthroughs Dashboard */}
-            <section id="breakthroughs" class="mb-24 scroll-mt-24">
-                <div class="mb-12 text-center max-w-3xl mx-auto">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Quantitative Breakthroughs</h2>
-                    <p class="text-gray-400 text-lg">
-                        Interact with the dashboard below to explore the three major pharmacological hurdles overcome by stapling technology. Select a metric to view the comparative data.
-                    </p>
-                </div>
+                <section id="mechanism" class="fade-in-section py-10 border-b border-white/10 not-prose">
+                    <h2 class="text-3xl font-bold text-white mb-8 text-center md:text-left">The Structural Mechanism</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                        <div class="bg-[#0F1612]/50 p-8 rounded-3xl border border-white/10 flex flex-col items-center group hover:border-white/20 transition-all">
+                            <h3 class="text-xl font-bold text-white mb-8">Native Peptide (Unstapled)</h3>
+                            <div class="peptide-chain w-full h-48 flex justify-center">
+                                <div class="amino-acid bg-gray-700 text-gray-300 transform translate-y-4">AA</div>
+                                <div class="amino-acid bg-gray-700 text-gray-300 transform -translate-y-2">AA</div>
+                                <div class="amino-acid bg-gray-700 text-gray-300 transform translate-y-6">AA</div>
+                                <div class="amino-acid bg-gray-700 text-gray-300 transform -translate-y-4">AA</div>
+                                <div class="amino-acid bg-gray-700 text-gray-300 transform translate-y-2">AA</div>
+                                <div class="amino-acid bg-gray-700 text-gray-300 transform -translate-y-6">AA</div>
+                                <div class="amino-acid bg-gray-700 text-gray-300 transform translate-y-1">AA</div>
+                            </div>
+                            <p class="mt-8 text-sm text-gray-400 text-center leading-relaxed">
+                                Highly flexible, loses shape in solution, making it vulnerable to enzymes (proteases).
+                            </p>
+                        </div>
 
-                <div class="bg-[#0F1612] rounded-3xl border border-white/10 overflow-hidden shadow-2xl">
-                    <div class="border-b border-white/10 bg-white/5 p-4 sm:p-6 flex flex-wrap justify-center gap-4">
-                        <button id="btn-stability" class="data-toggle-btn px-6 py-3 rounded-full font-bold text-sm transition-all bg-[#B8FF00] text-[#0A0E0D] shadow-[0_0_15px_rgba(184,255,0,0.2)]" onclick="updateDashboard('stability')">
-                            &#9654; Protease Stability
-                        </button>
-                        <button id="btn-permeability" class="data-toggle-btn px-6 py-3 rounded-full font-medium text-sm transition-all bg-transparent text-gray-400 border border-white/20 hover:bg-white/5 hover:text-white" onclick="updateDashboard('permeability')">
-                            &#9654; Cell Permeability
-                        </button>
-                        <button id="btn-affinity" class="data-toggle-btn px-6 py-3 rounded-full font-medium text-sm transition-all bg-transparent text-gray-400 border border-white/20 hover:bg-white/5 hover:text-white" onclick="updateDashboard('affinity')">
-                            &#9654; Target Affinity
-                        </button>
+                        <div class="bg-[#0F1612]/80 p-8 rounded-3xl border border-[#B8FF00]/30 flex flex-col items-center relative overflow-hidden group hover:shadow-[0_0_30px_rgba(184,255,0,0.1)] transition-all">
+                            <div class="absolute inset-0 bg-[#B8FF00]/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <h3 class="text-xl font-bold text-[#B8FF00] mb-8 relative z-10">Stapled Peptide</h3>
+                            <div class="peptide-chain w-full h-48 relative flex justify-center z-10">
+                                <div class="staple-bridge" style="width: 130px; left: calc(50% - 65px);"></div>
+                                <div class="amino-acid bg-[#B8FF00] text-[#0A0E0D]">AA</div>
+                                <div class="amino-acid bg-[#B8FF00] text-[#0A0E0D] transform translate-y-2">AA</div>
+                                <div class="amino-acid bg-white text-[#0A0E0D] ring-2 ring-[#B8FF00] ring-offset-2 ring-offset-[#0F1612]" id="anchor1">X</div>
+                                <div class="amino-acid bg-[#B8FF00] text-[#0A0E0D] transform -translate-y-2">AA</div>
+                                <div class="amino-acid bg-[#B8FF00] text-[#0A0E0D] transform -translate-y-1">AA</div>
+                                <div class="amino-acid bg-white text-[#0A0E0D] ring-2 ring-[#B8FF00] ring-offset-2 ring-offset-[#0F1612]" id="anchor2">X</div>
+                                <div class="amino-acid bg-[#B8FF00] text-[#0A0E0D]">AA</div>
+                            </div>
+                            <p class="mt-8 text-sm text-gray-300 text-center font-medium leading-relaxed relative z-10">
+                                A hydrocarbon bridge ("staple") locks the peptide into a rigid alpha-helix.
+                            </p>
+                        </div>
                     </div>
+                </section>
 
-                    <div class="p-8 md:p-12">
-                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
-                            <div class="lg:col-span-1">
-                                <h3 id="panel-title" class="text-2xl font-bold text-white mb-4 fade-in">Proteolytic Resistance</h3>
-                                <div id="panel-stat" class="text-5xl font-black text-[#B8FF00] mb-6 fade-in drop-shadow-[0_0_10px_rgba(184,255,0,0.3)]">>12x Increase</div>
-                                <p id="panel-desc" class="text-gray-400 leading-relaxed fade-in text-lg mb-8">
-                                    Natural peptides are rapidly degraded by enzymes in the bloodstream, resulting in half-lives of minutes. The hydrocarbon staple acts as a physical shield, preventing proteases from accessing and cleaving the peptide backbone, extending half-life to hours or days.
-                                </p>
-                                <div class="p-5 bg-white/5 border-l-4 border-[#B8FF00] rounded-r-xl fade-in">
-                                    <p class="text-sm text-gray-300 font-bold uppercase tracking-wider mb-2">Key Takeaway</p>
-                                    <p id="panel-takeaway" class="text-base text-white">Allows for practical dosing schedules in clinical settings rather than continuous infusion.</p>
-                                </div>
+                <section id="thermodynamics" class="fade-in-section py-10 border-b border-white/10">
+                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                        <Thermometer class="text-[#B8FF00] w-8 h-8" /> Thermodynamic Stabilization
+                    </h2>
+                    <p>The primary physical objective of peptide stapling is to forcefully overcome the massive thermodynamic entropic penalty associated with the binding of a highly flexible linear peptide to its structured biological target receptor.</p>
+                    <p>By covalently locking the peptide into an α-helix during chemical synthesis, the stapling process heavily restricts the conformational space available to the unbound state. This results in a substantial net improvement in overall binding affinity (Kd) and absolute target selectivity.</p>
+                    <p>Furthermore, stapled peptides show incredible structural fortitude against extreme chemical denaturants like urea, routinely retaining significant residual helicity even at high concentrations.</p>
+                </section>
+
+                <section id="pharmacokinetics" class="fade-in-section py-10 border-b border-white/10">
+                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                        <Activity class="text-[#B8FF00] w-8 h-8" /> Breakthrough Stability
+                    </h2>
+                    <p>Because a correctly engineered stapled peptide is covalently forced into a rigid α-helical cylinder, it is physically incapable of unraveling into the extended orientation required to fit into a protease's catalytic cleft. This steric shielding results in exponential increases in proteolytic stability.</p>
+                    <p>The hydrocarbon staple also significantly increases lipophilicity, facilitating reversible binding to human serum albumin, which acts as a circulating depot and vastly extends circulating half-life.</p>
+
+                    {/* Chart.js Dashboard */}
+                    <div class="my-12 not-prose">
+                        <div class="bg-[#0F1612] rounded-3xl border border-white/10 overflow-hidden shadow-2xl">
+                            <div class="border-b border-white/10 bg-white/5 p-4 sm:p-6 flex flex-wrap justify-center gap-4">
+                                <button id="btn-stability" class="data-toggle-btn px-6 py-3 rounded-full font-bold text-sm transition-all bg-[#B8FF00] text-[#0A0E0D] shadow-[0_0_15px_rgba(184,255,0,0.2)]" onclick="updateDashboard('stability')">
+                                    &#9654; Protease Stability
+                                </button>
+                                <button id="btn-permeability" class="data-toggle-btn px-6 py-3 rounded-full font-medium text-sm transition-all bg-transparent text-gray-400 border border-white/20 hover:bg-white/5 hover:text-white" onclick="updateDashboard('permeability')">
+                                    &#9654; Cell Permeability
+                                </button>
+                                <button id="btn-affinity" class="data-toggle-btn px-6 py-3 rounded-full font-medium text-sm transition-all bg-transparent text-gray-400 border border-white/20 hover:bg-white/5 hover:text-white" onclick="updateDashboard('affinity')">
+                                    &#9654; Target Affinity
+                                </button>
                             </div>
 
-                            <div class="lg:col-span-2 w-full flex justify-center">
-                                <div class="chart-container fade-in" id="chart-wrapper">
-                                    <canvas id="mainChart"></canvas>
+                            <div class="p-8">
+                                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+                                    <div class="lg:col-span-1">
+                                        <h3 id="panel-title" class="text-2xl font-bold text-white mb-4 fade-in">Proteolytic Resistance</h3>
+                                        <div id="panel-stat" class="text-4xl font-black text-[#B8FF00] mb-6 fade-in">>12x Increase</div>
+                                        <p id="panel-desc" class="text-gray-400 leading-relaxed fade-in text-base mb-8">
+                                            The hydrocarbon staple acts as a physical shield, preventing proteases from accessing and cleaving the peptide backbone, extending half-life significantly.
+                                        </p>
+                                        <div class="p-4 bg-white/5 border-l-4 border-[#B8FF00] rounded-r-xl fade-in">
+                                            <p id="panel-takeaway" class="text-sm text-white">Allows for practical dosing schedules in clinical settings.</p>
+                                        </div>
+                                    </div>
+                                    <div class="lg:col-span-2 w-full flex justify-center">
+                                        <div class="chart-container fade-in" id="chart-wrapper">
+                                            <canvas id="mainChart"></canvas>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
 
-            {/* Therapeutic Horizons */}
-            <section id="applications" class="mb-12">
-                <div class="mb-12 text-center max-w-3xl mx-auto">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Therapeutic Horizons</h2>
-                    <p class="text-gray-400 text-lg">
-                        Because stapled peptides can now enter cells and remain stable, they unlock a massive class of "undruggable" intracellular targets, primarily protein-protein interactions (PPIs).
-                    </p>
-                </div>
+                    {/* Table 2 */}
+                    <div class="my-10 not-prose">
+                        <div class="overflow-x-auto bg-[#0F1612] rounded-2xl border border-white/10 shadow-2xl">
+                            <table class="w-full text-left border-collapse min-w-[600px]">
+                                <thead>
+                                    <tr class="bg-white/5 text-white border-b border-white/10">
+                                        <th class="p-4 font-semibold text-sm uppercase tracking-wider">Parameter</th>
+                                        <th class="p-4 font-semibold text-sm uppercase tracking-wider">Linear Peptides</th>
+                                        <th class="p-4 font-semibold text-sm uppercase tracking-wider">Stapled Peptides</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-sm divide-y divide-white/5">
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 font-medium text-[#B8FF00]">Structure</td>
+                                        <td class="p-4 text-rose-400">Random coil in solution.</td>
+                                        <td class="p-4 text-emerald-400">Rigid α-helical cylinder.</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 font-medium text-[#B8FF00]">Protease Resistance</td>
+                                        <td class="p-4 text-rose-400">Extremely poor (minutes).</td>
+                                        <td class="p-4 text-emerald-400">Highly resistant (hours/days).</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 font-medium text-[#B8FF00]">Permeability</td>
+                                        <td class="p-4 text-rose-400">Negligible uptake.</td>
+                                        <td class="p-4 text-emerald-400">Enhanced cell penetration.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-3 flex justify-end items-center text-xs text-gray-500 italic">
+                            <Info class="w-3 h-3 mr-1" />
+                            <span>Citation: Derived from Data on Pharmacokinetic Advancements in Stapled Peptides.</span>
+                        </div>
+                    </div>
+                </section>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-[#0F1612]/50 p-8 rounded-3xl border border-white/10 hover:border-[#B8FF00]/30 transition-all hover:-translate-y-1 group">
-                        <div class="w-14 h-14 bg-rose-500/10 text-rose-400 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                            &#9877;
+                <section id="toxicity" class="fade-in-section py-10 border-b border-white/10">
+                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                        <ShieldAlert class="text-[#B8FF00] w-8 h-8" /> Toxicity & Manufacturing
+                    </h2>
+                    <h3 class="text-xl font-bold text-white mb-3">Membrane Toxicity and Lysis</h3>
+                    <p>Excessive hydrophobicity can lead to non-specific membrane perturbation and cellular toxicity. Researchers rely on rigorous algorithms to balance the charge-to-hydrophobicity ratio to ensure selective cell penetration without catastrophic lysis.</p>
+                    <h3 class="text-xl font-bold text-white mt-8 mb-3">Manufacturing Challenges</h3>
+                    <p>The chemical synthesis of specialized non-natural amino acids is labor-intensive. The industry is pivoting towards fast-flow peptide synthesis and sustainable deprotection strategies to improve atom economy and reduce environmental impact.</p>
+                </section>
+
+                <section id="target-landscape" class="fade-in-section py-10 border-b border-white/10">
+                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                        <Crosshair class="text-[#B8FF00] w-8 h-8" /> Target Landscape
+                    </h2>
+                    <p>Stapled peptides are premier modalities for disrupting intracellular protein-protein interactions (PPIs) and transcription factors once deemed "undruggable."</p>
+                    <ul class="list-disc pl-6 space-y-3 mb-6">
+                        <li><strong>Wnt/β-catenin Axis:</strong> mimic TCF4 to competitively bind β-catenin with nanomolar affinity.</li>
+                        <li><strong>p53/MDM2 Network:</strong> potent dual-inhibitors that reactivate apoptotic cascades in cancer cells.</li>
+                        <li><strong>Emerging SP-PROTACs:</strong> high-affinity warheads used in next-gen protein degraders.</li>
+                    </ul>
+
+                    {/* Horizon Cards */}
+                    <div class="not-prose grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                        <div class="bg-[#0F1612]/50 p-6 rounded-3xl border border-white/10 hover:border-[#B8FF00]/30 transition-all hover:-translate-y-1">
+                            <div class="w-12 h-12 bg-rose-500/10 text-rose-400 rounded-2xl flex items-center justify-center text-2xl mb-6">
+                                &#9877;
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-4">Oncology</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Blocking the p53-MDM2 interaction to force cancer cell apoptosis.
+                            </p>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-4">Oncology</h3>
-                        <p class="text-gray-400 text-base leading-relaxed">
-                            Reactivating tumor suppressor pathways. The most prominent example is stapled peptides designed to block the p53-MDM2 interaction, forcing cancer cells into apoptosis (programmed cell death).
-                        </p>
-                    </div>
-                    
-                    <div class="bg-[#0F1612]/50 p-8 rounded-3xl border border-white/10 hover:border-[#B8FF00]/30 transition-all hover:-translate-y-1 group">
-                        <div class="w-14 h-14 bg-blue-500/10 text-blue-400 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                            &#129440;
+                        <div class="bg-[#0F1612]/50 p-6 rounded-3xl border border-white/10 hover:border-[#B8FF00]/30 transition-all hover:-translate-y-1">
+                            <div class="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-2xl flex items-center justify-center text-2xl mb-6">
+                                &#129440;
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-4">Infectious</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Targeting viral fusion mechanisms in HIV or RSV.
+                            </p>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-4">Infectious Disease</h3>
-                        <p class="text-gray-400 text-base leading-relaxed">
-                            Targeting viral fusion mechanisms. Stapled peptides can bind to viral envelope proteins (like in HIV or RSV), preventing the virus from merging with and entering healthy human cells.
-                        </p>
-                    </div>
-                    
-                    <div class="bg-[#0F1612]/50 p-8 rounded-3xl border border-white/10 hover:border-[#B8FF00]/30 transition-all hover:-translate-y-1 group">
-                        <div class="w-14 h-14 bg-amber-500/10 text-amber-400 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                            &#9881;
+                        <div class="bg-[#0F1612]/50 p-6 rounded-3xl border border-white/10 hover:border-[#B8FF00]/30 transition-all hover:-translate-y-1">
+                            <div class="w-12 h-12 bg-amber-500/10 text-amber-400 rounded-2xl flex items-center justify-center text-2xl mb-6">
+                                &#9881;
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-4">Metabolic</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Long-acting incretin mimetics for obesity and diabetes.
+                            </p>
                         </div>
-                        <h3 class="text-2xl font-bold text-white mb-4">Metabolic Disorders</h3>
-                        <p class="text-gray-400 text-base leading-relaxed">
-                            Creating long-acting incretin mimetics. Stapling GLP-1 and dual agonists increases their stability, potentially leading to highly effective, less frequently dosed treatments for obesity and diabetes.
-                        </p>
                     </div>
-                </div>
-            </section>
+                </section>
+
+                <section id="clinical-pipeline" class="fade-in-section py-10 border-b border-white/10">
+                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                        <Stethoscope class="text-[#B8FF00] w-8 h-8" /> Clinical Pipeline
+                    </h2>
+                    <p>By 2026, the clinical landscape has evolved via learning from early trials. Rein Therapeutics and Parabilis Medicines are leading the way with innovative candidates demonstrating phenomenal efficacy in various indications.</p>
+
+                    {/* Table 3 */}
+                    <div class="my-10 not-prose">
+                        <div class="overflow-x-auto bg-[#0F1612] rounded-2xl border border-white/10 shadow-2xl">
+                            <table class="w-full text-left border-collapse min-w-[700px]">
+                                <thead>
+                                    <tr class="bg-white/5 text-white border-b border-white/10">
+                                        <th class="p-4 font-semibold text-sm uppercase tracking-wider">Candidate</th>
+                                        <th class="p-4 font-semibold text-sm uppercase tracking-wider">Mechanism</th>
+                                        <th class="p-4 font-semibold text-sm uppercase tracking-wider">Indication</th>
+                                        <th class="p-4 font-semibold text-sm uppercase tracking-wider">Status (2026)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-sm divide-y divide-white/5">
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 font-medium text-[#B8FF00]">Zolucatetide (FOG-001)</td>
+                                        <td class="p-4 text-gray-300">β-catenin/TCF4 antagonist</td>
+                                        <td class="p-4 text-gray-300">Wnt-driven tumors</td>
+                                        <td class="p-4 text-emerald-400 font-medium">Phase 1/2 ongoing; 80% ORR in desmoids.</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 font-medium text-[#B8FF00]">LTI-03</td>
+                                        <td class="p-4 text-gray-300">Fibrosis inhibition</td>
+                                        <td class="p-4 text-gray-300">IPF (Pulmonary Fibrosis)</td>
+                                        <td class="p-4 text-emerald-400 font-medium">Phase 2b ready; Positive Phase 1b data.</td>
+                                    </tr>
+                                    <tr class="hover:bg-white/5 transition-colors">
+                                        <td class="p-4 font-medium text-[#B8FF00]">LTI-01</td>
+                                        <td class="p-4 text-gray-300">Proenzyme targeted</td>
+                                        <td class="p-4 text-gray-300">Pleural Effusions</td>
+                                        <td class="p-4 text-emerald-400 font-medium">Completed Phase 1b/2a; Fast Track.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-3 flex justify-end items-center text-xs text-gray-500 italic">
+                            <Info class="w-3 h-3 mr-1" />
+                            <span>Citation: Clinical Pipeline and Transformative Milestones Table (2024-2026).</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="conclusions" class="fade-in-section py-10">
+                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                        <Lightbulb class="text-[#B8FF00] w-8 h-8" /> Conclusions
+                    </h2>
+                    <p>The rapid evolution of stapled peptide technology marks an irreversible paradigm shift in structural biology and targeted pharmacology. Researchers have dismantled historical barriers preventing clinical use of linear peptides.</p>
+                    <p>Looking toward the remainder of the decade, the integration of generative AI platforms and large-scale physics engines will drastically accelerate lead optimization, providing exquisite interventions for the most intractable human diseases.</p>
+                </section>
+            </article>
         </div>
     </main>
 </BaseLayout>
 
 <style>
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #374151;
+        border-radius: 20px;
+    }
+
+    .nav-link.active {
+        color: #B8FF00 !important;
+        font-weight: 700;
+        border-left-color: #B8FF00;
+        background-color: rgba(184, 255, 0, 0.05);
+    }
+
     .chart-container {
         position: relative;
         width: 100%;
-        height: 400px;
-        max-height: 400px;
-    }
-
-    @media (max-width: 768px) {
-        .chart-container {
-            height: 300px;
-            max-height: 300px;
-        }
+        height: 350px;
     }
 
     .amino-acid {
@@ -197,7 +418,7 @@ const description = "Unlocking the potential of stapled peptides. Learn how this
         font-size: 0.85rem;
         z-index: 10;
         position: relative;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     }
 
     .peptide-chain {
@@ -217,6 +438,17 @@ const description = "Unlocking the potential of stapled peptides. Learn how this
         top: 15px;
         z-index: 5;
         box-shadow: inset 0 6px 10px -4px rgba(184,255,0,0.3);
+    }
+
+    .fade-in-section {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade-in-section.is-visible {
+        opacity: 1;
+        transform: none;
     }
 
     .fade-in {
@@ -240,12 +472,12 @@ const description = "Unlocking the potential of stapled peptides. Learn how this
         stability: {
             title: "Proteolytic Resistance",
             stat: ">12x Increase",
-            desc: "Natural peptides are rapidly degraded by enzymes in the bloodstream, resulting in half-lives of minutes. The hydrocarbon staple acts as a physical shield, preventing proteases from accessing and cleaving the peptide backbone, extending half-life to hours or days.",
-            takeaway: "Allows for practical dosing schedules in clinical settings rather than continuous infusion.",
+            desc: "The hydrocarbon staple acts as a physical shield, preventing proteases from accessing and cleaving the peptide backbone, extending half-life to hours or days.",
+            takeaway: "Allows for practical dosing schedules in clinical settings.",
             chartConfig: {
-                labels: ['Unstapled Peptide', 'Stapled Peptide'],
+                labels: ['Unstapled', 'Stapled'],
                 data: [15, 180],
-                yAxisLabel: 'Serum Half-Life (Minutes)',
+                yAxisLabel: 'Half-Life (Minutes)',
                 bgColor: ['rgba(255, 255, 255, 0.1)', '#B8FF00'],
                 borderColor: ['rgba(255, 255, 255, 0.2)', '#D4FF5C'],
                 title: 'In-vivo Stability Comparison'
@@ -254,10 +486,10 @@ const description = "Unlocking the potential of stapled peptides. Learn how this
         permeability: {
             title: "Intracellular Permeability",
             stat: "60% Cellular Uptake",
-            desc: "Unlike small molecules, standard peptides cannot cross the lipid bilayer of cell membranes due to size and polarity. The hydrophobic nature of the hydrocarbon staple masks polar groups and facilitates active transport (endocytosis) into the cell interior.",
-            takeaway: "Opens the door to targeting intracellular protein-protein interactions previously deemed 'undruggable'.",
+            desc: "The hydrophobic nature of the hydrocarbon staple masks polar groups and facilitates active transport into the cell interior.",
+            takeaway: "Opens the door to targeting intracellular protein interactions.",
             chartConfig: {
-                labels: ['Unstapled Peptide', 'Stapled Peptide'],
+                labels: ['Unstapled', 'Stapled'],
                 data: [2, 65],
                 yAxisLabel: 'Cellular Uptake (%)',
                 bgColor: ['rgba(255, 255, 255, 0.1)', '#0ea5e9'],
@@ -268,12 +500,12 @@ const description = "Unlocking the potential of stapled peptides. Learn how this
         affinity: {
             title: "Target Binding Affinity",
             stat: "10-50x Tighter Binding",
-            desc: "A flexible peptide must expend massive energy to fold into its active helical shape before binding its target. A stapled peptide is pre-folded. This 'entropic advantage' means binding is immediate, significantly lowering the Dissociation Constant (Kd).",
-            takeaway: "Lower Kd means stronger binding, requiring lower drug doses to achieve the desired therapeutic effect.",
+            desc: "A stapled peptide is pre-folded. This 'entropic advantage' means binding is immediate, significantly lowering the Dissociation Constant (Kd).",
+            takeaway: "Lower Kd means stronger binding, requiring lower drug doses.",
             chartConfig: {
-                labels: ['Unstapled Peptide', 'Stapled Peptide'],
+                labels: ['Unstapled', 'Stapled'],
                 data: [450, 15],
-                yAxisLabel: 'Dissociation Constant (Kd in nM) - Lower is Better',
+                yAxisLabel: 'Kd (nM) - Lower is Better',
                 bgColor: ['rgba(255, 255, 255, 0.1)', '#8b5cf6'],
                 borderColor: ['rgba(255, 255, 255, 0.2)', '#a78bfa'],
                 title: 'Binding Strength (Lower = Stronger)'
@@ -310,9 +542,7 @@ const description = "Unlocking the potential of stapled peptides. Learn how this
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: {
-                        display: false
-                    },
+                    legend: { display: false },
                     title: {
                         display: true,
                         text: contentData.stability.chartConfig.title,
@@ -327,8 +557,6 @@ const description = "Unlocking the potential of stapled peptides. Learn how this
                         borderColor: 'rgba(255,255,255,0.1)',
                         borderWidth: 1,
                         padding: 12,
-                        titleFont: { size: 14 },
-                        bodyFont: { size: 14 },
                         displayColors: false
                     }
                 },
@@ -338,34 +566,19 @@ const description = "Unlocking the potential of stapled peptides. Learn how this
                         title: {
                             display: true,
                             text: contentData.stability.chartConfig.yAxisLabel,
-                            font: { weight: '600' },
                             color: '#9ca3af'
                         },
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.05)',
-                            drawBorder: false
-                        }
+                        grid: { color: 'rgba(255, 255, 255, 0.05)', drawBorder: false }
                     },
                     x: {
-                        grid: {
-                            display: false,
-                            drawBorder: false
-                        },
-                        ticks: {
-                            font: { weight: '600', size: 14 },
-                            color: '#e5e7eb'
-                        }
+                        grid: { display: false, drawBorder: false },
+                        ticks: { color: '#e5e7eb' }
                     }
-                },
-                animation: {
-                    duration: 800,
-                    easing: 'easeOutQuart'
                 }
             }
         });
     }
 
-    // Export function to global window scope so buttons can access it
     window.updateDashboard = function(viewId) {
         const btns = document.querySelectorAll('.data-toggle-btn');
         btns.forEach(btn => {
@@ -374,18 +587,7 @@ const description = "Unlocking the potential of stapled peptides. Learn how this
         const activeBtn = document.getElementById(`btn-${viewId}`);
         activeBtn.className = 'data-toggle-btn px-6 py-3 rounded-full font-bold text-sm transition-all bg-[#B8FF00] text-[#0A0E0D] shadow-[0_0_15px_rgba(184,255,0,0.2)]';
 
-        const elementsToAnimate = ['panel-title', 'panel-stat', 'panel-desc', 'panel-takeaway', 'chart-wrapper'];
-        elementsToAnimate.forEach(id => {
-            const el = document.getElementById(id);
-            if(el) {
-                el.classList.remove('fade-in');
-                void el.offsetWidth;
-                el.classList.add('fade-in');
-            }
-        });
-
         const data = contentData[viewId];
-
         document.getElementById('panel-title').innerText = data.title;
         document.getElementById('panel-stat').innerText = data.stat;
         document.getElementById('panel-desc').innerText = data.desc;
@@ -402,8 +604,48 @@ const description = "Unlocking the potential of stapled peptides. Learn how this
         }
     }
 
-    // Initialize chart when DOM is fully loaded or component mounts
-    document.addEventListener('DOMContentLoaded', initChart);
-    // Support Astro view transitions if enabled
-    document.addEventListener('astro:page-load', initChart);
+    function initScrollEffects() {
+        // 1. Fade In on Scroll
+        const faders = document.querySelectorAll('.fade-in-section');
+        const appearOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+        const appearOnScroll = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+        faders.forEach(fader => appearOnScroll.observe(fader));
+
+        // 2. Scrollspy for Sidebar TOC
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('#toc a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const scrollPos = window.scrollY + 120;
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollPos >= sectionTop && scrollPos < (sectionTop + sectionHeight)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initChart();
+        initScrollEffects();
+    });
+    document.addEventListener('astro:page-load', () => {
+        initChart();
+        initScrollEffects();
+    });
 </script>

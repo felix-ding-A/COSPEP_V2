@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Advent of Stapled Peptide Technology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.260.0/umd/lucide.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            900: '#134e4a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Interactive Fade-in Utilities */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Table row hover transition */
+        tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        /* Custom Scrollbar for Sidebar */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 20px;
+        }
+
+        /* Active Nav Item */
+        .nav-active {
+            color: #0d9488 !important;
+            font-weight: 600;
+            border-left: 3px solid #0d9488;
+            padding-left: 0.75rem !important;
+            background-color: #f0fdfa;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <!-- Hero Section -->
+    <header class="relative bg-primary-900 text-white pt-24 pb-32 overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="hexagons" width="50" height="43.4" patternUnits="userSpaceOnUse"
+                        patternTransform="scale(2)">
+                        <path d="M25 0L50 14.4V43.3L25 57.7L0 43.3V14.4Z" fill="none" stroke="currentColor"
+                            stroke-width="1"></path>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hexagons)"></rect>
+            </svg>
+        </div>
+        <div class="relative max-w-7xl mx-auto px-6 lg:px-8 z-10 text-center">
+            <span
+                class="inline-block py-1 px-3 rounded-full bg-primary-700 text-primary-100 text-sm font-semibold tracking-wide uppercase mb-6 shadow-sm">Review
+                Article</span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-tight font-serif">
+                The Advent of Stapled Peptide Technology
+            </h1>
+            <p class="mt-4 text-xl md:text-2xl text-primary-100 max-w-3xl mx-auto font-light leading-relaxed">
+                Chemical Mechanisms, Stability Breakthroughs, and Clinical Translation
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12 flex flex-col lg:flex-row gap-12 relative">
+
+        <!-- Sidebar / Table of Contents -->
+        <aside class="hidden lg:block w-1/4 shrink-0 relative">
+            <div
+                class="sticky top-8 bg-white p-6 rounded-2xl shadow-sm border border-slate-100 custom-scrollbar overflow-y-auto max-h-[85vh]">
+                <h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-2">
+                    <i data-lucide="list" class="w-4 h-4"></i> Contents
+                </h3>
+                <nav id="toc" class="flex flex-col space-y-1">
+                    <a href="#introduction"
+                        class="text-sm text-slate-600 hover:text-primary-600 py-2 pl-3 transition-all border-l-[3px] border-transparent">Introduction</a>
+                    <a href="#chemical-foundations"
+                        class="text-sm text-slate-600 hover:text-primary-600 py-2 pl-3 transition-all border-l-[3px] border-transparent">Chemical
+                        Foundations</a>
+                    <a href="#thermodynamics"
+                        class="text-sm text-slate-600 hover:text-primary-600 py-2 pl-3 transition-all border-l-[3px] border-transparent">Thermodynamic
+                        Stabilization</a>
+                    <a href="#pharmacokinetics"
+                        class="text-sm text-slate-600 hover:text-primary-600 py-2 pl-3 transition-all border-l-[3px] border-transparent">Pharmacokinetic
+                        Stability</a>
+                    <a href="#toxicity"
+                        class="text-sm text-slate-600 hover:text-primary-600 py-2 pl-3 transition-all border-l-[3px] border-transparent">Toxicity
+                        & Manufacturing</a>
+                    <a href="#target-landscape"
+                        class="text-sm text-slate-600 hover:text-primary-600 py-2 pl-3 transition-all border-l-[3px] border-transparent">Expanding
+                        the Target Landscape</a>
+                    <a href="#clinical-pipeline"
+                        class="text-sm text-slate-600 hover:text-primary-600 py-2 pl-3 transition-all border-l-[3px] border-transparent">Clinical
+                        Pipeline (2024-2026)</a>
+                    <a href="#conclusions"
+                        class="text-sm text-slate-600 hover:text-primary-600 py-2 pl-3 transition-all border-l-[3px] border-transparent">Conclusions
+                        & Future</a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Article Content -->
+        <main
+            class="w-full lg:w-3/4 max-w-4xl prose prose-slate prose-lg md:prose-xl prose-a:text-primary-600 hover:prose-a:text-primary-800 font-serif leading-relaxed">
+
+            <section id="introduction" class="fade-in-section pb-10 border-b border-slate-200">
+                <h2 class="text-3xl font-bold text-slate-900 font-sans mt-0 mb-6 flex items-center gap-3">
+                    <i data-lucide="dna" class="text-primary-600"></i> Introduction to Peptide
+                </h2>
+                <p>The pharmaceutical and biotechnological landscapes have historically been bifurcated into two primary
+                    therapeutic modalities: small molecules and large biologicals. Small molecules, typically defined by
+                    a molecular weight below 500 Daltons, have long formed the bedrock of the pharmaceutical industry.
+                    They are celebrated for their oral bioavailability, low manufacturing costs, and inherent capacity
+                    to penetrate cell membranes. However, their diminutive surface area fundamentally restricts their
+                    ability to disrupt extensive, flat protein-protein interactions (PPIs).</p>
+                <p>Conversely, large biologicals, such as monoclonal antibodies exceeding 150,000 Daltons, offer
+                    exquisite target specificity and possess the necessary surface area to bind complex, undruggable
+                    extracellular targets. Despite these advantages, monoclonal antibodies are inherently incapable of
+                    traversing the hydrophobic lipid bilayer to reach intracellular domains.</p>
+                <p>Peptides occupy the critical middle ground between these two extremes. As the minimal functional
+                    domains of larger proteins, peptides natively mediate a vast array of physiological processes.
+                    Within the structural lexicon of biology, the α-helix represents the most ubiquitous secondary
+                    structural motif.</p>
+                <p>Despite theoretical advantages, unmodified linear peptides have suffered from severe pharmacological
+                    liabilities: rapid conformational collapse, proteolytic cleavage, and exceptionally poor
+                    pharmacokinetic profiles. To overcome these barriers, the scientific community developed
+                    <strong>"stapled peptide"</strong> technology. Pioneered in the late 1990s and early 2000s, stapled
+                    peptides are engineered to forcefully lock a peptide sequence into its bioactive α-helical
+                    conformation via a synthetic macrocyclic brace—the "staple".</p>
+            </section>
+
+            <section id="chemical-foundations" class="fade-in-section py-10 border-b border-slate-200">
+                <h2 class="text-3xl font-bold text-slate-900 font-sans mb-6 flex items-center gap-3">
+                    <i data-lucide="flask-conical" class="text-primary-600"></i> Chemical Foundations of Stapled Peptide
+                    Technology
+                </h2>
+                <p>A stapled peptide is formally classified as a Class A peptidomimetic. The architecture of the
+                    prototypical all-hydrocarbon staple is achieved by incorporating highly specialized
+                    α,α-disubstituted non-natural amino acids bearing terminal alkene side chains during solid-phase
+                    peptide synthesis (SPPS).</p>
+                <p>Once the linear precursor sequence is successfully synthesized, the macrocycle is formed via a
+                    ruthenium-catalyzed ring-closing metathesis (RCM) reaction. Beyond the classic single
+                    all-hydrocarbon staple, advanced modalities have expanded to include multimeric constraints
+                    (stitched peptides), click-chemistry staples, lactam bridges, and heteroatom linkages like
+                    1,4-dinitroimidazole cross-links.</p>
+
+                <!-- Table 1 -->
+                <div class="my-10 not-prose">
+                    <div
+                        class="overflow-x-auto bg-white rounded-xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] border border-slate-100">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-primary-50 text-primary-900 border-b-2 border-primary-200">
+                                    <th class="p-4 font-semibold text-sm">Macrocyclization Modality</th>
+                                    <th class="p-4 font-semibold text-sm">Chemical Mechanism</th>
+                                    <th class="p-4 font-semibold text-sm">Spacing / Characteristics</th>
+                                    <th class="p-4 font-semibold text-sm">Primary Advantages</th>
+                                    <th class="p-4 font-semibold text-sm">Limitations</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm divide-y divide-slate-100">
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="p-4 font-medium text-slate-900">All-Hydrocarbon Staple</td>
+                                    <td class="p-4 text-slate-600">Ruthenium-catalyzed Ring-Closing Metathesis (RCM)
+                                    </td>
+                                    <td class="p-4 text-slate-600">i, i+4 or i, i+7 spacing.</td>
+                                    <td class="p-4 text-emerald-600 font-medium">Superior cell penetration, very high
+                                        proteolytic stability.</td>
+                                    <td class="p-4 text-rose-600">Expensive unnatural amino acids, hydrophobic
+                                        liabilities.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="p-4 font-medium text-slate-900">Lactam Bridge</td>
+                                    <td class="p-4 text-slate-600">Condensation of Lysine and Aspartic/Glutamic acid
+                                    </td>
+                                    <td class="p-4 text-slate-600">Limited to i, i+4 spacing.</td>
+                                    <td class="p-4 text-emerald-600 font-medium">Excellent for extracellular targets,
+                                        high bioactivity.</td>
+                                    <td class="p-4 text-rose-600">Fails to improve cell penetration due to high
+                                        polarity.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="p-4 font-medium text-slate-900">Bis-triazole "Double Click"</td>
+                                    <td class="p-4 text-slate-600">Copper(I)-catalyzed alkyne-azide cycloaddition
+                                        (CuAAC)</td>
+                                    <td class="p-4 text-slate-600">i, i+7 utilizing diazido peptides.</td>
+                                    <td class="p-4 text-emerald-600 font-medium">Modular synthesis, allows varied
+                                        linkers.</td>
+                                    <td class="p-4 text-rose-600">Triazole rings can introduce unintended steric
+                                        hindrance.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="p-4 font-medium text-slate-900">Stitched Peptides</td>
+                                    <td class="p-4 text-slate-600">Tandem RCM with dual-alkene amino acids</td>
+                                    <td class="p-4 text-slate-600">Extended multipoint constraints.</td>
+                                    <td class="p-4 text-emerald-600 font-medium">Extreme rigidity over large sequences.
+                                    </td>
+                                    <td class="p-4 text-rose-600">Complex synthesis, poor atom economy.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="p-4 font-medium text-slate-900">1,4-Dinitroimidazole</td>
+                                    <td class="p-4 text-slate-600">Cine-substitution with specific amino acids</td>
+                                    <td class="p-4 text-slate-600">Reacts specifically with cysteines in aqueous media.
+                                    </td>
+                                    <td class="p-4 text-emerald-600 font-medium">Highly chemoselective bioconjugation.
+                                    </td>
+                                    <td class="p-4 text-rose-600">Requires strict solvent and pH controls.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3 flex justify-end items-center text-xs text-slate-500 italic">
+                        <i data-lucide="info" class="w-3 h-3 mr-1"></i>
+                        <span>Citation: Compiled from "The Advent of Stapled Peptide Technology" (2026).</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="thermodynamics" class="fade-in-section py-10 border-b border-slate-200">
+                <h2 class="text-3xl font-bold text-slate-900 font-sans mb-6 flex items-center gap-3">
+                    <i data-lucide="thermometer" class="text-primary-600"></i> Thermodynamic and Biophysical
+                    Stabilization
+                </h2>
+                <p>The primary physical objective of peptide stapling is to forcefully overcome the massive
+                    thermodynamic entropic penalty associated with the binding of a highly flexible linear peptide to
+                    its structured biological target receptor.</p>
+                <p>By covalently locking the peptide into an α-helix during chemical synthesis prior to biological
+                    administration, the stapling process heavily restricts the conformational space available to the
+                    unbound state. Consequently, the massive entropic penalty of binding is effectively "pre-paid" in
+                    the laboratory. This results in a substantial net improvement in overall binding affinity (Kd) and
+                    absolute target selectivity.</p>
+                <p>Furthermore, stapled peptides show incredible structural fortitude against extreme chemical
+                    denaturants, such as urea and guanidine hydrochloride (GdmCl), routinely retaining significant
+                    residual helicity even at concentrations exceeding 6M.</p>
+            </section>
+
+            <section id="pharmacokinetics" class="fade-in-section py-10 border-b border-slate-200">
+                <h2 class="text-3xl font-bold text-slate-900 font-sans mb-6 flex items-center gap-3">
+                    <i data-lucide="activity" class="text-primary-600"></i> Breakthroughs in Proteolytic and
+                    Pharmacokinetic Stability
+                </h2>
+                <p>Because a correctly engineered stapled peptide is covalently forced into a rigid α-helical cylinder,
+                    it is physically incapable of unraveling into the extended β-strand orientation required to fit into
+                    a protease's catalytic cleft. This steric shielding results in exponential, order-of-magnitude
+                    increases in proteolytic stability.</p>
+                <p>Systemically, the massive hydrocarbon staple significantly increases overall lipophilicity,
+                    facilitating non-specific, reversible binding to human serum albumin. This acts as a massive
+                    circulating depot that shields the smaller peptide from the renal filtration apparatus, vastly
+                    extending circulating half-life.</p>
+
+                <!-- Table 2 -->
+                <div class="my-10 not-prose">
+                    <div
+                        class="overflow-x-auto bg-white rounded-xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] border border-slate-100">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-primary-50 text-primary-900 border-b-2 border-primary-200">
+                                    <th class="p-4 font-semibold text-sm">Pharmacokinetic Parameter</th>
+                                    <th class="p-4 font-semibold text-sm">Unmodified Linear Peptides</th>
+                                    <th class="p-4 font-semibold text-sm">Hydrocarbon-Stapled Peptides</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm divide-y divide-slate-100">
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="p-4 font-medium text-slate-900">Secondary Structure</td>
+                                    <td class="p-4 text-rose-600">Highly flexible, random coil in solution.</td>
+                                    <td class="p-4 text-emerald-600">Rigid, pre-organized α-helical cylinder.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="p-4 font-medium text-slate-900">Conformational Entropy</td>
+                                    <td class="p-4 text-rose-600">High (incurs massive binding penalty).</td>
+                                    <td class="p-4 text-emerald-600">Low (entropic penalty pre-paid).</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="p-4 font-medium text-slate-900">Protease Resistance</td>
+                                    <td class="p-4 text-rose-600">Extremely poor (t1/2 often 2-15 minutes).</td>
+                                    <td class="p-4 text-emerald-600">Highly resistant (sterically shields backbone).
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="p-4 font-medium text-slate-900">Primary Clearance Route</td>
+                                    <td class="p-4 text-rose-600">Rapid glomerular filtration.</td>
+                                    <td class="p-4 text-emerald-600">Reduced renal clearance, extensive albumin binding.
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="p-4 font-medium text-slate-900">Intracellular Permeability</td>
+                                    <td class="p-4 text-rose-600">Negligible (due to high polar surface area).</td>
+                                    <td class="p-4 text-emerald-600">Enhanced (hydrophobic face penetrates lipid
+                                        bilayer).</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="p-4 font-medium text-slate-900">Target Selectivity</td>
+                                    <td class="p-4 text-rose-600">Lower (conformational promiscuity allows off-target
+                                        binding).</td>
+                                    <td class="p-4 text-emerald-600">Very High (rigid sequence complementarity).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3 flex justify-end items-center text-xs text-slate-500 italic">
+                        <i data-lucide="info" class="w-3 h-3 mr-1"></i>
+                        <span>Citation: Derived from Data on Pharmacokinetic Advancements in Stapled Peptides.</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="toxicity" class="fade-in-section py-10 border-b border-slate-200">
+                <h2 class="text-3xl font-bold text-slate-900 font-sans mb-6 flex items-center gap-3">
+                    <i data-lucide="shield-alert" class="text-primary-600"></i> Mitigating Toxicity and Scale-Up
+                </h2>
+                <h3 class="text-xl font-bold text-slate-800 font-sans mb-3">Membrane Toxicity and Lysis</h3>
+                <p>Excessive or poorly calibrated hydrophobicity inevitably leads to non-specific membrane perturbation,
+                    detergent-like lytic activity, and severe cellular toxicity. Highly cationic, hydrophobic stapled
+                    peptides often exhibit severe hemolytic activity, indiscriminately destroying human red blood cells.
+                </p>
+                <p>To circumvent this, researchers rely on rigorous structure-function-toxicity algorithms to calibrate
+                    the hydrophobicity index, balancing the charge-to-hydrophobicity ratio to ensure selective cell
+                    penetration without catastrophic lysis.</p>
+
+                <h3 class="text-xl font-bold text-slate-800 font-sans mt-8 mb-3">Manufacturing Challenges</h3>
+                <p>A notable limitation lies in manufacturing complexity. The chemical synthesis of chiral
+                    α,α-disubstituted non-natural amino acids is labor-intensive and expensive. Furthermore, solid-phase
+                    peptide synthesis suffers from poor atom economy, requiring massive volumes of environmentally toxic
+                    reagents like concentrated trifluoroacetic acid (TFA). The industry is pivoting towards fast-flow
+                    peptide synthesis and sustainable deprotection strategies.</p>
+            </section>
+
+            <section id="target-landscape" class="fade-in-section py-10 border-b border-slate-200">
+                <h2 class="text-3xl font-bold text-slate-900 font-sans mb-6 flex items-center gap-3">
+                    <i data-lucide="crosshair" class="text-primary-600"></i> Expanding the Target Landscape
+                </h2>
+                <p>Stapled peptides are premier modalities for disrupting intracellular protein-protein interactions
+                    (PPIs) and transcription factors once deemed "undruggable."</p>
+                <ul class="list-disc pl-6 space-y-3 mb-6">
+                    <li><strong>Wnt/β-catenin and TCF4 Axis:</strong> Synthetic helices mimicking TCF4 competitively
+                        bind to β-catenin with extreme nanomolar affinity, displacing native TCF4 and silencing
+                        oncogenic transcription programs.</li>
+                    <li><strong>p53/MDM2/MDMX Network:</strong> Stapled peptides acting as potent dual-inhibitors bind
+                        equipotently to MDM2 and MDMX, liberating the p53 tumor suppressor and reactivating apoptotic
+                        cascades.</li>
+                    <li><strong>Emerging SP-PROTACs:</strong> Stapled peptides are being used as high-affinity targeting
+                        warheads in next-generation Proteolysis-Targeting Chimeras (PROTACs), directing cellular
+                        degradation machinery to undruggable targets like AR-V7.</li>
+                </ul>
+            </section>
+
+            <section id="clinical-pipeline" class="fade-in-section py-10 border-b border-slate-200">
+                <h2 class="text-3xl font-bold text-slate-900 font-sans mb-6 flex items-center gap-3">
+                    <i data-lucide="stethoscope" class="text-primary-600"></i> The Clinical Pipeline and Transformative
+                    Milestones
+                </h2>
+                <p>By 2026, the clinical landscape has evolved via learning from early trials. Aileron Therapeutics'
+                    ALRN-6924 (an MDM2/MDMX inhibitor) demonstrated proof-of-concept but encountered severe toxicities
+                    in advanced trials, prompting a strategic pivot. Aileron rebranded to Rein Therapeutics, shifting
+                    focus to pulmonary fibrotic indications with LTI-03.</p>
+                <p>Simultaneously, Parabilis Medicines leveraged the AI-driven Helicon platform to advance Zolucatetide
+                    (FOG-001), a first-in-class β-catenin/TCF4 antagonist demonstrating phenomenal efficacy in
+                    Wnt-driven solid tumors.</p>
+
+                <!-- Table 3 -->
+                <div class="my-10 not-prose">
+                    <div
+                        class="overflow-x-auto bg-white rounded-xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] border border-slate-100">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-primary-50 text-primary-900 border-b-2 border-primary-200">
+                                    <th class="p-4 font-semibold text-sm">Clinical Candidate</th>
+                                    <th class="p-4 font-semibold text-sm">Sponsoring Company</th>
+                                    <th class="p-4 font-semibold text-sm">Primary Target / Mechanism</th>
+                                    <th class="p-4 font-semibold text-sm">Primary Disease Indication</th>
+                                    <th class="p-4 font-semibold text-sm">Current Clinical Status (2026)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm divide-y divide-slate-100">
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="p-4 font-medium text-slate-900">ALRN-6924 (sulanemadlin)</td>
+                                    <td class="p-4 text-slate-600">Aileron Therapeutics</td>
+                                    <td class="p-4 text-slate-600">Dual MDM2/MDMX Inhibitor</td>
+                                    <td class="p-4 text-slate-600">Breast Cancer, Solid Tumors</td>
+                                    <td class="p-4 text-rose-600 font-medium">Terminated (failed to meet endpoints,
+                                        severe Grade 4 neutropenia).</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="p-4 font-medium text-slate-900">LTI-03</td>
+                                    <td class="p-4 text-slate-600">Rein Therapeutics</td>
+                                    <td class="p-4 text-slate-600">Caveolin-1 mimetic / Fibrosis inhibition</td>
+                                    <td class="p-4 text-slate-600">Idiopathic Pulmonary Fibrosis (IPF)</td>
+                                    <td class="p-4 text-emerald-600 font-medium">Phase 2b ready; Inhaled delivery.
+                                        Positive Phase 1b data.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="p-4 font-medium text-slate-900">Zolucatetide (FOG-001)</td>
+                                    <td class="p-4 text-slate-600">Parabilis Medicines</td>
+                                    <td class="p-4 text-slate-600">β-catenin/TCF4 direct antagonist</td>
+                                    <td class="p-4 text-slate-600">Desmoid Tumors, CRC, Wnt-driven tumors</td>
+                                    <td class="p-4 text-emerald-600 font-medium">Phase 1/2 ongoing; Granted Orphan Drug
+                                        status. 80% ORR in desmoids.</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="p-4 font-medium text-slate-900">LTI-01</td>
+                                    <td class="p-4 text-slate-600">Rein Therapeutics</td>
+                                    <td class="p-4 text-slate-600">Proenzyme targeted therapy</td>
+                                    <td class="p-4 text-slate-600">Loculated Pleural Effusions</td>
+                                    <td class="p-4 text-emerald-600 font-medium">Completed Phase 1b/2a; Orphan and Fast
+                                        Track designations.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3 flex justify-end items-center text-xs text-slate-500 italic">
+                        <i data-lucide="info" class="w-3 h-3 mr-1"></i>
+                        <span>Citation: Clinical Pipeline and Transformative Milestones Table (2024-2026).</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="conclusions" class="fade-in-section py-10">
+                <h2 class="text-3xl font-bold text-slate-900 font-sans mb-6 flex items-center gap-3">
+                    <i data-lucide="lightbulb" class="text-primary-600"></i> Conclusions and Future Perspectives
+                </h2>
+                <p>The rapid evolution of stapled peptide technology marks an irreversible paradigm shift in structural
+                    biology and targeted pharmacology. By utilizing sophisticated organometallic chemistry to covalently
+                    constrain dynamic amino acid sequences, researchers have dismantled historical barriers preventing
+                    clinical use of linear peptides.</p>
+                <p>Looking toward the remainder of the decade, the integration of generative AI platforms and
+                    large-scale physics engines will drastically accelerate lead optimization. Combined with targeted
+                    protein degradation (SP-PROTACs) and breakthroughs in oral bioavailability, macrocyclic peptides
+                    will continue to forcefully bridge the gap between small molecules and large biologics, providing
+                    exquisite interventions for the most intractable human diseases.</p>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 text-center border-t border-slate-800">
+        <p class="mb-2">Document formatted for interactive reading.</p>
+        <p class="text-sm">Based on the provided manuscript: <em>The Advent of Stapled Peptide Technology (2026)</em>
+        </p>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // 1. Fade In on Scroll
+        const faders = document.querySelectorAll('.fade-in-section');
+        const appearOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+        const appearOnScroll = new IntersectionObserver(function (entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+
+        // 2. Scrollspy for Sidebar TOC
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('#toc a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+
+            // Allow slight margin so when header touches top it switches
+            const scrollPos = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollPos >= sectionTop && scrollPos < (sectionTop + sectionHeight)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('nav-active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('nav-active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
