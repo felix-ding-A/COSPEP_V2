@@ -233,6 +233,6 @@
     "products": {
         "found": "Продуктов найдено",
         "notFound": "Продукты не найдены по вашему запросу",
-        "adjustFilters": "Попробуйте изменить фильтры или условия поиска"
+        "adjustFilters": "Нет нужного экстракта? <a href=\"#request-form\" class=\"text-[#B8FF00] hover:underline cursor-pointer transition-colors\">Свяжитесь с нами</a> для индивидуального заказа."
     }
 }

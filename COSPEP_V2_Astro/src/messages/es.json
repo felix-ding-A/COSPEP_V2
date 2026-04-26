@@ -233,6 +233,6 @@
     "products": {
         "found": "Productos encontrados",
         "notFound": "No se encontraron productos que coincidan con sus criterios",
-        "adjustFilters": "Intente ajustar sus filtros o términos de búsqueda"
+        "adjustFilters": "Más allá de nuestro catálogo: <a href=\"#request-form\" class=\"text-[#B8FF00] hover:underline cursor-pointer transition-colors\">contáctenos</a> para los extractos específicos que necesite."
     }
 }

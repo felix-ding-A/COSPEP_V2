@@ -92,7 +92,7 @@ export function RequestForm() {
     }, [executeRecaptcha, locale, form]);
 
     return (
-        <section className="py-24 bg-gradient-to-b from-[#0F1612] to-[#0A0E0D]">
+        <section id="request-form" className="py-24 bg-gradient-to-b from-[#0F1612] to-[#0A0E0D]">
             <div className="container mx-auto px-4 md:px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

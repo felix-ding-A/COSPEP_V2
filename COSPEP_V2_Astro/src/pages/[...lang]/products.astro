@@ -111,7 +111,7 @@ const jsonLd = {
                             ) : (
                                 <div class="py-20 text-center glass rounded-2xl border border-dashed border-white/10">
                                     <h3 class="text-xl text-gray-400 mb-4">{t('products.notFound') || 'No products found matching your criteria'}</h3>
-                                    <p class="text-gray-500">{t('products.adjustFilters') || 'Try adjusting your filters or search terms'}</p>
+                                    <p class="text-gray-500" set:html={t('products.adjustFilters') || 'Beyond our catalog—<a href="#request-form" class="text-[#B8FF00] hover:underline cursor-pointer transition-colors">contact us</a> for the specific extracts you require.'} />
                                 </div>
                             )}
                         </div>

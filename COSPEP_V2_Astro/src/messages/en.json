@@ -23,7 +23,7 @@
     "products": {
         "found": "Products Found",
         "notFound": "No products found matching your criteria",
-        "adjustFilters": "Try adjusting your filters or search terms"
+        "adjustFilters": "Beyond our catalog—<a href=\"#request-form\" class=\"text-[#B8FF00] hover:underline cursor-pointer transition-colors\">contact us</a> for the specific extracts you require."
     },
     "nav": {
         "products": "Products",

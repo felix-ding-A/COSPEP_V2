@@ -219,6 +219,6 @@
     "products": {
         "found": "منتجات تم العثور عليها",
         "notFound": "لم يتم العثور على منتجات تطابق معاييرك",
-        "adjustFilters": "حاول تعديل الفلاتر أو كلمات البحث"
+        "adjustFilters": "أكثر من مجرد كتالوج—<a href=\"#request-form\" class=\"text-[#B8FF00] hover:underline cursor-pointer transition-colors\">اتصل بنا</a> للحصول على المستخلصات المحددة التي تحتاجها."
     }
 }
