@@ -20,6 +20,11 @@
         "noImage": "No Image Available",
         "inStock": "In Stock"
     },
+    "products": {
+        "found": "Products Found",
+        "notFound": "No products found matching your criteria",
+        "adjustFilters": "Try adjusting your filters or search terms"
+    },
     "nav": {
         "products": "Products",
         "about": "About Us",

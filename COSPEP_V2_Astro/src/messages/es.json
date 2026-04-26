@@ -76,19 +76,19 @@
         "hero": {
             "slides": [
                 {
-                    "badge": "100% Puro �?Clínicamente probado",
+                    "badge": "100% Puro �?Clínicamente probado",
                     "title": "Puro, potente y",
                     "highlight": "Derivado naturalmente",
                     "description": "Abastecido éticamente y fabricado de manera sostenible para potenciar la consistencia en la salud en la que puede confiar."
                 },
                 {
-                    "badge": "Calidad Premium �?Certificado",
+                    "badge": "Calidad Premium �?Certificado",
                     "title": "La innovación se une a",
                     "highlight": "La Excelencia",
                     "description": "Formulaciones de vanguardia respaldadas por la ciencia, que ofrecen resultados superiores para su bienestar."
                 },
                 {
-                    "badge": "Confianza mundial �?Resultados probados",
+                    "badge": "Confianza mundial �?Resultados probados",
                     "title": "Su socio en",
                     "highlight": "Salud y Bienestar",
                     "description": "Soluciones integrales adaptadas a sus necesidades, respaldadas por la experiencia líder en la industria."
@@ -229,5 +229,10 @@
             "titleFallback": "{title} | Información de la Industria | COSPEP",
             "fallback": "Lea sobre {title} y descubra las últimas tendencias en ingredientes bioactivos y fabricación farmacéutica."
         }
+    ,
+    "products": {
+        "found": "Productos encontrados",
+        "notFound": "No se encontraron productos que coincidan con sus criterios",
+        "adjustFilters": "Intente ajustar sus filtros o términos de búsqueda"
     }
 }
