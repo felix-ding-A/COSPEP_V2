@@ -24,7 +24,7 @@ export function NewsBlogs() {
             link: "" // Disabled link
         },
         {
-            title: "Launching Our New Sustainable Extraction Facility in Oregon",
+            title: "Cultivating Pure Ingredients while Sustaining a Greener Global Future",
             category: "Sustainability",
             image: "/images/blog-3.webp",
             date: "December 15, 2025",
