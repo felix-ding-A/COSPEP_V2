@@ -8,7 +8,17 @@
         "aboutUs": "من نحن",
         "products": "المنتجات",
         "services": "خدماتنا",
-        "allRightsReserved": "جميع الحقوق محفوظة"
+        "allRightsReserved": "جميع الحقوق محفوظة",
+        "moq": "الحد الأدنى للطلب (MOQ)",
+        "leadTime": "مدة التسليم",
+        "grade": "الدرجة",
+        "documents": "المستندات",
+        "purity": "النقاء",
+        "inciName": "اسم INCI",
+        "readyToShip": "جاهز للشحن",
+        "categories": "الفئات",
+        "noImage": "لا توجد صورة",
+        "inStock": "في المخزن"
     },
     "nav": {
         "products": "المنتجات",

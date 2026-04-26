@@ -138,7 +138,7 @@ export function HeroSection({ lang: propLang }: HeroSectionProps) {
                                 className="inline-block"
                             >
                                 <div className="glass px-4 py-2 rounded-full text-sm text-white/90 uppercase tracking-wider">
-                                    <span className="text-[#B8FF00]">●</span> {carouselData[currentSlide].badge}
+                                    {carouselData[currentSlide].badge}
                                 </div>
                             </m.div>
 

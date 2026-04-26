@@ -8,7 +8,17 @@
         "aboutUs": "About Us",
         "products": "Products",
         "services": "Services",
-        "allRightsReserved": "All rights reserved"
+        "allRightsReserved": "All rights reserved",
+        "moq": "MOQ",
+        "leadTime": "Lead Time",
+        "grade": "Grade",
+        "documents": "Documents",
+        "purity": "Purity",
+        "inciName": "INCI Name",
+        "readyToShip": "Ready to Ship",
+        "categories": "Categories",
+        "noImage": "No Image Available",
+        "inStock": "In Stock"
     },
     "nav": {
         "products": "Products",
@@ -82,19 +92,19 @@
         "hero": {
             "slides": [
                 {
-                    "badge": "100% Pure • Clinically Tested",
+                    "badge": "100% Pure | Clinically Tested",
                     "title": "Pure, Potent &",
                     "highlight": "Naturally Derived",
                     "description": "Ethically sourced and sustainably made to empower consistency in health you can trust, for maximum impact on your goals."
                 },
                 {
-                    "badge": "Premium Quality • Certified",
+                    "badge": "Premium Quality | Certified",
                     "title": "Innovation Meets",
                     "highlight": "Excellence",
                     "description": "Cutting-edge formulations backed by science, delivering superior results for your health and wellness journey."
                 },
                 {
-                    "badge": "Trusted Worldwide • Proven Results",
+                    "badge": "Trusted Worldwide | Proven Results",
                     "title": "Your Partner in",
                     "highlight": "Health & Wellness",
                     "description": "Comprehensive solutions tailored to your needs, supported by industry-leading expertise and quality assurance."

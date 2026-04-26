@@ -11,7 +11,7 @@ const carouselSlides = [
     {
         image: "/images/product-carousel-1.webp",
         title: "Bio-Active Peptides",
-        subtitle: "Pharmaceutical Grade • cGMP Certified",
+        subtitle: "Pharmaceutical Grade | cGMP Certified",
         description: "Advanced peptide synthesis for research and therapeutic applications",
         cta: "Explore Peptides",
         scrollTarget: "products-list"
@@ -19,7 +19,7 @@ const carouselSlides = [
     {
         image: "/images/product-carousel-2.webp",
         title: "Premium Plant Extracts",
-        subtitle: "100% Natural • Sustainable Sourcing",
+        subtitle: "100% Natural | Sustainable Sourcing",
         description: "High-purity botanical extracts for nutraceuticals and cosmetics",
         cta: "View Extracts",
         scrollTarget: "products-list"
@@ -27,7 +27,7 @@ const carouselSlides = [
     {
         image: "/images/product-carousel-3.webp",
         title: "Custom Health Supplements",
-        subtitle: "Made to Order • Quality Assured",
+        subtitle: "Made to Order | Quality Assured",
         description: "Turnkey supplement manufacturing from formulation to packaging",
         cta: "Start Your Business",
         href: "/custom-manufacturing"
