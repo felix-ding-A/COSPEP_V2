@@ -27,6 +27,8 @@
         "loading": "Loading...",
         "resources": {
             "title": "Resources",
+            "news": "News",
+            "blogs": "Blogs",
             "industryInsights": "Industry Insights",
             "sustainability": "Sustainability",
             "customerService": "Customer Service"

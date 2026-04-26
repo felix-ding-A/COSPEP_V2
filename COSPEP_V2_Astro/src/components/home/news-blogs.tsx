@@ -10,14 +10,14 @@ export function NewsBlogs() {
     const locale = useLocale();
     const blogPosts = [
         {
-            title: "COSPEP Wins Best Innovation Award at Global Pharma 2026",
+            title: "COSPEP Wins Best Innovation Award at Global Pharma 2024",
             category: "Company News",
             image: "/images/blog-1.webp",
             date: "January 15, 2026",
             link: "" // Disabled link
         },
         {
-            title: "Breakthrough in Peptide Stability: New Research Published",
+            title: "Stapled Peptides: The Future of Therapeutics",
             category: "R&D Research",
             image: "/images/blog-2.webp",
             date: "December 28, 2025",
