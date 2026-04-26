@@ -45,7 +45,7 @@ const description = "Chemical Mechanisms, Stability Breakthroughs, and Clinical 
                     Chemical Mechanisms, Stability Breakthroughs, and Clinical Translation
                 </p>
                 <div class="mt-10 flex justify-center gap-4">
-                    <a href="#introduction" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-full text-[#0A0E0D] bg-[#B8FF00] hover:bg-[#B8FF00]/90 transition-all hover:scale-105 shadow-[0_0_20px_rgba(184,255,0,0.3)]">
+                    <a href="#pharmacokinetics" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-full text-[#0A0E0D] bg-[#B8FF00] hover:bg-[#B8FF00]/90 transition-all hover:scale-105 shadow-[0_0_20px_rgba(184,255,0,0.3)]">
                         Start Reading
                     </a>
                 </div>
@@ -61,11 +61,11 @@ const description = "Chemical Mechanisms, Stability Breakthroughs, and Clinical 
                         <List class="w-4 h-4" /> Contents
                     </h3>
                     <nav id="toc" class="flex flex-col space-y-1">
+                        <a href="#pharmacokinetics" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Breakthrough Stability</a>
                         <a href="#introduction" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Introduction</a>
                         <a href="#chemical-foundations" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Chemical Foundations</a>
                         <a href="#mechanism" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Structural Mechanism</a>
                         <a href="#thermodynamics" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Thermodynamic Stabilization</a>
-                        <a href="#pharmacokinetics" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Breakthrough Stability</a>
                         <a href="#toxicity" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Toxicity & Manufacturing</a>
                         <a href="#target-landscape" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Target Landscape</a>
                         <a href="#clinical-pipeline" class="text-sm text-gray-400 hover:text-[#B8FF00] py-2 pl-3 transition-all border-l-[3px] border-transparent nav-link">Clinical Pipeline</a>
@@ -77,120 +77,8 @@ const description = "Chemical Mechanisms, Stability Breakthroughs, and Clinical 
             {/* Article Content */}
             <article class="w-full lg:w-3/4 max-w-4xl prose prose-invert prose-lg md:prose-xl prose-headings:text-white prose-headings:font-bold prose-p:text-gray-300 prose-strong:text-white prose-a:text-[#B8FF00] prose-a:no-underline hover:prose-a:underline">
                 
-                <section id="introduction" class="fade-in-section pb-10 border-b border-white/10">
+                <section id="pharmacokinetics" class="fade-in-section pb-10 border-b border-white/10">
                     <h2 class="text-3xl font-bold text-white mt-0 mb-6 flex items-center gap-3">
-                        <Dna class="text-[#B8FF00] w-8 h-8" /> Introduction
-                    </h2>
-                    <p>The pharmaceutical and biotechnological landscapes have historically been bifurcated into two primary therapeutic modalities: small molecules and large biologicals. Small molecules have long formed the bedrock of the pharmaceutical industry, celebrated for their oral bioavailability and capacity to penetrate cell membranes. However, their diminutive surface area fundamentally restricts their ability to disrupt extensive, flat protein-protein interactions (PPIs).</p>
-                    <p>Conversely, large biologicals like monoclonal antibodies offer exquisite target specificity but are inherently incapable of traversing the hydrophobic lipid bilayer to reach intracellular domains.</p>
-                    <p>Peptides occupy the critical middle ground. As the minimal functional domains of larger proteins, peptides natively mediate a vast array of physiological processes. Within the structural lexicon of biology, the α-helix represents the most ubiquitous secondary structural motif.</p>
-                    <p>Despite theoretical advantages, unmodified linear peptides have suffered from severe pharmacological liabilities: rapid conformational collapse, proteolytic cleavage, and poor pharmacokinetic profiles. To overcome these barriers, the scientific community developed <strong>"stapled peptide"</strong> technology. Pioneered in the late 1990s and early 2000s, stapled peptides are engineered to forcefully lock a peptide sequence into its bioactive α-helical conformation via a synthetic macrocyclic brace—the "staple".</p>
-                </section>
-
-                <section id="chemical-foundations" class="fade-in-section py-10 border-b border-white/10">
-                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-                        <FlaskConical class="text-[#B8FF00] w-8 h-8" /> Chemical Foundations
-                    </h2>
-                    <p>A stapled peptide is formally classified as a Class A peptidomimetic. The architecture of the prototypical all-hydrocarbon staple is achieved by incorporating highly specialized α,α-disubstituted non-natural amino acids bearing terminal alkene side chains during solid-phase peptide synthesis (SPPS).</p>
-                    <p>Once the linear precursor sequence is successfully synthesized, the macrocycle is formed via a ruthenium-catalyzed ring-closing metathesis (RCM) reaction. Beyond the classic single all-hydrocarbon staple, advanced modalities include multimeric constraints (stitched peptides), click-chemistry staples, and heteroatom linkages.</p>
-
-                    {/* Table 1 */}
-                    <div class="my-10 not-prose">
-                        <div class="overflow-x-auto bg-[#0F1612] rounded-2xl border border-white/10 shadow-2xl">
-                            <table class="w-full text-left border-collapse min-w-[600px]">
-                                <thead>
-                                    <tr class="bg-white/5 text-white border-b border-white/10">
-                                        <th class="p-4 font-semibold text-sm uppercase tracking-wider">Modality</th>
-                                        <th class="p-4 font-semibold text-sm uppercase tracking-wider">Mechanism</th>
-                                        <th class="p-4 font-semibold text-sm uppercase tracking-wider">Advantages</th>
-                                        <th class="p-4 font-semibold text-sm uppercase tracking-wider">Limitations</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-sm divide-y divide-white/5">
-                                    <tr class="hover:bg-white/5 transition-colors">
-                                        <td class="p-4 font-medium text-[#B8FF00]">All-Hydrocarbon Staple</td>
-                                        <td class="p-4 text-gray-300">Ruthenium-catalyzed RCM</td>
-                                        <td class="p-4 text-emerald-400">Superior cell penetration, very high proteolytic stability.</td>
-                                        <td class="p-4 text-rose-400">Expensive synthesis, hydrophobic liabilities.</td>
-                                    </tr>
-                                    <tr class="hover:bg-white/5 transition-colors">
-                                        <td class="p-4 font-medium text-[#B8FF00]">Lactam Bridge</td>
-                                        <td class="p-4 text-gray-300">Condensation of Lys and Asp/Glu</td>
-                                        <td class="p-4 text-emerald-400">Excellent for extracellular targets, high bioactivity.</td>
-                                        <td class="p-4 text-rose-400">Fails to improve cell penetration due to high polarity.</td>
-                                    </tr>
-                                    <tr class="hover:bg-white/5 transition-colors">
-                                        <td class="p-4 font-medium text-[#B8FF00]">Bis-triazole "Double Click"</td>
-                                        <td class="p-4 text-gray-300">CuAAC click chemistry</td>
-                                        <td class="p-4 text-emerald-400">Modular synthesis, allows varied linkers.</td>
-                                        <td class="p-4 text-rose-400">Triazole rings can introduce unintended steric hindrance.</td>
-                                    </tr>
-                                    <tr class="hover:bg-white/5 transition-colors">
-                                        <td class="p-4 font-medium text-[#B8FF00]">Stitched Peptides</td>
-                                        <td class="p-4 text-gray-300">Tandem RCM</td>
-                                        <td class="p-4 text-emerald-400">Extreme rigidity over large sequences.</td>
-                                        <td class="p-4 text-rose-400">Complex synthesis, poor atom economy.</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="mt-3 flex justify-end items-center text-xs text-gray-500 italic">
-                            <Info class="w-3 h-3 mr-1" />
-                            <span>Citation: Compiled from "The Advent of Stapled Peptide Technology" (2026).</span>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="mechanism" class="fade-in-section py-10 border-b border-white/10 not-prose">
-                    <h2 class="text-3xl font-bold text-white mb-8 text-center md:text-left">The Structural Mechanism</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-                        <div class="bg-[#0F1612]/50 p-8 rounded-3xl border border-white/10 flex flex-col items-center group hover:border-white/20 transition-all">
-                            <h3 class="text-xl font-bold text-white mb-8">Native Peptide (Unstapled)</h3>
-                            <div class="peptide-chain w-full h-48 flex justify-center">
-                                <div class="amino-acid bg-gray-700 text-gray-300 transform translate-y-4">AA</div>
-                                <div class="amino-acid bg-gray-700 text-gray-300 transform -translate-y-2">AA</div>
-                                <div class="amino-acid bg-gray-700 text-gray-300 transform translate-y-6">AA</div>
-                                <div class="amino-acid bg-gray-700 text-gray-300 transform -translate-y-4">AA</div>
-                                <div class="amino-acid bg-gray-700 text-gray-300 transform translate-y-2">AA</div>
-                                <div class="amino-acid bg-gray-700 text-gray-300 transform -translate-y-6">AA</div>
-                                <div class="amino-acid bg-gray-700 text-gray-300 transform translate-y-1">AA</div>
-                            </div>
-                            <p class="mt-8 text-sm text-gray-400 text-center leading-relaxed">
-                                Highly flexible, loses shape in solution, making it vulnerable to enzymes (proteases).
-                            </p>
-                        </div>
-
-                        <div class="bg-[#0F1612]/80 p-8 rounded-3xl border border-[#B8FF00]/30 flex flex-col items-center relative overflow-hidden group hover:shadow-[0_0_30px_rgba(184,255,0,0.1)] transition-all">
-                            <div class="absolute inset-0 bg-[#B8FF00]/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                            <h3 class="text-xl font-bold text-[#B8FF00] mb-8 relative z-10">Stapled Peptide</h3>
-                            <div class="peptide-chain w-full h-48 relative flex justify-center z-10">
-                                <div class="staple-bridge" style="width: 130px; left: calc(50% - 65px);"></div>
-                                <div class="amino-acid bg-[#B8FF00] text-[#0A0E0D]">AA</div>
-                                <div class="amino-acid bg-[#B8FF00] text-[#0A0E0D] transform translate-y-2">AA</div>
-                                <div class="amino-acid bg-white text-[#0A0E0D] ring-2 ring-[#B8FF00] ring-offset-2 ring-offset-[#0F1612]" id="anchor1">X</div>
-                                <div class="amino-acid bg-[#B8FF00] text-[#0A0E0D] transform -translate-y-2">AA</div>
-                                <div class="amino-acid bg-[#B8FF00] text-[#0A0E0D] transform -translate-y-1">AA</div>
-                                <div class="amino-acid bg-white text-[#0A0E0D] ring-2 ring-[#B8FF00] ring-offset-2 ring-offset-[#0F1612]" id="anchor2">X</div>
-                                <div class="amino-acid bg-[#B8FF00] text-[#0A0E0D]">AA</div>
-                            </div>
-                            <p class="mt-8 text-sm text-gray-300 text-center font-medium leading-relaxed relative z-10">
-                                A hydrocarbon bridge ("staple") locks the peptide into a rigid alpha-helix.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="thermodynamics" class="fade-in-section py-10 border-b border-white/10">
-                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-                        <Thermometer class="text-[#B8FF00] w-8 h-8" /> Thermodynamic Stabilization
-                    </h2>
-                    <p>The primary physical objective of peptide stapling is to forcefully overcome the massive thermodynamic entropic penalty associated with the binding of a highly flexible linear peptide to its structured biological target receptor.</p>
-                    <p>By covalently locking the peptide into an α-helix during chemical synthesis, the stapling process heavily restricts the conformational space available to the unbound state. This results in a substantial net improvement in overall binding affinity (Kd) and absolute target selectivity.</p>
-                    <p>Furthermore, stapled peptides show incredible structural fortitude against extreme chemical denaturants like urea, routinely retaining significant residual helicity even at high concentrations.</p>
-                </section>
-
-                <section id="pharmacokinetics" class="fade-in-section py-10 border-b border-white/10">
-                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center gap-3">
                         <Activity class="text-[#B8FF00] w-8 h-8" /> Breakthrough Stability
                     </h2>
                     <p>Because a correctly engineered stapled peptide is covalently forced into a rigid α-helical cylinder, it is physically incapable of unraveling into the extended orientation required to fit into a protease's catalytic cleft. This steric shielding results in exponential increases in proteolytic stability.</p>
@@ -268,6 +156,16 @@ const description = "Chemical Mechanisms, Stability Breakthroughs, and Clinical 
                             <span>Citation: Derived from Data on Pharmacokinetic Advancements in Stapled Peptides.</span>
                         </div>
                     </div>
+                </section>
+
+                <section id="introduction" class="fade-in-section py-10 border-b border-white/10">
+                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                        <Dna class="text-[#B8FF00] w-8 h-8" /> Introduction
+                    </h2>
+                    <p>The pharmaceutical and biotechnological landscapes have historically been bifurcated into two primary therapeutic modalities: small molecules and large biologicals. Small molecules have long formed the bedrock of the pharmaceutical industry, celebrated for their oral bioavailability and capacity to penetrate cell membranes. However, their diminutive surface area fundamentally restricts their ability to disrupt extensive, flat protein-protein interactions (PPIs).</p>
+                    <p>Conversely, large biologicals like monoclonal antibodies offer exquisite target specificity but are inherently incapable of traversing the hydrophobic lipid bilayer to reach intracellular domains.</p>
+                    <p>Peptides occupy the critical middle ground. As the minimal functional domains of larger proteins, peptides natively mediate a vast array of physiological processes. Within the structural lexicon of biology, the α-helix represents the most ubiquitous secondary structural motif.</p>
+                    <p>Despite theoretical advantages, unmodified linear peptides have suffered from severe pharmacological liabilities: rapid conformational collapse, proteolytic cleavage, and poor pharmacokinetic profiles. To overcome these barriers, the scientific community developed <strong>"stapled peptide"</strong> technology. Pioneered in the late 1990s and early 2000s, stapled peptides are engineered to forcefully lock a peptide sequence into its bioactive α-helical conformation via a synthetic macrocyclic brace—the "staple".</p>
                 </section>
 
                 <section id="toxicity" class="fade-in-section py-10 border-b border-white/10">
