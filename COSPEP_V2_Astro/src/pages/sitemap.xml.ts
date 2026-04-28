@@ -3,8 +3,8 @@ import { getProducts, getPosts } from '@/lib/sanity/queries';
 export async function GET() {
   const products = await getProducts();
   const posts = await getPosts();
-  
-  const langs = ['', 'es', 'ru', 'ar'];
+
+  const langs = [''];
   const baseUrl = 'https://cospep.com';
 
   const staticPages = [
