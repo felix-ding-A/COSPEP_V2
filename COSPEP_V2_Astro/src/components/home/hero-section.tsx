@@ -180,7 +180,7 @@ export function HeroSection({ lang: propLang }: HeroSectionProps) {
                                     asChild
                                 >
                                     <Link href="/about">
-                                        {tCommon('learnMore')}
+                                        {tCommon('aboutUs')}
                                         <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                                     </Link>
                                 </Button>

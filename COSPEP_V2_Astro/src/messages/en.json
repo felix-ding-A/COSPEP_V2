@@ -5,7 +5,7 @@
         "viewAll": "View All Products",
         "contact": "Contact",
         "home": "Home",
-        "aboutUs": "About Us",
+        "aboutUs": "About COSPEP",
         "products": "Products",
         "services": "Services",
         "allRightsReserved": "All rights reserved",
@@ -75,7 +75,7 @@
         "quickLinks": {
             "title": "Quick Links",
             "home": "Home",
-            "about": "About Us",
+            "about": "About COSPEP",
             "service": "Packaging & Logistics",
             "contact": "Contact Us"
         },

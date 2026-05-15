@@ -329,7 +329,7 @@ export function Navbar({ lang: propLang }: NavbarProps) {
 
                                     <SheetClose asChild>
                                         <Link href="/about" className="text-lg font-medium text-white hover:text-[#B8FF00]">
-                                            About Us
+                                            About COSPEP
                                         </Link>
                                     </SheetClose>
 

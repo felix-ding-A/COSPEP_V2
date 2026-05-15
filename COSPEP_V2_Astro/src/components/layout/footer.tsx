@@ -99,9 +99,9 @@ export function Footer({ lang: propLang }: FooterProps) {
                                 )}
                             </ul>
                             <div className="flex gap-4 pt-2">
-                                <Link href="#" className="hover:text-primary"><LinkedinIcon className="h-5 w-5" /></Link>
-                                <Link href="#" className="hover:text-primary"><FacebookIcon className="h-5 w-5" /></Link>
-                                <Link href="#" className="hover:text-primary"><TwitterIcon className="h-5 w-5" /></Link>
+                                <Link href="#" className="hover:text-primary" aria-label="Follow COSPEP on LinkedIn"><LinkedinIcon className="h-5 w-5" /></Link>
+                                <Link href="#" className="hover:text-primary" aria-label="Follow COSPEP on Facebook"><FacebookIcon className="h-5 w-5" /></Link>
+                                <Link href="#" className="hover:text-primary" aria-label="Follow COSPEP on Twitter"><TwitterIcon className="h-5 w-5" /></Link>
                             </div>
                         </div>
                     </div>
