@@ -16,7 +16,7 @@ export function PeptidePromo() {
                     {/* Background with Generated Image */}
                     <div className="absolute inset-0 z-0">
                         <Image
-                            src="/images/peptide-promo-bg.png"
+                            src="/images/peptide-promo-bg.webp"
                             alt="Peptide Research"
                             className="object-cover w-full h-full"
                         />
@@ -53,7 +53,7 @@ export function PeptidePromo() {
                             </p>
 
                             <div className="pt-4">
-                                <Link 
+                                <Link
                                     href="/peptides"
                                     className="inline-flex items-center px-8 py-4 bg-[#B8FF00] hover:bg-[#B8FF00]/90 text-[#0A0E0D] font-bold text-lg rounded-full transition-all hover:scale-105 shadow-[0_0_20px_rgba(184,255,0,0.3)] group"
                                 >
@@ -67,12 +67,12 @@ export function PeptidePromo() {
                     {/* Decorative Elements */}
                     <div className="absolute top-0 right-0 p-12 hidden lg:block">
                         <motion.div
-                            animate={{ 
+                            animate={{
                                 rotate: [0, 360],
                                 scale: [1, 1.1, 1],
                             }}
-                            transition={{ 
-                                duration: 20, 
+                            transition={{
+                                duration: 20,
                                 repeat: Infinity,
                                 ease: "linear"
                             }}
