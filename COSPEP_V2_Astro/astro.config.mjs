@@ -12,7 +12,7 @@ export default defineConfig({
   site: 'https://cospep.com',
   integrations: [react(), partytown({
     config: {
-      forward: ['dataLayer.push'],
+      forward: ['dataLayer.push', 'clarity'],
     },
   })],
   output: 'server',
