@@ -24,12 +24,12 @@ export async function GET() {
     '/privacy',
   ];
 
-  const getUrl = (lang: string, path: string) => {
+  const getUrl = (lang: string, path: string): string => {
     const langPrefix = lang === defaultLang ? '' : `/${lang}`;
     return `${baseUrl}${langPrefix}${path}`;
   };
 
-  const formatDate = (dateStr?: string) => {
+  const formatDate = (dateStr?: string): string | null => {
     if (!dateStr) return null;
     try {
       return new Date(dateStr).toISOString();
@@ -38,92 +38,92 @@ export async function GET() {
     }
   };
 
-  let xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">`;
+  /**
+   * Build a single <url> block deterministically using an array of lines,
+   * then join with '\n'. This avoids the SSR streaming whitespace injection
+   * that occurs when using string concatenation (+=) with template literals.
+   */
+  const buildUrlEntry = (
+    loc: string,
+    altLinks: Array<{ lang: string; href: string }>,
+    opts: { changefreq: string; priority: string; lastmod?: string | null }
+  ): string => {
+    const lines: string[] = [];
+    lines.push('  <url>');
+    lines.push(`    <loc>${loc}</loc>`);
+    for (const { lang, href } of altLinks) {
+      lines.push(`    <xhtml:link rel="alternate" hreflang="${lang}" href="${href}" />`);
+    }
+    if (opts.lastmod) {
+      lines.push(`    <lastmod>${opts.lastmod}</lastmod>`);
+    }
+    lines.push(`    <changefreq>${opts.changefreq}</changefreq>`);
+    lines.push(`    <priority>${opts.priority}</priority>`);
+    lines.push('  </url>');
+    return lines.join('\n');
+  };
 
-  // Add static pages
-  staticPages.forEach(page => {
-    langKeys.forEach(lang => {
+  const urlEntries: string[] = [];
+
+  // Static pages
+  for (const page of staticPages) {
+    for (const lang of langKeys) {
       const loc = getUrl(lang, page);
-      xml += `
-  <url>
-    <loc>${loc}</loc>`;
-      
-      langKeys.forEach(altLang => {
-        xml += `
-    <xhtml:link rel="alternate" hreflang="${altLang}" href="${getUrl(altLang, page)}" />`;
-      });
+      const altLinks = langKeys.map(l => ({ lang: l, href: getUrl(l, page) }));
+      urlEntries.push(
+        buildUrlEntry(loc, altLinks, {
+          changefreq: 'weekly',
+          priority: page === '' ? '1.0' : '0.8',
+        })
+      );
+    }
+  }
 
-      xml += `
-    <changefreq>weekly</changefreq>
-    <priority>${page === '' ? '1.0' : '0.8'}</priority>
-  </url>`;
-    });
-  });
-
-  // Add dynamic products
-  products.forEach(product => {
+  // Dynamic products
+  for (const product of products) {
     const path = `/products/${product.slug.current}`;
     const lastmod = formatDate(product._updatedAt);
-    
-    langKeys.forEach(lang => {
+    for (const lang of langKeys) {
       const loc = getUrl(lang, path);
-      xml += `
-  <url>
-    <loc>${loc}</loc>`;
+      const altLinks = langKeys.map(l => ({ lang: l, href: getUrl(l, path) }));
+      urlEntries.push(
+        buildUrlEntry(loc, altLinks, {
+          changefreq: 'monthly',
+          priority: '0.7',
+          lastmod,
+        })
+      );
+    }
+  }
 
-      langKeys.forEach(altLang => {
-        xml += `
-    <xhtml:link rel="alternate" hreflang="${altLang}" href="${getUrl(altLang, path)}" />`;
-      });
-
-      if (lastmod) {
-        xml += `
-    <lastmod>${lastmod}</lastmod>`;
-      }
-      
-      xml += `
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>`;
-    });
-  });
-
-  // Add dynamic posts
-  posts.forEach(post => {
+  // Dynamic posts
+  for (const post of posts) {
     const path = `/industry-insights/${post.slug.current}`;
     const lastmod = formatDate(post._updatedAt);
-
-    langKeys.forEach(lang => {
+    for (const lang of langKeys) {
       const loc = getUrl(lang, path);
-      xml += `
-  <url>
-    <loc>${loc}</loc>`;
+      const altLinks = langKeys.map(l => ({ lang: l, href: getUrl(l, path) }));
+      urlEntries.push(
+        buildUrlEntry(loc, altLinks, {
+          changefreq: 'monthly',
+          priority: '0.6',
+          lastmod,
+        })
+      );
+    }
+  }
 
-      langKeys.forEach(altLang => {
-        xml += `
-    <xhtml:link rel="alternate" hreflang="${altLang}" href="${getUrl(altLang, path)}" />`;
-      });
-
-      if (lastmod) {
-        xml += `
-    <lastmod>${lastmod}</lastmod>`;
-      }
-
-      xml += `
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>`;
-    });
-  });
-
-  xml += `
-</urlset>`;
+  const xml = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
+    '        xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+    ...urlEntries,
+    '</urlset>',
+  ].join('\n');
 
   return new Response(xml, {
     headers: {
-      'Content-Type': 'application/xml',
+      'Content-Type': 'application/xml; charset=utf-8',
     },
   });
 }
