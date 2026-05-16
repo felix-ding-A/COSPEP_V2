@@ -31,6 +31,7 @@ export interface Product {
   seoTitle?: string;
   seoDesc?: string;
   description?: string;
+  _updatedAt?: string;
   documents?: {
     title: string;
     file: {
@@ -80,7 +81,8 @@ export async function getProducts(search?: string, categorySlug?: string, stockS
         stockStatus,
         "categories": categories[]->{title, slug},
         "imageUrl": image.asset->url,
-        description
+        description,
+        _updatedAt
       }`;
 
       return client.fetch(query, {
@@ -107,7 +109,8 @@ export async function getProducts(search?: string, categorySlug?: string, stockS
         stockStatus,
         "categories": categories[]->{title, slug},
         "imageUrl": image.asset->url,
-        description
+        description,
+        _updatedAt
       }`;
 
   return client.fetch(query, { search: search || null, categorySlug: categorySlug || null, stockStatus: stockStatus || null });
@@ -218,6 +221,7 @@ export async function getPosts(lang: string = 'en'): Promise<any[]> {
         slug,
         "mainImage": mainImage.asset->url,
         publishedAt,
+        _updatedAt,
         excerpt
     }`;
   return client.fetch(query);
