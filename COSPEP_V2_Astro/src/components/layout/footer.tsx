@@ -107,7 +107,7 @@ export function Footer({ lang: propLang }: FooterProps) {
                     </div>
 
                     <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center text-xs mt-auto">
-                        <p>&copy; {new Date().getFullYear()} {settings?.heroText || "Prius Group / COSPEP"}. All rights reserved.</p>
+                        <p>&copy; {new Date().getFullYear()} {settings?.heroText || "COSPEP"}. All rights reserved.</p>
                         <div className="flex gap-4 mt-4 md:mt-0">
                             <Link href="/privacy" className="hover:text-foreground">{t('privacyPolicy')}</Link>
                             <Link href="/terms" className="hover:text-foreground">{t('termsOfService')}</Link>
