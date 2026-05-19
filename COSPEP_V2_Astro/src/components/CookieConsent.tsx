@@ -23,18 +23,7 @@ function loadAnalytics() {
     const firstScript = document.getElementsByTagName("script")[0];
     firstScript.parentNode!.insertBefore(gtmScript, firstScript);
 
-    // ── GA4 (standalone, loaded via GTM is preferred — kept here as fallback) ─
-    const gaScript = document.createElement("script");
-    gaScript.async = true;
-    gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-QEVM1NZGDL";
-    document.head.appendChild(gaScript);
-    gaScript.onload = () => {
-        (window as any).dataLayer = (window as any).dataLayer || [];
-        function gtag(...args: any[]) { (window as any).dataLayer.push(args); }
-        (window as any).gtag = (window as any).gtag || gtag;
-        (window as any).gtag("js", new Date());
-        (window as any).gtag("config", "G-QEVM1NZGDL");
-    };
+
 
     // ── Microsoft Clarity — deferred to idle to avoid blocking render ─────────
     function _loadClarity() {
