@@ -208,6 +208,8 @@ export function Navbar({ lang: propLang }: NavbarProps) {
                     <div className="relative">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                         <input
+                            id="navbar-search"
+                            name="q"
                             type="text"
                             placeholder="Search products..."
                             className="w-32 lg:w-48 xl:w-64 pl-10 pr-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B8FF00] focus:border-transparent transition-all"
