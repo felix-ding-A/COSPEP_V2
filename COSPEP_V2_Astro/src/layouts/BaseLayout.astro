@@ -49,7 +49,11 @@ const absoluteOgImage = new URL(ogImage, Astro.site).href;
 <!doctype html>
 <html lang={lang} dir={dir} class="dark">
 	<head>
-		<!-- Google Tag Manager (noscript fallback — only if consent was already given) -->
+		<!-- Google Tag Manager: dataLayer pre-init (no network request, must be first) -->
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+		</script>
+		<!-- End Google Tag Manager pre-init -->
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/webp" href="/favicon.webp" />
@@ -85,6 +89,16 @@ const absoluteOgImage = new URL(ogImage, Astro.site).href;
 		<meta property="twitter:image" content={absoluteOgImage} />
 	</head>
 	<body class="min-h-screen bg-[#0A0E0D] font-sans antialiased text-white flex flex-col">
+		<!-- Google Tag Manager (noscript) -->
+		<noscript>
+			<iframe
+				src="https://www.googletagmanager.com/ns.html?id=GTM-TZP98ZV5"
+				height="0"
+				width="0"
+				style="display:none;visibility:hidden"
+			></iframe>
+		</noscript>
+		<!-- End Google Tag Manager (noscript) -->
 		<CookieConsent client:load />
 		<Toaster client:idle />
 		<Navbar client:load lang={lang} />

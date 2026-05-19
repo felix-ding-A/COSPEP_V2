@@ -4,18 +4,26 @@ import React, { useEffect, useState } from "react";
 
 const CONSENT_KEY = "cookie-consent";
 
+// Guard: prevent duplicate loading if called more than once
+let _analyticsLoaded = false;
+
 function loadAnalytics() {
-    // GTM
-    const dataLayer = (window as any).dataLayer || [];
-    (window as any).dataLayer = dataLayer;
-    dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+    if (_analyticsLoaded) return;
+    _analyticsLoaded = true;
+
+    // ── GTM ──────────────────────────────────────────────────────────────────
+    // dataLayer is pre-initialized in BaseLayout.astro <head> (no network cost)
+    // Here we just load the GTM script; GTM itself will push gtm.start
+    (window as any).dataLayer = (window as any).dataLayer || [];
 
     const gtmScript = document.createElement("script");
     gtmScript.async = true;
     gtmScript.src = "https://www.googletagmanager.com/gtm.js?id=GTM-TZP98ZV5";
-    document.head.appendChild(gtmScript);
+    // Insert before the first <script> for highest priority
+    const firstScript = document.getElementsByTagName("script")[0];
+    firstScript.parentNode!.insertBefore(gtmScript, firstScript);
 
-    // GA4
+    // ── GA4 (standalone, loaded via GTM is preferred — kept here as fallback) ─
     const gaScript = document.createElement("script");
     gaScript.async = true;
     gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-QEVM1NZGDL";
@@ -23,12 +31,12 @@ function loadAnalytics() {
     gaScript.onload = () => {
         (window as any).dataLayer = (window as any).dataLayer || [];
         function gtag(...args: any[]) { (window as any).dataLayer.push(args); }
-        (window as any).gtag = gtag;
-        gtag("js", new Date());
-        gtag("config", "G-QEVM1NZGDL");
+        (window as any).gtag = (window as any).gtag || gtag;
+        (window as any).gtag("js", new Date());
+        (window as any).gtag("config", "G-QEVM1NZGDL");
     };
 
-    // Microsoft Clarity — deferred after idle
+    // ── Microsoft Clarity — deferred to idle to avoid blocking render ─────────
     function _loadClarity() {
         (function (c: any, l: any, a: string, r: string, i: string, t?: any, y?: any) {
             c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
