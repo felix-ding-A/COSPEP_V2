@@ -4,26 +4,24 @@ import React, { useEffect, useState } from "react";
 
 const CONSENT_KEY = "cookie-consent";
 
-// Guard: prevent duplicate loading if called more than once
-let _analyticsLoaded = false;
+// Guard: prevent duplicate consent update if called more than once
+let _consentGranted = false;
 
 function loadAnalytics() {
-    if (_analyticsLoaded) return;
-    _analyticsLoaded = true;
+    if (_consentGranted) return;
+    _consentGranted = true;
 
-    // ── GTM ──────────────────────────────────────────────────────────────────
-    // dataLayer is pre-initialized in BaseLayout.astro <head> (no network cost)
-    // Here we just load the GTM script; GTM itself will push gtm.start
-    (window as any).dataLayer = (window as any).dataLayer || [];
-
-    const gtmScript = document.createElement("script");
-    gtmScript.async = true;
-    gtmScript.src = "https://www.googletagmanager.com/gtm.js?id=GTM-TZP98ZV5";
-    // Insert before the first <script> for highest priority
-    const firstScript = document.getElementsByTagName("script")[0];
-    firstScript.parentNode!.insertBefore(gtmScript, firstScript);
-
-
+    // ── Consent Mode v2: grant all consent ───────────────────────────────────
+    // GTM is already loaded in <head>; we just signal user consent here.
+    // GTM will then fire GA4 and other tags based on their trigger conditions.
+    function gtag(...args: any[]) { (window as any).dataLayer.push(args); }
+    (window as any).gtag = (window as any).gtag || gtag;
+    (window as any).gtag('consent', 'update', {
+        ad_storage: 'granted',
+        analytics_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+    });
 
     // ── Microsoft Clarity — deferred to idle to avoid blocking render ─────────
     function _loadClarity() {
@@ -40,6 +38,7 @@ function loadAnalytics() {
         setTimeout(_loadClarity, 3000);
     }
 }
+
 
 export function CookieConsent() {
     const [visible, setVisible] = useState(false);

@@ -49,11 +49,21 @@ const absoluteOgImage = new URL(ogImage, Astro.site).href;
 <!doctype html>
 <html lang={lang} dir={dir} class="dark">
 	<head>
-		<!-- Google Tag Manager: dataLayer pre-init (no network request, must be first) -->
+		<!-- Google Tag Manager -->
 		<script is:inline>
+			// Consent Mode v2: default denied until user accepts
 			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('consent', 'default', {
+				ad_storage: 'denied',
+				analytics_storage: 'denied',
+				ad_user_data: 'denied',
+				ad_personalization: 'denied',
+				wait_for_update: 500
+			});
 		</script>
-		<!-- End Google Tag Manager pre-init -->
+		<script is:inline async src="https://www.googletagmanager.com/gtm.js?id=GTM-TZP98ZV5"></script>
+		<!-- End Google Tag Manager -->
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/webp" href="/favicon.webp" />
