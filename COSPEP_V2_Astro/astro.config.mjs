@@ -17,6 +17,11 @@ export default defineConfig({
   })],
   output: 'server',
   adapter: vercel(),
+  // 301 redirects: /en/xxx → /xxx (canonical, no language prefix for English)
+  redirects: {
+    '/en': '/',
+    '/en/[...slug]': '/[...slug]',
+  },
   server: {
     host: '127.0.0.1',
     port: 4321,

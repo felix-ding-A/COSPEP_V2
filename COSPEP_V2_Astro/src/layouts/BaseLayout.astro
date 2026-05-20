@@ -27,7 +27,7 @@ const dir = lang === 'ar' ? 'rtl' : 'ltr';
 // Multi-language SEO alternates
 const languages = ['en', 'es', 'ru', 'ar'];
 const pathname = Astro.url.pathname;
-const pathWithoutLang = pathname.replace(/^\/(es|ru|ar)(\/|$)/, '/');
+const pathWithoutLang = pathname.replace(/^\/(en|es|ru|ar)(\/|$)/, '/');
 
 const alternates = languages.map(l => {
     const prefix = l === 'en' ? '' : `/${l}`;
@@ -61,8 +61,13 @@ const absoluteOgImage = new URL(ogImage, Astro.site).href;
 				ad_personalization: 'denied',
 				wait_for_update: 500
 			});
+			// Standard GTM loader (IIFE)
+			(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayer','GTM-TZP98ZV5');
 		</script>
-		<script is:inline async src="https://www.googletagmanager.com/gtm.js?id=GTM-TZP98ZV5"></script>
 		<!-- End Google Tag Manager -->
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
