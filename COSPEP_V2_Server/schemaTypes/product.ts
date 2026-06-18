@@ -273,7 +273,7 @@ export default defineType({
             name: 'recommendedProducts',
             title: 'Recommended Products',
             type: 'array',
-            of: [{ type: 'reference', to: { type: 'product' } }],
+            of: [{ type: 'reference', to: { type: 'product' }, weak: true }],
             description: 'Select up to 3 recommended products to display on this product detail page',
             validation: (Rule: any) => Rule.max(3),
         },
