@@ -147,7 +147,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
         leadTime,
         packaging,
         storage,
-        "recommendedProducts": recommendedProducts[]->[defined(_id)] {  
+        "recommendedProducts": recommendedProducts[defined(@->._id)]->{  
           _id,
           name,
           slug,
