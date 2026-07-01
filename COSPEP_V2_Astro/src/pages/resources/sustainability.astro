@@ -1,12 +1,11 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Leaf, Recycle, HeartHandshake } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useTranslations } from "@/lib/i18n";
 
-const { lang: langParam } = Astro.params;
-const lang = (langParam as any) || 'en';
+const lang = 'en';
 const t = useTranslations(lang, 'nav.sustainability');
 
 const title = "Sustainability | COSPEP";

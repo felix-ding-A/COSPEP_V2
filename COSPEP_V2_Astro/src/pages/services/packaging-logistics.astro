@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import {
     Package,
@@ -19,9 +19,6 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from '@/lib/navigation';
-
-const { lang: langParam } = Astro.params;
-const lang = langParam || 'en';
 
 const title = "Packaging & Logistics Support | COSPEP";
 const description = "Ensuring product integrity and timely delivery with professional packaging standards and global logistics solutions.";

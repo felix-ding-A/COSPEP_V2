@@ -1,12 +1,9 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { client, urlFor } from "@/lib/sanity";
 import { Link } from '@/lib/navigation';
 import { Search, Package, FileText, ChevronRight } from "lucide-react";
-
-const { lang: langParam } = Astro.params;
-const lang = langParam || 'en';
 
 const query = Astro.url.searchParams.get('q') || '';
 

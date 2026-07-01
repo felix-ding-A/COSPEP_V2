@@ -1,33 +1,23 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { useTranslations } from '../lib/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { useTranslations } from '@/lib/i18n';
 import { HeroSection } from '@/components/home/hero-section';
-import TrustStatsBar from '../components/home/TrustStatsBar.astro';
-import PeptidePromo from '../components/home/PeptidePromo.astro';
-import ProductEcosystem from '../components/home/ProductEcosystem.astro';
-import ManufacturingSection from '../components/home/ManufacturingSection.astro';
-import NewsBlogs from '../components/home/NewsBlogs.astro';
+import TrustStatsBar from '@/components/home/TrustStatsBar.astro';
+import PeptidePromo from '@/components/home/PeptidePromo.astro';
+import ProductEcosystem from '@/components/home/ProductEcosystem.astro';
+import ManufacturingSection from '@/components/home/ManufacturingSection.astro';
+import NewsBlogs from '@/components/home/NewsBlogs.astro';
 import { client } from "@/lib/sanity";
 import { getSiteSettings } from "@/lib/sanity/queries";
 
-export function getStaticPaths() {
-  return [
-    { params: { lang: undefined } },
-    { params: { lang: 'es' } },
-    { params: { lang: 'ru' } },
-    { params: { lang: 'ar' } },
-  ];
-}
-
-const { lang: langParam } = Astro.params;
-const lang = langParam || 'en';
-const t = useTranslations(lang as any);
+const lang = 'en';
+const t = useTranslations(lang);
 
 const settings = await client.fetch(getSiteSettings);
 
 // SEO Metadata
 const baseUrl = 'https://cospep.com';
-const currentUrl = lang === 'en' ? baseUrl : `${baseUrl}/${lang}`;
+const currentUrl = baseUrl;
 const title = t('meta.home.title');
 const description = t('meta.home.description');
 const keywords = "China Peptide Suppliers, Chinese Peptide Manufacturer, Bioactive Peptides, Botanical Extracts Supplier, Bulk Peptides China, Custom Synthesis, Pharmaceutical Intermediates";

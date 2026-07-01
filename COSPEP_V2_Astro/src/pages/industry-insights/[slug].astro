@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { useTranslations } from '../../../lib/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { useTranslations } from '@/lib/i18n';
 import { getBlogPostBySlug } from "@/lib/sanity/queries";
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/lib/sanity";
@@ -8,12 +8,12 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { blogPortableTextComponents } from "@/components/blog/blog-portable-text-components";
 import { FaqAccordion } from "@/components/blog/FaqAccordion";
 
-const { slug, lang: langParam } = Astro.params;
-const lang = langParam || 'en';
-const t = useTranslations(lang as any);
+const { slug } = Astro.params;
+const lang = 'en';
+const t = useTranslations(lang);
 
 if (!slug) {
-    return Astro.redirect(`/${lang}/industry-insights`);
+    return Astro.redirect(`/industry-insights`);
 }
 
 const post = await getBlogPostBySlug(slug);
@@ -62,7 +62,7 @@ if (post.body && Array.isArray(post.body)) {
     }
 }
 
-const faqTitle = lang === 'es' ? 'Preguntas Frecuentes' : (lang === 'ru' ? 'Часто задаваемые вопросы' : 'Frequently Asked Questions');
+const faqTitle = 'Frequently Asked Questions';
 
 const title = post.seoTitle || t('meta.blogDetail.titleFallback').replace('{title}', post.title);
 const description = post.seoDescription || post.excerpt || t('meta.blogDetail.fallback').replace('{title}', post.title);
@@ -131,7 +131,7 @@ const articleSchema = {
                 {post.publishedAt && (
                     <div class="mb-6 text-sm text-[#B8FF00] font-medium tracking-wide uppercase">
                         {new Date(post.publishedAt).toLocaleDateString(
-                            lang === 'cn' ? 'zh-CN' : (lang === 'es' ? 'es-ES' : 'en-US'),
+                            'en-US',
                             {
                                 year: 'numeric',
                                 month: 'long',

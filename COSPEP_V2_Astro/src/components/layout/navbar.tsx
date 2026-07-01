@@ -19,34 +19,16 @@ import { Menu, ChevronDown, Search } from "lucide-react";
 
 interface NavbarProps {
     lang?: string;
+    categories?: any[];
 }
 
-export function Navbar({ lang: propLang }: NavbarProps) {
+export function Navbar({ lang: propLang, categories: initialCategories = [] }: NavbarProps) {
     const router = useRouter();
     const pathname = usePathname();
     const serverLocale = useLocale();
     const currentLocale = propLang || serverLocale;
     const t = useTranslations('nav');
-    const [categories, setCategories] = React.useState<any[]>([]);
-    const [expandedMobileCategory, setExpandedMobileCategory] = React.useState<string | null>(null);
-    const [expandedDesktopCategory, setExpandedDesktopCategory] = React.useState<string | null>(null);
-
-    // Main categories definition
-    const mainCategories = [
-        { title: 'Botanical Extracts', value: 'botanical-extracts' },
-        { title: 'Fruit & Vegetable Powders', value: 'fruit-vegetable-powders' },
-        { title: 'Peptides', value: 'peptides' },
-        { title: 'Custom Solutions', value: 'custom-solutions' }
-    ];
-
-    // Group subcategories by parent
-    const groupedCategories = React.useMemo(() => {
-        const grouped: Record<string, any[]> = {};
-        mainCategories.forEach(mc => {
-            grouped[mc.value] = categories.filter(cat => cat.parentCategory === mc.value);
-        });
-        return grouped;
-    }, [categories]);
+    const [categories, setCategories] = React.useState<any[]>(initialCategories);
 
     const resourcesMenu = [
         { href: "/industry-insights", label: t('resources.industryInsights') },
@@ -61,8 +43,12 @@ export function Navbar({ lang: propLang }: NavbarProps) {
 
 
     React.useEffect(() => {
+        if (initialCategories && initialCategories.length > 0) {
+            setCategories(initialCategories);
+            return;
+        }
         const fetchCategories = async () => {
-            const query = `*[_type == "category"] | order(parentCategory asc, order asc) {
+            const query = `*[_type == "category"] | order(order asc) {
                 title, 
                 slug, 
                 parentCategory,
@@ -76,7 +62,7 @@ export function Navbar({ lang: propLang }: NavbarProps) {
             }
         };
         fetchCategories();
-    }, []);
+    }, [initialCategories]);
 
     return (
         <header
@@ -100,59 +86,32 @@ export function Navbar({ lang: propLang }: NavbarProps) {
                 {/* Desktop Nav */}
                 <nav className="hidden md:flex items-center gap-4 lg:gap-8 text-sm font-medium">
 
-                    {/* Products Dropdown - Two Column Layout */}
+                    {/* Products Dropdown */}
                     <div className="group relative">
                         <Link href="/products" className="flex items-center gap-1 text-white hover:text-[#B8FF00] transition-colors py-4">
                             {t('products')}
                             <ChevronDown className="w-4 h-4" />
                         </Link>
                         <div className="absolute left-0 top-full hidden group-hover:block">
-                            <div className="flex rounded-lg glass-strong border border-white/10 shadow-lg overflow-hidden animate-in fade-in-0 slide-in-from-top-2 duration-300">
-                                {/* Left Column - Main Categories */}
-                                <div className="w-72 h-96 border-r border-white/10 p-2 flex flex-col">
-                                    {mainCategories.map((mainCat) => (
-                                        <div
-                                            key={mainCat.value}
-                                            className="group/cat relative"
-                                            onMouseEnter={() => setExpandedDesktopCategory(mainCat.value)}
+                            <div className="w-[520px] p-4 rounded-lg glass-strong border border-white/10 shadow-lg animate-in fade-in-0 slide-in-from-top-2 duration-300">
+                                <div className="grid grid-cols-2 gap-2">
+                                    {categories.map((subCat: any) => (
+                                        <Link
+                                            key={subCat.slug.current}
+                                            href={`/products?categories=${subCat.slug.current}`}
+                                            className="block rounded-md px-3 py-2 text-sm text-gray-300 hover:bg-[#B8FF00]/10 hover:text-[#B8FF00] transition-colors"
                                         >
-                                            <div className="flex items-center justify-between rounded-md px-3 py-2 text-sm text-white hover:bg-[#B8FF00]/10 hover:text-[#B8FF00] transition-colors cursor-pointer">
-                                                <span>{mainCat.title}</span>
-                                                <ChevronDown className="w-4 h-4 -rotate-90" />
-                                            </div>
-                                        </div>
+                                            {subCat.title}
+                                        </Link>
                                     ))}
-                                    <div className="border-t border-white/10 my-1"></div>
+                                </div>
+                                <div className="border-t border-white/10 mt-3 pt-2">
                                     <Link
                                         href="/products"
-                                        className="block rounded-md px-3 py-2 text-sm text-white hover:bg-[#B8FF00]/10 hover:text-[#B8FF00] font-semibold transition-colors"
+                                        className="block rounded-md px-3 py-1.5 text-sm text-center text-white hover:bg-[#B8FF00]/10 hover:text-[#B8FF00] font-semibold transition-colors"
                                     >
                                         {t('viewAllProducts')}
                                     </Link>
-                                </div>
-
-                                {/* Right Column - Subcategories */}
-                                <div className="w-80 h-96 p-3 bg-white/5">
-                                    {expandedDesktopCategory && groupedCategories[expandedDesktopCategory]?.length > 0 ? (
-                                        <div className="space-y-1">
-                                            <div className="text-xs text-gray-400 uppercase tracking-wider mb-2 px-2">
-                                                {mainCategories.find(cat => cat.value === expandedDesktopCategory)?.title}
-                                            </div>
-                                            {groupedCategories[expandedDesktopCategory].map((subCat: any) => (
-                                                <Link
-                                                    key={subCat.slug.current}
-                                                    href={`/products?categories=${subCat.slug.current}`}
-                                                    className="block rounded-md px-3 py-2 text-sm text-gray-300 hover:bg-[#B8FF00]/10 hover:text-[#B8FF00] transition-colors"
-                                                >
-                                                    {subCat.title}
-                                                </Link>
-                                            ))}
-                                        </div>
-                                    ) : (
-                                        <div className="flex items-center justify-center h-full text-sm text-gray-500">
-                                            Hover over a category
-                                        </div>
-                                    )}
                                 </div>
                             </div>
                         </div>
@@ -264,33 +223,16 @@ export function Navbar({ lang: propLang }: NavbarProps) {
                                         <Link href="/products" className="text-lg font-medium text-white hover:text-[#B8FF00] mb-2 block">
                                             Products
                                         </Link>
-                                        <div className="pl-4 flex flex-col gap-3 border-l-2 border-white/20 ml-1">
-                                            {mainCategories.map((mainCat) => (
-                                                <div key={mainCat.value}>
-                                                    <button
-                                                        onClick={() => setExpandedMobileCategory(
-                                                            expandedMobileCategory === mainCat.value ? null : mainCat.value
-                                                        )}
-                                                        className="flex items-center justify-between w-full text-base text-gray-300 hover:text-[#B8FF00] transition-colors"
+                                        <div className="pl-4 flex flex-col gap-2 border-l-2 border-white/20 ml-1">
+                                            {categories.map((subCat: any) => (
+                                                <SheetClose asChild key={subCat.slug.current}>
+                                                    <Link
+                                                        href={`/products?categories=${subCat.slug.current}`}
+                                                        className="text-base text-gray-400 hover:text-[#B8FF00]"
                                                     >
-                                                        <span>{mainCat.title}</span>
-                                                        <ChevronDown className={`w-4 h-4 transition-transform ${expandedMobileCategory === mainCat.value ? 'rotate-180' : ''}`} />
-                                                    </button>
-                                                    {expandedMobileCategory === mainCat.value && groupedCategories[mainCat.value]?.length > 0 && (
-                                                        <div className="pl-3 mt-2 flex flex-col gap-2 border-l border-white/10">
-                                                            {groupedCategories[mainCat.value].map((subCat: any) => (
-                                                                <SheetClose asChild key={subCat.slug.current}>
-                                                                    <Link
-                                                                        href={`/products?categories=${subCat.slug.current}`}
-                                                                        className="text-sm text-gray-400 hover:text-[#B8FF00]"
-                                                                    >
-                                                                        {subCat.title}
-                                                                    </Link>
-                                                                </SheetClose>
-                                                            ))}
-                                                        </div>
-                                                    )}
-                                                </div>
+                                                        {subCat.title}
+                                                    </Link>
+                                                </SheetClose>
                                             ))}
                                         </div>
                                     </div>

@@ -2,36 +2,19 @@
 
 import { motion } from "framer-motion";
 import { Link } from "@/lib/navigation";
-import { Leaf, Apple, Pill, FlaskConical } from "lucide-react";
+import { Pill, Sparkles, Brain, Activity, Heart, Eye, Shield, FlaskConical } from "lucide-react";
 import React from 'react';
 
-// Main categories to display
-const mainCategories = [
-    {
-        title: "Botanical Extracts",
-        value: "botanical-extracts",
-        icon: Leaf,
-        description: "Natural plant-based extracts and compounds"
-    },
-    {
-        title: "Fruit & Vegetable Powders",
-        value: "fruit-vegetable-powders",
-        icon: Apple,
-        description: "Premium quality fruit and vegetable powders"
-    },
-    {
-        title: "Peptides",
-        value: "peptides",
-        icon: Pill,
-        description: "High-purity peptide compounds"
-    },
-    {
-        title: "Custom Solutions",
-        value: "custom-solutions",
-        icon: FlaskConical,
-        description: "Tailored formulations for your needs"
-    }
-];
+const iconMap: Record<string, any> = {
+    'metabolic-weight-management': Activity,
+    'tissue-repair-recovery': Heart,
+    'cognitive-enhancement': Brain,
+    'anti-aging-longevity': Shield,
+    'beauty-cosmetics': Sparkles,
+    'wellness-recovery': Pill,
+    'hair-care-growth': Sparkles,
+    'skin-brightening': Eye
+};
 
 interface CategoryGridProps {
     categories: Array<{
@@ -64,25 +47,25 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
                         transition={{ delay: 0.1 }}
                         className="text-gray-400 max-w-2xl mx-auto"
                     >
-                        Explore our comprehensive range of pharmaceutical ingredients and custom solutions
+                        Explore our comprehensive range of high-purity peptides and custom synthesis services
                     </motion.p>
                 </div>
 
-                {/* Category Grid - 2x2 */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
-                    {mainCategories.map((category, index) => {
-                        const Icon = category.icon;
+                {/* Category Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
+                    {categories.map((category, index) => {
+                        const Icon = iconMap[category.slug.current] || FlaskConical;
 
                         return (
                             <motion.div
-                                key={category.value}
+                                key={category.slug.current}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: index * 0.1, duration: 0.4 }}
+                                transition={{ delay: index * 0.05, duration: 0.4 }}
                             >
                                 <Link
-                                    href={`/products?parentCategory=${category.value}`}
+                                    href={`/products?categories=${category.slug.current}`}
                                     className="group block h-full"
                                 >
                                     <div className="glass h-full rounded-xl p-6 transition-all duration-300 hover:bg-white/10 hover:border-[#B8FF00]/30 border border-white/10">
@@ -97,9 +80,11 @@ export function CategoryGrid({ categories }: CategoryGridProps) {
                                                 <h3 className="text-lg font-semibold text-white group-hover:text-[#B8FF00] transition-colors">
                                                     {category.title}
                                                 </h3>
-                                                <p className="text-sm text-gray-400 mt-1">
-                                                    {category.description}
-                                                </p>
+                                                {category.description && (
+                                                    <p className="text-sm text-gray-400 mt-1 line-clamp-2">
+                                                        {category.description}
+                                                    </p>
+                                                )}
                                             </div>
 
                                             {/* Arrow */}

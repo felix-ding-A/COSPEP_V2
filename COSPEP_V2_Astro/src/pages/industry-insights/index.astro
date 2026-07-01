@@ -1,12 +1,11 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { useTranslations } from '../../../lib/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { useTranslations } from '@/lib/i18n';
 import { getPosts } from "@/lib/sanity/queries";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-const { lang: langParam } = Astro.params;
-const lang = langParam || 'en';
-const t = useTranslations(lang as any);
+const lang = 'en';
+const t = useTranslations(lang);
 
 const posts = await getPosts();
 
@@ -34,7 +33,7 @@ const description = "Stay updated with the latest trends in botanical ingredient
                 {posts.length > 0 ? (
                     posts.map((post: any) => (
                         <a
-                            href={`/${lang === 'en' ? '' : `${lang}/`}industry-insights/${post.slug.current}`}
+                            href={`/industry-insights/${post.slug.current}`}
                             class="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0F1612]/50 hover:bg-[#0F1612] transition-all hover:scale-[1.02] hover:shadow-2xl hover:shadow-[#B8FF00]/10 duration-300"
                         >
                             <div class="relative aspect-video w-full overflow-hidden">
@@ -49,7 +48,7 @@ const description = "Stay updated with the latest trends in botanical ingredient
                             </div>
                             <div class="p-6 flex flex-col flex-1">
                                 <div class="mb-3 text-sm text-[#B8FF00]">
-                                    {new Date(post.publishedAt).toLocaleDateString(lang === 'cn' ? 'zh-CN' : (lang === 'es' ? 'es-ES' : 'en-US'), {
+                                    {new Date(post.publishedAt).toLocaleDateString('en-US', {
                                         year: 'numeric',
                                         month: 'long',
                                         day: 'numeric'

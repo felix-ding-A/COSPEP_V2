@@ -9,12 +9,10 @@ export default {
             type: 'string',
             options: {
                 list: [
-                    { title: 'Botanical Extracts', value: 'botanical-extracts' },
-                    { title: 'Fruit & Vegetable Powders', value: 'fruit-vegetable-powders' },
-                    { title: 'Peptides', value: 'peptides' },
-                    { title: 'Custom Solutions', value: 'custom-solutions' }
+                    { title: 'Peptides', value: 'peptides' }
                 ]
             },
+            initialValue: 'peptides',
             validation: (Rule: any) => Rule.required(),
             description: 'Select which main category group this belongs to'
         },
@@ -58,10 +56,7 @@ export default {
         prepare(selection: any) {
             const { title, parentCategory } = selection;
             const parentLabels: Record<string, string> = {
-                'botanical-extracts': 'Botanical Extracts',
-                'fruit-vegetable-powders': 'Fruit & Vegetable Powders',
-                'peptides': 'Peptides',
-                'custom-solutions': 'Custom Solutions'
+                'peptides': 'Peptides'
             };
             return {
                 title: title,

@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { useTranslations } from '../../lib/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { useTranslations } from '@/lib/i18n';
 import { ProductsHeroCarousel } from '@/components/products/products-hero-carousel';
 import { CategoryGrid } from '@/components/products/category-grid';
 import { FilterSidebar } from '@/components/products/filter-sidebar';
@@ -10,9 +10,8 @@ import { getProducts, getCategories, getSettings } from "@/lib/sanity/queries";
 
 
 // SSR handling
-const { lang: langParam } = Astro.params;
-const lang = langParam || 'en';
-const t = useTranslations(lang as any);
+const lang = 'en';
+const t = useTranslations(lang);
 
 // Parse search params
 const searchParams = Astro.url.searchParams;

@@ -23,7 +23,7 @@
     "products": {
         "found": "Products Found",
         "notFound": "No products found matching your criteria",
-        "adjustFilters": "Beyond our catalog—<a href=\"#request-form\" class=\"text-[#B8FF00] hover:underline cursor-pointer transition-colors\">contact us</a> for the specific extracts you require."
+        "adjustFilters": "Beyond our catalog—<a href=\"#request-form\" class=\"text-[#B8FF00] hover:underline cursor-pointer transition-colors\">contact us</a> for the specific peptides you require."
     },
     "nav": {
         "products": "Products",
@@ -71,7 +71,7 @@
         }
     },
     "footer": {
-        "companyDescription": "Your premier sourcing partner for high-quality botanical ingredients. Bridging the gap between certified standards and global demand.",
+        "companyDescription": "Your premier sourcing partner for high-quality bioactive peptides. Bridging the gap between certified standards and global demand.",
         "quickLinks": {
             "title": "Quick Links",
             "home": "Home",
@@ -140,20 +140,20 @@
             "description": "A comprehensive portfolio designed to empower a truly diverse range of health and industry provision.",
             "items": [
                 {
-                    "title": "Bio-Active Peptides",
-                    "description": "Advanced peptide formulations for targeted health outcomes"
+                    "title": "Cosmetic Peptides",
+                    "description": "Advanced peptide compounds for skin anti-aging, brightening, and hair growth"
                 },
                 {
-                    "title": "Pharmaceutical Intermediates",
-                    "description": "High-purity intermediates for pharmaceutical manufacturing"
+                    "title": "Longevity Peptides",
+                    "description": "High-purity peptides to support cellular longevity, vitality, and anti-aging"
                 },
                 {
-                    "title": "Natural Plant Extracts",
-                    "description": "Premium botanical extracts with verified potency"
+                    "title": "Wellness & Recovery",
+                    "description": "Bioactive compounds to promote tissue repair, cognitive support, and metabolic balance"
                 },
                 {
-                    "title": "Custom Health Supplements",
-                    "description": "Tailored supplement solutions for your needs"
+                    "title": "Custom Peptide Synthesis",
+                    "description": "Tailored synthesis and contract manufacturing services for innovative formulas"
                 }
             ]
         },
@@ -198,7 +198,7 @@
         },
         "featuredProducts": {
             "title": "Featured Ingredients",
-            "description": "Discover our most sought-after botanical extracts, verified for quality and potency.",
+            "description": "Discover our most sought-after bioactive peptides, verified for quality and potency.",
             "viewDetails": "View Details",
             "viewAll": "View All Products",
             "casNumber": "CAS No.:",
@@ -211,23 +211,23 @@
     },
     "meta": {
         "home": {
-            "title": "Leading Chinese Peptide Manufacturer & Plant Extracts Supplier | COSPEP",
-            "description": "Leading Chinese Peptide Manufacturer & Plant Extracts Supplier. Specialist in high-purity bioactive peptides, bulk botanical extracts, and custom synthesis for global B2B sourcing."
+            "title": "Leading Chinese Peptide Manufacturer & Supplier | COSPEP",
+            "description": "Leading Chinese Peptide Manufacturer. Specialist in high-purity bioactive peptides and custom synthesis for global B2B sourcing."
         },
         "products": {
-            "title": "High-Purity Bioactive Peptides & Plant Extracts Catalog | COSPEP",
-            "description": "Explore our wide range of high-quality peptides and plant extracts. Direct from manufacturer with guaranteed purity and worldwide shipping."
+            "title": "High-Purity Bioactive Peptides Catalog | COSPEP",
+            "description": "Explore our wide range of high-quality peptides. Direct from manufacturer with guaranteed purity and worldwide shipping."
         },
         "industryInsights": {
             "title": "Industry Insights & Blog | Bioactive Peptide Technology | COSPEP",
-            "description": "Read our latest insights and articles on bioactive peptides, plant extracts, and pharmaceutical intermediates."
+            "description": "Read our latest insights and articles on bioactive peptides and cosmetic ingredients."
         },
         "about": {
-            "title": "About COSPEP | China Peptide Manufacturer & Botanical Extract Supplier",
-            "description": "Learn about COSPEP, a premier supplier of botanical ingredients and bioactive peptides. Discover our mission, values, and manufacturing excellence."
+            "title": "About COSPEP | China Peptide Manufacturer & Supplier",
+            "description": "Learn about COSPEP, a premier supplier of bioactive peptides. Discover our mission, values, and manufacturing excellence."
         },
         "contact": {
-            "title": "Contact COSPEP | China Peptide Wholesale & Botanical Sourcing",
+            "title": "Contact COSPEP | China Peptide Wholesale & Custom Synthesis",
             "description": "Contact COSPEP for high-quality peptide sourcing and custom manufacturing. Reach our team for quotes, technical support, and global logistics."
         },
         "customManufacturing": {
@@ -240,7 +240,7 @@
         },
         "service": {
             "title": "Services & Logistics | Global Sourcing & Supply Chain | COSPEP",
-            "description": "Streamlined global logistics for your botanical ingredients. One shipment, multiple factories, and professional packaging standards."
+            "description": "Streamlined global logistics for your peptide ingredients. One shipment, multiple factories, and professional packaging standards."
         },
         "productDetail": {
             "titleFallback": "{name} | High-Purity Peptides | COSPEP",

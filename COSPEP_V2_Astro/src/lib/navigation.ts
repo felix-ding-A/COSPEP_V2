@@ -6,14 +6,11 @@ export { Link };
 
 // Simple shim for useLocale
 export function useLocale() {
-  if (typeof window === 'undefined') return 'en';
-  const [, lang] = window.location.pathname.split('/');
-  return ['en', 'es', 'ru', 'ar'].includes(lang) ? lang : 'en';
+  return 'en';
 }
 
 export function useParams() {
-    const locale = useLocale();
-    return { lang: locale };
+    return { lang: 'en' };
 }
 
 export function useSearchParams() {
@@ -23,8 +20,7 @@ export function useSearchParams() {
 
 // Custom hook to mimic next-intl useTranslations
 export function useTranslations(namespace?: string) {
-    const locale = useLocale();
-    return useAstroTranslations(locale as any, namespace);
+    return useAstroTranslations('en', namespace);
 }
 
 // ... the rest of existing shims
@@ -37,27 +33,7 @@ export function useRouter() {
   return {
     push: (url: string) => { window.location.href = url; },
     replace: (url: string, options?: { locale?: string }) => { 
-        if (options?.locale) {
-            const parts = window.location.pathname.split('/');
-            const currentLocale = ['en', 'es', 'ru', 'ar'].find(l => l === parts[1]);
-            
-            if (currentLocale) {
-                if (options.locale === 'en') {
-                    parts.splice(1, 1);
-                } else {
-                    parts[1] = options.locale;
-                }
-            } else {
-                if (options.locale !== 'en') {
-                    parts.splice(1, 0, options.locale);
-                }
-            }
-            
-            const newPath = parts.join('/') || '/';
-            window.location.replace(newPath + window.location.search);
-        } else {
-            window.location.replace(url); 
-        }
+        window.location.replace(url); 
     },
     back: () => { window.history.back(); },
   };

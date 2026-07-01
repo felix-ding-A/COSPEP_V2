@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import {
     Headphones,
@@ -18,9 +18,6 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from '@/lib/navigation';
-
-const { lang: langParam } = Astro.params;
-const lang = langParam || 'en';
 
 const title = "After-Sales Technical Support | COSPEP";
 const description = "Comprehensive post-purchase support ensuring your success with our products through expert guidance and responsive assistance.";

@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useTranslations } from "@/lib/i18n";
 import { 
@@ -7,8 +7,7 @@ import {
     ShieldAlert, Crosshair, Stethoscope, Lightbulb, Info 
 } from "lucide-astro";
 
-const { lang: langParam } = Astro.params;
-const lang = (langParam as any) || 'en';
+const lang = 'en';
 const t = useTranslations(lang);
 
 const title = "The Advent of Stapled Peptide Technology | COSPEP";

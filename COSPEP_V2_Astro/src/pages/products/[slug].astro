@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { useTranslations } from '../../../lib/i18n';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { useTranslations } from '@/lib/i18n';
 import { getProductBySlug } from "@/lib/sanity/queries";
 import { Badge } from "@/components/ui/badge";
 import { Truck } from "lucide-react";
@@ -11,12 +11,12 @@ import { ProductDetailClient } from "@/components/products/product-detail-client
 import { SITE_CONFIG } from "@/lib/config";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-const { slug, lang: langParam } = Astro.params;
-const lang = langParam || 'en';
-const t = useTranslations(lang as any);
+const { slug } = Astro.params;
+const lang = 'en';
+const t = useTranslations(lang);
 
 if (!slug) {
-    return Astro.redirect(`/${lang}/products`);
+    return Astro.redirect(`/products`);
 }
 
 const product = await getProductBySlug(slug);
